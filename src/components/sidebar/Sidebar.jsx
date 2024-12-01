@@ -32,7 +32,7 @@ const Sidebar = () => {
     },
     {
       name: "Check-in / Checkout",
-      path: "/check-in-check-out",
+      path: "/checkin-checkout",
       defaultIcon: checkinIconDefault,
       activeIcon: checkinIconActive,
     },

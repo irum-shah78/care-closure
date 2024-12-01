@@ -4,7 +4,6 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate } from "react-router-dom";
-import tickIcon from "../../assets/tick.svg";
 
 const PreRegistration = () => {
   const navigate = useNavigate();
@@ -39,88 +38,32 @@ const PreRegistration = () => {
       placeholder: "Morning(9AM - 12PM)",
       options: ["Morning(9AM - 12PM)", "Morning(9AM - 12PM)"],
     },
-    { type: "text", label: "Last ", placeholder: "Enter last name" },
-    
-    
-    {
-      type: "select",
-      label: "Marital Status",
-      placeholder: "Select your marital status",
-      options: ["Single", "Married"],
-    },
-    {
-      type: "select",
-      label: "Blood Group",
-      placeholder: "Select your blood group",
-      options: ["A+", "B+", "O+", "AB+"],
-    },
-  ];
-
-  const contactInformationFields = [
-    { type: "text", label: "Mobile Number", placeholder: "Placeholder" },
-    { type: "text", label: "Email", placeholder: "Placeholder" },
-    {
-      type: "select",
-      label: "City",
-      placeholder: "Select Your City",
-      options: ["City 1", "City 2", "City 3"],
-    },
-    { type: "text", label: "Address", placeholder: "Placeholder", colSpan: 2 },
-    {
-      type: "select",
-      label: "State",
-      placeholder: "Select Your State",
-      options: ["State 1", "State 2", "State 3"],
-    },
-    { type: "text", label: "Pincode", placeholder: "Enter your pincode" },
-  ];
-
-  const emergencyContactFields = [
-    { type: "text", label: "Contact Name", placeholder: "Enter name" },
-    { type: "text", label: "Relationship", placeholder: "Enter relationship" },
-    {
-      type: "text",
-      label: "Contact Number",
-      placeholder: "Enter contact number",
-    },
   ];
 
   const medicalInformationFields = [
-    { type: "text", label: "Known Allergies", placeholder: "If any" },
-    { type: "text", label: "Current Medications", placeholder: "If any" },
+    { type: "text", label: "Reason For Visit", placeholder: "Brief Description of your Medical Concern " },
+    { type: "text", label: "Current Symptoms", placeholder: "List any current symptoms" },
+    { type: "text", label: "Symptoms Duration", placeholder: "How long have you had these symptoms?" },
+  ];
+
+  const insuranceVerificationFields = [
+    { type: "text", label: "Insurance Provider", placeholder: "Enter name" },
+    { type: "text", label: "Policy Number", placeholder: "Enter number" },
+    { type: "text", label: "Subscriber Name", placeholder: "Enter name" },
     {
       type: "select",
-      label: "Medical History",
-      placeholder: "Any previous conditions",
-      options: ["None", "Condition 1", "Condition 2"],
+      label: "Relationship to Subscriber",
+      placeholder: "Self",
+      options: ["Self", "Owner", "Subscriber"],
     },
   ];
 
-  const insuranceInformationFields = [
-    {
-      type: "text",
-      label: "Insurance Provider",
-      placeholder: "Enter name of insurance provider",
-    },
-    {
-      type: "text",
-      label: "Policy Number",
-      placeholder: "Enter policy number",
-    },
-  ];
-
-  const cardDetailsFields = [
-    { type: "text", label: "Card Number", placeholder: "12345678" },
-    { type: "text", label: "Expiry Date", placeholder: "mm/yy" },
-    { type: "text", label: "CVV", placeholder: "123" },
-  ];
-
-  const paymentFields = [
+  const additionalRequirements = [
     {
       type: "select",
-      label: "Payment Status",
-      placeholder: "Select status",
-      options: ["Received", "Pending", "Failed"],
+      label: "Additional Requirements",
+      placeholder: "Wheelchair access, interpreter, etc",
+      options: ["Wheelchair access, interpreter, etc", "AC", "Interpreter"],
     },
   ];
 
@@ -182,13 +125,13 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Contact Information">
+            <FormSection title="Medical Information">
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-                {contactInformationFields.map((field, index) => {
-                  if (field.label === "Address") {
+                {medicalInformationFields.map((field, index) => {
+                  if (field.label === "Reason For Visit") {
                     return (
-                      <label key={index} className="block col-span-2">
+                      <label key={index} className="block col-span-3">
                         <span className="text-sm font-medium">
                           {field.label}
                         </span>
@@ -200,9 +143,9 @@ const PreRegistration = () => {
                       </label>
                     );
                   }
-                  if (field.label === "Pincode") {
+                  if (field.label === "Current Symptoms") {
                     return (
-                      <label key={index} className="block col-span-1">
+                      <label key={index} className="block col-span-2">
                         <span className="text-sm font-medium">
                           {field.label}
                         </span>
@@ -219,10 +162,10 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Emergency Contact">
+            <FormSection title="Insurance Verification">
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-                {emergencyContactFields.map((field, index) =>
+                {insuranceVerificationFields.map((field, index) =>
                   renderField(field, index)
                 )}
               </div>
@@ -236,65 +179,10 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Insurance Information">
-              <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-                {insuranceInformationFields.map((field, index) => {
-                  if (field.label === "Insurance Provider") {
-                    return (
-                      <label key={index} className="block col-span-2">
-                        <span className="text-sm font-medium">
-                          {field.label}
-                        </span>
-                        <input
-                          type={field.type}
-                          placeholder={field.placeholder}
-                          className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
-                        />
-                      </label>
-                    );
-                  }
-
-                  if (field.label === "Policy Number") {
-                    return (
-                      <label key={index} className="block col-span-1 relative">
-                        <span className="text-sm font-medium">
-                          {field.label}
-                        </span>
-                        <div className="relative mt-3">
-                          <input
-                            type={field.type}
-                            placeholder={field.placeholder}
-                            className="border border-gray-300 text-[#808080] p-2 rounded w-full pr-10"
-                          />
-                          <img
-                            src={tickIcon}
-                            alt="Icon"
-                            className="absolute top-1/2 right-3 transform -translate-y-1/2 w-5 h-5"
-                          />
-                        </div>
-                      </label>
-                    );
-                  }
-
-                  return renderField(field, index);
-                })}
-              </div>
-            </FormSection>
-
-            <FormSection title="Card Details">
-              <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-                {cardDetailsFields.map((field, index) =>
-                  renderField(field, index)
-                )}
-              </div>
-            </FormSection>
-
-            <FormSection title="Payment">
+            <FormSection title="Additional Requirements">
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 gap-x-14 gap-y-4 mt-4">
-                {paymentFields.map((field, index) => renderField(field, index))}
+                {additionalRequirements.map((field, index) => renderField(field, index))}
               </div>
             </FormSection>
 
@@ -310,7 +198,7 @@ const PreRegistration = () => {
                 type="submit"
                 className="px-6 py-2 rounded-xl bg-[#2E2559] text-white"
               >
-                Generate ID
+                Schedule Visit
               </button>
             </div>
           </form>

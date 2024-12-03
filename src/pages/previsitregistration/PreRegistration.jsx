@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const PreRegistration = () => {
   const navigate = useNavigate();
   const handlePatient = () => {
-    navigate("/patients");
+    navigate("/patients/patient-details");
   };
 
   const patientDetailsFields = [
@@ -41,9 +41,21 @@ const PreRegistration = () => {
   ];
 
   const medicalInformationFields = [
-    { type: "text", label: "Reason For Visit", placeholder: "Brief Description of your Medical Concern " },
-    { type: "text", label: "Current Symptoms", placeholder: "List any current symptoms" },
-    { type: "text", label: "Symptoms Duration", placeholder: "How long have you had these symptoms?" },
+    {
+      type: "text",
+      label: "Reason For Visit",
+      placeholder: "Brief Description of your Medical Concern ",
+    },
+    {
+      type: "text",
+      label: "Current Symptoms",
+      placeholder: "List any current symptoms",
+    },
+    {
+      type: "text",
+      label: "Symptoms Duration",
+      placeholder: "How long have you had these symptoms?",
+    },
   ];
 
   const insuranceVerificationFields = [
@@ -113,7 +125,9 @@ const PreRegistration = () => {
               className="cursor-pointer"
               onClick={handlePatient}
             />
-            <h1 className="text-2xl font-bold">Pre-Visit Patient Registration</h1>
+            <h1 className="text-2xl font-bold">
+              Pre-Visit Patient Registration
+            </h1>
           </div>
           <form className="mt-6 space-y-6 shadow-sm">
             <FormSection title="Visit Information">
@@ -182,7 +196,9 @@ const PreRegistration = () => {
             <FormSection title="Additional Requirements">
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 gap-x-14 gap-y-4 mt-4">
-                {additionalRequirements.map((field, index) => renderField(field, index))}
+                {additionalRequirements.map((field, index) =>
+                  renderField(field, index)
+                )}
               </div>
             </FormSection>
 

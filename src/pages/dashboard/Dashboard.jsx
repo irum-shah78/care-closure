@@ -6,19 +6,22 @@ import appointments from "../../assets/appointments.svg";
 import compliance from "../../assets/compliance.svg";
 import next from "../../assets/next.svg";
 import previous from "../../assets/previous.svg";
-import "./Dashboard.css";
-
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import waitingIcon from "../../assets/waiting.svg";
+import inProgressIcon from "../../assets/inprogress.svg";
+import "./Dashboard.css";
+
+const getRandomStatus = () => (Math.random() < 0.5 ? "In Progress" : "Waiting");
 
 const Dashboard = () => {
   const [date, setDate] = useState(new Date());
+  const [activeTab, setActiveTab] = useState("patientQueue");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleChange = (newDate) => {
     setDate(newDate);
   };
-
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   const patients = [
     {
@@ -94,6 +97,141 @@ const Dashboard = () => {
       setCurrentIndex(currentIndex - 1);
     }
   };
+
+  const patientsData = [
+    {
+      id: "#214",
+      name: "Christopher",
+      age: 32,
+      gender: "Male",
+      appointment: "1st Appointment",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#215",
+      name: "Emily",
+      age: 56,
+      gender: "Female",
+      appointment: "2nd Appointment",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#216",
+      name: "John",
+      age: 45,
+      gender: "Male",
+      appointment: "Follow-up",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#217",
+      name: "Sophia",
+      age: 29,
+      gender: "Female",
+      appointment: "Routine Checkup",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#218",
+      name: "Michael",
+      age: 63,
+      gender: "Male",
+      appointment: "Checkup",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#219",
+      name: "Olivia",
+      age: 37,
+      gender: "Female",
+      appointment: "Regular",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#220",
+      name: "Daniel",
+      age: 51,
+      gender: "Male",
+      appointment: "Last Appointment",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check Out",
+    },
+    {
+      id: "#221",
+      name: "Isabella",
+      age: 48,
+      gender: "Female",
+      appointment: "Consultation",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#222",
+      name: "Ethan",
+      age: 34,
+      gender: "Male",
+      appointment: "Checkup",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#223",
+      name: "Ava",
+      age: 42,
+      gender: "Female",
+      appointment: "Regular",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check Out",
+    },
+    {
+      id: "#224",
+      name: "James",
+      age: 50,
+      gender: "Male",
+      appointment: "Checkup",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check In",
+    },
+    {
+      id: "#225",
+      name: "Mia",
+      age: 39,
+      gender: "Female",
+      appointment: "First Appointment",
+      time: "10:00 AM",
+      status: getRandomStatus(),
+      date: "12 Nov 2014",
+      action: "Check Out",
+    },
+  ];
   return (
     <div className="min-h-screen flex bg-gray-100">
       <Sidebar />
@@ -107,11 +245,8 @@ const Dashboard = () => {
           <div className="grid grid-cols-4 gap-4 mt-6">
             <div className="col-span-3 grid grid-cols-3 gap-4">
               <div className="flex bg-white shadow-md p-4 rounded-xl">
-                <div className="flex items-center justify-center bg-[#2E255924] w-[54px] h-[54px] rounded-lg mt-4">
-                  <img
-                    src={totalPatients}
-                    alt="total patients"
-                  />
+                <div className="flex items-center justify-center bg-[#2E255924] w-[50px] h-[50px] rounded-lg mt-4">
+                  <img src={totalPatients} alt="total patients" />
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-800">
@@ -126,11 +261,8 @@ const Dashboard = () => {
               </div>
 
               <div className="flex bg-white shadow-md p-4 rounded-xl">
-                <div className="flex items-center justify-center bg-[#2E255924] w-[54px] h-[54px] rounded-lg mt-4">
-                  <img
-                    src={appointments}
-                    alt="appointments"
-                  />
+                <div className="flex items-center justify-center bg-[#2E255924] w-[50px] h-[50px] rounded-lg mt-4">
+                  <img src={appointments} alt="appointments" />
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-800">
@@ -142,8 +274,8 @@ const Dashboard = () => {
               </div>
 
               <div className="flex bg-white shadow-md p-4 rounded-xl">
-                <div className="flex items-center justify-center bg-[#2E255924] w-[54px] h-[54px] rounded-lg mt-4">
-                  <img src={compliance} alt="compliance"/>
+                <div className="flex items-center justify-center bg-[#2E255924] w-[50px] h-[50px] rounded-lg mt-4">
+                  <img src={compliance} alt="compliance" />
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-800">
@@ -192,8 +324,11 @@ const Dashboard = () => {
                   {patients.map(
                     (patient, index) =>
                       index === currentIndex && (
-                        <div key={index} className="flex items-center p-2">
-                          <div>
+                        <div
+                          key={index}
+                          className="flex items-center p-2 space-x-10"
+                        >
+                          <div className="flex items-center">
                             <div className="flex items-center justify-center bg-[#2E2559] text-white w-10 h-10 rounded-full font-semibold text-sm">
                               {patient.initials}
                             </div>
@@ -201,12 +336,16 @@ const Dashboard = () => {
                               <h4 className="text-base font-medium text-[#363636]">
                                 {patient.name}
                               </h4>
-                              <div className="flex space-x-2 text-sm text-[#363636]">
-                                <p>{patient.gender}</p>
-                                <p>{patient.age} Years</p>
-                                <p>{patient.appointment}</p>
-                              </div>
                             </div>
+                          </div>
+                          <div className="text-sm text-[#363636]">
+                            {patient.gender}
+                          </div>
+                          <div className="text-sm text-[#363636]">
+                            {patient.age}
+                          </div>
+                          <div className="text-sm text-[#363636]">
+                            {patient.appointment}
                           </div>
                           <div>
                             <p
@@ -218,12 +357,14 @@ const Dashboard = () => {
                             >
                               {patient.status}
                             </p>
+                          </div>
+                          <div>
                             <p className="text-base font-medium text-[#2E2559]">
                               {patient.time}
                             </p>
-                            <p className="text-sm text-[#363636]">
-                              {patient.date}
-                            </p>
+                          </div>
+                          <div className="text-sm text-[#363636]">
+                            {patient.date}
                           </div>
                         </div>
                       )
@@ -244,65 +385,209 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="bg-white shadow mt-6 p-4 rounded-lg">
-            <div className="flex justify-between items-center border-b pb-2">
-              <h3 className="text-lg font-bold text-gray-800">Patient Queue</h3>
-              <div className="flex space-x-4">
-                <button className="text-indigo-600 font-medium">Queue</button>
-                <button className="text-gray-500 font-medium">
-                  Appointments
-                </button>
-              </div>
+          <div className="pt-2 bg-white shadow px-6 py-3 mt-6 rounded-lg">
+            <div className="flex space-x-4 mb-6">
+              <button
+                onClick={() => setActiveTab("patientQueue")}
+                className={`px-4 py-1 rounded ${
+                  activeTab === "patientQueue"
+                    ? "text-black font-semibold border-b-4 border-[#6D59CE]"
+                    : "text-gray-600"
+                }`}
+              >
+                Patient Queue
+              </button>
+              <button
+                onClick={() => setActiveTab("appointments")}
+                className={`px-4 py-1 rounded ${
+                  activeTab === "appointments"
+                    ? "text-black font-semibold border-b-4 border-[#6D59CE]"
+                    : "text-gray-600"
+                }`}
+              >
+                Appointments
+              </button>
             </div>
-            <div className="mt-4 overflow-x-auto">
-              <table className="table-auto w-full border-collapse">
-                <thead>
-                  <tr className="bg-gray-100">
-                    <th className="text-left px-4 py-2 text-gray-600">ID</th>
-                    <th className="text-left px-4 py-2 text-gray-600">Name</th>
-                    <th className="text-left px-4 py-2 text-gray-600">Age</th>
-                    <th className="text-left px-4 py-2 text-gray-600">
-                      Gender
-                    </th>
-                    <th className="text-left px-4 py-2 text-gray-600">
-                      Appointment
-                    </th>
-                    <th className="text-left px-4 py-2 text-gray-600">Time</th>
-                    <th className="text-left px-4 py-2 text-gray-600">
-                      Status
-                    </th>
-                    <th className="text-left px-4 py-2 text-gray-600">Date</th>
-                    <th className="text-left px-4 py-2 text-gray-600">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Array(6)
-                    .fill()
-                    .map((_, i) => (
-                      <tr key={i} className="hover:bg-gray-50">
-                        <td className="px-4 py-2 text-gray-800">#214</td>
-                        <td className="px-4 py-2 text-gray-800">Christopher</td>
-                        <td className="px-4 py-2 text-gray-800">32</td>
-                        <td className="px-4 py-2 text-gray-800">Male</td>
-                        <td className="px-4 py-2 text-gray-800">
-                          First Appointment
-                        </td>
-                        <td className="px-4 py-2 text-gray-800">10:00 AM</td>
-                        <td className="px-4 py-2 text-indigo-600 font-medium">
-                          In Progress
-                        </td>
-                        <td className="px-4 py-2 text-gray-800">Aug 12, 24</td>
-                        <td className="px-4 py-2">
-                          <button className="text-white bg-purple-600 px-3 py-1 rounded-full">
-                            Check In
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+
+            <div>
+              {activeTab === "patientQueue" && (
+                <div>
+                  <div className="bg-white overflow-hidden w-full h-full">
+                    <div className="max-h-[500px] overflow-y-auto w-full">
+                      <table className="w-full bg-white">
+                        <thead className="bg-gray-200">
+                          <tr>
+                            {[
+                              "ID",
+                              "Name",
+                              "Age",
+                              "Gender",
+                              "Appointment",
+                              "Time",
+                              "Status",
+                              "Date",
+                              "Action",
+                            ].map((header) => (
+                              <th key={header} className="p-4 text-center">
+                                {header}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {patientsData.map(
+                            ({
+                              id,
+                              name,
+                              age,
+                              gender,
+                              appointment,
+                              time,
+                              status,
+                              date,
+                              action,
+                            }) => (
+                              <tr
+                                key={id}
+                                className="border-b hover:bg-gray-50 text-center"
+                              >
+                                <td className="p-4">{id}</td>
+                                <td className="p-4">{name}</td>
+                                <td className="p-4">{age}</td>
+                                <td className="p-4">{gender}</td>
+                                <td className="p-4">{appointment}</td>
+                                <td className="p-4">{time}</td>
+                                {/* <td className="p-4">
+                                  <div
+                                    className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
+                                      status === "Chronic"
+                                        ? "bg-[#FFCDC9] text-[#D2362B]"
+                                        : "bg-[#E0F5FF] text-[#1A408C]"
+                                    }`}
+                                  >
+                                    <img
+                                      src={
+                                        status === "Chronic"
+                                          ? chronicIcon
+                                          : acuteIcon
+                                      }
+                                      alt={status}
+                                      className="w-4 h-4"
+                                    />
+                                    <span>{status}</span>
+                                  </div>
+                                </td> */}
+
+                                <td className="p-4">
+                                  <div
+                                    className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
+                                      status === "In Progress"
+                                        ? "bg-[#E2E0E8] text-[#2E1A8C]"
+                                        : "bg-[#DAEEF9] text-[#1A628C]"
+                                    }`}
+                                  >
+                                    <img
+                                      src={
+                                        status === "In Progress"
+                                          ? inProgressIcon
+                                          : waitingIcon
+                                      }
+                                      alt={status}
+                                      className="w-4 h-4"
+                                    />
+                                    <span>{status}</span>
+                                  </div>
+                                </td>
+                                <td className="p-4">{date}</td>
+                                <td className="p-4">{action}</td>
+                              </tr>
+                            )
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === "appointments" && (
+                <div>
+                  <div className="bg-white overflow-hidden w-full h-full">
+                    <div className="max-h-[500px] overflow-y-auto w-full">
+                      <table className="w-full bg-white">
+                        <thead className="bg-gray-200">
+                          <tr>
+                            {[
+                              "ID",
+                              "Name",
+                              "Age",
+                              "Gender",
+                              "Appointment",
+                              "Time",
+                              "Status",
+                              "Date",
+                              "Action",
+                            ].map((header) => (
+                              <th key={header} className="p-4 text-center">
+                                {header}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {patientsData.map(
+                            ({
+                              id,
+                              name,
+                              age,
+                              gender,
+                              appointment,
+                              time,
+                              status,
+                              date,
+                              action,
+                            }) => (
+                              <tr
+                                key={id}
+                                className="border-b hover:bg-gray-50 text-center"
+                              >
+                                <td className="p-4">{id}</td>
+                                <td className="p-4">{name}</td>
+                                <td className="p-4">{age}</td>
+                                <td className="p-4">{gender}</td>
+                                <td className="p-4">{appointment}</td>
+                                <td className="p-4">{time}</td>
+                                <td className="p-4">
+                                  <div
+                                    className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
+                                      status === "In Progress"
+                                        ? "bg-[#E2E0E8] text-[#2E1A8C]"
+                                        : "bg-[#DAEEF9] text-[#1A628C]"
+                                    }`}
+                                  >
+                                    <img
+                                      src={
+                                        status === "In Progress"
+                                          ? inProgressIcon
+                                          : waitingIcon
+                                      }
+                                      alt={status}
+                                      className="w-4 h-4"
+                                    />
+                                    <span>{status}</span>
+                                  </div>
+                                </td>
+                                <td className="p-4">{date}</td>
+                                <td className="p-4">{action}</td>
+                              </tr>
+                            )
+                          )}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

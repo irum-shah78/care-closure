@@ -142,6 +142,9 @@ const Patients = () => {
     // navigate("/patients/pre-registration");
   };
 
+  const handlePatientDetails = () => {
+    navigate("/patients/patient-details");
+  };
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -180,7 +183,10 @@ const Patients = () => {
                 <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
                   <img src={sortIcon} alt="filter" /> Sort by
                 </button>
-                <button className="border border-[#B3B3B3] bg-[#2E2559] text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm" onClick={handleClick}>
+                <button
+                  className="border border-[#B3B3B3] bg-[#2E2559] text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm"
+                  onClick={handleClick}
+                >
                   <img src={addIcon} alt="calendar" /> Add New Patient
                 </button>
               </div>
@@ -219,7 +225,11 @@ const Patients = () => {
                         status,
                         description,
                       }) => (
-                        <tr key={id} className="border-b hover:bg-gray-50">
+                        <tr
+                          key={id}
+                          className="border-b hover:bg-gray-50 cursor-pointer"
+                          onClick={handlePatientDetails}
+                        >
                           <td className="p-4">{id}</td>
                           <td className="p-4">{name}</td>
                           <td className="p-4">{age}</td>

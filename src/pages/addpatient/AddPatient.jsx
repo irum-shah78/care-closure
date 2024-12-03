@@ -301,3 +301,201 @@ const AddPatient = () => {
 };
 
 export default AddPatient;
+
+// import React, { useState } from "react";
+// import Header from "../../components/header/Header";
+// import Sidebar from "../../components/sidebar/Sidebar";
+// import FormSection from "../../components/formselection/FormSelection";
+// import backIcon from "../../assets/back-icon.svg";
+// import { useNavigate } from "react-router-dom";
+// import tickIcon from "../../assets/tick.svg";
+
+// const AddPatient = () => {
+//   const navigate = useNavigate();
+
+//   // State to manage form fields
+//   const [patientDetails, setPatientDetails] = useState({
+//     firstName: "",
+//     lastName: "",
+//     dob: "",
+//     gender: "",
+//     maritalStatus: "",
+//     bloodGroup: "",
+//   });
+
+//   const [contactInfo, setContactInfo] = useState({
+//     mobileNumber: "",
+//     email: "",
+//     city: "",
+//     address: "",
+//     state: "",
+//     pincode: "",
+//   });
+
+//   const handleInputChange = (section, field, value) => {
+//     if (section === "patientDetails") {
+//       setPatientDetails({ ...patientDetails, [field]: value });
+//     } else if (section === "contactInfo") {
+//       setContactInfo({ ...contactInfo, [field]: value });
+//     }
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     // Combine all data
+//     const allData = { ...patientDetails, ...contactInfo };
+
+//     // Filter relevant data for patients' table
+//     const patientData = {
+//       firstName: patientDetails.firstName,
+//       lastName: patientDetails.lastName,
+//       dob: patientDetails.dob,
+//       gender: patientDetails.gender,
+//       maritalStatus: patientDetails.maritalStatus,
+//       bloodGroup: patientDetails.bloodGroup,
+//     };
+
+//     console.log("All Form Data:", allData);
+//     console.log("Patient Table Data:", patientData);
+
+//     // Navigate to patients page (or handle further as needed)
+//     navigate("/patients");
+//   };
+
+//   const renderField = (field, section, key) => {
+//     if (field.type === "select") {
+//       return (
+//         <label key={key} className="block">
+//           <span className="text-sm font-medium">{field.label}</span>
+//           <select
+//             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
+//             defaultValue=""
+//             onChange={(e) => handleInputChange(section, field.name, e.target.value)}
+//           >
+//             <option value="" disabled>
+//               {field.placeholder}
+//             </option>
+//             {field.options.map((option, idx) => (
+//               <option key={idx} value={option}>
+//                 {option}
+//               </option>
+//             ))}
+//           </select>
+//         </label>
+//       );
+//     }
+//     return (
+//       <label key={key} className="block">
+//         <span className="text-sm font-medium">{field.label}</span>
+//         <input
+//           type={field.type}
+//           placeholder={field.placeholder}
+//           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+//           onChange={(e) => handleInputChange(section, field.name, e.target.value)}
+//         />
+//       </label>
+//     );
+//   };
+
+//   return (
+//     <div className="min-h-screen flex bg-gray-100">
+//       <Sidebar />
+//       <main className="flex-1">
+//         <Header />
+//         <div className="px-8 py-4">
+//           <div className="flex gap-2">
+//             <img
+//               src={backIcon}
+//               alt="back-icon"
+//               className="cursor-pointer"
+//               onClick={() => navigate("/patients")}
+//             />
+//             <h1 className="text-2xl font-bold">Add New Patient</h1>
+//           </div>
+//           <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
+//             <FormSection title="Patient Details">
+//               <hr className="text-[#D1D1D1] border-1" />
+//               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+//                 {[
+//                   { type: "text", label: "First Name", name: "firstName", placeholder: "Enter first name" },
+//                   { type: "text", label: "Last Name", name: "lastName", placeholder: "Enter last name" },
+//                   { type: "date", label: "Date of Birth", name: "dob", placeholder: "mm/dd/yy" },
+//                   {
+//                     type: "select",
+//                     label: "Gender",
+//                     name: "gender",
+//                     placeholder: "Select your gender",
+//                     options: ["Male", "Female"],
+//                   },
+//                   {
+//                     type: "select",
+//                     label: "Marital Status",
+//                     name: "maritalStatus",
+//                     placeholder: "Select your marital status",
+//                     options: ["Single", "Married"],
+//                   },
+//                   {
+//                     type: "select",
+//                     label: "Blood Group",
+//                     name: "bloodGroup",
+//                     placeholder: "Select your blood group",
+//                     options: ["A+", "B+", "O+", "AB+"],
+//                   },
+//                 ].map((field, index) =>
+//                   renderField(field, "patientDetails", index)
+//                 )}
+//               </div>
+//             </FormSection>
+
+//             <FormSection title="Contact Information">
+//               <hr className="text-[#D1D1D1] border-1" />
+//               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+//                 {[
+//                   { type: "text", label: "Mobile Number", name: "mobileNumber", placeholder: "Placeholder" },
+//                   { type: "text", label: "Email", name: "email", placeholder: "Placeholder" },
+//                   {
+//                     type: "select",
+//                     label: "City",
+//                     name: "city",
+//                     placeholder: "Select Your City",
+//                     options: ["City 1", "City 2", "City 3"],
+//                   },
+//                   { type: "text", label: "Address", name: "address", placeholder: "Placeholder" },
+//                   {
+//                     type: "select",
+//                     label: "State",
+//                     name: "state",
+//                     placeholder: "Select Your State",
+//                     options: ["State 1", "State 2", "State 3"],
+//                   },
+//                   { type: "text", label: "Pincode", name: "pincode", placeholder: "Enter your pincode" },
+//                 ].map((field, index) =>
+//                   renderField(field, "contactInfo", index)
+//                 )}
+//               </div>
+//             </FormSection>
+
+//             <div className="flex justify-end gap-4 mt-6">
+//               <button
+//                 type="button"
+//                 className="px-6 py-2 rounded-xl border border-[#747474] text-[#747474]"
+//                 onClick={() => navigate("/patients")}
+//               >
+//                 Cancel
+//               </button>
+//               <button
+//                 type="submit"
+//                 className="px-6 py-2 rounded-xl bg-[#2E2559] text-white"
+//               >
+//                 Submit
+//               </button>
+//             </div>
+//           </form>
+//         </div>
+//       </main>
+//     </div>
+//   );
+// };
+
+// export default AddPatient;

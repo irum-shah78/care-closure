@@ -1,156 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import searchIcon from "../../assets/search-icon.svg";
 import filterIcon from "../../assets/filter.svg";
 import sortIcon from "../../assets/sort.svg";
 import addIcon from "../../assets/add.svg";
-import chronicIcon from "../../assets/chronic.svg";
-import acuteIcon from "../../assets/acute.svg";
+import pendingIcon from "../../assets/pending-icon.svg";
+import completedIcon from "../../assets/completed-icon.svg";
+import notPaidIcon from "../../assets/not-payed-icon.svg";
 import { useNavigate } from "react-router-dom";
-
-const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
-
-const patientsData = [
-  {
-    id: "#214",
-    name: "Christopher",
-    age: 32,
-    gender: "Male",
-    lastAppointment: "10:00 AM Aug 12, 24",
-    nextAppointment: "10:00 AM Aug 12, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#215",
-    name: "Emily",
-    age: 56,
-    gender: "Female",
-    lastAppointment: "11:00 AM Aug 10, 24",
-    nextAppointment: "09:00 AM Aug 15, 24",
-    status: getRandomStatus(),
-    description: "Diabetes",
-  },
-  {
-    id: "#216",
-    name: "John",
-    age: 45,
-    gender: "Male",
-    lastAppointment: "12:00 PM Aug 08, 24",
-    nextAppointment: "12:00 PM Aug 14, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#217",
-    name: "Sophia",
-    age: 29,
-    gender: "Female",
-    lastAppointment: "03:00 PM Aug 06, 24",
-    nextAppointment: "11:00 AM Aug 20, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#218",
-    name: "Michael",
-    age: 63,
-    gender: "Male",
-    lastAppointment: "02:00 PM Aug 05, 24",
-    nextAppointment: "10:00 AM Aug 18, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#219",
-    name: "Olivia",
-    age: 37,
-    gender: "Female",
-    lastAppointment: "09:00 AM Aug 04, 24",
-    nextAppointment: "09:00 AM Aug 16, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#220",
-    name: "Daniel",
-    age: 51,
-    gender: "Male",
-    lastAppointment: "11:30 AM Aug 03, 24",
-    nextAppointment: "03:00 PM Aug 13, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#221",
-    name: "Isabella",
-    age: 48,
-    gender: "Female",
-    lastAppointment: "08:30 AM Aug 02, 24",
-    nextAppointment: "08:30 AM Aug 19, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#222",
-    name: "Ethan",
-    age: 34,
-    gender: "Male",
-    lastAppointment: "05:00 PM Aug 01, 24",
-    nextAppointment: "05:00 PM Aug 21, 24",
-    status: getRandomStatus(),
-    description: "Liver Disease",
-  },
-  {
-    id: "#223",
-    name: "Ava",
-    age: 42,
-    gender: "Female",
-    lastAppointment: "04:00 PM Jul 31, 24",
-    nextAppointment: "04:00 PM Aug 22, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#224",
-    name: "James",
-    age: 50,
-    gender: "Male",
-    lastAppointment: "06:00 PM Jul 30, 24",
-    nextAppointment: "02:00 PM Aug 23, 24",
-    status: getRandomStatus(),
-    description: "Kidney Stones",
-  },
-  {
-    id: "#225",
-    name: "Mia",
-    age: 39,
-    gender: "Female",
-    lastAppointment: "07:00 PM Jul 29, 24",
-    nextAppointment: "01:00 PM Aug 24, 24",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-];
 
 const Patients = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [patientsData, setPatientsData] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedPatients = JSON.parse(localStorage.getItem("patients") || "[]");
+    setPatientsData(storedPatients);
+  }, []);
+
   const handleClick = () => {
     navigate("/patients/add-patient");
-    // navigate("/patients/pre-registration");
   };
 
-  const handlePatientDetails = () => {
-    navigate("/patients/patient-details");
+  const handlePatientDetails = (patient) => {
+    navigate("/patients/patient-details", { state: { patient } });
   };
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredPatients = patientsData.filter((patient) =>
-    patient.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredPatients = patientsData.filter(
+    (patient) =>
+      patient.name &&
+      patient.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -198,16 +83,16 @@ const Patients = () => {
                   <thead className="bg-gray-200">
                     <tr>
                       {[
-                        "ID",
+                        "Patient ID",
                         "Name",
                         "Age",
                         "Gender",
-                        "Last Appointment",
-                        "Next Appointment",
-                        "Status",
-                        "Description",
+                        "Blood Group",
+                        "Contact Number",
+                        "Emergency Contact No.",
+                        "Payment Status",
                       ].map((header) => (
-                        <th key={header} className="p-4 text-left">
+                        <th key={header} className="p-4 text-center">
                           {header}
                         </th>
                       ))}
@@ -220,41 +105,59 @@ const Patients = () => {
                         name,
                         age,
                         gender,
-                        lastAppointment,
-                        nextAppointment,
-                        status,
-                        description,
+                        bloodGroup,
+                        mobileNumber,
+                        emergencyContactNumber,
+                        paymentStatus,
                       }) => (
                         <tr
                           key={id}
-                          className="border-b hover:bg-gray-50 cursor-pointer"
-                          onClick={handlePatientDetails}
+                          className="border-b hover:bg-gray-50 cursor-pointer text-center"
+                          // onClick={handlePatientDetails}
+                          onClick={() =>
+                            handlePatientDetails({
+                              id,
+                              name,
+                              age,
+                              gender,
+                              bloodGroup,
+                              mobileNumber,
+                              emergencyContactNumber,
+                              paymentStatus,
+                            })
+                          }
                         >
                           <td className="p-4">{id}</td>
                           <td className="p-4">{name}</td>
                           <td className="p-4">{age}</td>
                           <td className="p-4">{gender}</td>
-                          <td className="p-4">{lastAppointment}</td>
-                          <td className="p-4">{nextAppointment}</td>
+                          <td className="p-4">{bloodGroup}</td>
+                          <td className="p-4">{mobileNumber}</td>
+                          <td className="p-4">{emergencyContactNumber}</td>
                           <td className="p-4">
                             <div
                               className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
-                                status === "Chronic"
-                                  ? "bg-[#FFCDC9] text-[#D2362B]"
-                                  : "bg-[#E0F5FF] text-[#1A408C]"
+                                paymentStatus === "Pending"
+                                  ? "bg-[#FFEFC9] text-[#CE7B06]"
+                                  : paymentStatus === "Completed"
+                                  ? "bg-[#E0F5FF] text-[#1A408C]"
+                                  : "bg-[#FFCDC9] text-[#D2362B]"
                               }`}
                             >
                               <img
                                 src={
-                                  status === "Chronic" ? chronicIcon : acuteIcon
+                                  paymentStatus === "Pending"
+                                    ? pendingIcon
+                                    : paymentStatus === "Completed"
+                                    ? completedIcon
+                                    : notPaidIcon
                                 }
-                                alt={status}
+                                alt={paymentStatus}
                                 className="w-4 h-4"
                               />
-                              <span>{status}</span>
+                              <span>{paymentStatus}</span>
                             </div>
                           </td>
-                          <td className="p-4">{description}</td>
                         </tr>
                       )
                     )}

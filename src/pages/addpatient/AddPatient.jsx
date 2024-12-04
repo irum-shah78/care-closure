@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
@@ -8,101 +8,80 @@ import tickIcon from "../../assets/tick.svg";
 
 const AddPatient = () => {
   const navigate = useNavigate();
+
+  const [name, setname] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("");
+  const [age, setAge] = useState("");
+  const [description, setDescription] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  const [state, setState] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [emergencyContactName, setEmergencyContactName] = useState("");
+  const [emergencyRelationship, setEmergencyRelationship] = useState("");
+  const [emergencyContactNumber, setEmergencyContactNumber] = useState("");
+  const [allergies, setAllergies] = useState("");
+  const [medications, setMedications] = useState("");
+  const [medicalHistory, setMedicalHistory] = useState("");
+  const [insuranceProvider, setInsuranceProvider] = useState("");
+  const [policyNumber, setPolicyNumber] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState("");
+
   const handlePatient = () => {
     navigate("/patients");
   };
 
-  const patientDetailsFields = [
-    { type: "text", label: "First Name", placeholder: "Enter first name" },
-    { type: "text", label: "Last Name", placeholder: "Enter last name" },
-    { type: "date", label: "Date of Birth", placeholder: "mm/dd/yy" },
-    {
-      type: "select",
-      label: "Gender",
-      placeholder: "Select your gender",
-      options: ["Male", "Female"],
-    },
-    {
-      type: "select",
-      label: "Marital Status",
-      placeholder: "Select your marital status",
-      options: ["Single", "Married"],
-    },
-    {
-      type: "select",
-      label: "Blood Group",
-      placeholder: "Select your blood group",
-      options: ["A+", "B+", "O+", "AB+"],
-    },
-  ];
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const contactInformationFields = [
-    { type: "text", label: "Mobile Number", placeholder: "Placeholder" },
-    { type: "text", label: "Email", placeholder: "Placeholder" },
-    {
-      type: "select",
-      label: "City",
-      placeholder: "Select Your City",
-      options: ["City 1", "City 2", "City 3"],
-    },
-    { type: "text", label: "Address", placeholder: "Placeholder", colSpan: 2 },
-    {
-      type: "select",
-      label: "State",
-      placeholder: "Select Your State",
-      options: ["State 1", "State 2", "State 3"],
-    },
-    { type: "text", label: "Pincode", placeholder: "Enter your pincode" },
-  ];
+    const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
+    const newPatient = {
+      id: `#${Math.floor(1000 + Math.random() * 9000)}`,
+      status: getRandomStatus(),
+      name,
+      lastName,
+      dob,
+      gender,
+      maritalStatus,
+      bloodGroup,
+      age,
+      description,
+      mobileNumber,
+      email,
+      city,
+      address,
+      state,
+      pincode,
+      emergencyContactName,
+      emergencyRelationship,
+      emergencyContactNumber,
+      allergies,
+      medications,
+      medicalHistory,
+      insuranceProvider,
+      policyNumber,
+      cardNumber,
+      expiryDate,
+      cvv,
+      paymentStatus,
+    };
 
-  const emergencyContactFields = [
-    { type: "text", label: "Contact Name", placeholder: "Enter name" },
-    { type: "text", label: "Relationship", placeholder: "Enter relationship" },
-    {
-      type: "text",
-      label: "Contact Number",
-      placeholder: "Enter contact number",
-    },
-  ];
-
-  const medicalInformationFields = [
-    { type: "text", label: "Known Allergies", placeholder: "If any" },
-    { type: "text", label: "Current Medications", placeholder: "If any" },
-    {
-      type: "select",
-      label: "Medical History",
-      placeholder: "Any previous conditions",
-      options: ["None", "Condition 1", "Condition 2"],
-    },
-  ];
-
-  const insuranceInformationFields = [
-    {
-      type: "text",
-      label: "Insurance Provider",
-      placeholder: "Enter name of insurance provider",
-    },
-    {
-      type: "text",
-      label: "Policy Number",
-      placeholder: "Enter policy number",
-    },
-  ];
-
-  const cardDetailsFields = [
-    { type: "text", label: "Card Number", placeholder: "12345678" },
-    { type: "text", label: "Expiry Date", placeholder: "mm/yy" },
-    { type: "text", label: "CVV", placeholder: "123" },
-  ];
-
-  const paymentFields = [
-    {
-      type: "select",
-      label: "Payment Status",
-      placeholder: "Select status",
-      options: ["Received", "Pending", "Failed"],
-    },
-  ];
+    const existingPatients = JSON.parse(
+      localStorage.getItem("patients") || "[]"
+    );
+    existingPatients.push(newPatient);
+    localStorage.setItem("patients", JSON.stringify(existingPatients));
+    navigate("/patients");
+  };
 
   const renderField = (field, index) => {
     if (field.type === "select") {
@@ -111,7 +90,8 @@ const AddPatient = () => {
           <span className="text-sm font-medium">{field.label}</span>
           <select
             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
-            defaultValue=""
+            value={field.value}
+            onChange={field.onChange}
           >
             <option value="" disabled>
               {field.placeholder}
@@ -132,10 +112,222 @@ const AddPatient = () => {
           type={field.type}
           placeholder={field.placeholder}
           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+          value={field.value}
+          onChange={field.onChange}
         />
       </label>
     );
   };
+
+  const patientDetailsFields = [
+    {
+      label: "First Name",
+      type: "text",
+      placeholder: "Enter first name",
+      value: name,
+      onChange: (e) => setname(e.target.value),
+    },
+    {
+      label: "Last Name",
+      type: "text",
+      placeholder: "Enter last name",
+      value: lastName,
+      onChange: (e) => setLastName(e.target.value),
+    },
+    {
+      label: "Date of Birth",
+      type: "date",
+      placeholder: "mm/dd/yy",
+      value: dob,
+      onChange: (e) => setDob(e.target.value),
+    },
+    {
+      label: "Gender",
+      type: "select",
+      placeholder: "Select your gender",
+      options: ["Male", "Female"],
+      value: gender,
+      onChange: (e) => setGender(e.target.value),
+    },
+    {
+      label: "Marital Status",
+      type: "select",
+      placeholder: "Select your marital status",
+      options: ["Single", "Married"],
+      value: maritalStatus,
+      onChange: (e) => setMaritalStatus(e.target.value),
+    },
+    {
+      label: "Blood Group",
+      type: "select",
+      placeholder: "Select your blood group",
+      options: ["A+", "B+", "O+", "AB+"],
+      value: bloodGroup,
+      onChange: (e) => setBloodGroup(e.target.value),
+    },
+    {
+      label: "Age",
+      type: "text",
+      placeholder: "Enter age",
+      value: age,
+      onChange: (e) => setAge(e.target.value),
+    },
+    {
+      label: "Description",
+      type: "text",
+      placeholder: "Enter description",
+      value: description,
+      onChange: (e) => setDescription(e.target.value),
+    },
+  ];
+
+  const contactInformationFields = [
+    {
+      label: "Mobile Number",
+      type: "text",
+      placeholder: "Enter your mobile number",
+      value: mobileNumber,
+      onChange: (e) => setMobileNumber(e.target.value),
+    },
+    {
+      label: "Email",
+      type: "text",
+      placeholder: "Enter your email",
+      value: email,
+      onChange: (e) => setEmail(e.target.value),
+    },
+    {
+      label: "City",
+      type: "select",
+      placeholder: "Select Your City",
+      options: ["City 1", "City 2", "City 3"],
+      value: city,
+      onChange: (e) => setCity(e.target.value),
+    },
+    {
+      label: "Address",
+      type: "text",
+      placeholder: "Enter your address",
+      value: address,
+      onChange: (e) => setAddress(e.target.value),
+    },
+    {
+      label: "State",
+      type: "select",
+      placeholder: "Select Your State",
+      options: ["State 1", "State 2", "State 3"],
+      value: state,
+      onChange: (e) => setState(e.target.value),
+    },
+    {
+      label: "Pincode",
+      type: "text",
+      placeholder: "Enter your pincode",
+      value: pincode,
+      onChange: (e) => setPincode(e.target.value),
+    },
+  ];
+
+  const emergencyContactFields = [
+    {
+      label: "Contact Name",
+      type: "text",
+      placeholder: "Enter contact name",
+      value: emergencyContactName,
+      onChange: (e) => setEmergencyContactName(e.target.value),
+    },
+    {
+      label: "Relationship",
+      type: "text",
+      placeholder: "Enter relationship",
+      value: emergencyRelationship,
+      onChange: (e) => setEmergencyRelationship(e.target.value),
+    },
+    {
+      label: "Contact Number",
+      type: "text",
+      placeholder: "Enter contact number",
+      value: emergencyContactNumber,
+      onChange: (e) => setEmergencyContactNumber(e.target.value),
+    },
+  ];
+
+  const medicalInformationFields = [
+    {
+      label: "Known Allergies",
+      type: "text",
+      placeholder: "If any",
+      value: allergies,
+      onChange: (e) => setAllergies(e.target.value),
+    },
+    {
+      label: "Current Medications",
+      type: "text",
+      placeholder: "If any",
+      value: medications,
+      onChange: (e) => setMedications(e.target.value),
+    },
+    {
+      label: "Medical History",
+      type: "select",
+      placeholder: "Any previous conditions",
+      options: ["None", "Condition 1", "Condition 2"],
+      value: medicalHistory,
+      onChange: (e) => setMedicalHistory(e.target.value),
+    },
+  ];
+
+  const insuranceInformationFields = [
+    {
+      label: "Insurance Provider",
+      type: "text",
+      placeholder: "Enter name of insurance provider",
+      value: insuranceProvider,
+      onChange: (e) => setInsuranceProvider(e.target.value),
+    },
+    {
+      label: "Policy Number",
+      type: "text",
+      placeholder: "Enter policy number",
+      value: policyNumber,
+      onChange: (e) => setPolicyNumber(e.target.value),
+    },
+  ];
+
+  const cardDetailsFields = [
+    {
+      label: "Card Number",
+      type: "text",
+      placeholder: "12345678",
+      value: cardNumber,
+      onChange: (e) => setCardNumber(e.target.value),
+    },
+    {
+      label: "Expiry Date",
+      type: "text",
+      placeholder: "MM/YY",
+      value: expiryDate,
+      onChange: (e) => setExpiryDate(e.target.value),
+    },
+    {
+      label: "CVV",
+      type: "text",
+      placeholder: "123",
+      value: cvv,
+      onChange: (e) => setCvv(e.target.value),
+    },
+  ];
+
+  const paymentFields = [
+    {
+      type: "select",
+      label: "Payment Status",
+      placeholder: "Select status",
+      options: ["Pending", "Completed", "Not Payed"],
+      value: paymentStatus,
+      onChange: (e) => setPaymentStatus(e.target.value),
+    },
+  ];
 
   return (
     <div className="min-h-screen flex bg-gray-100">
@@ -152,7 +344,7 @@ const AddPatient = () => {
             />
             <h1 className="text-2xl font-bold">Add New Patient</h1>
           </div>
-          <form className="mt-6 space-y-6 shadow-sm">
+          <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
             <FormSection title="Patient Details">
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
@@ -301,201 +493,3 @@ const AddPatient = () => {
 };
 
 export default AddPatient;
-
-// import React, { useState } from "react";
-// import Header from "../../components/header/Header";
-// import Sidebar from "../../components/sidebar/Sidebar";
-// import FormSection from "../../components/formselection/FormSelection";
-// import backIcon from "../../assets/back-icon.svg";
-// import { useNavigate } from "react-router-dom";
-// import tickIcon from "../../assets/tick.svg";
-
-// const AddPatient = () => {
-//   const navigate = useNavigate();
-
-//   // State to manage form fields
-//   const [patientDetails, setPatientDetails] = useState({
-//     firstName: "",
-//     lastName: "",
-//     dob: "",
-//     gender: "",
-//     maritalStatus: "",
-//     bloodGroup: "",
-//   });
-
-//   const [contactInfo, setContactInfo] = useState({
-//     mobileNumber: "",
-//     email: "",
-//     city: "",
-//     address: "",
-//     state: "",
-//     pincode: "",
-//   });
-
-//   const handleInputChange = (section, field, value) => {
-//     if (section === "patientDetails") {
-//       setPatientDetails({ ...patientDetails, [field]: value });
-//     } else if (section === "contactInfo") {
-//       setContactInfo({ ...contactInfo, [field]: value });
-//     }
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     // Combine all data
-//     const allData = { ...patientDetails, ...contactInfo };
-
-//     // Filter relevant data for patients' table
-//     const patientData = {
-//       firstName: patientDetails.firstName,
-//       lastName: patientDetails.lastName,
-//       dob: patientDetails.dob,
-//       gender: patientDetails.gender,
-//       maritalStatus: patientDetails.maritalStatus,
-//       bloodGroup: patientDetails.bloodGroup,
-//     };
-
-//     console.log("All Form Data:", allData);
-//     console.log("Patient Table Data:", patientData);
-
-//     // Navigate to patients page (or handle further as needed)
-//     navigate("/patients");
-//   };
-
-//   const renderField = (field, section, key) => {
-//     if (field.type === "select") {
-//       return (
-//         <label key={key} className="block">
-//           <span className="text-sm font-medium">{field.label}</span>
-//           <select
-//             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
-//             defaultValue=""
-//             onChange={(e) => handleInputChange(section, field.name, e.target.value)}
-//           >
-//             <option value="" disabled>
-//               {field.placeholder}
-//             </option>
-//             {field.options.map((option, idx) => (
-//               <option key={idx} value={option}>
-//                 {option}
-//               </option>
-//             ))}
-//           </select>
-//         </label>
-//       );
-//     }
-//     return (
-//       <label key={key} className="block">
-//         <span className="text-sm font-medium">{field.label}</span>
-//         <input
-//           type={field.type}
-//           placeholder={field.placeholder}
-//           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
-//           onChange={(e) => handleInputChange(section, field.name, e.target.value)}
-//         />
-//       </label>
-//     );
-//   };
-
-//   return (
-//     <div className="min-h-screen flex bg-gray-100">
-//       <Sidebar />
-//       <main className="flex-1">
-//         <Header />
-//         <div className="px-8 py-4">
-//           <div className="flex gap-2">
-//             <img
-//               src={backIcon}
-//               alt="back-icon"
-//               className="cursor-pointer"
-//               onClick={() => navigate("/patients")}
-//             />
-//             <h1 className="text-2xl font-bold">Add New Patient</h1>
-//           </div>
-//           <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
-//             <FormSection title="Patient Details">
-//               <hr className="text-[#D1D1D1] border-1" />
-//               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-//                 {[
-//                   { type: "text", label: "First Name", name: "firstName", placeholder: "Enter first name" },
-//                   { type: "text", label: "Last Name", name: "lastName", placeholder: "Enter last name" },
-//                   { type: "date", label: "Date of Birth", name: "dob", placeholder: "mm/dd/yy" },
-//                   {
-//                     type: "select",
-//                     label: "Gender",
-//                     name: "gender",
-//                     placeholder: "Select your gender",
-//                     options: ["Male", "Female"],
-//                   },
-//                   {
-//                     type: "select",
-//                     label: "Marital Status",
-//                     name: "maritalStatus",
-//                     placeholder: "Select your marital status",
-//                     options: ["Single", "Married"],
-//                   },
-//                   {
-//                     type: "select",
-//                     label: "Blood Group",
-//                     name: "bloodGroup",
-//                     placeholder: "Select your blood group",
-//                     options: ["A+", "B+", "O+", "AB+"],
-//                   },
-//                 ].map((field, index) =>
-//                   renderField(field, "patientDetails", index)
-//                 )}
-//               </div>
-//             </FormSection>
-
-//             <FormSection title="Contact Information">
-//               <hr className="text-[#D1D1D1] border-1" />
-//               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-//                 {[
-//                   { type: "text", label: "Mobile Number", name: "mobileNumber", placeholder: "Placeholder" },
-//                   { type: "text", label: "Email", name: "email", placeholder: "Placeholder" },
-//                   {
-//                     type: "select",
-//                     label: "City",
-//                     name: "city",
-//                     placeholder: "Select Your City",
-//                     options: ["City 1", "City 2", "City 3"],
-//                   },
-//                   { type: "text", label: "Address", name: "address", placeholder: "Placeholder" },
-//                   {
-//                     type: "select",
-//                     label: "State",
-//                     name: "state",
-//                     placeholder: "Select Your State",
-//                     options: ["State 1", "State 2", "State 3"],
-//                   },
-//                   { type: "text", label: "Pincode", name: "pincode", placeholder: "Enter your pincode" },
-//                 ].map((field, index) =>
-//                   renderField(field, "contactInfo", index)
-//                 )}
-//               </div>
-//             </FormSection>
-
-//             <div className="flex justify-end gap-4 mt-6">
-//               <button
-//                 type="button"
-//                 className="px-6 py-2 rounded-xl border border-[#747474] text-[#747474]"
-//                 onClick={() => navigate("/patients")}
-//               >
-//                 Cancel
-//               </button>
-//               <button
-//                 type="submit"
-//                 className="px-6 py-2 rounded-xl bg-[#2E2559] text-white"
-//               >
-//                 Submit
-//               </button>
-//             </div>
-//           </form>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// };
-
-// export default AddPatient;

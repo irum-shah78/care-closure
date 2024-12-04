@@ -7,7 +7,7 @@ import line from "../../assets/line.svg";
 import nextPage from "../../assets/next-page.svg";
 import chronicIcon from "../../assets/chronic.svg";
 import acuteIcon from "../../assets/acute.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
 
@@ -142,20 +142,18 @@ const patientsData = [
 
 const PatientDetails = () => {
   const navigate = useNavigate();
-  const handleBack = () => {
-    navigate("/patients");
-  };
+  const { state } = useLocation();
+  const patient = state?.patient;
 
+  const handleBack = () => navigate("/patients");
   const handlePreVisit = () => {
-    navigate("/patients/patient-details/pre-visit");
+    navigate("/patients/patient-details/pre-visit", { state: { patient } });
   };
-
   const handleDuringVisit = () => {
-    navigate("/patients/patient-details/during-visit");
+    navigate("/patients/patient-details/during-visit", { state: { patient } });
   };
-
   const handlePostVisit = () => {
-    navigate("/patients/patient-details/post-visit");
+    navigate("/patients/patient-details/post-visit", { state: { patient } });
   };
 
   return (
@@ -185,20 +183,22 @@ const PatientDetails = () => {
                   className="w-20 h-20 rounded-full object-cover"
                 />
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-xl font-semibold mt-4">William Henry</h2>
-                  <p className="text-gray-600">william@mail.com</p>
+                  <h2 className="text-xl font-semibold mt-4">
+                    {patient?.name}
+                  </h2>
+                  <p className="text-gray-600">{patient?.email}</p>
                   <div className="flex items-center gap-8">
                     <div className="flex flex-col text-center items-center justify-center">
                       <span className="text-gray-700 text-sm font-medium">
-                        15
-                      </span>{" "}
+                        {patient?.posts || 0}
+                      </span>
                       <span className="text-gray-500 text-sm">Post</span>
                     </div>
                     <img src={line} alt="line" />
                     <div className="flex flex-col text-center items-center justify-center">
                       <span className="text-gray-700 text-sm font-medium">
-                        01
-                      </span>{" "}
+                        {patient?.upcomingAppointments || 0}
+                      </span>
                       <span className="text-gray-500 text-sm">Upcoming</span>
                     </div>
                   </div>
@@ -210,17 +210,19 @@ const PatientDetails = () => {
                 <div className="grid grid-rows-3 py-3">
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">Gender</p>
-                    <p className="text-gray-800">Male</p>
+                    <p className="text-gray-800">{patient?.gender}</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">
                       Street Address
                     </p>
-                    <p className="text-gray-800">231 New Street</p>
+                    <p className="text-gray-800">{patient?.address}</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">Status</p>
-                    <p className="text-[#47DA60]">Active</p>
+                    <p className="text-[#47DA60]">
+                      {patient?.status || "Active"}
+                    </p>
                   </div>
                 </div>
 
@@ -229,17 +231,17 @@ const PatientDetails = () => {
                     <p className="text-sm font-medium text-[#797979]">
                       Birthday
                     </p>
-                    <p className="text-gray-800">Jan 23rd, 2002</p>
+                    <p className="text-gray-800">{patient?.birthday}</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">City</p>
-                    <p className="text-gray-800">Big City</p>
+                    <p className="text-gray-800">{patient?.city}</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">
                       Registered Date
                     </p>
-                    <p className="text-gray-800">Nov 24th, 2024</p>
+                    <p className="text-gray-800">{patient?.registeredDate}</p>
                   </div>
                 </div>
 
@@ -248,14 +250,13 @@ const PatientDetails = () => {
                     <p className="text-sm font-medium text-[#797979]">
                       Phone Number
                     </p>
-                    <p className="text-gray-800">0000 0000 000</p>
+                    <p className="text-gray-800">{patient?.mobileNumber}</p>
                   </div>
-
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">
                       ZIP Code
                     </p>
-                    <p className="text-gray-800">67302</p>
+                    <p className="text-gray-800">{patient?.zipCode}</p>
                   </div>
                 </div>
               </div>

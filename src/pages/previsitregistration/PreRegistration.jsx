@@ -3,16 +3,18 @@ import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const PreRegistration = () => {
+  const { state } = useLocation();
+  const patient = state?.patient;
+
   const navigate = useNavigate();
   const handlePatient = () => {
-    navigate("/patients/patient-details");
+    navigate("/patients/patient-details", { state: { patient } });
   };
 
   // Form states
-  const [visitId, setVisitId] = useState("");
   const [visitType, setVisitType] = useState("");
   const [department, setDepartment] = useState("");
   const [preferredDoctor, setPreferredDoctor] = useState("");
@@ -22,9 +24,14 @@ const PreRegistration = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Generate dynamic visit ID
+    const visitId = `#${Math.floor(1000 + Math.random() * 9000)}`;
+
     // Create visit details object
     const visitDetails = {
-      visitId: `#${Math.floor(1000 + Math.random() * 9000)}`, // Generate dynamic ID
+      patientId: patient?.id,
+      name: patient?.name,
+      visitId,
       visitType,
       department,
       preferredDoctor,
@@ -32,60 +39,30 @@ const PreRegistration = () => {
       preferredTimeSlot,
     };
 
-    // Get existing patient data from localStorage
-    const storedData = localStorage.getItem("patientData");
-    let patientData = storedData ? JSON.parse(storedData) : {};
+    // Retrieve existing visit data from localStorage
+    const storedData = localStorage.getItem("patientVisits");
+    const existingVisits = Array.isArray(JSON.parse(storedData))
+      ? JSON.parse(storedData)
+      : [];
 
-    // Update patient data with visit details
-    patientData = {
-      ...patientData,
-      visitDetails: [...(patientData.visitDetails || []), visitDetails],
-    };
+    // Append the new visit details
+    existingVisits.push(visitDetails);
 
-    // Save updated data back to localStorage
-    localStorage.setItem("patientData", JSON.stringify(patientData));
+    // Save the updated data back to localStorage
+    localStorage.setItem("patientVisits", JSON.stringify(existingVisits));
 
-    // Redirect to dashboard or another page
-    navigate("/dashboard");
+    // Redirect to the patient details page
+    navigate("/patients/patient-details", { state: { patient } });
   };
 
-  // const [visitId, setVisitId] = useState("");
-  // const [visitType, setVisitType] = useState("");
-  // const [department, setDepartment] = useState("");
-  // const [preferredDoctor, setPreferredDoctor] = useState("");
-  // const [preferredDate, setPreferredDate] = useState("");
-  // const [preferredTimeSlot, setPreferredTimeSlot] = useState("");
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const visitDetails = {
-  //     visitId: `#${Math.floor(1000 + Math.random() * 9000)}`,
-  //     visitType,
-  //     department,
-  //     preferredDoctor,
-  //     preferredDate,
-  //     preferredTimeSlot,
-  //   };
-
-  //   const patientData = JSON.parse(localStorage.getItem("patients") || "[]");
-  //   const updatedPatient = {
-  //     ...patientData,
-  //     visitDetails,
-  //   };
-
-  //   localStorage.setItem("patients", JSON.stringify(updatedPatient));
-  //   navigate("/dashboard");
-  // };
-
   const visitInfoFields = [
-    {
-      type: "number",
-      label: "Visit ID",
-      placeholder: "#2315",
-      value: visitId,
-      onChange: (e) => setVisitId(e.target.value),
-    },
+    // {
+    //   type: "number",
+    //   label: "Visit ID",
+    //   placeholder: "#2315",
+    //   value: visitId,
+    //   onChange: (e) => setVisitId(e.target.value),
+    // },
     {
       type: "select",
       label: "Visit Type",
@@ -166,6 +143,40 @@ const PreRegistration = () => {
     },
   ];
 
+  // const renderField = (field, index) => {
+  //   if (field.type === "select") {
+  //     return (
+  //       <label key={index} className="block">
+  //         <span className="text-sm font-medium">{field.label}</span>
+  //         <select
+  //           className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
+  //           defaultValue=""
+  //         >
+  //           <option value="" disabled>
+  //             {field.placeholder}
+  //           </option>
+  //           {field.options.map((option, idx) => (
+  //             <option key={idx} value={option}>
+  //               {option}
+  //             </option>
+  //           ))}
+  //         </select>
+  //       </label>
+  //     );
+  //   }
+  //   return (
+  //     <label key={index} className="block">
+  //       <span className="text-sm font-medium">{field.label}</span>
+  //       <input
+  //         type={field.type}
+  //         placeholder={field.placeholder}
+  //         className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+  //       />
+  //     </label>
+  //   );
+  // };
+
+
   const renderField = (field, index) => {
     if (field.type === "select") {
       return (
@@ -173,7 +184,8 @@ const PreRegistration = () => {
           <span className="text-sm font-medium">{field.label}</span>
           <select
             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
-            defaultValue=""
+            value={field.value}
+            onChange={field.onChange}
           >
             <option value="" disabled>
               {field.placeholder}
@@ -194,11 +206,12 @@ const PreRegistration = () => {
           type={field.type}
           placeholder={field.placeholder}
           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+          value={field.value}
+          onChange={field.onChange}
         />
       </label>
     );
   };
-
   return (
     <div className="min-h-screen flex bg-gray-100">
       <Sidebar />

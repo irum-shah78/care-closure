@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import backIcon from "../../assets/back-icon.svg";
@@ -11,139 +11,51 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
 
-const patientsData = [
-  {
-    id: "#214",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    lastAppointment: "10:00 AM Aug 12, 24",
-    appointementNo: "07",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#215",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    gender: "Female",
-    lastAppointment: "11:00 AM Aug 10, 24",
-    appointementNo: "07",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Diabetes",
-  },
-  {
-    id: "#216",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    lastAppointment: "12:00 PM Aug 08, 24",
-    appointementNo: "24",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#217",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    gender: "Female",
-    lastAppointment: "03:00 PM Aug 06, 24",
-    appointementNo: "20",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#218",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    lastAppointment: "02:00 PM Aug 05, 24",
-    appointementNo: "10",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#219",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    gender: "Female",
-    lastAppointment: "09:00 AM Aug 04, 24",
-    appointementNo: "09",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#220",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    lastAppointment: "11:30 AM Aug 03, 24",
-    appointementNo: "03",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#221",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    gender: "Female",
-    lastAppointment: "08:30 AM Aug 02, 24",
-    appointementNo: "08",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#222",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    lastAppointment: "05:00 PM Aug 01, 24",
-    appointementNo: "05",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Liver Disease",
-  },
-  {
-    id: "#223",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    gender: "Female",
-    lastAppointment: "04:00 PM Jul 31, 24",
-    appointementNo: "04",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-  {
-    id: "#224",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    lastAppointment: "06:00 PM Jul 30, 24",
-    appointementNo: "02",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Kidney Stones",
-  },
-  {
-    id: "#225",
-    date: "Aug 12, 24",
-    time: "10:00 AM",
-    gender: "Female",
-    lastAppointment: "07:00 PM Jul 29, 24",
-    appointementNo: "07",
-    appointTo: "Dr. Aoze",
-    status: getRandomStatus(),
-    description: "Heart Disease",
-  },
-];
-
 const PatientDetails = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const patient = state?.patient;
+  const [appointments, setAppointments] = useState([]);
+  const [appointmentStats, setAppointmentStats] = useState({
+    total: 0,
+    lastAppointment: "N/A",
+  });
+
+  useEffect(() => {
+    if (patient) {
+      localStorage.setItem("patient", JSON.stringify(patient));
+    }
+    const storedAppointments = localStorage.getItem("patientVisits");
+    if (storedAppointments) {
+      const parsedAppointments = JSON.parse(storedAppointments);
+      const filteredAppointments = parsedAppointments
+        .filter((appointment) => appointment.patientId === patient?.id)
+        .map((appointment) => ({
+          ...appointment,
+          status: appointment.status || getRandomStatus(),
+        }));
+
+      setAppointments(filteredAppointments);
+
+      if (filteredAppointments.length > 0) {
+        const lastAppointmentDate = filteredAppointments
+          .map(
+            (appointment) =>
+              new Date(
+                appointment.preferredDate + " " + appointment.preferredTimeSlot
+              )
+          )
+          .sort((a, b) => b - a)[0]; // Sort appointments by date
+
+        setAppointmentStats({
+          total: filteredAppointments.length,
+          lastAppointment: lastAppointmentDate.toLocaleString(), // Display date and time
+        });
+      } else {
+        setAppointmentStats({ total: 0, lastAppointment: "N/A" });
+      }
+    }
+  }, [patient]);
 
   useEffect(() => {
     if (patient) {
@@ -290,7 +202,7 @@ const PatientDetails = () => {
             </div>
           </div>
 
-          <div className="bg-white overflow-hidden rounded-xl shadow-md w-full h-full px-4 py-3">
+          {/* <div className="bg-white overflow-hidden rounded-xl shadow-md w-full h-full px-4 py-3">
             <h2 className="text-xl font-bold text-gray-800 mt-2">
               Appointment Details
             </h2>
@@ -361,6 +273,91 @@ const PatientDetails = () => {
                   )}
                 </tbody>
               </table>
+            </div>
+          </div> */}
+
+          <div className="col-span-12 bg-white overflow-hidden rounded-xl shadow-md w-full h-full px-4 py-3">
+            <h2 className="text-xl font-bold text-gray-800 mt-2">
+              Appointment Details
+            </h2>
+            <hr className="text-[#D1D1D1] border-1 mt-6 mb-6" />
+            <div className="max-h-[500px] overflow-y-auto w-full">
+              {appointments.length > 0 ? (
+                <table className="w-full bg-white">
+                  <thead className="bg-gray-200">
+                    <tr>
+                      {[
+                        "ID",
+                        "Date",
+                        "Time",
+                        "Appointment No.",
+                        "Appoint to",
+                        "Status",
+                        "Description",
+                      ].map((header) => (
+                        <th key={header} className="p-4 text-center">
+                          {header}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {appointments.map(
+                      (
+                        {
+                          visitId,
+                          preferredDate,
+                          preferredTimeSlot,
+                          preferredDoctor,
+                          status,
+                          description,
+                        },
+                        index
+                      ) => {
+                        const appointmentNumber = index + 1;
+                        return (
+                          <tr
+                            key={visitId}
+                            className="border-b hover:bg-gray-50 text-center"
+                          >
+                            <td className="p-4">{visitId}</td>
+                            <td className="p-4">{preferredDate}</td>
+                            <td className="p-4">{preferredTimeSlot}</td>
+
+                            <td className="p-4">{appointmentNumber}</td>
+                            <td className="p-4">{preferredDoctor}</td>
+                            <td className="p-4">
+                              <div
+                                className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
+                                  status === "Chronic"
+                                    ? "bg-[#FFCDC9] text-[#D2362B]"
+                                    : "bg-[#E0F5FF] text-[#1A408C]"
+                                }`}
+                              >
+                                <img
+                                  src={
+                                    status === "Chronic"
+                                      ? chronicIcon
+                                      : acuteIcon
+                                  }
+                                  alt={status}
+                                  className="w-4 h-4"
+                                />
+                                <span>{status}</span>
+                              </div>
+                            </td>
+                            <td className="p-4">{patient.description}</td>
+                          </tr>
+                        );
+                      }
+                    )}
+                  </tbody>
+                </table>
+              ) : (
+                <p className="text-gray-600 text-center">
+                  No appointment details found.
+                </p>
+              )}
             </div>
           </div>
         </div>

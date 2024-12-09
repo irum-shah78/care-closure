@@ -40,10 +40,54 @@ const AddPatient = () => {
     navigate("/patients");
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
+  //   const newPatient = {
+  //     id: `#${Math.floor(1000 + Math.random() * 9000)}`,
+  //     status: getRandomStatus(),
+  //     name,
+  //     lastName,
+  //     dob,
+  //     gender,
+  //     maritalStatus,
+  //     bloodGroup,
+  //     age,
+  //     description,
+  //     mobileNumber,
+  //     email,
+  //     city,
+  //     address,
+  //     state,
+  //     pincode,
+  //     emergencyContactName,
+  //     emergencyRelationship,
+  //     emergencyContactNumber,
+  //     allergies,
+  //     medications,
+  //     medicalHistory,
+  //     insuranceProvider,
+  //     policyNumber,
+  //     cardNumber,
+  //     expiryDate,
+  //     cvv,
+  //     paymentStatus,
+  //   };
+
+  //   const existingPatients = JSON.parse(
+  //     localStorage.getItem("patients") || "[]"
+  //   );
+  //   existingPatients.push(newPatient);
+  //   localStorage.setItem("patients", JSON.stringify(existingPatients));
+  //   navigate("/patients");
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
+
     const newPatient = {
       id: `#${Math.floor(1000 + Math.random() * 9000)}`,
       status: getRandomStatus(),
@@ -75,11 +119,14 @@ const AddPatient = () => {
       paymentStatus,
     };
 
-    const existingPatients = JSON.parse(
-      localStorage.getItem("patients") || "[]"
-    );
+    const existingPatientsRaw = localStorage.getItem("patients");
+    const existingPatients = Array.isArray(JSON.parse(existingPatientsRaw))
+      ? JSON.parse(existingPatientsRaw)
+      : [];
+
     existingPatients.push(newPatient);
     localStorage.setItem("patients", JSON.stringify(existingPatients));
+
     navigate("/patients");
   };
 

@@ -145,11 +145,11 @@ const PatientDetails = () => {
   const { state } = useLocation();
   const patient = state?.patient;
 
-  // useEffect(() => {
-  //   if (patient) {
-  //     localStorage.setItem("patient", JSON.stringify(patient));
-  //   }
-  // }, [patient]);
+  useEffect(() => {
+    if (patient) {
+      localStorage.setItem("patient", JSON.stringify(patient));
+    }
+  }, [patient]);
 
   const handleBack = () => navigate("/patients");
   const handlePreVisit = () => {

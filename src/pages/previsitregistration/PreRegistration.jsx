@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
@@ -11,32 +11,119 @@ const PreRegistration = () => {
     navigate("/patients/patient-details");
   };
 
-  const patientDetailsFields = [
-    { type: "text", label: "Visit ID", placeholder: "#2315" },
+  // Form states
+  const [visitId, setVisitId] = useState("");
+  const [visitType, setVisitType] = useState("");
+  const [department, setDepartment] = useState("");
+  const [preferredDoctor, setPreferredDoctor] = useState("");
+  const [preferredDate, setPreferredDate] = useState("");
+  const [preferredTimeSlot, setPreferredTimeSlot] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Create visit details object
+    const visitDetails = {
+      visitId: `#${Math.floor(1000 + Math.random() * 9000)}`, // Generate dynamic ID
+      visitType,
+      department,
+      preferredDoctor,
+      preferredDate,
+      preferredTimeSlot,
+    };
+
+    // Get existing patient data from localStorage
+    const storedData = localStorage.getItem("patientData");
+    let patientData = storedData ? JSON.parse(storedData) : {};
+
+    // Update patient data with visit details
+    patientData = {
+      ...patientData,
+      visitDetails: [...(patientData.visitDetails || []), visitDetails],
+    };
+
+    // Save updated data back to localStorage
+    localStorage.setItem("patientData", JSON.stringify(patientData));
+
+    // Redirect to dashboard or another page
+    navigate("/dashboard");
+  };
+
+  // const [visitId, setVisitId] = useState("");
+  // const [visitType, setVisitType] = useState("");
+  // const [department, setDepartment] = useState("");
+  // const [preferredDoctor, setPreferredDoctor] = useState("");
+  // const [preferredDate, setPreferredDate] = useState("");
+  // const [preferredTimeSlot, setPreferredTimeSlot] = useState("");
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const visitDetails = {
+  //     visitId: `#${Math.floor(1000 + Math.random() * 9000)}`,
+  //     visitType,
+  //     department,
+  //     preferredDoctor,
+  //     preferredDate,
+  //     preferredTimeSlot,
+  //   };
+
+  //   const patientData = JSON.parse(localStorage.getItem("patients") || "[]");
+  //   const updatedPatient = {
+  //     ...patientData,
+  //     visitDetails,
+  //   };
+
+  //   localStorage.setItem("patients", JSON.stringify(updatedPatient));
+  //   navigate("/dashboard");
+  // };
+
+  const visitInfoFields = [
+    {
+      type: "number",
+      label: "Visit ID",
+      placeholder: "#2315",
+      value: visitId,
+      onChange: (e) => setVisitId(e.target.value),
+    },
     {
       type: "select",
       label: "Visit Type",
       placeholder: "New Consultation",
       options: ["Checkup", "Regular"],
+      value: visitType,
+      onChange: (e) => setVisitType(e.target.value),
     },
     {
       type: "select",
       label: "Department",
       placeholder: "General Medicine",
       options: ["Medicine", "Labs"],
+      value: department,
+      onChange: (e) => setDepartment(e.target.value),
     },
     {
       type: "select",
       label: "Preferred Doctor",
       placeholder: "Select your gender",
       options: ["Male", "Female"],
+      value: preferredDoctor,
+      onChange: (e) => setPreferredDoctor(e.target.value),
     },
-    { type: "date", label: "Preferred Date", placeholder: "mm/dd/yy" },
+    {
+      type: "date",
+      label: "Preferred Date",
+      placeholder: "mm/dd/yy",
+      value: preferredDate,
+      onChange: (e) => setPreferredDate(e.target.value),
+    },
     {
       type: "select",
       label: "Preferred Time Slot",
       placeholder: "Morning(9AM - 12PM)",
       options: ["Morning(9AM - 12PM)", "Morning(9AM - 12PM)"],
+      value: preferredTimeSlot,
+      onChange: (e) => setPreferredTimeSlot(e.target.value),
     },
   ];
 
@@ -129,11 +216,11 @@ const PreRegistration = () => {
               Pre-Visit Patient Registration
             </h1>
           </div>
-          <form className="mt-6 space-y-6 shadow-sm">
+          <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
             <FormSection title="Visit Information">
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-                {patientDetailsFields.map((field, index) =>
+                {visitInfoFields.map((field, index) =>
                   renderField(field, index)
                 )}
               </div>

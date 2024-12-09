@@ -167,7 +167,7 @@ const AddPatient = () => {
     },
     {
       label: "Age",
-      type: "text",
+      type: "number",
       placeholder: "Enter age",
       value: age,
       onChange: (e) => setAge(e.target.value),
@@ -184,7 +184,7 @@ const AddPatient = () => {
   const contactInformationFields = [
     {
       label: "Mobile Number",
-      type: "text",
+      type: "number",
       placeholder: "Enter your mobile number",
       value: mobileNumber,
       onChange: (e) => setMobileNumber(e.target.value),
@@ -221,7 +221,7 @@ const AddPatient = () => {
     },
     {
       label: "Pincode",
-      type: "text",
+      type: "number",
       placeholder: "Enter your pincode",
       value: pincode,
       onChange: (e) => setPincode(e.target.value),
@@ -245,7 +245,7 @@ const AddPatient = () => {
     },
     {
       label: "Contact Number",
-      type: "text",
+      type: "number",
       placeholder: "Enter contact number",
       value: emergencyContactNumber,
       onChange: (e) => setEmergencyContactNumber(e.target.value),
@@ -287,7 +287,7 @@ const AddPatient = () => {
     },
     {
       label: "Policy Number",
-      type: "text",
+      type: "number",
       placeholder: "Enter policy number",
       value: policyNumber,
       onChange: (e) => setPolicyNumber(e.target.value),
@@ -297,14 +297,14 @@ const AddPatient = () => {
   const cardDetailsFields = [
     {
       label: "Card Number",
-      type: "text",
+      type: "number",
       placeholder: "12345678",
       value: cardNumber,
       onChange: (e) => setCardNumber(e.target.value),
     },
     {
       label: "Expiry Date",
-      type: "text",
+      type: "date",
       placeholder: "MM/YY",
       value: expiryDate,
       onChange: (e) => setExpiryDate(e.target.value),
@@ -368,6 +368,8 @@ const AddPatient = () => {
                           type={field.type}
                           placeholder={field.placeholder}
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+                          value={field.value} // Bind to state
+                          onChange={field.onChange} // Update state
                         />
                       </label>
                     );
@@ -382,6 +384,8 @@ const AddPatient = () => {
                           type={field.type}
                           placeholder={field.placeholder}
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+                          value={field.value}
+                          onChange={field.onChange}
                         />
                       </label>
                     );
@@ -408,7 +412,7 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Insurance Information">
+            {/* <FormSection title="Insurance Information">
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {insuranceInformationFields.map((field, index) => {
@@ -438,6 +442,56 @@ const AddPatient = () => {
                             type={field.type}
                             placeholder={field.placeholder}
                             className="border border-gray-300 text-[#808080] p-2 rounded w-full pr-10"
+                          />
+                          <img
+                            src={tickIcon}
+                            alt="Icon"
+                            className="absolute top-1/2 right-3 transform -translate-y-1/2 w-5 h-5"
+                          />
+                        </div>
+                      </label>
+                    );
+                  }
+
+                  return renderField(field, index);
+                })}
+              </div>
+            </FormSection> */}
+
+            <FormSection title="Insurance Information">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {insuranceInformationFields.map((field, index) => {
+                  if (field.label === "Insurance Provider") {
+                    return (
+                      <label key={index} className="block col-span-2">
+                        <span className="text-sm font-medium">
+                          {field.label}
+                        </span>
+                        <input
+                          type={field.type}
+                          placeholder={field.placeholder}
+                          className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+                          value={field.value}
+                          onChange={field.onChange}
+                        />
+                      </label>
+                    );
+                  }
+
+                  if (field.label === "Policy Number") {
+                    return (
+                      <label key={index} className="block col-span-1 relative">
+                        <span className="text-sm font-medium">
+                          {field.label}
+                        </span>
+                        <div className="relative mt-3">
+                          <input
+                            type={field.type}
+                            placeholder={field.placeholder}
+                            className="border border-gray-300 text-[#808080] p-2 rounded w-full pr-10"
+                            value={field.value}
+                            onChange={field.onChange}
                           />
                           <img
                             src={tickIcon}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import backIcon from "../../assets/back-icon.svg";
@@ -145,6 +145,12 @@ const PatientDetails = () => {
   const { state } = useLocation();
   const patient = state?.patient;
 
+  // useEffect(() => {
+  //   if (patient) {
+  //     localStorage.setItem("patient", JSON.stringify(patient));
+  //   }
+  // }, [patient]);
+
   const handleBack = () => navigate("/patients");
   const handlePreVisit = () => {
     navigate("/patients/patient-details/pre-visit", { state: { patient } });
@@ -176,15 +182,15 @@ const PatientDetails = () => {
 
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-8 flex bg-white p-3 rounded-xl shadow-md h-[270px]">
-              <div className="flex flex-col items-center justify-center space-x-4 pr-6">
+              <div className="flex flex-col items-center justify-center space-x-4 pr-6 text-center">
                 <img
                   src={patientImage}
                   alt="Patient"
                   className="w-20 h-20 rounded-full object-cover"
                 />
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-xl font-semibold mt-4">
-                    {patient?.name}
+                  <h2 className="text-xl font-semibold mt-4 ">
+                    {patient?.name} {patient?.lastName}
                   </h2>
                   <p className="text-gray-600">{patient?.email}</p>
                   <div className="flex items-center gap-8">
@@ -231,7 +237,7 @@ const PatientDetails = () => {
                     <p className="text-sm font-medium text-[#797979]">
                       Birthday
                     </p>
-                    <p className="text-gray-800">{patient?.birthday}</p>
+                    <p className="text-gray-800">{patient?.dob}</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">City</p>
@@ -256,7 +262,7 @@ const PatientDetails = () => {
                     <p className="text-sm font-medium text-[#797979]">
                       ZIP Code
                     </p>
-                    <p className="text-gray-800">{patient?.zipCode}</p>
+                    <p className="text-gray-800">{patient?.pincode}</p>
                   </div>
                 </div>
               </div>

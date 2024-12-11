@@ -33,7 +33,7 @@ const Header = ({ user }) => {
     <>
       <header className="flex items-center justify-between px-8 h-[70px] bg-white shadow-md w-full z-50">
         <div className="flex items-center cursor-pointer" >
-          <div className="relative">
+          <div className="relative z-50">
             <button
               onClick={toggleDropdown}
               className="flex items-center justify-between w-44 text-sm font-normal space-x-2 bg-white border border-[#D9D9D9] rounded-3xl px-4 py-2"

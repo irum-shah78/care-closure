@@ -275,14 +275,6 @@ const PreRegistration = () => {
                 )}
               </div>
             </FormSection>
-            <FormSection title="Medical Information">
-              <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-                {medicalInformationFields.map((field, index) =>
-                  renderField(field, index)
-                )}
-              </div>
-            </FormSection>
 
             <FormSection title="Additional Requirements">
               <hr className="text-[#D1D1D1] border-1" />

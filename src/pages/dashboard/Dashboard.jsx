@@ -237,7 +237,7 @@ const Dashboard = () => {
       <Sidebar />
       <main className="flex-1">
         <Header />
-        <div className="px-8 py-6">
+        <div className="px-8 py-6 bg-gray-100">
           <h1 className="text-2xl font-bold text-gray-800">
             Welcome to CareFlow
           </h1>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import profileImage from "../../assets/profile-img.svg";
-import dropdown from "../../assets/dropdown.svg"
+import dropdown from "../../assets/dropdown.svg";
 import notification from "../../assets/notification.svg";
 import profileDropdown from "../../assets/profile-dropdown.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,13 +8,11 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ user }) => {
   const [selectedRole, setSelectedRole] = useState("Front Desk Staff");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   const getCurrentDateTime = () => {
     const current = new Date();
@@ -32,18 +30,17 @@ const Header = ({ user }) => {
   return (
     <>
       <header className="flex items-center justify-between px-8 h-[70px] bg-white shadow-md w-full z-50">
-        <div className="flex items-center cursor-pointer" >
+        <div className="flex items-center cursor-pointer">
           <div className="relative z-50">
             <button
               onClick={toggleDropdown}
               className="flex items-center justify-between w-44 text-sm font-normal space-x-2 bg-white border border-[#D9D9D9] rounded-3xl px-4 py-2"
             >
               <span>{selectedRole}</span>
-             
-              <img src={dropdown} alt="dropdown"/>
+              <img src={dropdown} alt="dropdown" />
             </button>
             {isDropdownOpen && (
-              <ul className="absolute w-44 left-0 text-sm mt-2 bg-white border border-gray-300 rounded shadow-lg">
+              <ul className="absolute w-44 left-0 text-sm mt-2 bg-white border border-gray-300 rounded shadow-lg z-[100]">
                 {roles.map((role) => (
                   <li
                     key={role}
@@ -116,6 +113,29 @@ const Header = ({ user }) => {
           </div>
         </div>
       </header>
+
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white shadow-md w-full px-8 py-4 z-[50]">
+          <div className="text-[#656565] text-sm mb-4">
+            {getCurrentDateTime()}
+          </div>
+          <div className="flex items-center mb-4">
+            <img
+              src={profileImage}
+              alt="User"
+              className="w-8 h-8 rounded-full"
+            />
+            <div className="text-base flex flex-col ms-2">
+              <span className="mr-2 text-[#656565] ms-2">Welcome</span>
+              <div className="flex justify-between items-center gap-2">
+                <span className="ml-2 text-[#2E2559] font-semibold">
+                  Jawad Afzal
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -14,7 +14,6 @@ const PreRegistration = () => {
     navigate("/patients/patient-details", { state: { patient } });
   };
 
-  // Form states
   const [visitType, setVisitType] = useState("");
   const [department, setDepartment] = useState("");
   const [preferredDoctor, setPreferredDoctor] = useState("");
@@ -23,11 +22,8 @@ const PreRegistration = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Generate dynamic visit ID
     const visitId = `#${Math.floor(1000 + Math.random() * 9000)}`;
 
-    // Create visit details object
     const visitDetails = {
       patientId: patient?.id,
       name: patient?.name,
@@ -39,19 +35,13 @@ const PreRegistration = () => {
       preferredTimeSlot,
     };
 
-    // Retrieve existing visit data from localStorage
     const storedData = localStorage.getItem("patientVisits");
     const existingVisits = Array.isArray(JSON.parse(storedData))
       ? JSON.parse(storedData)
       : [];
 
-    // Append the new visit details
     existingVisits.push(visitDetails);
-
-    // Save the updated data back to localStorage
     localStorage.setItem("patientVisits", JSON.stringify(existingVisits));
-
-    // Redirect to the patient details page
     navigate("/patients/patient-details", { state: { patient } });
   };
 
@@ -116,9 +106,10 @@ const PreRegistration = () => {
       placeholder: "List any current symptoms",
     },
     {
-      type: "text",
+      type: "select",
       label: "Symptoms Duration",
-      placeholder: "How long have you had these symptoms?",
+      placeholder: "Hours",
+      options: ["Hours", "Days", "Weeks"],
     },
   ];
 

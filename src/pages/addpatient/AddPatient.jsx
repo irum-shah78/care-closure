@@ -9,9 +9,8 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
 
-const API_URL = "https://api.countrystatecity.in/v1";
-// const API_KEY = "NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==";
-const API_KEY = "a1hYOHBvT2VmUHRsWWQ3RHNiMFpOSWU1bDhrTDUzVzVRMzI2T1NRZg==";
+const API_URL = process.env.REACT_APP_API_URL;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const AddPatient = () => {
   const navigate = useNavigate();

@@ -284,48 +284,11 @@ const AddPatient = () => {
   ];
 
   const contactInformationFields = [
-    // {
-    //   label: "Country",
-    //   type: "select",
-    //   placeholder: "Select Your Country",
-    //   options: countries.map((c) => ({ value: c.iso2, label: c.name })),
-    //   value: country,
-    //   onChange: (e) => {
-    //     const selectedCountry = e.target.value;
-    //     setCountry(selectedCountry);
-    //     setState("");
-    //     setCity("");
-    //     loadStates(selectedCountry);
-    //   },
-    // },
-    // {
-    //   label: "State",
-    //   type: "select",
-    //   placeholder: "Select Your State",
-    //   options: states.map((s) => ({ value: s.iso2, label: s.name })),
-    //   value: state,
-    //   disabled: !country,
-    //   onChange: (e) => {
-    //     const selectedState = e.target.value;
-    //     setState(selectedState);
-    //     setCity("");
-    //     loadCities(country, selectedState);
-    //   },
-    // },
-    // {
-    //   label: "City",
-    //   type: "select",
-    //   placeholder: "Select Your City",
-    //   options: cities.map((c) => ({ value: c.name, label: c.name })),
-    //   value: city,
-    //   disabled: !state,
-    //   onChange: (e) => setCity(e.target.value),
-    // },
     {
       label: "Country",
       type: "select",
       placeholder: "Select Your Country",
-      options: Array.isArray(countries) ? countries.map((c) => ({ value: c.iso2, label: c.name })) : [],
+      options: countries.map((c) => ({ value: c.iso2, label: c.name })),
       value: country,
       onChange: (e) => {
         const selectedCountry = e.target.value;
@@ -339,7 +302,7 @@ const AddPatient = () => {
       label: "State",
       type: "select",
       placeholder: "Select Your State",
-      options: Array.isArray(states) ? states.map((s) => ({ value: s.iso2, label: s.name })) : [],
+      options: states.map((s) => ({ value: s.iso2, label: s.name })),
       value: state,
       disabled: !country,
       onChange: (e) => {
@@ -353,11 +316,48 @@ const AddPatient = () => {
       label: "City",
       type: "select",
       placeholder: "Select Your City",
-      options: Array.isArray(cities) ? cities.map((c) => ({ value: c.name, label: c.name })) : [],
+      options: cities.map((c) => ({ value: c.name, label: c.name })),
       value: city,
       disabled: !state,
       onChange: (e) => setCity(e.target.value),
     },
+    // {
+    //   label: "Country",
+    //   type: "select",
+    //   placeholder: "Select Your Country",
+    //   options: Array.isArray(countries) ? countries.map((c) => ({ value: c.iso2, label: c.name })) : [],
+    //   value: country,
+    //   onChange: (e) => {
+    //     const selectedCountry = e.target.value;
+    //     setCountry(selectedCountry);
+    //     setState("");
+    //     setCity("");
+    //     loadStates(selectedCountry);
+    //   },
+    // },
+    // {
+    //   label: "State",
+    //   type: "select",
+    //   placeholder: "Select Your State",
+    //   options: Array.isArray(states) ? states.map((s) => ({ value: s.iso2, label: s.name })) : [],
+    //   value: state,
+    //   disabled: !country,
+    //   onChange: (e) => {
+    //     const selectedState = e.target.value;
+    //     setState(selectedState);
+    //     setCity("");
+    //     loadCities(country, selectedState);
+    //   },
+    // },
+    // {
+    //   label: "City",
+    //   type: "select",
+    //   placeholder: "Select Your City",
+    //   options: Array.isArray(cities) ? cities.map((c) => ({ value: c.name, label: c.name })) : [],
+    //   value: city,
+    //   disabled: !state,
+    //   onChange: (e) => setCity(e.target.value),
+    // },
     {
       label: "Mobile Number",
       type: "phone",

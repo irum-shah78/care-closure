@@ -4,7 +4,6 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate } from "react-router-dom";
-
 const DuringVisit = () => {
   const navigate = useNavigate();
   const handlePatient = () => {
@@ -93,6 +92,7 @@ const DuringVisit = () => {
           <select
             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
             defaultValue=""
+            required
           >
             <option value="" disabled>
               {field.placeholder}
@@ -113,6 +113,7 @@ const DuringVisit = () => {
           type={field.type}
           placeholder={field.placeholder}
           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+          required
         />
       </label>
     );
@@ -165,6 +166,7 @@ const DuringVisit = () => {
                         <select
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
                           defaultValue=""
+                          required
                         >
                           <option value="" disabled>
                             {field.placeholder}

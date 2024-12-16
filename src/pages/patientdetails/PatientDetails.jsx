@@ -10,7 +10,6 @@ import acuteIcon from "../../assets/acute.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
-
 const PatientDetails = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -45,11 +44,11 @@ const PatientDetails = () => {
                 appointment.preferredDate + " " + appointment.preferredTimeSlot
               )
           )
-          .sort((a, b) => b - a)[0]; // Sort appointments by date
+          .sort((a, b) => b - a)[0];
 
         setAppointmentStats({
           total: filteredAppointments.length,
-          lastAppointment: lastAppointmentDate.toLocaleString(), // Display date and time
+          lastAppointment: lastAppointmentDate.toLocaleString(),
         });
       } else {
         setAppointmentStats({ total: 0, lastAppointment: "N/A" });
@@ -201,80 +200,6 @@ const PatientDetails = () => {
               </button>
             </div>
           </div>
-
-          {/* <div className="bg-white overflow-hidden rounded-xl shadow-md w-full h-full px-4 py-3">
-            <h2 className="text-xl font-bold text-gray-800 mt-2">
-              Appointment Details
-            </h2>
-            <hr className="text-[#D1D1D1] border-1 mt-6 mb-6" />
-            <div className="max-h-[500px] overflow-y-auto w-full">
-              <table className="w-full bg-white">
-                <thead className="bg-gray-200">
-                  <tr>
-                    {[
-                      "ID",
-                      "Date",
-                      "Time",
-                      "Last Appointment",
-                      "Appointment No.",
-                      "Appoint to",
-                      "Status",
-                      "Description",
-                    ].map((header) => (
-                      <th key={header} className="p-4 text-center">
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {patientsData.map(
-                    ({
-                      id,
-                      date,
-                      time,
-                      lastAppointment,
-                      appointementNo,
-                      appointTo,
-                      status,
-                      description,
-                    }) => (
-                      <tr
-                        key={id}
-                        className="border-b hover:bg-gray-50 cursor-pointer text-center"
-                      >
-                        <td className="p-4">{id}</td>
-                        <td className="p-4">{date}</td>
-                        <td className="p-4">{time}</td>
-                        <td className="p-4">{lastAppointment}</td>
-                        <td className="p-4">{appointementNo}</td>
-                        <td className="p-4">{appointTo}</td>
-                        <td className="p-4">
-                          <div
-                            className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
-                              status === "Chronic"
-                                ? "bg-[#FFCDC9] text-[#D2362B]"
-                                : "bg-[#E0F5FF] text-[#1A408C]"
-                            }`}
-                          >
-                            <img
-                              src={
-                                status === "Chronic" ? chronicIcon : acuteIcon
-                              }
-                              alt={status}
-                              className="w-4 h-4"
-                            />
-                            <span>{status}</span>
-                          </div>
-                        </td>
-                        <td className="p-4">{description}</td>
-                      </tr>
-                    )
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div> */}
 
           <div className="col-span-12 bg-white overflow-hidden rounded-xl shadow-md w-full h-full px-4 py-3">
             <h2 className="text-xl font-bold text-gray-800 mt-2">

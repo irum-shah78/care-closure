@@ -15,11 +15,6 @@ const Patients = () => {
   const [patientsData, setPatientsData] = useState([]);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const storedPatients = JSON.parse(localStorage.getItem("patients") || "[]");
-  //   setPatientsData(storedPatients);
-  // }, []);
-
   useEffect(() => {
     const storedPatients = JSON.parse(localStorage.getItem("patients") || "[]");
     setPatientsData(Array.isArray(storedPatients) ? storedPatients : []);
@@ -36,12 +31,6 @@ const Patients = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
-
-  // const filteredPatients = patientsData.filter(
-  //   (patient) =>
-  //     patient.name &&
-  //     patient.name.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
 
   const filteredPatients = Array.isArray(patientsData)
     ? patientsData.filter(
@@ -112,70 +101,6 @@ const Patients = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {filteredPatients.map(
-                      ({
-                        id,
-                        name,
-                        age,
-                        gender,
-                        bloodGroup,
-                        mobileNumber,
-                        emergencyContactNumber,
-                        paymentStatus,
-                      }) => (
-                        <tr
-                          key={id}
-                          className="border-b hover:bg-gray-50 cursor-pointer text-center"
-                          // onClick={handlePatientDetails}
-                          onClick={() => handlePatientDetails(patient)}
-                          // onClick={() =>
-                          //   handlePatientDetails({
-                          //     id,
-                          //     name,
-                          //     age,
-                          //     gender,
-                          //     bloodGroup,
-                          //     mobileNumber,
-                          //     emergencyContactNumber,
-                          //     paymentStatus,
-                          //   })
-                          // }
-                        >
-                          <td className="p-4">{id}</td>
-                          <td className="p-4">{name}</td>
-                          <td className="p-4">{age}</td>
-                          <td className="p-4">{gender}</td>
-                          <td className="p-4">{bloodGroup}</td>
-                          <td className="p-4">{mobileNumber}</td>
-                          <td className="p-4">{emergencyContactNumber}</td>
-                          <td className="p-4">
-                            <div
-                              className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
-                                paymentStatus === "Pending"
-                                  ? "bg-[#FFEFC9] text-[#CE7B06]"
-                                  : paymentStatus === "Completed"
-                                  ? "bg-[#E0F5FF] text-[#1A408C]"
-                                  : "bg-[#FFCDC9] text-[#D2362B]"
-                              }`}
-                            >
-                              <img
-                                src={
-                                  paymentStatus === "Pending"
-                                    ? pendingIcon
-                                    : paymentStatus === "Completed"
-                                    ? completedIcon
-                                    : notPaidIcon
-                                }
-                                alt={paymentStatus}
-                                className="w-4 h-4"
-                              />
-                              <span>{paymentStatus}</span>
-                            </div>
-                          </td>
-                        </tr>
-                      )
-                    )} */}
-
                     {filteredPatients.map((patient) => {
                       const {
                         id,

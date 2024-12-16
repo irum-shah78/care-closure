@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import totalPatients from "../../assets/totalPatients.svg";
@@ -11,6 +11,7 @@ import "react-calendar/dist/Calendar.css";
 import waitingIcon from "../../assets/waiting.svg";
 import inProgressIcon from "../../assets/inprogress.svg";
 import "./Dashboard.css";
+import { useNavigate } from "react-router-dom";
 
 const getRandomStatus = () => (Math.random() < 0.5 ? "In Progress" : "Waiting");
 
@@ -18,6 +19,45 @@ const Dashboard = () => {
   const [date, setDate] = useState(new Date());
   const [activeTab, setActiveTab] = useState("patientQueue");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [patientsData, setPatientsData] = useState([]);
+
+  const [appointmentsData, setAppointmentsData] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedPatients = JSON.parse(localStorage.getItem("patients")) || [];
+    setPatientsData(storedPatients);
+    const storedAppointments =
+      JSON.parse(localStorage.getItem("patientVisits")) || [];
+    setAppointmentsData(storedAppointments);
+  }, []);
+
+  const combinedData = patientsData.map((patient) => {
+    const patientAppointments = appointmentsData.filter(
+      (appointment) => appointment.patientId === patient.id
+    );
+
+    const sortedAppointments = patientAppointments.sort((a, b) => {
+      const dateA = new Date(a.preferredDate + " " + a.preferredTimeSlot);
+      const dateB = new Date(b.preferredDate + " " + b.preferredTimeSlot);
+      return dateB - dateA;
+    });
+
+    const recentAppointment = sortedAppointments[0];
+    const appointmentNumber = sortedAppointments.length;
+
+    const getRandomAction = () =>
+      Math.random() > 0.5 ? "Check In" : "Check Out";
+
+    return {
+      ...patient,
+      date: recentAppointment?.preferredDate || "N/A",
+      time: recentAppointment?.preferredTimeSlot || "N/A",
+      status: recentAppointment?.status || getRandomStatus(),
+      appointment: appointmentNumber || "N/A",
+      action: getRandomAction(),
+    };
+  });
 
   const handleChange = (newDate) => {
     setDate(newDate);
@@ -98,140 +138,9 @@ const Dashboard = () => {
     }
   };
 
-  const patientsData = [
-    {
-      id: "#214",
-      name: "Christopher",
-      age: 32,
-      gender: "Male",
-      appointment: "1st Appointment",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#215",
-      name: "Emily",
-      age: 56,
-      gender: "Female",
-      appointment: "2nd Appointment",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#216",
-      name: "John",
-      age: 45,
-      gender: "Male",
-      appointment: "Follow-up",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#217",
-      name: "Sophia",
-      age: 29,
-      gender: "Female",
-      appointment: "Routine Checkup",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#218",
-      name: "Michael",
-      age: 63,
-      gender: "Male",
-      appointment: "Checkup",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#219",
-      name: "Olivia",
-      age: 37,
-      gender: "Female",
-      appointment: "Regular",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#220",
-      name: "Daniel",
-      age: 51,
-      gender: "Male",
-      appointment: "Last Appointment",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check Out",
-    },
-    {
-      id: "#221",
-      name: "Isabella",
-      age: 48,
-      gender: "Female",
-      appointment: "Consultation",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#222",
-      name: "Ethan",
-      age: 34,
-      gender: "Male",
-      appointment: "Checkup",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#223",
-      name: "Ava",
-      age: 42,
-      gender: "Female",
-      appointment: "Regular",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check Out",
-    },
-    {
-      id: "#224",
-      name: "James",
-      age: 50,
-      gender: "Male",
-      appointment: "Checkup",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check In",
-    },
-    {
-      id: "#225",
-      name: "Mia",
-      age: 39,
-      gender: "Female",
-      appointment: "First Appointment",
-      time: "10:00 AM",
-      status: getRandomStatus(),
-      date: "12 Nov 2014",
-      action: "Check Out",
-    },
-  ];
+  const handlePatientDetails = (patient) => {
+    navigate("/patients/patient-details", { state: { patient } });
+  };
   return (
     <div className="min-h-screen flex bg-gray-100">
       <Sidebar />
@@ -397,7 +306,7 @@ const Dashboard = () => {
               >
                 Patient Queue
               </button>
-              <button
+              {/* <button
                 onClick={() => setActiveTab("appointments")}
                 className={`px-4 py-1 rounded ${
                   activeTab === "appointments"
@@ -406,7 +315,7 @@ const Dashboard = () => {
                 }`}
               >
                 Appointments
-              </button>
+              </button> */}
             </div>
 
             <div>
@@ -435,8 +344,8 @@ const Dashboard = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {patientsData.map(
-                            ({
+                          {combinedData.map((patient) => {
+                            const {
                               id,
                               name,
                               age,
@@ -446,10 +355,13 @@ const Dashboard = () => {
                               status,
                               date,
                               action,
-                            }) => (
+                            } = patient;
+
+                            return (
                               <tr
                                 key={id}
-                                className="border-b hover:bg-gray-50 text-center"
+                                className="border-b hover:bg-gray-50 cursor-pointer text-center"
+                                onClick={() => handlePatientDetails(patient)}
                               >
                                 <td className="p-4">{id}</td>
                                 <td className="p-4">{name}</td>
@@ -457,27 +369,6 @@ const Dashboard = () => {
                                 <td className="p-4">{gender}</td>
                                 <td className="p-4">{appointment}</td>
                                 <td className="p-4">{time}</td>
-                                {/* <td className="p-4">
-                                  <div
-                                    className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
-                                      status === "Chronic"
-                                        ? "bg-[#FFCDC9] text-[#D2362B]"
-                                        : "bg-[#E0F5FF] text-[#1A408C]"
-                                    }`}
-                                  >
-                                    <img
-                                      src={
-                                        status === "Chronic"
-                                          ? chronicIcon
-                                          : acuteIcon
-                                      }
-                                      alt={status}
-                                      className="w-4 h-4"
-                                    />
-                                    <span>{status}</span>
-                                  </div>
-                                </td> */}
-
                                 <td className="p-4">
                                   <div
                                     className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
@@ -501,8 +392,8 @@ const Dashboard = () => {
                                 <td className="p-4">{date}</td>
                                 <td className="p-4">{action}</td>
                               </tr>
-                            )
-                          )}
+                            );
+                          })}
                         </tbody>
                       </table>
                     </div>
@@ -510,7 +401,7 @@ const Dashboard = () => {
                 </div>
               )}
 
-              {activeTab === "appointments" && (
+              {/* {activeTab === "appointments" && (
                 <div>
                   <div className="bg-white overflow-hidden w-full h-full">
                     <div className="max-h-[500px] overflow-y-auto w-full">
@@ -587,7 +478,7 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -597,77 +488,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-// custom calendar
-/* <div className="col-span-1 bg-white shadow px-4 py-3 rounded-lg">
-              <div className="flex items-center justify-between">
-                <button className="text-gray-500 hover:text-gray-700">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <h3 className="text-lg font-bold text-gray-800">
-                  January - 2024
-                </h3>
-                <button className="text-gray-500 hover:text-gray-700">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </div>
-
-              <div className="grid grid-cols-7 mt-4 text-center text-sm text-gray-500">
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-                <div>Sun</div>
-              </div>
-
-              <div className="grid grid-cols-7 mt-2 text-center">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div className="py-2 rounded-lg">1</div>
-                <div className="py-2 rounded-lg">2</div>
-
-                {Array.from({ length: 31 }, (_, i) => (
-                  <div
-                    key={i}
-                    className={`py-2 rounded-lg ${
-                      i === 13
-                        ? "bg-purple-600 text-white font-bold"
-                        : "text-gray-800"
-                    }`}
-                  >
-                    {i + 3}
-                  </div>
-                ))}
-              </div>
-            </div> */

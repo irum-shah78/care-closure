@@ -8,17 +8,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 const PreRegistration = () => {
   const { state } = useLocation();
   const patient = state?.patient;
-
   const navigate = useNavigate();
-  const handlePatient = () => {
-    navigate("/patients/patient-details", { state: { patient } });
-  };
-
   const [visitType, setVisitType] = useState("");
   const [department, setDepartment] = useState("");
   const [preferredDoctor, setPreferredDoctor] = useState("");
   const [preferredDate, setPreferredDate] = useState("");
   const [preferredTimeSlot, setPreferredTimeSlot] = useState("");
+  const handlePatient = () => {
+    navigate("/patients/patient-details", { state: { patient } });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -115,7 +113,7 @@ const PreRegistration = () => {
 
   const insuranceVerificationFields = [
     { type: "text", label: "Insurance Provider", placeholder: "Enter name" },
-    { type: "text", label: "Policy Number", placeholder: "Enter number" },
+    { type: "number", label: "Policy Number", placeholder: "Enter number" },
     { type: "text", label: "Subscriber Name", placeholder: "Enter name" },
     {
       type: "select",
@@ -134,40 +132,6 @@ const PreRegistration = () => {
     },
   ];
 
-  // const renderField = (field, index) => {
-  //   if (field.type === "select") {
-  //     return (
-  //       <label key={index} className="block">
-  //         <span className="text-sm font-medium">{field.label}</span>
-  //         <select
-  //           className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
-  //           defaultValue=""
-  //         >
-  //           <option value="" disabled>
-  //             {field.placeholder}
-  //           </option>
-  //           {field.options.map((option, idx) => (
-  //             <option key={idx} value={option}>
-  //               {option}
-  //             </option>
-  //           ))}
-  //         </select>
-  //       </label>
-  //     );
-  //   }
-  //   return (
-  //     <label key={index} className="block">
-  //       <span className="text-sm font-medium">{field.label}</span>
-  //       <input
-  //         type={field.type}
-  //         placeholder={field.placeholder}
-  //         className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
-  //       />
-  //     </label>
-  //   );
-  // };
-
-
   const renderField = (field, index) => {
     if (field.type === "select") {
       return (
@@ -177,6 +141,7 @@ const PreRegistration = () => {
             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
             value={field.value}
             onChange={field.onChange}
+            required
           >
             <option value="" disabled>
               {field.placeholder}
@@ -199,6 +164,7 @@ const PreRegistration = () => {
           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
           value={field.value}
           onChange={field.onChange}
+          required
         />
       </label>
     );
@@ -244,6 +210,7 @@ const PreRegistration = () => {
                           type={field.type}
                           placeholder={field.placeholder}
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+                          required
                         />
                       </label>
                     );
@@ -258,6 +225,7 @@ const PreRegistration = () => {
                           type={field.type}
                           placeholder={field.placeholder}
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+                          required
                         />
                       </label>
                     );

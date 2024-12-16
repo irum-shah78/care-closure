@@ -99,6 +99,7 @@ const PostVisit = () => {
           <select
             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
             defaultValue=""
+            required
           >
             <option value="" disabled>
               {field.placeholder}
@@ -119,6 +120,7 @@ const PostVisit = () => {
           type={field.type}
           placeholder={field.placeholder}
           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+          required
         />
       </label>
     );

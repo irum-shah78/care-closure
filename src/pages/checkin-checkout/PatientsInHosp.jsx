@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import searchIcon from "../../assets/search-icon.svg";
@@ -8,155 +8,60 @@ import chronicIcon from "../../assets/chronic.svg";
 import acuteIcon from "../../assets/acute.svg";
 import waitingIcon from "../../assets/waiting.svg";
 import inProgressIcon from "../../assets/inprogress.svg";
+import { useNavigate } from "react-router-dom";
 
 const getRandomStatus = () => (Math.random() < 0.5 ? "In Progress" : "Waiting");
-const getRandomAction = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
-
-const patientsData = [
-  {
-    id: "#214",
-    name: "Christopher",
-    age: 32,
-    gender: "Male",
-    contactNo: "234 000 000",
-    time: "10:00 AM",
-    date: "Aug 12, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. Chris",
-    action: getRandomAction(),
-  },
-  {
-    id: "#215",
-    name: "Emily",
-    age: 56,
-    gender: "Female",
-    contactNo: "235 111 111",
-    time: "11:00 AM",
-    date: "Aug 13, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. Sarah",
-    action: getRandomAction(),
-  },
-  {
-    id: "#216",
-    name: "Michael",
-    age: 45,
-    gender: "Male",
-    contactNo: "236 222 222",
-    time: "12:30 PM",
-    date: "Aug 14, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. John",
-    action: getRandomAction(),
-  },
-  {
-    id: "#217",
-    name: "Jessica",
-    age: 29,
-    gender: "Female",
-    contactNo: "237 333 333",
-    time: "2:00 PM",
-    date: "Aug 15, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. Linda",
-    action: getRandomAction(),
-  },
-  {
-    id: "#218",
-    name: "Daniel",
-    age: 39,
-    gender: "Male",
-    contactNo: "238 444 444",
-    time: "3:15 PM",
-    date: "Aug 16, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. Chris",
-    action: getRandomAction(),
-  },
-  {
-    id: "#219",
-    name: "Sophia",
-    age: 50,
-    gender: "Female",
-    contactNo: "239 555 555",
-    time: "4:00 PM",
-    date: "Aug 17, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. Sarah",
-    action: getRandomAction(),
-  },
-  {
-    id: "#220",
-    name: "James",
-    age: 27,
-    gender: "Male",
-    contactNo: "240 666 666",
-    time: "9:00 AM",
-    date: "Aug 18, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. John",
-    action: getRandomAction(),
-  },
-  {
-    id: "#221",
-    name: "Olivia",
-    age: 36,
-    gender: "Female",
-    contactNo: "241 777 777",
-    time: "10:45 AM",
-    date: "Aug 19, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. Linda",
-    action: getRandomAction(),
-  },
-  {
-    id: "#222",
-    name: "David",
-    age: 41,
-    gender: "Male",
-    contactNo: "242 888 888",
-    time: "1:00 PM",
-    date: "Aug 20, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. Chris",
-    action: getRandomAction(),
-  },
-  {
-    id: "#223",
-    name: "Emma",
-    age: 34,
-    gender: "Female",
-    contactNo: "243 999 999",
-    time: "2:30 PM",
-    date: "Aug 21, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. Sarah",
-    action: getRandomAction(),
-  },
-  {
-    id: "#224",
-    name: "Liam",
-    age: 47,
-    gender: "Male",
-    contactNo: "244 000 111",
-    time: "3:45 PM",
-    date: "Aug 22, 24",
-    status: getRandomStatus(),
-    appointTo: "Dr. John",
-    action: getRandomAction(),
-  },
-];
-
 const PatientsInHospital = () => {
+  const [patientsData, setPatientsData] = useState([]);
+  const [appointmentsData, setAppointmentsData] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedPatients = JSON.parse(localStorage.getItem("patients")) || [];
+    setPatientsData(storedPatients);
+    const storedAppointments =
+      JSON.parse(localStorage.getItem("patientVisits")) || [];
+    setAppointmentsData(storedAppointments);
+  }, []);
+
+  const combinedData = patientsData.map((patient) => {
+    const patientAppointments = appointmentsData.filter(
+      (appointment) => appointment.patientId === patient.id
+    );
+
+    const sortedAppointments = patientAppointments.sort((a, b) => {
+      const dateA = new Date(a.preferredDate + " " + a.preferredTimeSlot);
+      const dateB = new Date(b.preferredDate + " " + b.preferredTimeSlot);
+      return dateB - dateA;
+    });
+
+    const recentAppointment = sortedAppointments[0];
+    const appointmentNumber = sortedAppointments.length;
+    const getRandomAction = () => (Math.random() > 0.5 ? "Chronic" : "Acute");
+
+    return {
+      ...patient,
+      date: recentAppointment?.preferredDate || "N/A",
+      time: recentAppointment?.preferredTimeSlot || "N/A",
+      status: recentAppointment?.status || getRandomStatus(),
+      appointment: appointmentNumber || "N/A",
+      action: getRandomAction(),
+      appointTo: recentAppointment?.preferredDoctor || "N/A",
+    };
+  });
+
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredPatients = patientsData.filter((patient) =>
+  const filteredPatients = combinedData.filter((patient) =>
     patient.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handlePatientDetails = (patient) => {
+    navigate("/patients/patient-details", { state: { patient } });
+  };
   return (
     <div className="min-h-screen flex bg-gray-100">
       <Sidebar />
@@ -189,7 +94,6 @@ const PatientsInHospital = () => {
                 </button>
               </div>
             </div>
-
             <div className="bg-white overflow-hidden w-full h-full">
               <div className="max-h-[500px] overflow-y-auto w-full">
                 <table className="w-full bg-white">
@@ -207,35 +111,37 @@ const PatientsInHospital = () => {
                         "Appoint to",
                         "Action",
                       ].map((header) => (
-                        <th key={header} className="p-4 text-center">
+                        <th key={header} className="px-2 py-4 text-center">
                           {header}
                         </th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredPatients.map(
-                      ({
+                    {filteredPatients.map((patient) => {
+                      const {
                         id,
                         name,
                         age,
                         gender,
-                        contactNo,
+                        mobileNumber,
                         time,
                         date,
                         status,
                         appointTo,
                         action,
-                      }) => (
+                      } = patient;
+                      return (
                         <tr
                           key={id}
-                          className="border-b hover:bg-gray-50 text-center"
+                          className="border-b hover:bg-gray-50 text-center cursor-pointer"
+                          onClick={() => handlePatientDetails(patient)}
                         >
                           <td className="p-4">{id}</td>
                           <td className="p-4">{name}</td>
                           <td className="p-4">{age}</td>
                           <td className="p-4">{gender}</td>
-                          <td className="p-4">{contactNo}</td>
+                          <td className="p-4">{mobileNumber}</td>
                           <td className="p-4">{time}</td>
                           <td className="p-4">{date}</td>
                           <td className="p-4">
@@ -278,8 +184,8 @@ const PatientsInHospital = () => {
                             </div>
                           </td>
                         </tr>
-                      )
-                    )}
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>

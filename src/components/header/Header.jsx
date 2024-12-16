@@ -29,7 +29,7 @@ const Header = ({ user }) => {
 
   return (
     <>
-      <header className="flex items-center justify-between px-8 h-[70px] bg-white shadow-md w-full z-50">
+      <header className="flex items-center justify-between px-8 h-[70px] bg-white shadow-md w-full z-80">
         <div className="flex items-center cursor-pointer">
           <div className="relative z-50">
             <button

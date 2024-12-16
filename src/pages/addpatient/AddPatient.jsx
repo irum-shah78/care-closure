@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate } from "react-router-dom";
 import tickIcon from "../../assets/tick.svg";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import axios from "axios";
+
+const API_URL = "https://api.countrystatecity.in/v1";
+// const API_KEY = "NHhvOEcyWk50N2Vna3VFTE00bFp3MjFKR0ZEOUhkZlg4RTk1MlJlaA==";
+const API_KEY = "a1hYOHBvT2VmUHRsWWQ3RHNiMFpOSWU1bDhrTDUzVzVRMzI2T1NRZg==";
 
 const AddPatient = () => {
   const navigate = useNavigate();
-
   const [name, setname] = useState("");
   const [lastName, setLastName] = useState("");
   const [dob, setDob] = useState("");
@@ -17,12 +23,6 @@ const AddPatient = () => {
   const [bloodGroup, setBloodGroup] = useState("");
   const [age, setAge] = useState("");
   const [description, setDescription] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [city, setCity] = useState("");
-  const [address, setAddress] = useState("");
-  const [state, setState] = useState("");
-  const [pincode, setPincode] = useState("");
   const [emergencyContactName, setEmergencyContactName] = useState("");
   const [emergencyRelationship, setEmergencyRelationship] = useState("");
   const [emergencyContactNumber, setEmergencyContactNumber] = useState("");
@@ -35,53 +35,62 @@ const AddPatient = () => {
   const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState("");
   const [paymentStatus, setPaymentStatus] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [city, setCity] = useState("");
+  const [address, setAddress] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    loadCountries();
+  }, []);
+
+  const loadCountries = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/countries`, {
+        headers: { "X-CSCAPI-KEY": API_KEY },
+      });
+      setCountries(response.data);
+    } catch (error) {
+      console.error("Error loading countries:", error);
+    }
+  };
+
+  const loadStates = async (countryCode) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/countries/${countryCode}/states`,
+        {
+          headers: { "X-CSCAPI-KEY": API_KEY },
+        }
+      );
+      setStates(response.data);
+      setCities([]);
+    } catch (error) {
+      console.error("Error loading states:", error);
+    }
+  };
+
+  const loadCities = async (countryCode, stateCode) => {
+    try {
+      const response = await axios.get(
+        `${API_URL}/countries/${countryCode}/states/${stateCode}/cities`,
+        { headers: { "X-CSCAPI-KEY": API_KEY } }
+      );
+      setCities(response.data);
+    } catch (error) {
+      console.error("Error loading cities:", error);
+    }
+  };
 
   const handlePatient = () => {
     navigate("/patients");
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
-  //   const newPatient = {
-  //     id: `#${Math.floor(1000 + Math.random() * 9000)}`,
-  //     status: getRandomStatus(),
-  //     name,
-  //     lastName,
-  //     dob,
-  //     gender,
-  //     maritalStatus,
-  //     bloodGroup,
-  //     age,
-  //     description,
-  //     mobileNumber,
-  //     email,
-  //     city,
-  //     address,
-  //     state,
-  //     pincode,
-  //     emergencyContactName,
-  //     emergencyRelationship,
-  //     emergencyContactNumber,
-  //     allergies,
-  //     medications,
-  //     medicalHistory,
-  //     insuranceProvider,
-  //     policyNumber,
-  //     cardNumber,
-  //     expiryDate,
-  //     cvv,
-  //     paymentStatus,
-  //   };
-
-  //   const existingPatients = JSON.parse(
-  //     localStorage.getItem("patients") || "[]"
-  //   );
-  //   existingPatients.push(newPatient);
-  //   localStorage.setItem("patients", JSON.stringify(existingPatients));
-  //   navigate("/patients");
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -131,6 +140,30 @@ const AddPatient = () => {
   };
 
   const renderField = (field, index) => {
+    if (field.type === "phone") {
+      return (
+        <label key={index} className="block">
+          <span className="text-sm font-medium">{field.label}</span>
+          <PhoneInput
+            country={"us"}
+            value={field.value}
+            onChange={field.onChange}
+            inputStyle={{
+              padding: "20px",
+              borderRadius: "5px",
+              border: "1px solid #CDCDCD",
+              marginTop: "8px",
+              marginLeft: "40px",
+            }}
+            containerStyle={{ margin: "10px 0" }}
+            placeholder={field.placeholder}
+            enableSearch={true}
+            required
+          />
+        </label>
+      );
+    }
+
     if (field.type === "select") {
       return (
         <label key={index} className="block">
@@ -139,6 +172,7 @@ const AddPatient = () => {
             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
             value={field.value}
             onChange={field.onChange}
+            required
           >
             <option value="" disabled>
               {field.placeholder}
@@ -152,6 +186,7 @@ const AddPatient = () => {
         </label>
       );
     }
+
     return (
       <label key={index} className="block">
         <span className="text-sm font-medium">{field.label}</span>
@@ -161,9 +196,26 @@ const AddPatient = () => {
           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
           value={field.value}
           onChange={field.onChange}
+          required
         />
       </label>
     );
+  };
+
+  const calculateAge = (dob) => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+
+    return age;
   };
 
   const patientDetailsFields = [
@@ -186,7 +238,11 @@ const AddPatient = () => {
       type: "date",
       placeholder: "mm/dd/yy",
       value: dob,
-      onChange: (e) => setDob(e.target.value),
+      onChange: (e) => {
+        const newDob = e.target.value;
+        setDob(newDob);
+        setAge(calculateAge(newDob));
+      },
     },
     {
       label: "Gender",
@@ -230,26 +286,62 @@ const AddPatient = () => {
 
   const contactInformationFields = [
     {
-      label: "Mobile Number",
-      type: "number",
-      placeholder: "Enter your mobile number",
-      value: mobileNumber,
-      onChange: (e) => setMobileNumber(e.target.value),
+      label: "Country",
+      type: "select",
+      placeholder: "Select Your Country",
+      options: countries.map((c) => ({ value: c.iso2, label: c.name })),
+      value: country,
+      onChange: (e) => {
+        const selectedCountry = e.target.value;
+        setCountry(selectedCountry);
+        setState("");
+        setCity("");
+        loadStates(selectedCountry);
+      },
     },
     {
-      label: "Email",
-      type: "text",
-      placeholder: "Enter your email",
-      value: email,
-      onChange: (e) => setEmail(e.target.value),
+      label: "State",
+      type: "select",
+      placeholder: "Select Your State",
+      options: states.map((s) => ({ value: s.iso2, label: s.name })),
+      value: state,
+      disabled: !country,
+      onChange: (e) => {
+        const selectedState = e.target.value;
+        setState(selectedState);
+        setCity("");
+        loadCities(country, selectedState);
+      },
     },
     {
       label: "City",
       type: "select",
       placeholder: "Select Your City",
-      options: ["City 1", "City 2", "City 3"],
+      options: cities.map((c) => ({ value: c.name, label: c.name })),
       value: city,
+      disabled: !state,
       onChange: (e) => setCity(e.target.value),
+    },
+    {
+      label: "Mobile Number",
+      type: "phone",
+      placeholder: "Enter your mobile number",
+      value: mobileNumber,
+      onChange: (value) => setMobileNumber(value),
+    },
+    {
+      label: "Email",
+      type: "email",
+      placeholder: "Enter your email",
+      value: email,
+      onChange: (e) => setEmail(e.target.value),
+    },
+    {
+      label: "Zipcode",
+      type: "number",
+      placeholder: "Enter your zipcode",
+      value: pincode,
+      onChange: (e) => setPincode(e.target.value),
     },
     {
       label: "Address",
@@ -257,21 +349,6 @@ const AddPatient = () => {
       placeholder: "Enter your address",
       value: address,
       onChange: (e) => setAddress(e.target.value),
-    },
-    {
-      label: "State",
-      type: "select",
-      placeholder: "Select Your State",
-      options: ["State 1", "State 2", "State 3"],
-      value: state,
-      onChange: (e) => setState(e.target.value),
-    },
-    {
-      label: "Pincode",
-      type: "number",
-      placeholder: "Enter your pincode",
-      value: pincode,
-      onChange: (e) => setPincode(e.target.value),
     },
   ];
 
@@ -285,17 +362,18 @@ const AddPatient = () => {
     },
     {
       label: "Relationship",
-      type: "text",
-      placeholder: "Enter relationship",
-      value: emergencyRelationship,
+      type: "select",
+      placeholder: "Select relationship",
+      options: ["Father", "Mother", "Husband", "Wife", "Sister", "Daughter"],
+      value: state,
       onChange: (e) => setEmergencyRelationship(e.target.value),
     },
     {
       label: "Contact Number",
-      type: "number",
+      type: "phone",
       placeholder: "Enter contact number",
       value: emergencyContactNumber,
-      onChange: (e) => setEmergencyContactNumber(e.target.value),
+      onChange: (value) => setEmergencyContactNumber(value),
     },
   ];
 
@@ -405,25 +483,37 @@ const AddPatient = () => {
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {contactInformationFields.map((field, index) => {
-                  if (field.label === "Address") {
+                  if (field.type === "select") {
                     return (
-                      <label key={index} className="block col-span-2">
+                      <label
+                        key={index}
+                        className={`block col-span-${
+                          field.label === "Address" ? "2" : "1"
+                        }`}
+                      >
                         <span className="text-sm font-medium">
                           {field.label}
                         </span>
-                        <input
-                          type={field.type}
-                          placeholder={field.placeholder}
+                        <select
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
-                          value={field.value} // Bind to state
-                          onChange={field.onChange} // Update state
-                        />
+                          value={field.value}
+                          onChange={field.onChange}
+                          disabled={field.disabled || false}
+                          required
+                        >
+                          <option value="">{field.placeholder}</option>
+                          {field.options.map((option, idx) => (
+                            <option key={idx} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
+                        </select>
                       </label>
                     );
                   }
-                  if (field.label === "Pincode") {
+                  if (field.label === "Address") {
                     return (
-                      <label key={index} className="block col-span-1">
+                      <label key={index} className="block col-span-3">
                         <span className="text-sm font-medium">
                           {field.label}
                         </span>
@@ -433,10 +523,12 @@ const AddPatient = () => {
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
                           value={field.value}
                           onChange={field.onChange}
+                          required
                         />
                       </label>
                     );
                   }
+
                   return renderField(field, index);
                 })}
               </div>
@@ -450,6 +542,7 @@ const AddPatient = () => {
                 )}
               </div>
             </FormSection>
+
             <FormSection title="Medical Information">
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
@@ -458,52 +551,6 @@ const AddPatient = () => {
                 )}
               </div>
             </FormSection>
-
-            {/* <FormSection title="Insurance Information">
-              <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
-                {insuranceInformationFields.map((field, index) => {
-                  if (field.label === "Insurance Provider") {
-                    return (
-                      <label key={index} className="block col-span-2">
-                        <span className="text-sm font-medium">
-                          {field.label}
-                        </span>
-                        <input
-                          type={field.type}
-                          placeholder={field.placeholder}
-                          className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
-                        />
-                      </label>
-                    );
-                  }
-
-                  if (field.label === "Policy Number") {
-                    return (
-                      <label key={index} className="block col-span-1 relative">
-                        <span className="text-sm font-medium">
-                          {field.label}
-                        </span>
-                        <div className="relative mt-3">
-                          <input
-                            type={field.type}
-                            placeholder={field.placeholder}
-                            className="border border-gray-300 text-[#808080] p-2 rounded w-full pr-10"
-                          />
-                          <img
-                            src={tickIcon}
-                            alt="Icon"
-                            className="absolute top-1/2 right-3 transform -translate-y-1/2 w-5 h-5"
-                          />
-                        </div>
-                      </label>
-                    );
-                  }
-
-                  return renderField(field, index);
-                })}
-              </div>
-            </FormSection> */}
 
             <FormSection title="Insurance Information">
               <hr className="text-[#D1D1D1] border-1" />
@@ -521,6 +568,7 @@ const AddPatient = () => {
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
                           value={field.value}
                           onChange={field.onChange}
+                          required
                         />
                       </label>
                     );
@@ -539,6 +587,7 @@ const AddPatient = () => {
                             className="border border-gray-300 text-[#808080] p-2 rounded w-full pr-10"
                             value={field.value}
                             onChange={field.onChange}
+                            required
                           />
                           <img
                             src={tickIcon}

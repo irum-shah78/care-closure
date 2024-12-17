@@ -5,8 +5,11 @@ import notification from "../../assets/notification.svg";
 import profileDropdown from "../../assets/profile-dropdown.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import LanguageSwitcher from "../languageswitcher/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const Header = ({ user }) => {
+  const { t } = useTranslation();
   const [selectedRole, setSelectedRole] = useState("Front Desk Staff");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,7 +28,7 @@ const Header = ({ user }) => {
     });
   };
 
-  const roles = ["Admissions Clerk", "Front Desk Staff", "Supervisor"];
+  const roles = ["Admissions Clerk", "Front Desk Staff", "Supervisor", "Patients"];
 
   return (
     <>
@@ -63,6 +66,7 @@ const Header = ({ user }) => {
               </ul>
             )}
           </div>
+          <LanguageSwitcher />
         </div>
 
         <div className="flex items-center space-x-4 gap-3">
@@ -83,7 +87,7 @@ const Header = ({ user }) => {
               className="w-8 h-8 rounded-full"
             />
             <div className="text-base flex flex-col ms-2">
-              <span className="mr-2 text-[#656565] ms-2">Welcome</span>
+              <span className="mr-2 text-[#656565] ms-2">{t("components.header.welcome")}</span>
               <div className="flex justify-between items-center gap-2 cursor-pointer">
                 <span className="ml-2 text-[#2E2559] font-semibold">
                   Jawad Afzal
@@ -126,7 +130,7 @@ const Header = ({ user }) => {
               className="w-8 h-8 rounded-full"
             />
             <div className="text-base flex flex-col ms-2">
-              <span className="mr-2 text-[#656565] ms-2">Welcome</span>
+              <span className="mr-2 text-[#656565] ms-2">{t("components.header.welcome")}</span>
               <div className="flex justify-between items-center gap-2">
                 <span className="ml-2 text-[#2E2559] font-semibold">
                   Jawad Afzal

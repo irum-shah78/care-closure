@@ -1,0 +1,97 @@
+{
+  "common": {
+    "buttons": {
+      "save": "保存",
+      "cancel": "取消",
+      "submit": "提交",
+      "update": "更新",
+      "delete": "删除"
+    },
+    "status": {
+      "active": "活跃",
+      "inactive": "未活跃",
+      "pending": "待处理"
+    }
+  },
+  "components": {
+    "formselection": {
+      "title": "表单选择",
+      "selectForm": "选择表单"
+    },
+    "header": {
+      "welcome": "欢迎",
+      "logout": "退出",
+      "settings": "设置"
+    },
+    "languageswitcher": {
+      "selectLanguage": "选择语言"
+    },
+    "sidebar": {
+      "dashboard": "仪表板",
+      "patients": "患者",
+      "addPatient": "添加患者",
+      "checkin": "登记/退房",
+      "duringVisit": "就诊期间",
+      "patientDetails": "患者详情",
+      "postVisit": "就诊后",
+      "preRegistration": "预登记"
+    }
+  },
+  "pages": {
+    "addpatient": {
+      "title": "添加新患者",
+      "personalInfo": "个人信息",
+      "fields": {
+        "firstName": "名",
+        "lastName": "姓",
+        "dob": "出生日期",
+        "gender": "性别",
+        "contact": "联系电话",
+        "email": "电子邮件",
+        "address": "地址"
+      }
+    },
+    "checkin-checkout": {
+      "title": "患者登记/退房",
+      "checkIn": "登记",
+      "checkOut": "退房",
+      "patientsInHosp": "在院患者"
+    },
+    "dashboard": {
+      "title": "欢迎使用 CareFlow",
+      "stats": {
+        "totalPatients": "患者总数",
+        "todayAppointments": "今日预约",
+        "waitingPatients": "等待患者"
+      }
+    },
+    "duringvisit": {
+      "title": "就诊期间",
+      "vitals": "生命体征",
+      "diagnosis": "诊断",
+      "prescription": "处方"
+    },
+    "patientdetails": {
+      "title": "患者详情",
+      "history": "病历",
+      "appointments": "预约",
+      "documents": "文档"
+    },
+    "patients": {
+      "title": "患者列表",
+      "search": "搜索患者",
+      "filters": "筛选"
+    },
+    "postvisit": {
+      "title": "就诊后",
+      "followUp": "随访",
+      "billing": "账单",
+      "medications": "药物"
+    },
+    "previsitregistration": {
+      "title": "预约登记",
+      "appointment": "预约详情",
+      "insurance": "保险信息"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import dashboardIconDefault from "../../assets/dashboard.svg";
 import dashboardIconActive from "../../assets/dashboard-clicked.svg";
 import patientsIconDefault from "../../assets/patient.svg";
@@ -9,6 +10,7 @@ import checkinIconActive from "../../assets/patient-clicked.svg";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -18,20 +20,20 @@ const Sidebar = () => {
 
   const navItems = [
     {
-      name: "Dashboard",
+      name: t("components.sidebar.dashboard"),
       path: "/dashboard",
       defaultIcon: dashboardIconDefault,
       activeIcon: dashboardIconActive,
     },
     {
-      name: "Patients",
+      name: t("components.sidebar.patients"),
       path: "/patients",
       defaultIcon: patientsIconDefault,
       activeIcon: patientsIconActive,
       matchPaths: ["/patients", "/patients/add-patient"],
     },
     {
-      name: "Check-in / Checkout",
+      name: t("components.sidebar.checkin"),
       path: "/checkin-checkout",
       defaultIcon: checkinIconDefault,
       activeIcon: checkinIconActive,

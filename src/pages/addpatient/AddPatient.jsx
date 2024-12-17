@@ -8,11 +8,13 @@ import tickIcon from "../../assets/tick.svg";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const API_URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const AddPatient = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [name, setname] = useState("");
   const [lastName, setLastName] = useState("");
@@ -148,11 +150,11 @@ const AddPatient = () => {
             value={field.value}
             onChange={field.onChange}
             inputStyle={{
-              padding: "20px",
+              paddingTop: "20px",
+              paddingBottom: "20px",
               borderRadius: "5px",
               border: "1px solid #CDCDCD",
-              marginTop: "8px",
-              marginLeft: "40px",
+              width: "100%",
             }}
             containerStyle={{ margin: "10px 0" }}
             placeholder={field.placeholder}
@@ -219,23 +221,23 @@ const AddPatient = () => {
 
   const patientDetailsFields = [
     {
-      label: "First Name",
+      label: t("pages.addPatient.patientDetails.firstName"),
       type: "text",
-      placeholder: "Enter first name",
+      placeholder: t("pages.addPatient.placeholders.enterFirstName"),
       value: name,
       onChange: (e) => setname(e.target.value),
     },
     {
-      label: "Last Name",
+      label: t("pages.addPatient.patientDetails.lastName"),
       type: "text",
-      placeholder: "Enter last name",
+      placeholder: t("pages.addPatient.placeholders.enterLastName"),
       value: lastName,
       onChange: (e) => setLastName(e.target.value),
     },
     {
-      label: "Date of Birth",
+      label: t("pages.addPatient.patientDetails.dob"),
       type: "date",
-      placeholder: "mm/dd/yy",
+      placeholder: t("pages.addPatient.placeholders.enterDate"),
       value: dob,
       onChange: (e) => {
         const newDob = e.target.value;
@@ -244,9 +246,9 @@ const AddPatient = () => {
       },
     },
     {
-      label: "Gender",
+      label: t("pages.addPatient.patientDetails.gender"),
       type: "select",
-      placeholder: "Select your gender",
+      placeholder: t("pages.addPatient.placeholders.selectGender"),
       options: ["Male", "Female"],
       value: gender,
       onChange: (e) => setGender(e.target.value),
@@ -321,43 +323,6 @@ const AddPatient = () => {
       disabled: !state,
       onChange: (e) => setCity(e.target.value),
     },
-    // {
-    //   label: "Country",
-    //   type: "select",
-    //   placeholder: "Select Your Country",
-    //   options: Array.isArray(countries) ? countries.map((c) => ({ value: c.iso2, label: c.name })) : [],
-    //   value: country,
-    //   onChange: (e) => {
-    //     const selectedCountry = e.target.value;
-    //     setCountry(selectedCountry);
-    //     setState("");
-    //     setCity("");
-    //     loadStates(selectedCountry);
-    //   },
-    // },
-    // {
-    //   label: "State",
-    //   type: "select",
-    //   placeholder: "Select Your State",
-    //   options: Array.isArray(states) ? states.map((s) => ({ value: s.iso2, label: s.name })) : [],
-    //   value: state,
-    //   disabled: !country,
-    //   onChange: (e) => {
-    //     const selectedState = e.target.value;
-    //     setState(selectedState);
-    //     setCity("");
-    //     loadCities(country, selectedState);
-    //   },
-    // },
-    // {
-    //   label: "City",
-    //   type: "select",
-    //   placeholder: "Select Your City",
-    //   options: Array.isArray(cities) ? cities.map((c) => ({ value: c.name, label: c.name })) : [],
-    //   value: city,
-    //   disabled: !state,
-    //   onChange: (e) => setCity(e.target.value),
-    // },
     {
       label: "Mobile Number",
       type: "phone",
@@ -495,20 +460,22 @@ const AddPatient = () => {
       <Sidebar />
       <main className="flex-1">
         <Header />
-        <div className="px-8 py-4">
-          <div className="flex gap-2">
+        <div className="px-4 sm:px-6 lg:px-8 py-4 bg-gray-100">
+          <div className="flex items-center gap-2">
             <img
               src={backIcon}
               alt="back-icon"
               className="cursor-pointer"
               onClick={handlePatient}
             />
-            <h1 className="text-2xl font-bold">Add New Patient</h1>
+            <h1 className="text-lg sm:text-xl md:text-2xl font-bold">
+              {t("pages.addPatient.title")}
+            </h1>
           </div>
           <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
-            <FormSection title="Patient Details">
+            <FormSection title={t("pages.addPatient.patientDetails.title")}>
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
                 {patientDetailsFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -517,14 +484,16 @@ const AddPatient = () => {
 
             <FormSection title="Contact Information">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
                 {contactInformationFields.map((field, index) => {
                   if (field.type === "select") {
                     return (
                       <label
                         key={index}
-                        className={`block col-span-${
-                          field.label === "Address" ? "2" : "1"
+                        className={`block col-span-1 ${
+                          field.label === "Address"
+                            ? "sm:col-span-2"
+                            : "col-span-1"
                         }`}
                       >
                         <span className="text-sm font-medium">
@@ -549,7 +518,10 @@ const AddPatient = () => {
                   }
                   if (field.label === "Address") {
                     return (
-                      <label key={index} className="block col-span-3">
+                      <label
+                        key={index}
+                        className="block col-span-1 sm:col-span-2 lg:col-span-3"
+                      >
                         <span className="text-sm font-medium">
                           {field.label}
                         </span>
@@ -564,7 +536,6 @@ const AddPatient = () => {
                       </label>
                     );
                   }
-
                   return renderField(field, index);
                 })}
               </div>
@@ -572,7 +543,7 @@ const AddPatient = () => {
 
             <FormSection title="Emergency Contact">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
                 {emergencyContactFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -581,7 +552,7 @@ const AddPatient = () => {
 
             <FormSection title="Medical Information">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
                 {medicalInformationFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -590,11 +561,14 @@ const AddPatient = () => {
 
             <FormSection title="Insurance Information">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
                 {insuranceInformationFields.map((field, index) => {
                   if (field.label === "Insurance Provider") {
                     return (
-                      <label key={index} className="block col-span-2">
+                      <label
+                        key={index}
+                        className="block col-span-1 sm:col-span-2 lg:col-span-2"
+                      >
                         <span className="text-sm font-medium">
                           {field.label}
                         </span>
@@ -609,7 +583,6 @@ const AddPatient = () => {
                       </label>
                     );
                   }
-
                   if (field.label === "Policy Number") {
                     return (
                       <label key={index} className="block col-span-1 relative">
@@ -634,7 +607,6 @@ const AddPatient = () => {
                       </label>
                     );
                   }
-
                   return renderField(field, index);
                 })}
               </div>
@@ -642,7 +614,7 @@ const AddPatient = () => {
 
             <FormSection title="Card Details">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
                 {cardDetailsFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -651,12 +623,12 @@ const AddPatient = () => {
 
             <FormSection title="Payment">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 gap-4 mt-4">
                 {paymentFields.map((field, index) => renderField(field, index))}
               </div>
             </FormSection>
 
-            <div className="flex justify-end gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row justify-end gap-4 mt-6">
               <button
                 type="button"
                 className="px-6 py-2 rounded-xl border border-[#747474] text-[#747474]"

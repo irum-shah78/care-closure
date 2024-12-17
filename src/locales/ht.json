@@ -1,0 +1,97 @@
+{
+  "common": {
+    "buttons": {
+      "save": "Sove",
+      "cancel": "Anile",
+      "submit": "Soumèt",
+      "update": "Mete ajou",
+      "delete": "Efase"
+    },
+    "status": {
+      "active": "Aktif",
+      "inactive": "Inaktif",
+      "pending": "An atant"
+    }
+  },
+  "components": {
+    "formselection": {
+      "title": "Seleksyon Fòm",
+      "selectForm": "Chwazi yon fòm"
+    },
+    "header": {
+      "welcome": "Byenveni",
+      "logout": "Dekonekte",
+      "settings": "Paramèt"
+    },
+    "languageswitcher": {
+      "selectLanguage": "Chwazi Lang"
+    },
+    "sidebar": {
+      "dashboard": "Tablo de Bò",
+      "patients": "Pasyan",
+      "addPatient": "Ajoute Pasyan",
+      "checkin": "Antre/Soti",
+      "duringVisit": "Pandan Vizit",
+      "patientDetails": "Detay Pasyan",
+      "postVisit": "Aprè Vizit",
+      "preRegistration": "Pre-Anrejistreman"
+    }
+  },
+  "pages": {
+    "addpatient": {
+      "title": "Ajoute Nouvo Pasyan",
+      "personalInfo": "Enfòmasyon Pèsonèl",
+      "fields": {
+        "firstName": "Non",
+        "lastName": "Siyati",
+        "dob": "Dat Nesans",
+        "gender": "Sèks",
+        "contact": "Nimewo Kontak",
+        "email": "Imèl",
+        "address": "Adrès"
+      }
+    },
+    "checkin-checkout": {
+      "title": "Antre/Soti Pasyan",
+      "checkIn": "Antre",
+      "checkOut": "Soti",
+      "patientsInHosp": "Pasyan nan Lopital"
+    },
+    "dashboard": {
+      "title": "Byenveni nan CareFlow",
+      "stats": {
+        "totalPatients": "Total Pasyan",
+        "todayAppointments": "Randevou Jodi a",
+        "waitingPatients": "Pasyan kap Tann"
+      }
+    },
+    "duringvisit": {
+      "title": "Pandan Vizit",
+      "vitals": "Siy Vital",
+      "diagnosis": "Dyagnostik",
+      "prescription": "Preskripsyon"
+    },
+    "patientdetails": {
+      "title": "Detay Pasyan",
+      "history": "Istwa Medikal",
+      "appointments": "Randevou",
+      "documents": "Dokiman"
+    },
+    "patients": {
+      "title": "Lis Pasyan",
+      "search": "Chèche Pasyan",
+      "filters": "Filtre"
+    },
+    "postvisit": {
+      "title": "Aprè Vizit",
+      "followUp": "Swivi",
+      "billing": "Faktirasyon",
+      "medications": "Medikaman"
+    },
+    "previsitregistration": {
+      "title": "Pre-Anrejistreman Vizit",
+      "appointment": "Detay Randevou",
+      "insurance": "Enfòmasyon Asirans"
+    }
+  }
+}

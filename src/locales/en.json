@@ -1,0 +1,212 @@
+{
+  "common": {
+    "buttons": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "update": "Update",
+      "delete": "Delete"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending"
+    }
+  },
+  "components": {
+    "formselection": {
+      "title": "Form Selection",
+      "selectForm": "Select a form"
+    },
+    "header": {
+      "welcome": "Welcome",
+      "logout": "Logout",
+      "settings": "Settings",
+      "roles": {
+        "admissionsClerk": "Admissions Clerk",
+        "frontDeskStaff": "Front Desk Staff",
+        "supervisor": "Supervisor"
+      }
+    },
+    "languageswitcher": {
+      "selectLanguage": "Select Language"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "patients": "Patients",
+      "addPatient": "Add Patient",
+      "checkin": "Check-In/Check-Out",
+      "duringVisit": "During Visit",
+      "patientDetails": "Patient Details",
+      "postVisit": "Post Visit",
+      "preRegistration": "Pre-Registration"
+    }
+  },
+  "pages": {
+    "addPatient": {
+      "title": "Add New Patient",
+      "patientDetails": {
+        "title": "Patient Details",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "dob": "Date of Birth",
+        "gender": "Gender",
+        "maritalStatus": "Marital Status",
+        "bloodGroup": "Blood Group",
+        "age": "Age",
+        "description": "Description"
+      },
+      "contactInfo": {
+        "country": "Country",
+        "state": "State",
+        "city": "City",
+        "mobileNumber": "Mobile Number",
+        "email": "Email",
+        "zipcode": "Zipcode",
+        "address": "Address"
+      },
+      "emergencyContact": {
+        "contactName": "Contact Name",
+        "relationship": "Relationship",
+        "contactNumber": "Contact Number"
+      },
+      "medicalInfo": {
+        "allergies": "Known Allergies",
+        "medications": "Current Medications",
+        "medicalHistory": "Medical History"
+      },
+      "placeholders": {
+        "enterFirstName": "Enter first name",
+        "enterLastName": "Enter last name",
+        "enterDate":"mm/dd/yy",
+        "selectGender": "Select your gender",
+        "selectMaritalStatus": "Select your marital status",
+        "selectBloodGroup": "Select your blood group",
+        "enterAge": "Enter age",
+        "enterDescription": "Enter description",
+        "selectCountry": "Select Your Country",
+        "selectState": "Select Your State",
+        "selectCity": "Select Your City",
+        "enterMobileNumber": "Enter your mobile number",
+        "enterEmail": "Enter your email",
+        "enterZipcode": "Enter your zipcode",
+        "enterAddress": "Enter your address",
+        "enterContactName": "Enter contact name",
+        "selectRelationship": "Select relationship",
+        "enterContactNumber": "Enter contact number",
+        "enterAllergies": "If any",
+        "enterMedications": "If any",
+        "selectMedicalHistory": "Any previous conditions"
+      },
+      "buttons": {
+        "submit": "Submit",
+        "cancel": "Cancel"
+      },
+      "status": {
+        "chronic": "Chronic",
+        "acute": "Acute"
+      },
+      "gender":{
+        "male":"",
+        "female":""
+      }
+    },
+    "checkin-checkout": {
+      "title": "Patient Check In/Out",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "patientsInHosp": "Patients In Hospital"
+    },
+    "dashboard": {
+      "title": "Welcome to CareFlow",
+      "stats": {
+        "totalPatients": "Total Patients",
+        "todayAppointments": "Appointments Today",
+        "waitingPatients": "Waiting Patients",
+        "complianceScore": "Compliance Score",
+        "fromLastMonth": "from last month",
+        "fromLastWeek": "from last week",
+        "remaining": "Remaining"
+      },
+      "nextPatient": {
+        "title": "Next Patient",
+        "headers": {
+          "name": "Name",
+          "gender": "Gender",
+          "age": "Age",
+          "appointment": "Appointment",
+          "status": "Status",
+          "time": "Time",
+          "date": "Date"
+        }
+      },
+      "patientQueue": {
+        "title": "Patient Queue",
+        "headers": {
+          "id": "ID",
+          "name": "Name",
+          "age": "Age",
+          "gender": "Gender",
+          "appointment": "Appointment",
+          "time": "Time",
+          "status": "Status",
+          "date": "Date",
+          "action": "Action"
+        },
+        "status": {
+          "inProgress": "In Progress",
+          "waiting": "Waiting"
+        },
+        "action": {
+          "checkIn": "Check In",
+          "checOut": "Check Out"
+        }
+      }
+    },
+    "patients": {
+      "title": "Patients",
+      "searchPlaceholder": "Search Patient here..",
+      "filter": "Filter",
+      "sort": "Sort by",
+      "addNew": "Add New Patient",
+      "tableHeaders": {
+        "patientID": "Patient ID",
+        "name": "Name",
+        "age": "Age",
+        "gender": "Gender",
+        "bloodGroup": "Blood Group",
+        "contactNumber": "Contact Number",
+        "emergencyContact": "Emergency Contact No.",
+        "paymentStatus": "Payment Status"
+      },
+      "paymentStatus": {
+        "pending": "Pending",
+        "completed": "Completed",
+        "notPaid": "Not Paid"
+      }
+    },
+    "patientdetails": {
+      "title": "Patient Details",
+      "history": "Medical History",
+      "appointments": "Appointments",
+      "documents": "Documents"
+    },
+    "postvisit": {
+      "title": "Post Visit",
+      "followUp": "Follow Up",
+      "billing": "Billing",
+      "medications": "Medications"
+    },
+    "previsitregistration": {
+      "title": "Pre-Visit Registration",
+      "appointment": "Appointment Details",
+      "insurance": "Insurance Information"
+    },
+    "duringvisit": {
+      "title": "During Visit",
+      "vitals": "Vitals",
+      "diagnosis": "Diagnosis",
+      "prescription": "Prescription"
+    }
+  }
+}

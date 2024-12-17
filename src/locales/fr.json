@@ -1,0 +1,97 @@
+{
+  "common": {
+    "buttons": {
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "submit": "Soumettre",
+      "update": "Mettre à jour",
+      "delete": "Supprimer"
+    },
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif",
+      "pending": "En attente"
+    }
+  },
+  "components": {
+    "formselection": {
+      "title": "Sélection du formulaire",
+      "selectForm": "Sélectionner un formulaire"
+    },
+    "header": {
+      "welcome": "Bienvenue",
+      "logout": "Se déconnecter",
+      "settings": "Paramètres"
+    },
+    "languageswitcher": {
+      "selectLanguage": "Choisir la langue"
+    },
+    "sidebar": {
+      "dashboard": "Tableau de bord",
+      "patients": "Patients",
+      "addPatient": "Ajouter un patient",
+      "checkin": "Enregistrement/Départ",
+      "duringVisit": "Pendant la visite",
+      "patientDetails": "Détails du patient",
+      "postVisit": "Après la visite",
+      "preRegistration": "Pré-inscription"
+    }
+  },
+  "pages": {
+    "addpatient": {
+      "title": "Ajouter un nouveau patient",
+      "personalInfo": "Informations personnelles",
+      "fields": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "dob": "Date de naissance",
+        "gender": "Genre",
+        "contact": "Numéro de contact",
+        "email": "Adresse e-mail",
+        "address": "Adresse"
+      }
+    },
+    "checkin-checkout": {
+      "title": "Enregistrement/Départ du patient",
+      "checkIn": "Enregistrement",
+      "checkOut": "Départ",
+      "patientsInHosp": "Patients à l'hôpital"
+    },
+    "dashboard": {
+      "title": "Bienvenue sur CareFlow",
+      "stats": {
+        "totalPatients": "Total des patients",
+        "todayAppointments": "Rendez-vous du jour",
+        "waitingPatients": "Patients en attente"
+      }
+    },
+    "duringvisit": {
+      "title": "Pendant la visite",
+      "vitals": "Signes vitaux",
+      "diagnosis": "Diagnostic",
+      "prescription": "Ordonnance"
+    },
+    "patientdetails": {
+      "title": "Détails du patient",
+      "history": "Historique médical",
+      "appointments": "Rendez-vous",
+      "documents": "Documents"
+    },
+    "patients": {
+      "title": "Liste des patients",
+      "search": "Rechercher des patients",
+      "filters": "Filtres"
+    },
+    "postvisit": {
+      "title": "Après la visite",
+      "followUp": "Suivi",
+      "billing": "Facturation",
+      "medications": "Médicaments"
+    },
+    "previsitregistration": {
+      "title": "Pré-inscription à la visite",
+      "appointment": "Détails du rendez-vous",
+      "insurance": "Informations d'assurance"
+    }
+  }
+}

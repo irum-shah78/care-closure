@@ -1,0 +1,208 @@
+{
+  "common": {
+    "buttons": {
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "submit": "Enviar",
+      "update": "Actualizar",
+      "delete": "Eliminar"
+    },
+    "status": {
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "pending": "Pendiente"
+    }
+  },
+  "components": {
+    "formselection": {
+      "title": "Selección de Formulario",
+      "selectForm": "Seleccionar un formulario"
+    },
+    "header": {
+      "welcome": "Bienvenido",
+      "logout": "Cerrar Sesión",
+      "settings": "Configuración",
+      "roles": {
+        "admissionsClerk": "Auxiliar de admisiones",
+        "frontDeskStaff": "Personal de recepción",
+        "supervisor": "Supervisor"
+      }
+    },
+    "languageswitcher": {
+      "selectLanguage": "Seleccionar Idioma"
+    },
+    "sidebar": {
+      "dashboard": "Panel",
+      "patients": "Pacientes",
+      "addPatient": "Agregar Paciente",
+      "checkin": "Entrada/Salida",
+      "duringVisit": "Durante la Visita",
+      "patientDetails": "Detalles del Paciente",
+      "postVisit": "Post Visita",
+      "preRegistration": "Pre-Registro"
+    }
+  },
+  "pages": {
+    "addPatient": {
+      "title": "Agregar Nuevo Paciente",
+      "patientDetails": {
+        "title": "Detalles del Paciente",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "dob": "Fecha de nacimiento",
+        "gender": "Género",
+        "maritalStatus": "Estado civil",
+        "bloodGroup": "Grupo sanguíneo",
+        "age": "Edad",
+        "description": "Descripción"
+      },
+      "contactInfo": {
+        "country": "País",
+        "state": "Estado",
+        "city": "Ciudad",
+        "mobileNumber": "Número de móvil",
+        "email": "Correo electrónico",
+        "zipcode": "Código postal",
+        "address": "Dirección"
+      },
+      "emergencyContact": {
+        "contactName": "Nombre del contacto",
+        "relationship": "Relación",
+        "contactNumber": "Número de contacto"
+      },
+      "medicalInfo": {
+        "allergies": "Alergias conocidas",
+        "medications": "Medicamentos actuales",
+        "medicalHistory": "Historial médico"
+      },
+      "placeholders": {
+        "enterFirstName": "Introduzca el nombre",
+        "enterLastName": "Introduzca el apellido",
+        "enterDate":"dd/mm/aa",
+        "selectGender": "Seleccione su género",
+        "selectMaritalStatus": "Seleccione su estado civil",
+        "selectBloodGroup": "Seleccione su grupo sanguíneo",
+        "enterAge": "Introduzca la edad",
+        "enterDescription": "Introduzca la descripción",
+        "selectCountry": "Seleccione su país",
+        "selectState": "Seleccione su estado",
+        "selectCity": "Seleccione su ciudad",
+        "enterMobileNumber": "Introduzca su número móvil",
+        "enterEmail": "Introduzca su correo electrónico",
+        "enterZipcode": "Introduzca su código postal",
+        "enterAddress": "Introduzca su dirección",
+        "enterContactName": "Introduzca el nombre del contacto",
+        "selectRelationship": "Seleccione la relación",
+        "enterContactNumber": "Introduzca el número de contacto",
+        "enterAllergies": "Si hay alguna",
+        "enterMedications": "Si hay alguno",
+        "selectMedicalHistory": "Condiciones anteriores"
+      },
+      "buttons": {
+        "submit": "Enviar",
+        "cancel": "Cancelar"
+      },
+      "status": {
+        "chronic": "Crónico",
+        "acute": "Agudo"
+      }
+    },
+    "checkin-checkout": {
+      "title": "Entrada/Salida de Pacientes",
+      "checkIn": "Registrar Entrada",
+      "checkOut": "Registrar Salida",
+      "patientsInHosp": "Pacientes en el Hospital"
+    },
+    "dashboard": {
+      "title": "Bienvenido a CareFlow",
+      "stats": {
+        "totalPatients": "Total de Pacientes",
+        "todayAppointments": "Citas Hoy",
+        "waitingPatients": "Pacientes en Espera",
+        "complianceScore": "Puntuación de Cumplimiento",
+        "fromLastMonth": "del mes pasado",
+        "fromLastWeek": "de la semana pasada",
+        "remaining": "Restantes"
+      },
+      "nextPatient": {
+        "title": "Próximo Paciente",
+        "headers": {
+          "name": "Nombre",
+          "gender": "Género",
+          "age": "Edad",
+          "appointment": "Cita",
+          "status": "Estado",
+          "time": "Hora",
+          "date": "Fecha"
+        }
+      },
+      "patientQueue": {
+        "title": "Cola de Pacientes",
+        "headers": {
+          "id": "ID",
+          "name": "Nombre",
+          "age": "Edad",
+          "gender": "Género",
+          "appointment": "Cita",
+          "time": "Hora",
+          "status": "Estado",
+          "date": "Fecha",
+          "action": "Acción"
+        },
+        "status": {
+          "inProgress": "En Proceso",
+          "waiting": "En Espera"
+        },
+        "action": {
+          "checkIn": "Registrar Entrada",
+          "checOut": "Registrar Salida"
+        }
+      }
+    },
+    "patients": {
+      "title": "Pacientes",
+      "searchPlaceholder": "Buscar Paciente aquí..",
+      "filter": "Filtrar",
+      "sort": "Ordenar por",
+      "addNew": "Agregar Nuevo Paciente",
+      "tableHeaders": {
+        "patientID": "ID del Paciente",
+        "name": "Nombre",
+        "age": "Edad",
+        "gender": "Género",
+        "bloodGroup": "Grupo Sanguíneo",
+        "contactNumber": "Número de Contacto",
+        "emergencyContact": "Número de Contacto de Emergencia",
+        "paymentStatus": "Estado de Pago"
+      },
+      "paymentStatus": {
+        "pending": "Pendiente",
+        "completed": "Completado",
+        "notPaid": "No Pagado"
+      }
+    },
+    "patientdetails": {
+      "title": "Detalles del Paciente",
+      "history": "Historial Médico",
+      "appointments": "Citas",
+      "documents": "Documentos"
+    },
+    "postvisit": {
+      "title": "Post Visita",
+      "followUp": "Seguimiento",
+      "billing": "Facturación",
+      "medications": "Medicamentos"
+    },
+    "previsitregistration": {
+      "title": "Pre-Registro de Visita",
+      "appointment": "Detalles de la Cita",
+      "insurance": "Información del Seguro"
+    },
+    "duringvisit": {
+      "title": "Durante la Visita",
+      "vitals": "Signos Vitales",
+      "diagnosis": "Diagnóstico",
+      "prescription": "Receta"
+    }
+  }
+}

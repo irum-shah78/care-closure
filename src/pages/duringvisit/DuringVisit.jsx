@@ -11,8 +11,9 @@ const DuringVisit = () => {
   };
 
   const patientDetailsFields = [
-    { type: "text", label: "Visit ID", placeholder: "Auto Populated" },
-    { type: "text", label: "Patient Full Name", placeholder: "Name here" },
+    { type: "text", label: "Patient First Name", placeholder: "Name here" },
+    { type: "text", label: "Patient Middle Name", placeholder: "Name here" },
+    { type: "text", label: "Patient Last Name", placeholder: "Name here" },
     {
       type: "select",
       label: "Insurance Provider",
@@ -79,7 +80,7 @@ const DuringVisit = () => {
     },
     {
       type: "time",
-      label: "Assigned Date",
+      label: "Assigned Time",
       placeholder: "00:00:00",
     },
   ];

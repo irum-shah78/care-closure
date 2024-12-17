@@ -12,10 +12,13 @@ import waitingIcon from "../../assets/waiting.svg";
 import inProgressIcon from "../../assets/inprogress.svg";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const getRandomStatus = () => (Math.random() < 0.5 ? "In Progress" : "Waiting");
 
 const Dashboard = () => {
+  const { t } = useTranslation();
+
   const [date, setDate] = useState(new Date());
   const [activeTab, setActiveTab] = useState("patientQueue");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -148,7 +151,7 @@ const Dashboard = () => {
         <Header />
         <div className="px-8 py-6 bg-gray-100">
           <h1 className="text-2xl font-bold text-gray-800">
-            Welcome to CareFlow
+            {t("pages.dashboard.title")}
           </h1>
 
           <div className="grid grid-cols-4 gap-4 mt-6">
@@ -159,12 +162,12 @@ const Dashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-800">
-                    Total Patients
+                    {t("pages.dashboard.stats.totalPatients")}
                   </h3>
                   <p className="text-2xl font-bold">1248</p>
                   <p className="text-sm text-[#38AC4C]">
-                    <span className="font-bold text-[#38AC4C]">+20%</span> from
-                    last month
+                    <span className="font-bold text-[#38AC4C]">+20%</span>{" "}
+                    {t("pages.dashboard.stats.fromLastMonth")}
                   </p>
                 </div>
               </div>
@@ -175,10 +178,12 @@ const Dashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-800">
-                    Appointments Today
+                    {t("pages.dashboard.stats.todayAppointments")}
                   </h3>
                   <p className="text-2xl font-bold">42</p>
-                  <p className="text-sm text-[#6D59CE]">12 Remaining</p>
+                  <p className="text-sm text-[#6D59CE]">
+                    12 {t("pages.dashboard.stats.remaining")}
+                  </p>
                 </div>
               </div>
 
@@ -188,12 +193,12 @@ const Dashboard = () => {
                 </div>
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-800">
-                    Compliance Score
+                    {t("pages.dashboard.stats.complianceScore")}
                   </h3>
                   <p className="text-2xl font-bold">98%</p>
                   <p className="text-sm text-[#38AC4C]">
-                    <span className="font-bold text-[#38AC4C]">+2%</span> from
-                    last week
+                    <span className="font-bold text-[#38AC4C]">+2%</span>{" "}
+                    {t("pages.dashboard.stats.fromLastWeek")}
                   </p>
                 </div>
               </div>
@@ -201,7 +206,7 @@ const Dashboard = () => {
               <div className="col-span-3 bg-white shadow-md p-4 rounded-xl relative">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-gray-800">
-                    Next Patient
+                    {t("pages.dashboard.nextPatient.title")}
                   </h3>
                   <div className="flex gap-2 absolute top-0 right-0 mt-4 mr-6">
                     <button
@@ -304,18 +309,8 @@ const Dashboard = () => {
                     : "text-gray-600"
                 }`}
               >
-                Patient Queue
+                {t("pages.dashboard.patientQueue.title")}
               </button>
-              {/* <button
-                onClick={() => setActiveTab("appointments")}
-                className={`px-4 py-1 rounded ${
-                  activeTab === "appointments"
-                    ? "text-black font-semibold border-b-4 border-[#6D59CE]"
-                    : "text-gray-600"
-                }`}
-              >
-                Appointments
-              </button> */}
             </div>
 
             <div>
@@ -327,17 +322,19 @@ const Dashboard = () => {
                         <thead className="bg-gray-200">
                           <tr>
                             {[
-                              "ID",
-                              "Name",
-                              "Age",
-                              "Gender",
-                              "Appointment",
-                              "Time",
-                              "Status",
-                              "Date",
-                              "Action",
-                            ].map((header) => (
-                              <th key={header} className="p-4 text-center">
+                              t("pages.dashboard.patientQueue.headers.id"),
+                              t("pages.dashboard.patientQueue.headers.name"),
+                              t("pages.dashboard.patientQueue.headers.age"),
+                              t("pages.dashboard.patientQueue.headers.gender"),
+                              t(
+                                "pages.dashboard.patientQueue.headers.appointment"
+                              ),
+                              t("pages.dashboard.patientQueue.headers.time"),
+                              t("pages.dashboard.patientQueue.headers.status"),
+                              t("pages.dashboard.patientQueue.headers.date"),
+                              t("pages.dashboard.patientQueue.headers.action"),
+                            ].map((header, index) => (
+                              <th key={index} className="p-4 text-center">
                                 {header}
                               </th>
                             ))}
@@ -354,7 +351,6 @@ const Dashboard = () => {
                               time,
                               status,
                               date,
-                              action,
                             } = patient;
 
                             return (
@@ -386,11 +382,46 @@ const Dashboard = () => {
                                       alt={status}
                                       className="w-4 h-4"
                                     />
-                                    <span>{status}</span>
+                                    <span>
+                                      {status === "In Progress"
+                                        ? t(
+                                            "pages.dashboard.patientQueue.status.inProgress"
+                                          )
+                                        : t(
+                                            "pages.dashboard.patientQueue.status.waiting"
+                                          )}
+                                    </span>
                                   </div>
                                 </td>
                                 <td className="p-4">{date}</td>
-                                <td className="p-4">{action}</td>
+                                {/* <td className="p-4">
+                                  <button className="text-blue-500 underline">
+                                    {t(
+                                      "pages.dashboard.patientQueue.action.checkIn"
+                                    )}
+                                  </button>
+
+                                  <button className="text-red-500 underline">
+                                    {t(
+                                      "pages.dashboard.patientQueue.action.checOut"
+                                    )}
+                                  </button>
+                                </td> */}
+                                <td className="p-4">
+                                  {patient.action === "Check In" ? (
+                                    <button>
+                                      {t(
+                                        "pages.dashboard.patientQueue.action.checkIn"
+                                      )}
+                                    </button>
+                                  ) : (
+                                    <button>
+                                      {t(
+                                        "pages.dashboard.patientQueue.action.checOut"
+                                      )}
+                                    </button>
+                                  )}
+                                </td>
                               </tr>
                             );
                           })}
@@ -400,85 +431,6 @@ const Dashboard = () => {
                   </div>
                 </div>
               )}
-
-              {/* {activeTab === "appointments" && (
-                <div>
-                  <div className="bg-white overflow-hidden w-full h-full">
-                    <div className="max-h-[500px] overflow-y-auto w-full">
-                      <table className="w-full bg-white">
-                        <thead className="bg-gray-200">
-                          <tr>
-                            {[
-                              "ID",
-                              "Name",
-                              "Age",
-                              "Gender",
-                              "Appointment",
-                              "Time",
-                              "Status",
-                              "Date",
-                              "Action",
-                            ].map((header) => (
-                              <th key={header} className="p-4 text-center">
-                                {header}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {patientsData.map(
-                            ({
-                              id,
-                              name,
-                              age,
-                              gender,
-                              appointment,
-                              time,
-                              status,
-                              date,
-                              action,
-                            }) => (
-                              <tr
-                                key={id}
-                                className="border-b hover:bg-gray-50 text-center"
-                              >
-                                <td className="p-4">{id}</td>
-                                <td className="p-4">{name}</td>
-                                <td className="p-4">{age}</td>
-                                <td className="p-4">{gender}</td>
-                                <td className="p-4">{appointment}</td>
-                                <td className="p-4">{time}</td>
-                                <td className="p-4">
-                                  <div
-                                    className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
-                                      status === "In Progress"
-                                        ? "bg-[#E2E0E8] text-[#2E1A8C]"
-                                        : "bg-[#DAEEF9] text-[#1A628C]"
-                                    }`}
-                                  >
-                                    <img
-                                      src={
-                                        status === "In Progress"
-                                          ? inProgressIcon
-                                          : waitingIcon
-                                      }
-                                      alt={status}
-                                      className="w-4 h-4"
-                                    />
-                                    <span>{status}</span>
-                                  </div>
-                                </td>
-                                <td className="p-4">{date}</td>
-                                <td className="p-4">{action}</td>
-                              </tr>
-                            )
-                          )}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              )} */}
             </div>
           </div>
         </div>

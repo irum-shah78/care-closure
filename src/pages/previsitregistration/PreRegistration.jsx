@@ -44,26 +44,19 @@ const PreRegistration = () => {
   };
 
   const visitInfoFields = [
-    // {
-    //   type: "number",
-    //   label: "Visit ID",
-    //   placeholder: "#2315",
-    //   value: visitId,
-    //   onChange: (e) => setVisitId(e.target.value),
-    // },
     {
       type: "select",
       label: "Visit Type",
-      placeholder: "New Consultation",
-      options: ["Checkup", "Regular"],
+      placeholder: "Select Visit Type",
+      options: ["New Consultation", "Checkup", "Regular"],
       value: visitType,
       onChange: (e) => setVisitType(e.target.value),
     },
     {
       type: "select",
       label: "Department",
-      placeholder: "General Medicine",
-      options: ["Medicine", "Labs"],
+      placeholder: "Select Department",
+      options: ["General Medicine","Medicine", "Labs"],
       value: department,
       onChange: (e) => setDepartment(e.target.value),
     },

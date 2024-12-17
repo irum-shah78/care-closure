@@ -1,5 +1,4 @@
 import React from "react";
-
 const FormSection = ({ title, children }) => {
   return (
     <section className="bg-white p-6 rounded-lg shadow-md">

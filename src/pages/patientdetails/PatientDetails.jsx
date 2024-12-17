@@ -78,7 +78,7 @@ const PatientDetails = () => {
       <Sidebar />
       <main className="flex-1">
         <Header />
-        <div className="p-6 space-y-6">
+        <div className="p-6 space-y-6 bg-gray-100">
           <div className="flex items-center gap-3">
             <img
               src={backIcon}
@@ -92,7 +92,7 @@ const PatientDetails = () => {
           </div>
 
           <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-8 flex bg-white p-3 rounded-xl shadow-md h-[270px]">
+            <div className="xl:col-span-8 col-span-12 flex bg-white p-3 rounded-xl shadow-md h-[270px]">
               <div className="flex flex-col items-center justify-center space-x-4 pr-6 text-center">
                 <img
                   src={patientImage}
@@ -179,7 +179,7 @@ const PatientDetails = () => {
               </div>
             </div>
 
-            <div className="col-span-4 flex flex-col justify-center gap-6 h-[270px]">
+            <div className="xl:col-span-4 col-span-12 flex flex-col justify-center gap-6 h-[270px]">
               <button
                 className="px-4 text-[#363636] font-medium text-left bg-white p-6 rounded-xl shadow-md flex items-center justify-center gap-4"
                 onClick={handlePreVisit}

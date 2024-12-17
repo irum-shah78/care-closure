@@ -8,7 +8,6 @@ import patientsIconActive from "../../assets/patient-clicked.svg";
 import checkinIconDefault from "../../assets/patient.svg";
 import checkinIconActive from "../../assets/patient-clicked.svg";
 import { useNavigate } from "react-router-dom";
-
 const Sidebar = () => {
   const { t } = useTranslation();
   const location = useLocation();
@@ -54,7 +53,9 @@ const Sidebar = () => {
             const isActive =
               location.pathname === item.path ||
               (item.matchPaths &&
-                item.matchPaths.some((path) => location.pathname.startsWith(path)));
+                item.matchPaths.some((path) =>
+                  location.pathname.startsWith(path)
+                ));
 
             return (
               <li key={item.name} className="my-2 font-semibold text-[16px]">

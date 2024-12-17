@@ -65,12 +65,12 @@ const PatientsInHospital = () => {
   return (
     <div className="min-h-screen flex bg-gray-100">
       <Sidebar />
-      <main className="flex-1">
+      <main className="flex-1 bg-gray-100">
         <Header />
-        <div className="px-8 py-4">
+        <div className="lg:px-8 px-4 py-6 bg-gray-100">
           <h2 className="text-2xl font-semibold mb-4">Patients In Hospital</h2>
           <div className="bg-white rounded-xl border shadow-sm p-4 overflow-auto">
-            <div className="flex items-center justify-between mb-6 gap-6 ms-1">
+            <div className="flex flex-col xl:flex-row items-start justify-between mb-6 gap-6 ms-1">
               <div className="relative w-full">
                 <input
                   type="text"
@@ -85,14 +85,23 @@ const PatientsInHospital = () => {
                   className="absolute top-2.5 right-3 text-gray-500 pointer-events-none"
                 />
               </div>
-              <div className="flex flex-col md:flex-row w-[300px] gap-3 space-y-2 md:space-y-0 md:space-x-2">
+              {/* <div className="flex md:flex-row sm:flex-row w-[300px] gap-3 space-y-2 md:space-y-0 md:space-x-2">
                 <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
                   <img src={filterIcon} alt="filter" /> Filter
                 </button>
                 <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
                   <img src={sortIcon} alt="filter" /> Sort by
                 </button>
-              </div>
+              </div> */}
+              <div className="flex flex-row flex-wrap w-[300px] gap-3 gap-y-2">
+  <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
+    <img src={filterIcon} alt="filter" /> Filter
+  </button>
+  <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
+    <img src={sortIcon} alt="filter" /> Sort by
+  </button>
+</div>
+
             </div>
             <div className="bg-white overflow-hidden w-full h-full">
               <div className="max-h-[500px] overflow-y-auto w-full">

@@ -28,22 +28,27 @@ const Header = ({ user }) => {
     });
   };
 
-  const roles = ["Admissions Clerk", "Front Desk Staff", "Supervisor", "Patients"];
+  const roles = [
+    "Admissions Clerk",
+    "Front Desk Staff",
+    "Supervisor",
+    "Patients",
+  ];
 
   return (
     <>
-      <header className="flex items-center justify-between px-8 h-[70px] bg-white shadow-md w-full z-80">
+      <header className="flex items-center justify-between px-4 md:px-6 lg:px-8 h-[70px] bg-white shadow-md w-full z-80">
         <div className="flex items-center cursor-pointer">
           <div className="relative z-50">
             <button
               onClick={toggleDropdown}
-              className="flex items-center justify-between w-44 text-sm font-normal space-x-2 bg-white border border-[#D9D9D9] rounded-3xl px-4 py-2"
+              className="flex items-center justify-between w-32 md:w-40 lg:w-44 text-xs md:text-sm space-x-2 bg-white border border-[#D9D9D9] rounded-3xl px-3 py-2"
             >
-              <span>{selectedRole}</span>
+              <span className="truncate">{selectedRole}</span>
               <img src={dropdown} alt="dropdown" />
             </button>
             {isDropdownOpen && (
-              <ul className="absolute w-44 left-0 text-sm mt-2 bg-white border border-gray-300 rounded shadow-lg z-[100]">
+              <ul className="absolute w-32 md:w-40 lg:w-44 left-0 text-xs md:text-sm mt-2 bg-white border border-gray-300 rounded shadow-lg z-[100]">
                 {roles.map((role) => (
                   <li
                     key={role}
@@ -57,10 +62,12 @@ const Header = ({ user }) => {
                   >
                     <div className="w-6 flex-shrink-0">
                       {role === selectedRole && (
-                        <FontAwesomeIcon icon={faCheck} className="" />
+                        <FontAwesomeIcon icon={faCheck} />
                       )}
                     </div>
-                    <span className="flex-grow text-gray-700">{role}</span>
+                    <span className="flex-grow truncate text-gray-700">
+                      {role}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -69,27 +76,34 @@ const Header = ({ user }) => {
           <LanguageSwitcher />
         </div>
 
-        <div className="flex items-center space-x-4 gap-3">
-          <div className="hidden md:block text-[#656565] text-sm">
+        <div className="flex items-center space-x-2 md:space-x-3 lg:space-x-4 gap-2">
+          <div className="text-[#656565] text-xs md:text-sm lg:text-base whitespace-nowrap">
             {getCurrentDateTime()}
           </div>
 
           <div className="relative">
             <button className="focus:outline-none">
-              <img src={notification} alt="Notification" />
+              <img
+                src={notification}
+                alt="Notification"
+                className="w-5 h-5 md:w-6 md:h-6"
+              />
               <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-[#2E2559] rounded-full"></span>
             </button>
           </div>
+
           <div className="hidden md:flex items-center">
             <img
               src={profileImage}
               alt="User"
-              className="w-8 h-8 rounded-full"
+              className="w-7 h-7 md:w-8 md:h-8 rounded-full"
             />
-            <div className="text-base flex flex-col ms-2">
-              <span className="mr-2 text-[#656565] ms-2">{t("components.header.welcome")}</span>
-              <div className="flex justify-between items-center gap-2 cursor-pointer">
-                <span className="ml-2 text-[#2E2559] font-semibold">
+            <div className="text-xs md:text-sm flex flex-col ms-2">
+              <span className="text-[#656565]">
+                {t("components.header.welcome")}
+              </span>
+              <div className="flex items-center gap-1 md:gap-2 cursor-pointer">
+                <span className="text-[#2E2559] font-semibold">
                   Jawad Afzal
                 </span>
                 <img src={profileDropdown} alt="dropdown" className="w-2 h-2" />
@@ -97,6 +111,7 @@ const Header = ({ user }) => {
             </div>
           </div>
 
+          {/* Mobile Menu Toggle */}
           <div className="md:hidden">
             <button onClick={toggleMenu} className="focus:outline-none">
               <svg
@@ -130,7 +145,9 @@ const Header = ({ user }) => {
               className="w-8 h-8 rounded-full"
             />
             <div className="text-base flex flex-col ms-2">
-              <span className="mr-2 text-[#656565] ms-2">{t("components.header.welcome")}</span>
+              <span className="mr-2 text-[#656565] ms-2">
+                {t("components.header.welcome")}
+              </span>
               <div className="flex justify-between items-center gap-2">
                 <span className="ml-2 text-[#2E2559] font-semibold">
                   Jawad Afzal

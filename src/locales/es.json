@@ -57,6 +57,7 @@
         "description": "Descripción"
       },
       "contactInfo": {
+        "title": "Información del Contacto",
         "country": "País",
         "state": "Estado",
         "city": "Ciudad",
@@ -66,19 +67,36 @@
         "address": "Dirección"
       },
       "emergencyContact": {
+        "title": "Contacto de Emergencia",
         "contactName": "Nombre del contacto",
         "relationship": "Relación",
         "contactNumber": "Número de contacto"
       },
       "medicalInfo": {
+        "title": "Información Médica",
         "allergies": "Alergias conocidas",
         "medications": "Medicamentos actuales",
         "medicalHistory": "Historial médico"
       },
+      "insuranceInfo": {
+        "title": "Información del Seguro",
+        "insuranceProvider": "Proveedor de seguros",
+        "policyNumber": "Número de póliza"
+      },
+      "cardDetails": {
+        "title": "Detalles de la tarjeta",
+        "cardNumber": "Número de tarjeta",
+        "expiryDate": "Fecha de caducidad",
+        "cvv": "CVV"
+      },
+      "paymentInfo": {
+        "title": "Pago",
+        "paymentStatus": "Estado del pago"
+      },
       "placeholders": {
         "enterFirstName": "Introduzca el nombre",
         "enterLastName": "Introduzca el apellido",
-        "enterDate":"dd/mm/aa",
+        "enterDate": "dd/mm/aa",
         "selectGender": "Seleccione su género",
         "selectMaritalStatus": "Seleccione su estado civil",
         "selectBloodGroup": "Seleccione su grupo sanguíneo",
@@ -96,15 +114,35 @@
         "enterContactNumber": "Introduzca el número de contacto",
         "enterAllergies": "Si hay alguna",
         "enterMedications": "Si hay alguno",
-        "selectMedicalHistory": "Condiciones anteriores"
+        "selectMedicalHistory": "Condiciones anteriores",
+        "enterInsuranceProvider": "Introduzca el proveedor de seguros",
+        "enterPolicyNumber": "Introduzca el número de póliza",
+        "enterCardNumber": "Introduzca el número de tarjeta",
+        "enterExpiryDate": "MM/AA",
+        "enterCVV": "Introduzca el CVV",
+        "selectPaymentStatus": "Seleccione el estado del pago"
       },
       "buttons": {
+        "generateID":"Generar ID",
         "submit": "Enviar",
         "cancel": "Cancelar"
       },
       "status": {
         "chronic": "Crónico",
         "acute": "Agudo"
+      },
+      "gender": {
+        "male": "Masculina",
+        "female": "Femenina"
+      },
+      "maritalStatus": {
+        "single": "Soltero",
+        "married": "Casado"
+      },
+      "paymentStatus": {
+        "pending": "Pendiente",
+        "completed": "Completado",
+        "notPaid": "No Pagado"
       }
     },
     "checkin-checkout": {
@@ -183,9 +221,41 @@
     },
     "patientdetails": {
       "title": "Detalles del Paciente",
-      "history": "Historial Médico",
-      "appointments": "Citas",
-      "documents": "Documentos"
+      "back": "Atrás",
+      "personalInfo": {
+        "posts": "Publicaciones",
+        "upcoming": "Próximas",
+        "gender": "Género",
+        "streetAddress": "Dirección",
+        "status": "Estado",
+        "birthday": "Fecha de Nacimiento",
+        "city": "Ciudad",
+        "registeredDate": "Fecha de Registro",
+        "phoneNumber": "Número de Teléfono",
+        "zipCode": "Código Postal"
+      },
+      "visitTypes": {
+        "preVisit": "Detalles Pre-Visita",
+        "duringVisit": "Detalles Durante Visita",
+        "postVisit": "Detalles Post-Visita"
+      },
+      "appointmentDetails": {
+        "title": "Detalles de Citas",
+        "table": {
+          "id": "ID",
+          "date": "Fecha",
+          "time": "Hora",
+          "appointmentNo": "No. de Cita",
+          "appointTo": "Asignado a",
+          "status": "Estado",
+          "description": "Descripción"
+        },
+        "statusTypes": {
+          "chronic": "Crónico",
+          "acute": "Agudo"
+        },
+        "noAppointments": "No se encontraron detalles de citas."
+      }
     },
     "postvisit": {
       "title": "Post Visita",

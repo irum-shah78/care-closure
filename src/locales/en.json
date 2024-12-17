@@ -57,6 +57,7 @@
         "description": "Description"
       },
       "contactInfo": {
+        "title": "Contact Information",
         "country": "Country",
         "state": "State",
         "city": "City",
@@ -66,19 +67,36 @@
         "address": "Address"
       },
       "emergencyContact": {
+        "title": "Emergency Contact",
         "contactName": "Contact Name",
         "relationship": "Relationship",
         "contactNumber": "Contact Number"
       },
       "medicalInfo": {
+        "title": "Medical Information",
         "allergies": "Known Allergies",
         "medications": "Current Medications",
         "medicalHistory": "Medical History"
       },
+      "insuranceInfo": {
+        "title": "Insurance Information",
+        "insuranceProvider": "Insurance Provider",
+        "policyNumber": "Policy Number"
+      },
+      "cardDetails": {
+        "title": "Card Details",
+        "cardNumber": "Card Number",
+        "expiryDate": "Expiry Date",
+        "cvv": "CVV"
+      },
+      "paymentInfo": {
+        "title": "Payment",
+        "paymentStatus": "Payment Status"
+      },
       "placeholders": {
         "enterFirstName": "Enter first name",
         "enterLastName": "Enter last name",
-        "enterDate":"mm/dd/yy",
+        "enterDate": "mm/dd/yy",
         "selectGender": "Select your gender",
         "selectMaritalStatus": "Select your marital status",
         "selectBloodGroup": "Select your blood group",
@@ -96,9 +114,16 @@
         "enterContactNumber": "Enter contact number",
         "enterAllergies": "If any",
         "enterMedications": "If any",
-        "selectMedicalHistory": "Any previous conditions"
+        "selectMedicalHistory": "Any previous conditions",
+        "enterInsuranceProvider": "Enter insurance provider",
+        "enterPolicyNumber": "Enter policy number",
+        "enterCardNumber": "Enter card number",
+        "enterExpiryDate": "MM/YY",
+        "enterCVV": "Enter CVV",
+        "selectPaymentStatus": "Select payment status"
       },
       "buttons": {
+        "generateID":"Generate ID",
         "submit": "Submit",
         "cancel": "Cancel"
       },
@@ -106,9 +131,18 @@
         "chronic": "Chronic",
         "acute": "Acute"
       },
-      "gender":{
-        "male":"",
-        "female":""
+      "gender": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "maritalStatus": {
+        "single": "Single",
+        "married": "Married"
+      },
+      "paymentStatus":{
+        "pending":"Pending",
+        "completed":"Completed",
+        "notPaid":"Not Paid"
       }
     },
     "checkin-checkout": {
@@ -187,9 +221,41 @@
     },
     "patientdetails": {
       "title": "Patient Details",
-      "history": "Medical History",
-      "appointments": "Appointments",
-      "documents": "Documents"
+      "back": "Back",
+      "personalInfo": {
+        "posts": "Post",
+        "upcoming": "Upcoming",
+        "gender": "Gender",
+        "streetAddress": "Street Address",
+        "status": "Status",
+        "birthday": "Birthday",
+        "city": "City",
+        "registeredDate": "Registered Date",
+        "phoneNumber": "Phone Number",
+        "zipCode": "ZIP Code"
+      },
+      "visitTypes": {
+        "preVisit": "Pre-Visit Details",
+        "duringVisit": "During-Visit Details",
+        "postVisit": "Post-Visit Details"
+      },
+      "appointmentDetails": {
+        "title": "Appointment Details",
+        "table": {
+          "id": "ID",
+          "date": "Date",
+          "time": "Time",
+          "appointmentNo": "Appointment No.",
+          "appointTo": "Appoint to",
+          "status": "Status",
+          "description": "Description"
+        },
+        "statusTypes": {
+          "chronic": "Chronic",
+          "acute": "Acute"
+        },
+        "noAppointments": "No appointment details found."
+      }
     },
     "postvisit": {
       "title": "Post Visit",

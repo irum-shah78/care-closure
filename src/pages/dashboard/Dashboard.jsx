@@ -147,15 +147,15 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen flex bg-gray-100">
       <Sidebar />
-      <main className="flex-1">
+      <main className="flex-1 bg-gray-100">
         <Header />
-        <div className="px-8 py-6 bg-gray-100">
+        <div className="lg:px-8 px-4 py-6 bg-gray-100">
           <h1 className="text-2xl font-bold text-gray-800">
             {t("pages.dashboard.title")}
           </h1>
 
-          <div className="grid grid-cols-4 gap-4 mt-6">
-            <div className="col-span-3 grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-6">
+            <div className="col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div className="flex bg-white shadow-md p-4 rounded-xl">
                 <div className="flex items-center justify-center bg-[#2E255924] w-[50px] h-[50px] rounded-lg mt-4">
                   <img src={totalPatients} alt="total patients" />
@@ -287,7 +287,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="col-span-1 bg-white shadow px-4 py-3 rounded-lg">
+            <div className="col-span-1 bg-white shadow px-4 py-3 rounded-lg hidden xl:block">
               <div className="">
                 <Calendar
                   onChange={handleChange}
@@ -318,115 +318,113 @@ const Dashboard = () => {
                 <div>
                   <div className="bg-white overflow-hidden w-full h-full">
                     <div className="max-h-[500px] overflow-y-auto w-full">
-                      <table className="w-full bg-white">
-                        <thead className="bg-gray-200">
-                          <tr>
-                            {[
-                              t("pages.dashboard.patientQueue.headers.id"),
-                              t("pages.dashboard.patientQueue.headers.name"),
-                              t("pages.dashboard.patientQueue.headers.age"),
-                              t("pages.dashboard.patientQueue.headers.gender"),
-                              t(
-                                "pages.dashboard.patientQueue.headers.appointment"
-                              ),
-                              t("pages.dashboard.patientQueue.headers.time"),
-                              t("pages.dashboard.patientQueue.headers.status"),
-                              t("pages.dashboard.patientQueue.headers.date"),
-                              t("pages.dashboard.patientQueue.headers.action"),
-                            ].map((header, index) => (
-                              <th key={index} className="p-4 text-center">
-                                {header}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {combinedData.map((patient) => {
-                            const {
-                              id,
-                              name,
-                              age,
-                              gender,
-                              appointment,
-                              time,
-                              status,
-                              date,
-                            } = patient;
+                      <div className="overflow-x-auto w-full">
+                        <table className="min-w-full bg-white">
+                          <thead className="bg-gray-200">
+                            <tr>
+                              {[
+                                t("pages.dashboard.patientQueue.headers.id"),
+                                t("pages.dashboard.patientQueue.headers.name"),
+                                t("pages.dashboard.patientQueue.headers.age"),
+                                t(
+                                  "pages.dashboard.patientQueue.headers.gender"
+                                ),
+                                t(
+                                  "pages.dashboard.patientQueue.headers.appointment"
+                                ),
+                                t("pages.dashboard.patientQueue.headers.time"),
+                                t(
+                                  "pages.dashboard.patientQueue.headers.status"
+                                ),
+                                t("pages.dashboard.patientQueue.headers.date"),
+                                t(
+                                  "pages.dashboard.patientQueue.headers.action"
+                                ),
+                              ].map((header, index) => (
+                                <th
+                                  key={index}
+                                  className="p-4 text-center text-sm"
+                                >
+                                  {header}
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {combinedData.map((patient) => {
+                              const {
+                                id,
+                                name,
+                                age,
+                                gender,
+                                appointment,
+                                time,
+                                status,
+                                date,
+                              } = patient;
 
-                            return (
-                              <tr
-                                key={id}
-                                className="border-b hover:bg-gray-50 cursor-pointer text-center"
-                                onClick={() => handlePatientDetails(patient)}
-                              >
-                                <td className="p-4">{id}</td>
-                                <td className="p-4">{name}</td>
-                                <td className="p-4">{age}</td>
-                                <td className="p-4">{gender}</td>
-                                <td className="p-4">{appointment}</td>
-                                <td className="p-4">{time}</td>
-                                <td className="p-4">
-                                  <div
-                                    className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
-                                      status === "In Progress"
-                                        ? "bg-[#E2E0E8] text-[#2E1A8C]"
-                                        : "bg-[#DAEEF9] text-[#1A628C]"
-                                    }`}
-                                  >
-                                    <img
-                                      src={
+                              return (
+                                <tr
+                                  key={id}
+                                  className="border-b hover:bg-gray-50 cursor-pointer text-center"
+                                  onClick={() => handlePatientDetails(patient)}
+                                >
+                                  <td className="p-4">{id}</td>
+                                  <td className="p-4">{name}</td>
+                                  <td className="p-4">{age}</td>
+                                  <td className="p-4">{gender}</td>
+                                  <td className="p-4">{appointment}</td>
+                                  <td className="p-4">{time}</td>
+                                  <td className="p-4">
+                                    <div
+                                      className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
                                         status === "In Progress"
-                                          ? inProgressIcon
-                                          : waitingIcon
-                                      }
-                                      alt={status}
-                                      className="w-4 h-4"
-                                    />
-                                    <span>
-                                      {status === "In Progress"
-                                        ? t(
-                                            "pages.dashboard.patientQueue.status.inProgress"
-                                          )
-                                        : t(
-                                            "pages.dashboard.patientQueue.status.waiting"
-                                          )}
-                                    </span>
-                                  </div>
-                                </td>
-                                <td className="p-4">{date}</td>
-                                {/* <td className="p-4">
-                                  <button className="text-blue-500 underline">
-                                    {t(
-                                      "pages.dashboard.patientQueue.action.checkIn"
+                                          ? "bg-[#E2E0E8] text-[#2E1A8C]"
+                                          : "bg-[#DAEEF9] text-[#1A628C]"
+                                      }`}
+                                    >
+                                      <img
+                                        src={
+                                          status === "In Progress"
+                                            ? inProgressIcon
+                                            : waitingIcon
+                                        }
+                                        alt={status}
+                                        className="w-4 h-4"
+                                      />
+                                      <span>
+                                        {status === "In Progress"
+                                          ? t(
+                                              "pages.dashboard.patientQueue.status.inProgress"
+                                            )
+                                          : t(
+                                              "pages.dashboard.patientQueue.status.waiting"
+                                            )}
+                                      </span>
+                                    </div>
+                                  </td>
+                                  <td className="p-4">{date}</td>
+                                  <td className="p-4">
+                                    {patient.action === "Check In" ? (
+                                      <button>
+                                        {t(
+                                          "pages.dashboard.patientQueue.action.checkIn"
+                                        )}
+                                      </button>
+                                    ) : (
+                                      <button>
+                                        {t(
+                                          "pages.dashboard.patientQueue.action.checOut"
+                                        )}
+                                      </button>
                                     )}
-                                  </button>
-
-                                  <button className="text-red-500 underline">
-                                    {t(
-                                      "pages.dashboard.patientQueue.action.checOut"
-                                    )}
-                                  </button>
-                                </td> */}
-                                <td className="p-4">
-                                  {patient.action === "Check In" ? (
-                                    <button>
-                                      {t(
-                                        "pages.dashboard.patientQueue.action.checkIn"
-                                      )}
-                                    </button>
-                                  ) : (
-                                    <button>
-                                      {t(
-                                        "pages.dashboard.patientQueue.action.checOut"
-                                      )}
-                                    </button>
-                                  )}
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>

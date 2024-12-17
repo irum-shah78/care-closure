@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import dropdown from "../../assets/dropdown.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-
 const LanguageSwitcher = () => {
   const { i18n } = useTranslation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

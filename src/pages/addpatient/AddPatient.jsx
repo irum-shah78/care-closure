@@ -249,37 +249,43 @@ const AddPatient = () => {
       label: t("pages.addPatient.patientDetails.gender"),
       type: "select",
       placeholder: t("pages.addPatient.placeholders.selectGender"),
-      options: ["Male", "Female"],
+      options: [
+        t("pages.addPatient.gender.male"),
+        t("pages.addPatient.gender.female"),
+      ],
       value: gender,
       onChange: (e) => setGender(e.target.value),
     },
     {
-      label: "Marital Status",
+      label: t("pages.addPatient.patientDetails.maritalStatus"),
       type: "select",
-      placeholder: "Select your marital status",
-      options: ["Single", "Married"],
+      placeholder: t("pages.addPatient.placeholders.selectMaritalStatus"),
+      options: [
+        t("pages.addPatient.maritalStatus.single"),
+        t("pages.addPatient.maritalStatus.married"),
+      ],
       value: maritalStatus,
       onChange: (e) => setMaritalStatus(e.target.value),
     },
     {
-      label: "Blood Group",
+      label: t("pages.addPatient.patientDetails.bloodGroup"),
       type: "select",
-      placeholder: "Select your blood group",
+      placeholder: t("pages.addPatient.placeholders.selectBloodGroup"),
       options: ["A+", "B+", "O+", "AB+"],
       value: bloodGroup,
       onChange: (e) => setBloodGroup(e.target.value),
     },
     {
-      label: "Age",
+      label: t("pages.addPatient.patientDetails.age"),
       type: "number",
-      placeholder: "Enter age",
+      placeholder: t("pages.addPatient.placeholders.enterAge"),
       value: age,
       onChange: (e) => setAge(e.target.value),
     },
     {
-      label: "Description",
+      label: t("pages.addPatient.patientDetails.description"),
       type: "text",
-      placeholder: "Enter description",
+      placeholder: t("pages.addPatient.placeholders.enterDescription"),
       value: description,
       onChange: (e) => setDescription(e.target.value),
     },
@@ -287,9 +293,9 @@ const AddPatient = () => {
 
   const contactInformationFields = [
     {
-      label: "Country",
+      label: t("pages.addPatient.contactInfo.country"),
       type: "select",
-      placeholder: "Select Your Country",
+      placeholder: t("pages.addPatient.placeholders.selectCountry"),
       options: countries.map((c) => ({ value: c.iso2, label: c.name })),
       value: country,
       onChange: (e) => {
@@ -301,9 +307,9 @@ const AddPatient = () => {
       },
     },
     {
-      label: "State",
+      label: t("pages.addPatient.contactInfo.state"),
       type: "select",
-      placeholder: "Select Your State",
+      placeholder: t("pages.addPatient.placeholders.selectState"),
       options: states.map((s) => ({ value: s.iso2, label: s.name })),
       value: state,
       disabled: !country,
@@ -315,39 +321,39 @@ const AddPatient = () => {
       },
     },
     {
-      label: "City",
+      label: t("pages.addPatient.contactInfo.city"),
       type: "select",
-      placeholder: "Select Your City",
+      placeholder: t("pages.addPatient.placeholders.selectCity"),
       options: cities.map((c) => ({ value: c.name, label: c.name })),
       value: city,
       disabled: !state,
       onChange: (e) => setCity(e.target.value),
     },
     {
-      label: "Mobile Number",
+      label: t("pages.addPatient.contactInfo.mobileNumber"),
       type: "phone",
-      placeholder: "Enter your mobile number",
+      placeholder: t("pages.addPatient.placeholders.enterMobileNumber"),
       value: mobileNumber,
       onChange: (value) => setMobileNumber(value),
     },
     {
-      label: "Email",
+      label: t("pages.addPatient.contactInfo.email"),
       type: "email",
-      placeholder: "Enter your email",
+      placeholder: t("pages.addPatient.placeholders.enterEmail"),
       value: email,
       onChange: (e) => setEmail(e.target.value),
     },
     {
-      label: "Zipcode",
+      label: t("pages.addPatient.contactInfo.zipcode"),
       type: "number",
-      placeholder: "Enter your zipcode",
+      placeholder: t("pages.addPatient.placeholders.enterZipcode"),
       value: pincode,
       onChange: (e) => setPincode(e.target.value),
     },
     {
-      label: "Address",
+      label: t("pages.addPatient.contactInfo.address"),
       type: "text",
-      placeholder: "Enter your address",
+      placeholder: t("pages.addPatient.placeholders.enterAddress"),
       value: address,
       onChange: (e) => setAddress(e.target.value),
     },
@@ -355,24 +361,24 @@ const AddPatient = () => {
 
   const emergencyContactFields = [
     {
-      label: "Contact Name",
+      label: t("pages.addPatient.emergencyContact.contactName"),
       type: "text",
-      placeholder: "Enter contact name",
+      placeholder: t("pages.addPatient.placeholders.enterContactName"),
       value: emergencyContactName,
       onChange: (e) => setEmergencyContactName(e.target.value),
     },
     {
-      label: "Relationship",
+      label: t("pages.addPatient.emergencyContact.relationship"),
       type: "select",
-      placeholder: "Select relationship",
+      placeholder: t("pages.addPatient.placeholders.selectRelationship"),
       options: ["Father", "Mother", "Husband", "Wife", "Sister", "Daughter"],
       value: state,
       onChange: (e) => setEmergencyRelationship(e.target.value),
     },
     {
-      label: "Contact Number",
+      label: t("pages.addPatient.emergencyContact.contactNumber"),
       type: "phone",
-      placeholder: "Enter contact number",
+      placeholder: t("pages.addPatient.placeholders.enterContactNumber"),
       value: emergencyContactNumber,
       onChange: (value) => setEmergencyContactNumber(value),
     },
@@ -380,23 +386,23 @@ const AddPatient = () => {
 
   const medicalInformationFields = [
     {
-      label: "Known Allergies",
+      label: t("pages.addPatient.medicalInfo.allergies"),
       type: "text",
-      placeholder: "If any",
+      placeholder: t("pages.addPatient.placeholders.enterAllergies"),
       value: allergies,
       onChange: (e) => setAllergies(e.target.value),
     },
     {
-      label: "Current Medications",
+      label: t("pages.addPatient.medicalInfo.medications"),
       type: "text",
-      placeholder: "If any",
+      placeholder: t("pages.addPatient.placeholders.enterMedications"),
       value: medications,
       onChange: (e) => setMedications(e.target.value),
     },
     {
-      label: "Medical History",
+      label: t("pages.addPatient.medicalInfo.medicalHistory"),
       type: "select",
-      placeholder: "Any previous conditions",
+      placeholder: t("pages.addPatient.placeholders.selectMedicalHistory"),
       options: ["None", "Condition 1", "Condition 2"],
       value: medicalHistory,
       onChange: (e) => setMedicalHistory(e.target.value),
@@ -405,16 +411,16 @@ const AddPatient = () => {
 
   const insuranceInformationFields = [
     {
-      label: "Insurance Provider",
+      label: t("pages.addPatient.insuranceInfo.insuranceProvider"),
       type: "text",
-      placeholder: "Enter name of insurance provider",
+      placeholder: t("pages.addPatient.placeholders.enterInsuranceProvider"),
       value: insuranceProvider,
       onChange: (e) => setInsuranceProvider(e.target.value),
     },
     {
-      label: "Policy Number",
+      label: t("pages.addPatient.insuranceInfo.policyNumber"),
       type: "number",
-      placeholder: "Enter policy number",
+      placeholder: t("pages.addPatient.placeholders.enterPolicyNumber"),
       value: policyNumber,
       onChange: (e) => setPolicyNumber(e.target.value),
     },
@@ -422,23 +428,23 @@ const AddPatient = () => {
 
   const cardDetailsFields = [
     {
-      label: "Card Number",
+      label: t("pages.addPatient.cardDetails.cardNumber"),
       type: "number",
-      placeholder: "12345678",
+      placeholder:  t("pages.addPatient.placeholders.enterCardNumber"),
       value: cardNumber,
       onChange: (e) => setCardNumber(e.target.value),
     },
     {
-      label: "Expiry Date",
+      label: t("pages.addPatient.cardDetails.expiryDate"),
       type: "date",
-      placeholder: "MM/YY",
+      placeholder: t("pages.addPatient.placeholders.enterExpiryDate"),
       value: expiryDate,
       onChange: (e) => setExpiryDate(e.target.value),
     },
     {
-      label: "CVV",
+      label: t("pages.addPatient.cardDetails.cvv"),
       type: "text",
-      placeholder: "123",
+      placeholder: t("pages.addPatient.placeholders.enterCVV"),
       value: cvv,
       onChange: (e) => setCvv(e.target.value),
     },
@@ -447,9 +453,9 @@ const AddPatient = () => {
   const paymentFields = [
     {
       type: "select",
-      label: "Payment Status",
-      placeholder: "Select status",
-      options: ["Pending", "Completed", "Not Payed"],
+      label: t("pages.addPatient.paymentInfo.paymentStatus"),
+      placeholder: t("pages.addPatient.placeholders.selectPaymentStatus"),
+      options: [t("pages.addPatient.paymentStatus.pending"), t("pages.addPatient.paymentStatus.completed"), t("pages.addPatient.paymentStatus.notPaid")],
       value: paymentStatus,
       onChange: (e) => setPaymentStatus(e.target.value),
     },
@@ -482,7 +488,7 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Contact Information">
+            <FormSection title={t("pages.addPatient.contactInfo.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {contactInformationFields.map((field, index) => {
@@ -491,7 +497,8 @@ const AddPatient = () => {
                       <label
                         key={index}
                         className={`block col-span-1 ${
-                          field.label === "Address"
+                          field.label ===
+                          t("pages.addPatient.contactInfo.address")
                             ? "sm:col-span-2"
                             : "col-span-1"
                         }`}
@@ -516,7 +523,9 @@ const AddPatient = () => {
                       </label>
                     );
                   }
-                  if (field.label === "Address") {
+                  if (
+                    field.label === t("pages.addPatient.contactInfo.address")
+                  ) {
                     return (
                       <label
                         key={index}
@@ -541,7 +550,7 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Emergency Contact">
+            <FormSection title={t("pages.addPatient.emergencyContact.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {emergencyContactFields.map((field, index) =>
@@ -550,7 +559,7 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Medical Information">
+            <FormSection title={t("pages.addPatient.medicalInfo.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {medicalInformationFields.map((field, index) =>
@@ -559,11 +568,11 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Insurance Information">
+            <FormSection title={t("pages.addPatient.insuranceInfo.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {insuranceInformationFields.map((field, index) => {
-                  if (field.label === "Insurance Provider") {
+                  if (field.label === t("pages.addPatient.insuranceInfo.insuranceProvider")) {
                     return (
                       <label
                         key={index}
@@ -583,7 +592,7 @@ const AddPatient = () => {
                       </label>
                     );
                   }
-                  if (field.label === "Policy Number") {
+                  if (field.label === t("pages.addPatient.insuranceInfo.policyNumber")) {
                     return (
                       <label key={index} className="block col-span-1 relative">
                         <span className="text-sm font-medium">
@@ -612,7 +621,7 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Card Details">
+            <FormSection  title={t("pages.addPatient.cardDetails.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {cardDetailsFields.map((field, index) =>
@@ -621,7 +630,7 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Payment">
+            <FormSection title={t("pages.addPatient.paymentInfo.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 gap-4 mt-4">
                 {paymentFields.map((field, index) => renderField(field, index))}
@@ -634,13 +643,13 @@ const AddPatient = () => {
                 className="px-6 py-2 rounded-xl border border-[#747474] text-[#747474]"
                 onClick={handlePatient}
               >
-                Cancel
+                {t("pages.addPatient.buttons.cancel")}
               </button>
               <button
                 type="submit"
                 className="px-6 py-2 rounded-xl bg-[#2E2559] text-white"
               >
-                Generate ID
+                {t("pages.addPatient.buttons.generateID")}
               </button>
             </div>
           </form>

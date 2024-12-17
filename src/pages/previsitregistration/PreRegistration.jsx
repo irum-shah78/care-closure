@@ -167,7 +167,7 @@ const PreRegistration = () => {
       <Sidebar />
       <main className="flex-1">
         <Header />
-        <div className="px-8 py-4">
+        <div className="px-4 sm:px-6 lg:px-8 py-4 bg-gray-100">
           <div className="flex gap-2">
             <img
               src={backIcon}
@@ -182,7 +182,7 @@ const PreRegistration = () => {
           <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
             <FormSection title="Visit Information">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {visitInfoFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -191,7 +191,7 @@ const PreRegistration = () => {
 
             <FormSection title="Medical Information">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {medicalInformationFields.map((field, index) => {
                   if (field.label === "Reason For Visit") {
                     return (
@@ -230,7 +230,7 @@ const PreRegistration = () => {
 
             <FormSection title="Insurance Verification">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {insuranceVerificationFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -239,14 +239,14 @@ const PreRegistration = () => {
 
             <FormSection title="Additional Requirements">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {additionalRequirements.map((field, index) =>
                   renderField(field, index)
                 )}
               </div>
             </FormSection>
 
-            <div className="flex justify-end gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row justify-end gap-4 mt-6">
               <button
                 type="button"
                 className="px-6 py-2 rounded-xl border border-[#747474] text-[#747474]"

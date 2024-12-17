@@ -1,28 +1,28 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import translationEN from '../locales/en.json';
-import translationES from '../locales/es.json';
-import translationHT from '../locales/ht.json';
-import translationZH from '../locales/zh.json';
-import translationFR from '../locales/fr.json';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import translationEN from "../locales/en.json";
+import translationES from "../locales/es.json";
+import translationHT from "../locales/ht.json";
+import translationZH from "../locales/zh.json";
+import translationFR from "../locales/fr.json";
 
 const resources = {
   en: {
-    translation: translationEN
+    translation: translationEN,
   },
   es: {
-    translation: translationES
+    translation: translationES,
   },
   ht: {
-    translation: translationHT
+    translation: translationHT,
   },
   zh: {
-    translation: translationZH
+    translation: translationZH,
   },
   fr: {
-    translation: translationFR
-  }
+    translation: translationFR,
+  },
 };
 
 i18n
@@ -30,10 +30,10 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'en',
+    fallbackLng: "en",
     interpolation: {
-      escapeValue: false
-    }
+      escapeValue: false,
+    },
   });
 
 export default i18n;

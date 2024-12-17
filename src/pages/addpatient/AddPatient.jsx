@@ -475,7 +475,7 @@ const AddPatient = () => {
           <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
             <FormSection title={t("pages.addPatient.patientDetails.title")}>
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {patientDetailsFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -484,7 +484,7 @@ const AddPatient = () => {
 
             <FormSection title="Contact Information">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {contactInformationFields.map((field, index) => {
                   if (field.type === "select") {
                     return (
@@ -543,7 +543,7 @@ const AddPatient = () => {
 
             <FormSection title="Emergency Contact">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {emergencyContactFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -552,7 +552,7 @@ const AddPatient = () => {
 
             <FormSection title="Medical Information">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {medicalInformationFields.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -561,7 +561,7 @@ const AddPatient = () => {
 
             <FormSection title="Insurance Information">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {insuranceInformationFields.map((field, index) => {
                   if (field.label === "Insurance Provider") {
                     return (
@@ -614,7 +614,7 @@ const AddPatient = () => {
 
             <FormSection title="Card Details">
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {cardDetailsFields.map((field, index) =>
                   renderField(field, index)
                 )}

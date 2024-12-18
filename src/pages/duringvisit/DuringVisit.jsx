@@ -4,83 +4,130 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const DuringVisit = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const handlePatient = () => {
     navigate("/patients/patient-details");
   };
 
   const patientDetailsFields = [
-    { type: "text", label: "Patient First Name", placeholder: "Name here" },
-    { type: "text", label: "Patient Middle Name", placeholder: "Name here" },
-    { type: "text", label: "Patient Last Name", placeholder: "Name here" },
+    {
+      type: "text",
+      label: t("pages.duringvisit.patientDetails.firstName.label"),
+      placeholder: t("pages.duringvisit.patientDetails.firstName.placeholder"),
+    },
+    {
+      type: "text",
+      label: t("pages.duringvisit.patientDetails.middleName.label"),
+      placeholder: t("pages.duringvisit.patientDetails.middleName.placeholder"),
+    },
+    {
+      type: "text",
+      label: t("pages.duringvisit.patientDetails.lastName.label"),
+      placeholder: t("pages.duringvisit.patientDetails.lastName.placeholder"),
+    },
     {
       type: "select",
-      label: "Insurance Provider",
-      placeholder: "Provider Name",
-      options: ["Checkup", "Regular"],
+      label: t("pages.duringvisit.patientDetails.insuranceProvider.label"),
+      placeholder: t(
+        "pages.duringvisit.patientDetails.insuranceProvider.placeholder"
+      ),
+      options: [
+        t(
+          "pages.duringvisit.patientDetails.insuranceProvider.options.providerOne"
+        ),
+        t(
+          "pages.duringvisit.patientDetails.insuranceProvider.options.providerTwo"
+        ),
+      ],
     },
     {
       type: "text",
-      label: "Insurance Number",
-      placeholder: "Enter insurance number",
+      label: t("pages.duringvisit.patientDetails.insuranceNumber.label"),
+      placeholder: t(
+        "pages.duringvisit.patientDetails.insuranceNumber.placeholder"
+      ),
     },
     {
       type: "text",
-      label: "Insurance Status",
-      placeholder: "Verification Status",
+      label: t("pages.duringvisit.patientDetails.insuranceStatus.label"),
+      placeholder: t(
+        "pages.duringvisit.patientDetails.insuranceStatus.placeholder"
+      ),
     },
   ];
 
   const roomAssignmentFields = [
     {
       type: "select",
-      label: "Ward Type",
-      placeholder: "Select Ward Type",
-      options: ["Emergency", "Regular"],
+      label: t("pages.duringvisit.roomAssignment.wardType.label"),
+      placeholder: t("pages.duringvisit.roomAssignment.wardType.placeholder"),
+      options: [
+        t("pages.duringvisit.roomAssignment.wardType.options.emergency"),
+        t("pages.duringvisit.roomAssignment.wardType.options.regular"),
+      ],
     },
-    { type: "text", label: "Room Number", placeholder: "Enter room number" },
-    { type: "text", label: "Bed Number", placeholder: "Enter bed number" },
     {
       type: "text",
-      label: "Admission Type",
-      placeholder: "Select admission type",
+      label: t("pages.duringvisit.roomAssignment.roomNumber.label"),
+      placeholder: t("pages.duringvisit.roomAssignment.roomNumber.placeholder"),
+    },
+    {
+      type: "text",
+      label: t("pages.duringvisit.roomAssignment.bedNumber.label"),
+      placeholder: t("pages.duringvisit.roomAssignment.bedNumber.placeholder"),
+    },
+    {
+      type: "text",
+      label: t("pages.duringvisit.roomAssignment.admissionType.label"),
+      placeholder: t(
+        "pages.duringvisit.roomAssignment.admissionType.placeholder"
+      ),
     },
   ];
 
   const teamNotificationFields = [
     {
       type: "text",
-      label: "Assigned Doctor",
-      placeholder: "Enter assigned doctor name",
+      label: t("pages.duringvisit.teamNotification.assignedDoctor.label"),
+      placeholder: t(
+        "pages.duringvisit.teamNotification.assignedDoctor.placeholder"
+      ),
     },
     {
       type: "text",
-      label: "Assigned Nurse",
-      placeholder: "Enter assigned nurse name",
+      label: t("pages.duringvisit.teamNotification.assignedNurse.label"),
+      placeholder: t(
+        "pages.duringvisit.teamNotification.assignedNurse.placeholder"
+      ),
     },
     {
-      type: "select",
-      label: "Additionl Notes",
-      placeholder: "Any special instrcutions or requirements",
-      options: ["Self", "Owner", "Subscriber"],
+      type: "text",
+      label: t("pages.duringvisit.teamNotification.additionalNotes.label"),
+      placeholder: t(
+        "pages.duringvisit.teamNotification.additionalNotes.placeholder"
+      ),
     },
   ];
 
   const admissionStatusFields = [
     {
       type: "text",
-      label: "Status",
-      placeholder: "Select admission status",
+      label: t("pages.duringvisit.admissionStatus.status.label"),
+      placeholder: t("pages.duringvisit.admissionStatus.status.placeholder"),
     },
     {
       type: "date",
-      label: "Assigned Date",
-      placeholder: "Enter assigned nurse name",
+      label: t("pages.duringvisit.admissionStatus.assignedDate.label"),
+      placeholder: t(
+        "pages.duringvisit.admissionStatus.assignedDate.placeholder"
+      ),
     },
     {
       type: "time",
-      label: "Assigned Time",
+      label: t("pages.duringvisit.admissionStatus.assignedTime.label"),
       placeholder: "00:00:00",
     },
   ];
@@ -133,10 +180,12 @@ const DuringVisit = () => {
               className="cursor-pointer"
               onClick={handlePatient}
             />
-            <h1 className="text-2xl font-bold">During-Visit</h1>
+            <h1 className="text-2xl font-bold">
+              {t("pages.duringvisit.title")}
+            </h1>
           </div>
           <form className="mt-6 space-y-6 shadow-sm">
-            <FormSection title="Patient & Insurance Verfication">
+            <FormSection title={t("pages.duringvisit.patientDetails.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {patientDetailsFields.map((field, index) =>
@@ -145,7 +194,7 @@ const DuringVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Room Assignment">
+            <FormSection title={t("pages.duringvisit.roomAssignment.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {roomAssignmentFields.map((field, index) =>
@@ -154,30 +203,27 @@ const DuringVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Team Notification">
+            <FormSection title={t("pages.duringvisit.teamNotification.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {teamNotificationFields.map((field, index) => {
-                  if (field.label === "Additionl Notes") {
+                  if (
+                    field.label ===
+                    t(
+                      "pages.duringvisit.teamNotification.additionalNotes.label"
+                    )
+                  ) {
                     return (
                       <label key={index} className="block col-span-3">
                         <span className="text-sm font-medium">
                           {field.label}
                         </span>
-                        <select
+                        <input
+                          type={field.type}
+                          placeholder={field.placeholder}
                           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
-                          defaultValue=""
                           required
-                        >
-                          <option value="" disabled>
-                            {field.placeholder}
-                          </option>
-                          {field.options?.map((option, i) => (
-                            <option key={i} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
-                        </select>
+                        />
                       </label>
                     );
                   }
@@ -186,7 +232,7 @@ const DuringVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Admission Status">
+            <FormSection title={t("pages.duringvisit.admissionStatus.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {admissionStatusFields.map((field, index) =>
@@ -201,13 +247,13 @@ const DuringVisit = () => {
                 className="px-6 py-2 rounded-xl border border-[#747474] text-[#747474]"
                 onClick={handlePatient}
               >
-                Cancel
+                {t("pages.duringvisit.buttons.cancel")}
               </button>
               <button
                 type="submit"
                 className="px-6 py-2 rounded-xl bg-[#2E2559] text-white"
               >
-                Complete Admission
+                {t("pages.duringvisit.buttons.complete")}
               </button>
             </div>
           </form>

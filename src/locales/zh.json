@@ -9,19 +9,20 @@
     },
     "status": {
       "active": "活跃",
-      "inactive": "未活跃",
+      "inactive": "非活跃",
       "pending": "待处理"
     }
   },
   "components": {
-    "formselection": {
-      "title": "表单选择",
-      "selectForm": "选择表单"
-    },
     "header": {
       "welcome": "欢迎",
-      "logout": "退出",
-      "settings": "设置"
+      "logout": "登出",
+      "settings": "设置",
+      "roles": {
+        "admissionsClerk": "招生文员",
+        "frontDeskStaff": "前台人员",
+        "supervisor": "主管"
+      }
     },
     "languageswitcher": {
       "selectLanguage": "选择语言"
@@ -31,67 +32,549 @@
       "patients": "患者",
       "addPatient": "添加患者",
       "checkin": "登记/退房",
-      "duringVisit": "就诊期间",
+      "duringVisit": "访问期间",
       "patientDetails": "患者详情",
-      "postVisit": "就诊后",
-      "preRegistration": "预登记"
+      "postVisit": "访问后",
+      "preRegistration": "预注册"
     }
   },
   "pages": {
-    "addpatient": {
+    "addPatient": {
       "title": "添加新患者",
-      "personalInfo": "个人信息",
-      "fields": {
-        "firstName": "名",
-        "lastName": "姓",
+      "patientDetails": {
+        "title": "患者详情",
+        "firstName": "名字",
+        "lastName": "姓氏",
         "dob": "出生日期",
         "gender": "性别",
-        "contact": "联系电话",
+        "maritalStatus": "婚姻状况",
+        "bloodGroup": "血型",
+        "age": "年龄",
+        "description": "描述"
+      },
+      "contactInfo": {
+        "title": "联系信息",
+        "country": "国家",
+        "state": "州",
+        "city": "城市",
+        "mobileNumber": "手机号",
         "email": "电子邮件",
+        "zipcode": "邮政编码",
         "address": "地址"
+      },
+      "emergencyContact": {
+        "title": "紧急联系人",
+        "contactName": "联系人姓名",
+        "relationship": "关系",
+        "contactNumber": "联系电话"
+      },
+      "medicalInfo": {
+        "title": "医疗信息",
+        "allergies": "已知过敏",
+        "medications": "当前用药",
+        "medicalHistory": "病史"
+      },
+      "insuranceInfo": {
+        "title": "保险信息",
+        "insuranceProvider": "保险提供者",
+        "policyNumber": "保单号码"
+      },
+      "cardDetails": {
+        "title": "卡片详情",
+        "cardNumber": "卡号",
+        "expiryDate": "到期日期",
+        "cvv": "CVV"
+      },
+      "paymentInfo": {
+        "title": "付款",
+        "paymentStatus": "付款状态"
+      },
+      "placeholders": {
+        "enterFirstName": "输入名字",
+        "enterLastName": "输入姓氏",
+        "enterDate": "月/日/年",
+        "selectGender": "选择性别",
+        "selectMaritalStatus": "选择婚姻状况",
+        "selectBloodGroup": "选择血型",
+        "enterAge": "输入年龄",
+        "enterDescription": "输入描述",
+        "selectCountry": "选择国家",
+        "selectState": "选择州",
+        "selectCity": "选择城市",
+        "enterMobileNumber": "输入手机号",
+        "enterEmail": "输入电子邮件",
+        "enterZipcode": "输入邮政编码",
+        "enterAddress": "输入地址",
+        "enterContactName": "输入联系人姓名",
+        "selectRelationship": "选择关系",
+        "enterContactNumber": "输入联系电话",
+        "enterAllergies": "如果有",
+        "enterMedications": "如果有",
+        "selectMedicalHistory": "任何病史",
+        "enterInsuranceProvider": "输入保险提供者",
+        "enterPolicyNumber": "输入保单号码",
+        "enterCardNumber": "输入卡号",
+        "enterExpiryDate": "月/年",
+        "enterCVV": "输入CVV",
+        "selectPaymentStatus": "选择付款状态"
+      },
+      "buttons": {
+        "generateID": "生成ID",
+        "submit": "提交",
+        "cancel": "取消"
+      },
+      "status": {
+        "chronic": "慢性",
+        "acute": "急性"
+      },
+      "gender": {
+        "male": "男",
+        "female": "女"
+      },
+      "maritalStatus": {
+        "single": "单身",
+        "married": "已婚"
+      },
+      "paymentStatus": {
+        "pending": "待处理",
+        "completed": "已完成",
+        "notPaid": "未支付"
       }
     },
     "checkin-checkout": {
       "title": "患者登记/退房",
       "checkIn": "登记",
       "checkOut": "退房",
-      "patientsInHosp": "在院患者"
+      "patientsInHosp": "在院患者",
+      "search": {
+        "placeholder": "在这里搜索患者.."
+      },
+      "buttons": {
+        "filter": "筛选",
+        "sortBy": "排序依据"
+      },
+      "table": {
+        "headers": {
+          "id": "ID",
+          "name": "姓名",
+          "age": "年龄",
+          "gender": "性别",
+          "contactNo": "联系电话",
+          "time": "时间",
+          "date": "日期",
+          "status": "状态",
+          "appointTo": "指派给",
+          "action": "操作"
+        },
+        "status": {
+          "inProgress": "进行中",
+          "waiting": "等待中"
+        },
+        "action": {
+          "chronic": "慢性",
+          "acute": "急性"
+        }
+      }
     },
     "dashboard": {
       "title": "欢迎使用 CareFlow",
       "stats": {
-        "totalPatients": "患者总数",
+        "totalPatients": "总患者数",
         "todayAppointments": "今日预约",
-        "waitingPatients": "等待患者"
+        "waitingPatients": "等待中的患者",
+        "complianceScore": "合规得分",
+        "fromLastMonth": "较上月",
+        "fromLastWeek": "较上周",
+        "remaining": "剩余"
+      },
+      "nextPatient": {
+        "title": "下一个患者",
+        "headers": {
+          "name": "姓名",
+          "gender": "性别",
+          "age": "年龄",
+          "appointment": "预约",
+          "status": "状态",
+          "time": "时间",
+          "date": "日期"
+        }
+      },
+      "patientQueue": {
+        "title": "患者队列",
+        "headers": {
+          "id": "编号",
+          "name": "姓名",
+          "age": "年龄",
+          "gender": "性别",
+          "appointment": "预约",
+          "time": "时间",
+          "status": "状态",
+          "date": "日期",
+          "action": "操作"
+        },
+        "status": {
+          "inProgress": "进行中",
+          "waiting": "等待中"
+        },
+        "action": {
+          "checkIn": "登记",
+          "checOut": "签出"
+        }
       }
     },
-    "duringvisit": {
-      "title": "就诊期间",
-      "vitals": "生命体征",
-      "diagnosis": "诊断",
-      "prescription": "处方"
+    "patients": {
+      "title": "患者",
+      "searchPlaceholder": "在此搜索患者..",
+      "filter": "筛选",
+      "sort": "排序依据",
+      "addNew": "新增患者",
+      "tableHeaders": {
+        "patientID": "患者编号",
+        "name": "姓名",
+        "age": "年龄",
+        "gender": "性别",
+        "bloodGroup": "血型",
+        "contactNumber": "联系电话",
+        "emergencyContact": "紧急联系电话",
+        "paymentStatus": "付款状态"
+      },
+      "paymentStatus": {
+        "pending": "待处理",
+        "completed": "已完成",
+        "notPaid": "未支付"
+      }
     },
     "patientdetails": {
       "title": "患者详情",
-      "history": "病历",
-      "appointments": "预约",
-      "documents": "文档"
-    },
-    "patients": {
-      "title": "患者列表",
-      "search": "搜索患者",
-      "filters": "筛选"
-    },
-    "postvisit": {
-      "title": "就诊后",
-      "followUp": "随访",
-      "billing": "账单",
-      "medications": "药物"
+      "back": "返回",
+      "patient": "患者",
+      "personalInfo": {
+        "posts": "帖子",
+        "upcoming": "即将到来",
+        "gender": "性别",
+        "streetAddress": "街道地址",
+        "status": "状态",
+        "birthday": "生日",
+        "city": "城市",
+        "registeredDate": "注册日期",
+        "phoneNumber": "电话号码",
+        "zipCode": "邮政编码"
+      },
+      "visitTypes": {
+        "preVisit": "访前详情",
+        "duringVisit": "访中详情",
+        "postVisit": "访后详情"
+      },
+      "appointmentDetails": {
+        "title": "预约详情",
+        "table": {
+          "id": "编号",
+          "date": "日期",
+          "time": "时间",
+          "appointmentNo": "预约号",
+          "appointTo": "预约给",
+          "status": "状态",
+          "description": "描述"
+        },
+        "statusTypes": {
+          "chronic": "慢性",
+          "acute": "急性"
+        },
+        "noAppointments": "未找到预约详情。"
+      }
     },
     "previsitregistration": {
-      "title": "预约登记",
-      "appointment": "预约详情",
-      "insurance": "保险信息"
+      "title": "访前患者登记",
+      "visitInformation": {
+        "title": "访问信息",
+        "visitType": {
+          "label": "访问类型",
+          "placeholder": "选择访问类型",
+          "options": {
+            "newConsultation": "新咨询",
+            "checkup": "检查",
+            "regular": "常规"
+          }
+        },
+        "department": {
+          "label": "部门",
+          "placeholder": "选择部门",
+          "options": {
+            "generalMedicine": "普通内科",
+            "medicine": "内科",
+            "labs": "实验室"
+          }
+        },
+        "preferredDoctor": {
+          "label": "首选医生",
+          "placeholder": "选择性别",
+          "options": {
+            "male": "男",
+            "female": "女"
+          }
+        },
+        "preferredDate": {
+          "label": "首选日期",
+          "placeholder": "月/日/年"
+        },
+        "preferredTimeSlot": {
+          "label": "首选时间段",
+          "placeholder": "上午(9AM - 12PM)",
+          "options": {
+            "morning": "上午(9AM - 12PM)",
+            "afternoon": "下午(12PM - 3PM)"
+          }
+        }
+      },
+      "medicalInformation": {
+        "title": "医疗信息",
+        "reasonForVisit": {
+          "label": "访问原因",
+          "placeholder": "简述您的医疗问题"
+        },
+        "currentSymptoms": {
+          "label": "当前症状",
+          "placeholder": "列出所有当前症状"
+        },
+        "symptomsDuration": {
+          "label": "症状持续时间",
+          "placeholder": "小时",
+          "options": {
+            "hours": "小时",
+            "days": "天",
+            "weeks": "周"
+          }
+        }
+      },
+      "insuranceInformation": {
+        "title": "保险信息",
+        "provider": {
+          "label": "保险供应商",
+          "placeholder": "输入名称"
+        },
+        "policyNumber": {
+          "label": "保单号码",
+          "placeholder": "输入号码"
+        },
+        "subscriberName": {
+          "label": "投保人姓名",
+          "placeholder": "输入姓名"
+        },
+        "relationship": {
+          "label": "与投保人的关系",
+          "placeholder": "本人",
+          "options": {
+            "self": "本人",
+            "owner": "所有者",
+            "subscriber": "投保人"
+          }
+        }
+      },
+      "additionalRequirements": {
+        "label": "其他需求",
+        "placeholder": "选择需求",
+        "options": {
+          "wheelchair": "轮椅通道、翻译等",
+          "ac": "空调",
+          "interpreter": "翻译"
+        }
+      },
+      "buttons": {
+        "cancel": "取消",
+        "schedule": "安排访问"
+      }
+    },
+    "duringvisit": {
+      "title": "访中详情",
+      "patientDetails": {
+        "title": "患者与保险验证",
+        "firstName": {
+          "label": "患者名字",
+          "placeholder": "输入名字"
+        },
+        "middleName": {
+          "label": "患者中间名",
+          "placeholder": "输入中间名"
+        },
+        "lastName": {
+          "label": "患者姓氏",
+          "placeholder": "输入姓氏"
+        },
+        "insuranceProvider": {
+          "label": "保险供应商",
+          "placeholder": "输入供应商名称",
+          "options": {
+            "providerOne": "供应商 1",
+            "providerTwo": "供应商 2"
+          }
+        },
+        "insuranceNumber": {
+          "label": "保险编号",
+          "placeholder": "输入保险编号"
+        },
+        "insuranceStatus": {
+          "label": "保险状态",
+          "placeholder": "验证状态"
+        }
+      },
+      "roomAssignment": {
+        "title": "房间分配",
+        "wardType": {
+          "label": "病房类型",
+          "placeholder": "选择病房类型",
+          "options": {
+            "emergency": "急诊",
+            "regular": "普通"
+          }
+        },
+        "roomNumber": {
+          "label": "房间号",
+          "placeholder": "输入房间号"
+        },
+        "bedNumber": {
+          "label": "床位号",
+          "placeholder": "输入床位号"
+        },
+        "admissionType": {
+          "label": "入院类型",
+          "placeholder": "输入入院类型"
+        }
+      },
+      "teamNotification": {
+        "title": "团队通知",
+        "assignedDoctor": {
+          "label": "指定医生",
+          "placeholder": "输入医生姓名"
+        },
+        "assignedNurse": {
+          "label": "指定护士",
+          "placeholder": "输入护士姓名"
+        },
+        "additionalNotes": {
+          "label": "附加备注",
+          "placeholder": "任何特殊指示或要求"
+        }
+      },
+      "admissionStatus": {
+        "title": "入院状态",
+        "status": {
+          "label": "状态",
+          "placeholder": "输入入院状态"
+        },
+        "assignedDate": {
+          "label": "指定日期",
+          "placeholder": "输入指定日期"
+        },
+        "assignedTime": {
+          "label": "指定时间",
+          "placeholder": "00:00:00"
+        }
+      },
+      "buttons": {
+        "cancel": "取消",
+        "complete": "完成入院"
+      }
+    },
+    "postvisit": {
+      "title": "访后",
+      "followUp": "后续",
+      "billing": "账单",
+      "medications": "药物",
+      "backButton": "返回",
+      "printSummary": "打印摘要",
+      "completeCheckout": "完成结账",
+      "paymentProcessing": {
+        "title": "付款处理",
+        "consultationFee": {
+          "label": "咨询费",
+          "placeholder": "100.00"
+        },
+        "medicatedCharges": {
+          "label": "药费",
+          "placeholder": "费用"
+        },
+        "additionalServices": {
+          "label": "附加服务",
+          "placeholder": "如有"
+        },
+        "totalAmount": {
+          "label": "总金额",
+          "placeholder": "金额"
+        },
+        "paymentMethod": {
+          "label": "付款方式",
+          "placeholder": "选择付款方式",
+          "options": {
+            "online": "在线",
+            "cash": "现金"
+          }
+        },
+        "paymentStatus": {
+          "label": "付款状态",
+          "placeholder": "选择付款状态",
+          "options": {
+            "pending": "待处理",
+            "completed": "已完成"
+          }
+        }
+      },
+      "followupSection": {
+        "title": "后续详情",
+        "required": {
+          "label": "是否需要后续",
+          "placeholder": "选择选项",
+          "options": {
+            "option1": "选项 1",
+            "option2": "选项 2"
+          }
+        },
+        "preferredDate": {
+          "label": "首选日期",
+          "placeholder": ""
+        },
+        "assignedDoctor": {
+          "label": "指定医生",
+          "placeholder": "输入医生姓名"
+        },
+        "department": {
+          "label": "部门",
+          "placeholder": "输入部门"
+        }
+      },
+      "visitSummary": {
+        "title": "访问摘要",
+        "diagnosis": {
+          "label": "诊断",
+          "placeholder": "输入诊断"
+        },
+        "treatmentSummary": {
+          "label": "治疗摘要",
+          "placeholder": "输入摘要"
+        },
+        "medicationsPrescribed": {
+          "label": "开具的药物",
+          "placeholder": "输入药物"
+        },
+        "specialInstructions": {
+          "label": "特别说明",
+          "placeholder": "输入说明"
+        }
+      },
+      "visitStatus": {
+        "title": "访问状态",
+        "statusUpdate": {
+          "label": "状态更新",
+          "placeholder": "输入访问状态"
+        },
+        "dischargedDate": {
+          "label": "出院日期",
+          "placeholder": "输入出院日期"
+        },
+        "dischargedTime": {
+          "label": "出院时间",
+          "placeholder": "00:00:00"
+        }
+      }
     }
   }
 }

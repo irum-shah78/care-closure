@@ -4,89 +4,138 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PostVisit = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const handlePatient = () => {
     navigate("/patients/patient-details");
   };
 
   const paymentProcessingFields = [
-    { type: "text", label: "Cunsultation Fee", placeholder: "100.00" },
-    { type: "text", label: "Medicated Charges", placeholder: "Charges here" },
-    { type: "text", label: "Additional Services ", placeholder: "If any" },
-    { type: "text", label: "Total Amount", placeholder: "Amount here" },
     {
-      type: "select",
-      label: "Payment Method",
-      placeholder: "Select Payment Method ",
-      options: ["Online", "Cash"],
+      type: "text",
+      label: t("pages.postvisit.paymentProcessing.consultationFee.label"),
+      placeholder: "100.00",
+    },
+    {
+      type: "text",
+      label: t("pages.postvisit.paymentProcessing.medicatedCharges.label"),
+      placeholder: t(
+        "pages.postvisit.paymentProcessing.medicatedCharges.placeholder"
+      ),
+    },
+    {
+      type: "text",
+      label: t("pages.postvisit.paymentProcessing.additionalServices.label"),
+      placeholder: t(
+        "pages.postvisit.paymentProcessing.additionalServices.placeholder"
+      ),
+    },
+    {
+      type: "text",
+      label: t("pages.postvisit.paymentProcessing.totalAmount.label"),
+      placeholder: t(
+        "pages.postvisit.paymentProcessing.totalAmount.placeholder"
+      ),
     },
     {
       type: "select",
-      label: "Payment Status",
-      placeholder: "Select Payment status ",
-      options: ["Pending", "Completed"],
+      label: t("pages.postvisit.paymentProcessing.paymentMethod.label"),
+      placeholder: t(
+        "pages.postvisit.paymentProcessing.paymentMethod.placeholder"
+      ),
+      options: [
+        t("pages.postvisit.paymentProcessing.paymentMethod.options.online"),
+        t("pages.postvisit.paymentProcessing.paymentMethod.options.cash"),
+      ],
+    },
+    {
+      type: "select",
+      label: t("pages.postvisit.paymentProcessing.paymentStatus.label"),
+      placeholder: t(
+        "pages.postvisit.paymentProcessing.paymentStatus.placeholder"
+      ),
+      options: [
+        t("pages.postvisit.paymentProcessing.paymentStatus.options.pending"),
+        t("pages.postvisit.paymentProcessing.paymentStatus.options.completed"),
+      ],
     },
   ];
 
   const followupFields = [
     {
       type: "select",
-      label: "Follow-up Required",
-      placeholder: "Select Option",
-      options: ["Option", "Option"],
-    },
-    { type: "date", label: "Preferred Date", placeholder: "" },
-    {
-      type: "text",
-      label: "Assigned Doctor",
-      placeholder: "Select doctor name",
+      label: t("pages.postvisit.followupSection.required.label"),
+      placeholder: t("pages.postvisit.followupSection.required.placeholder"),
+      options: [
+        t("pages.postvisit.followupSection.required.options.option1"),
+        t("pages.postvisit.followupSection.required.options.option2"),
+      ],
     },
     {
+      type: "date",
+      label: t("pages.postvisit.followupSection.preferredDate.label"),
+      placeholder: "mm/dd/yy",
+    },
+    {
       type: "text",
-      label: "Department",
-      placeholder: "Select department",
+      label: t("pages.postvisit.followupSection.assignedDoctor.label"),
+      placeholder: t(
+        "pages.postvisit.followupSection.assignedDoctor.placeholder"
+      ),
+    },
+    {
+      type: "text",
+      label: t("pages.postvisit.followupSection.department.label"),
+      placeholder: t("pages.postvisit.followupSection.department.placeholder"),
     },
   ];
 
   const visitSummaryFields = [
     {
       type: "text",
-      label: "Diagnosis",
-      placeholder: "Enter diagnosis",
+      label: t("pages.postvisit.visitSummary.diagnosis.label"),
+      placeholder: t("pages.postvisit.visitSummary.diagnosis.placeholder"),
     },
     {
       type: "text",
-      label: "Treatment Summary",
-      placeholder: "Enter summary",
+      label: t("pages.postvisit.visitSummary.treatmentSummary.label"),
+      placeholder: t(
+        "pages.postvisit.visitSummary.treatmentSummary.placeholder"
+      ),
     },
     {
       type: "text",
-      label: "Medications Prescribed",
-      placeholder: "Enter medications",
+      label: t("pages.postvisit.visitSummary.medicationsPrescribed.label"),
+      placeholder: t(
+        "pages.postvisit.visitSummary.medicationsPrescribed.placeholder"
+      ),
     },
     {
       type: "text",
-      label: "Special Instructions",
-      placeholder: "Enter instructions",
+      label: t("pages.postvisit.visitSummary.specialInstructions.label"),
+      placeholder: t(
+        "pages.postvisit.visitSummary.specialInstructions.placeholder"
+      ),
     },
   ];
 
   const visitStatusFields = [
     {
       type: "text",
-      label: "Status Update",
-      placeholder: "Select visit status",
+      label: t("pages.postvisit.visitStatus.statusUpdate.label"),
+      placeholder: t("pages.postvisit.visitStatus.statusUpdate.placeholder"),
     },
     {
       type: "date",
-      label: "Discharged Date",
-      placeholder: "Enter assigned nurse name",
+      label: t("pages.postvisit.visitStatus.dischargedDate.label"),
+      placeholder: "mm/dd/yy",
     },
     {
       type: "time",
-      label: "Discharged Time",
+      label: t("pages.postvisit.visitStatus.dischargedTime.label"),
       placeholder: "00:00:00",
     },
   ];
@@ -139,10 +188,13 @@ const PostVisit = () => {
               className="cursor-pointer"
               onClick={handlePatient}
             />
-            <h1 className="text-2xl font-bold">Post-Visit</h1>
+            <h1 className="text-2xl font-bold">
+              {" "}
+              {t("pages.postvisit.title")}
+            </h1>
           </div>
           <form className="mt-6 space-y-6 shadow-sm">
-            <FormSection title="Payment Processing">
+            <FormSection title={t("pages.postvisit.paymentProcessing.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {paymentProcessingFields.map((field, index) =>
@@ -151,7 +203,7 @@ const PostVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Follow-up Scheduling">
+            <FormSection title={t("pages.postvisit.followupSection.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {followupFields.map((field, index) =>
@@ -160,7 +212,7 @@ const PostVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Visit Summary">
+            <FormSection title={t("pages.postvisit.visitSummary.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {visitSummaryFields.map((field, index) =>
@@ -169,7 +221,7 @@ const PostVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Visit Status">
+            <FormSection title={t("pages.postvisit.visitStatus.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {visitStatusFields.map((field, index) =>
@@ -184,13 +236,13 @@ const PostVisit = () => {
                 className="px-6 py-2 rounded-xl border border-[#747474] text-[#747474]"
                 onClick={handlePatient}
               >
-                Print Summary
+                {t("pages.postvisit.printSummary")}
               </button>
               <button
                 type="submit"
                 className="px-6 py-2 rounded-xl bg-[#2E2559] text-white"
               >
-                Complete Check-out
+                {t("pages.postvisit.completeCheckout")}
               </button>
             </div>
           </form>

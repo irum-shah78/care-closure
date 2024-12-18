@@ -68,16 +68,16 @@ const Patients = () => {
                 />
               </div>
               <div className="flex flex-col md:flex-row w-full md:w-3/5 gap-3 md:gap-2">
-                <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
+                <button className="truncate border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
                   <img src={filterIcon} alt="filter" />
                   {t("pages.patients.filter")}
                 </button>
-                <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
+                <button className="truncate border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
                   <img src={sortIcon} alt="sort" />
                   {t("pages.patients.sort")}
                 </button>
                 <button
-                  className="border border-[#B3B3B3] bg-[#2E2559] text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm"
+                  className="truncate border border-[#B3B3B3] bg-[#2E2559] text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm"
                   onClick={handleClick}
                 >
                   <img src={addIcon} alt="add" />

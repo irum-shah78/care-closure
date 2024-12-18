@@ -4,8 +4,10 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const PreRegistration = () => {
+  const { t } = useTranslation();
   const { state } = useLocation();
   const patient = state?.patient;
   const navigate = useNavigate();
@@ -46,40 +48,90 @@ const PreRegistration = () => {
   const visitInfoFields = [
     {
       type: "select",
-      label: "Visit Type",
-      placeholder: "Select Visit Type",
-      options: ["New Consultation", "Checkup", "Regular"],
+      label: t("pages.previsitregistration.visitInformation.visitType.label"),
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.visitType.placeholder"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.visitInformation.visitType.options.newConsultation"
+        ),
+        t(
+          "pages.previsitregistration.visitInformation.visitType.options.checkup"
+        ),
+        t(
+          "pages.previsitregistration.visitInformation.visitType.options.regular"
+        ),
+      ],
       value: visitType,
       onChange: (e) => setVisitType(e.target.value),
     },
     {
       type: "select",
-      label: "Department",
-      placeholder: "Select Department",
-      options: ["General Medicine","Medicine", "Labs"],
+      label: t("pages.previsitregistration.visitInformation.department.label"),
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.department.placeholder"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.visitInformation.department.options.generalMedicine"
+        ),
+        t(
+          "pages.previsitregistration.visitInformation.department.options.medicine"
+        ),
+        t(
+          "pages.previsitregistration.visitInformation.department.options.labs"
+        ),
+      ],
       value: department,
       onChange: (e) => setDepartment(e.target.value),
     },
     {
       type: "select",
-      label: "Preferred Doctor",
-      placeholder: "Select your gender",
-      options: ["Male", "Female"],
+      label: t(
+        "pages.previsitregistration.visitInformation.preferredDoctor.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.preferredDoctor.placeholder"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.visitInformation.preferredDoctor.options.male"
+        ),
+        t(
+          "pages.previsitregistration.visitInformation.preferredDoctor.options.female"
+        ),
+      ],
       value: preferredDoctor,
       onChange: (e) => setPreferredDoctor(e.target.value),
     },
     {
       type: "date",
-      label: "Preferred Date",
-      placeholder: "mm/dd/yy",
+      label: t(
+        "pages.previsitregistration.visitInformation.preferredDate.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.preferredDate.placeholder"
+      ),
       value: preferredDate,
       onChange: (e) => setPreferredDate(e.target.value),
     },
     {
       type: "select",
-      label: "Preferred Time Slot",
-      placeholder: "Morning(9AM - 12PM)",
-      options: ["Morning(9AM - 12PM)", "Morning(9AM - 12PM)"],
+      label: t(
+        "pages.previsitregistration.visitInformation.preferredTimeSlot.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.preferredTimeSlot.placeholder"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.visitInformation.preferredTimeSlot.options.morning"
+        ),
+        t(
+          "pages.previsitregistration.visitInformation.preferredTimeSlot.options.afternoon"
+        ),
+      ],
       value: preferredTimeSlot,
       onChange: (e) => setPreferredTimeSlot(e.target.value),
     },
@@ -88,40 +140,110 @@ const PreRegistration = () => {
   const medicalInformationFields = [
     {
       type: "text",
-      label: "Reason For Visit",
-      placeholder: "Brief Description of your Medical Concern ",
+      label: t(
+        "pages.previsitregistration.medicalInformation.reasonForVisit.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.medicalInformation.reasonForVisit.placeholder"
+      ),
     },
     {
       type: "text",
-      label: "Current Symptoms",
-      placeholder: "List any current symptoms",
+      label: t(
+        "pages.previsitregistration.medicalInformation.currentSymptoms.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.medicalInformation.currentSymptoms.placeholder"
+      ),
     },
     {
       type: "select",
-      label: "Symptoms Duration",
-      placeholder: "Hours",
-      options: ["Hours", "Days", "Weeks"],
+      label: t(
+        "pages.previsitregistration.medicalInformation.symptomsDuration.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.medicalInformation.symptomsDuration.placeholder"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.medicalInformation.symptomsDuration.options.hours"
+        ),
+        t(
+          "pages.previsitregistration.medicalInformation.symptomsDuration.options.days"
+        ),
+        t(
+          "pages.previsitregistration.medicalInformation.symptomsDuration.options.weeks"
+        ),
+      ],
     },
   ];
 
   const insuranceVerificationFields = [
-    { type: "text", label: "Insurance Provider", placeholder: "Enter name" },
-    { type: "number", label: "Policy Number", placeholder: "Enter number" },
-    { type: "text", label: "Subscriber Name", placeholder: "Enter name" },
+    {
+      type: "text",
+      label: t(
+        "pages.previsitregistration.insuranceInformation.provider.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.insuranceInformation.provider.placeholder"
+      ),
+    },
+    {
+      type: "number",
+      label: t(
+        "pages.previsitregistration.insuranceInformation.policyNumber.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.insuranceInformation.policyNumber.placeholder"
+      ),
+    },
+    {
+      type: "text",
+      label: t(
+        "pages.previsitregistration.insuranceInformation.subscriberName.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.insuranceInformation.subscriberName.placeholder"
+      ),
+    },
     {
       type: "select",
-      label: "Relationship to Subscriber",
-      placeholder: "Self",
-      options: ["Self", "Owner", "Subscriber"],
+      label: t(
+        "pages.previsitregistration.insuranceInformation.relationship.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.insuranceInformation.relationship.placeholder"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.insuranceInformation.relationship.options.self"
+        ),
+        t(
+          "pages.previsitregistration.insuranceInformation.relationship.options.owner"
+        ),
+        t(
+          "pages.previsitregistration.insuranceInformation.relationship.options.subscriber"
+        ),
+      ],
     },
   ];
 
   const additionalRequirements = [
     {
       type: "select",
-      label: "Additional Requirements",
-      placeholder: "Wheelchair access, interpreter, etc",
-      options: ["Wheelchair access, interpreter, etc", "AC", "Interpreter"],
+      label: t("pages.previsitregistration.additionalRequirements.label"),
+      placeholder: t(
+        "pages.previsitregistration.additionalRequirements.placeholder"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.additionalRequirements.options.wheelchair"
+        ),
+        t("pages.previsitregistration.additionalRequirements.options.ac"),
+        t(
+          "pages.previsitregistration.additionalRequirements.options.interpreter"
+        ),
+      ],
     },
   ];
 
@@ -176,11 +298,13 @@ const PreRegistration = () => {
               onClick={handlePatient}
             />
             <h1 className="text-2xl font-bold">
-              Pre-Visit Patient Registration
+              {t("pages.previsitregistration.title")}
             </h1>
           </div>
           <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
-            <FormSection title="Visit Information">
+            <FormSection
+              title={t("pages.previsitregistration.visitInformation.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {visitInfoFields.map((field, index) =>
@@ -189,11 +313,18 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Medical Information">
+            <FormSection
+              title={t("pages.previsitregistration.medicalInformation.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {medicalInformationFields.map((field, index) => {
-                  if (field.label === "Reason For Visit") {
+                  if (
+                    field.label ===
+                    t(
+                      "pages.previsitregistration.medicalInformation.reasonForVisit.label"
+                    )
+                  ) {
                     return (
                       <label key={index} className="block col-span-3">
                         <span className="text-sm font-medium">
@@ -208,7 +339,12 @@ const PreRegistration = () => {
                       </label>
                     );
                   }
-                  if (field.label === "Current Symptoms") {
+                  if (
+                    field.label ===
+                    t(
+                      "pages.previsitregistration.medicalInformation.currentSymptoms.label"
+                    )
+                  ) {
                     return (
                       <label key={index} className="block col-span-2">
                         <span className="text-sm font-medium">
@@ -228,7 +364,9 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Insurance Verification">
+            <FormSection
+              title={t("pages.previsitregistration.insuranceInformation.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {insuranceVerificationFields.map((field, index) =>
@@ -237,9 +375,13 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Additional Requirements">
+            <FormSection
+              title={t(
+                "pages.previsitregistration.additionalRequirements.label"
+              )}
+            >
               <hr className="text-[#D1D1D1] border-1" />
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+              <div className="grid grid-cols-1 gap-x-14 gap-y-4 mt-4">
                 {additionalRequirements.map((field, index) =>
                   renderField(field, index)
                 )}
@@ -252,13 +394,13 @@ const PreRegistration = () => {
                 className="px-6 py-2 rounded-xl border border-[#747474] text-[#747474]"
                 onClick={handlePatient}
               >
-                Cancel
+                {t("pages.previsitregistration.buttons.cancel")}
               </button>
               <button
                 type="submit"
                 className="px-6 py-2 rounded-xl bg-[#2E2559] text-white"
               >
-                Schedule Visit
+                {t("pages.previsitregistration.buttons.schedule")}
               </button>
             </div>
           </form>

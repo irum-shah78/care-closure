@@ -14,10 +14,6 @@
     }
   },
   "components": {
-    "formselection": {
-      "title": "Form Selection",
-      "selectForm": "Select a form"
-    },
     "header": {
       "welcome": "Welcome",
       "logout": "Logout",
@@ -123,7 +119,7 @@
         "selectPaymentStatus": "Select payment status"
       },
       "buttons": {
-        "generateID":"Generate ID",
+        "generateID": "Generate ID",
         "submit": "Submit",
         "cancel": "Cancel"
       },
@@ -139,17 +135,46 @@
         "single": "Single",
         "married": "Married"
       },
-      "paymentStatus":{
-        "pending":"Pending",
-        "completed":"Completed",
-        "notPaid":"Not Paid"
+      "paymentStatus": {
+        "pending": "Pending",
+        "completed": "Completed",
+        "notPaid": "Not Paid"
       }
     },
     "checkin-checkout": {
       "title": "Patient Check In/Out",
       "checkIn": "Check In",
       "checkOut": "Check Out",
-      "patientsInHosp": "Patients In Hospital"
+      "patientsInHosp": "Patients In Hospital",
+      "search": {
+        "placeholder": "Search Patient here.."
+      },
+      "buttons": {
+        "filter": "Filter",
+        "sortBy": "Sort by"
+      },
+      "table": {
+        "headers": {
+          "id": "ID",
+          "name": "Name",
+          "age": "Age",
+          "gender": "Gender",
+          "contactNo": "Contact No.",
+          "time": "Time",
+          "date": "Date",
+          "status": "Status",
+          "appointTo": "Appoint to",
+          "action": "Action"
+        },
+        "status": {
+          "inProgress": "In Progress",
+          "waiting": "Waiting"
+        },
+        "action": {
+          "chronic": "Chronic",
+          "acute": "Acute"
+        }
+      }
     },
     "dashboard": {
       "title": "Welcome to CareFlow",
@@ -222,6 +247,7 @@
     "patientdetails": {
       "title": "Patient Details",
       "back": "Back",
+      "patient": "Patient",
       "personalInfo": {
         "posts": "Post",
         "upcoming": "Upcoming",
@@ -257,22 +283,298 @@
         "noAppointments": "No appointment details found."
       }
     },
-    "postvisit": {
-      "title": "Post Visit",
-      "followUp": "Follow Up",
-      "billing": "Billing",
-      "medications": "Medications"
-    },
     "previsitregistration": {
-      "title": "Pre-Visit Registration",
-      "appointment": "Appointment Details",
-      "insurance": "Insurance Information"
+      "title": "Pre-Visit Patient Registration",
+      "visitInformation": {
+        "title": "Visit Information",
+        "visitType": {
+          "label": "Visit Type",
+          "placeholder": "Select Visit Type",
+          "options": {
+            "newConsultation": "New Consultation",
+            "checkup": "Checkup",
+            "regular": "Regular"
+          }
+        },
+        "department": {
+          "label": "Department",
+          "placeholder": "Select Department",
+          "options": {
+            "generalMedicine": "General Medicine",
+            "medicine": "Medicine",
+            "labs": "Labs"
+          }
+        },
+        "preferredDoctor": {
+          "label": "Preferred Doctor",
+          "placeholder": "Select your gender",
+          "options": {
+            "male": "Male",
+            "female": "Female"
+          }
+        },
+        "preferredDate": {
+          "label": "Preferred Date",
+          "placeholder": "mm/dd/yy"
+        },
+        "preferredTimeSlot": {
+          "label": "Preferred Time Slot",
+          "placeholder": "Morning(9AM - 12PM)",
+          "options": {
+            "morning": "Morning(9AM - 12PM)",
+            "afternoon": "Morning(9AM - 12PM)"
+          }
+        }
+      },
+      "medicalInformation": {
+        "title": "Medical Information",
+        "reasonForVisit": {
+          "label": "Reason For Visit",
+          "placeholder": "Brief Description of your Medical Concern"
+        },
+        "currentSymptoms": {
+          "label": "Current Symptoms",
+          "placeholder": "List any current symptoms"
+        },
+        "symptomsDuration": {
+          "label": "Symptoms Duration",
+          "placeholder": "Hours",
+          "options": {
+            "hours": "Hours",
+            "days": "Days",
+            "weeks": "Weeks"
+          }
+        }
+      },
+      "insuranceInformation": {
+        "title": "Insurance Information",
+        "provider": {
+          "label": "Insurance Provider",
+          "placeholder": "Enter name"
+        },
+        "policyNumber": {
+          "label": "Policy Number",
+          "placeholder": "Enter number"
+        },
+        "subscriberName": {
+          "label": "Subscriber Name",
+          "placeholder": "Enter name"
+        },
+        "relationship": {
+          "label": "Relationship to Subscriber",
+          "placeholder": "Self",
+          "options": {
+            "self": "Self",
+            "owner": "Owner",
+            "subscriber": "Subscriber"
+          }
+        }
+      },
+      "additionalRequirements": {
+        "label": "Additional Requirements",
+        "placeholder": "Select requirements",
+        "options": {
+          "wheelchair": "Wheelchair access, interpreter, etc",
+          "ac": "AC",
+          "interpreter": "Interpreter"
+        }
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "schedule": "Schedule Visit"
+      }
     },
     "duringvisit": {
-      "title": "During Visit",
-      "vitals": "Vitals",
-      "diagnosis": "Diagnosis",
-      "prescription": "Prescription"
+      "title": "During-Visit",
+      "patientDetails": {
+        "title": "Patient & Insurance Verfication",
+        "firstName": {
+          "label": "Patient First Name",
+          "placeholder": "Name here"
+        },
+        "middleName": {
+          "label": "Patient Middle Name",
+          "placeholder": "Name here"
+        },
+        "lastName": {
+          "label": "Patient Last Name",
+          "placeholder": "Name here"
+        },
+        "insuranceProvider": {
+          "label": "Insurance Provider",
+          "placeholder": "Provider Name",
+          "options": {
+            "providerOne": "Provider 1",
+            "providerTwo": "Provider 2"
+          }
+        },
+        "insuranceNumber": {
+          "label": "Insurance Number",
+          "placeholder": "Enter insurance number"
+        },
+        "insuranceStatus": {
+          "label": "Insurance Status",
+          "placeholder": "Verification Status"
+        }
+      },
+      "roomAssignment": {
+        "title": "Room Assignment",
+        "wardType": {
+          "label": "Ward Type",
+          "placeholder": "Select Ward Type",
+          "options": {
+            "emergency": "Emergency",
+            "regular": "Regular"
+          }
+        },
+        "roomNumber": {
+          "label": "Room Number",
+          "placeholder": "Enter room number"
+        },
+        "bedNumber": {
+          "label": "Bed Number",
+          "placeholder": "Enter bed number"
+        },
+        "admissionType": {
+          "label": "Admission Type",
+          "placeholder": "Enter admission type"
+        }
+      },
+      "teamNotification": {
+        "title": "Team Notification",
+        "assignedDoctor": {
+          "label": "Assigned Doctor",
+          "placeholder": "Enter assigned doctor name"
+        },
+        "assignedNurse": {
+          "label": "Assigned Nurse",
+          "placeholder": "Enter assigned nurse name"
+        },
+        "additionalNotes": {
+          "label": "Additionl Notes",
+          "placeholder": "Any special instrcutions or requirements"
+        }
+      },
+      "admissionStatus": {
+        "title": "Admission Status",
+        "status": {
+          "label": "Status",
+          "placeholder": "Enter admission status"
+        },
+        "assignedDate": {
+          "label": "Assigned Date",
+          "placeholder": "Enter assigned nurse name"
+        },
+        "assignedTime": {
+          "label": "Assigned Time",
+          "placeholder": "00:00:00"
+        }
+      },
+      "buttons": {
+        "cancel": "Cancel",
+        "complete": "Complete Admission"
+      }
+    },
+    "postvisit": {
+      "title": "Post-Visit",
+      "followUp": "Follow Up",
+      "billing": "Billing",
+      "medications": "Medications",
+      "backButton": "Back",
+      "printSummary": "Print Summary",
+      "completeCheckout": "Complete Check-out",
+      "paymentProcessing": {
+        "title": "Payment Processing",
+        "consultationFee": {
+          "label": "Consultation Fee",
+          "placeholder": "100.00"
+        },
+        "medicatedCharges": {
+          "label": "Medicated Charges",
+          "placeholder": "Charges here"
+        },
+        "additionalServices": {
+          "label": "Additional Services",
+          "placeholder": "If any"
+        },
+        "totalAmount": {
+          "label": "Total Amount",
+          "placeholder": "Amount here"
+        },
+        "paymentMethod": {
+          "label": "Payment Method",
+          "placeholder": "Select Payment Method",
+          "options": {
+            "online": "Online",
+            "cash": "Cash"
+          }
+        },
+        "paymentStatus": {
+          "label": "Payment Status",
+          "placeholder": "Select Payment status",
+          "options": {
+            "pending": "Pending",
+            "completed": "Completed"
+          }
+        }
+      },
+      "followupSection": {
+        "title": "Follow-up Details",
+        "required": {
+          "label": "Follow-up Required",
+          "placeholder": "Select Option",
+          "options": {
+            "option1": "Option 1",
+            "option2": "Option 2"
+          }
+        },
+        "preferredDate": {
+          "label": "Preferred Date",
+          "placeholder": ""
+        },
+        "assignedDoctor": {
+          "label": "Assigned Doctor",
+          "placeholder": "Enter doctor name"
+        },
+        "department": {
+          "label": "Department",
+          "placeholder": "Enter department"
+        }
+      },
+      "visitSummary": {
+        "title": "Visit Summary",
+        "diagnosis": {
+          "label": "Diagnosis",
+          "placeholder": "Enter diagnosis"
+        },
+        "treatmentSummary": {
+          "label": "Treatment Summary",
+          "placeholder": "Enter summary"
+        },
+        "medicationsPrescribed": {
+          "label": "Medications Prescribed",
+          "placeholder": "Enter medications"
+        },
+        "specialInstructions": {
+          "label": "Special Instructions",
+          "placeholder": "Enter instructions"
+        }
+      },
+      "visitStatus": {
+        "title": "Visit Status",
+        "statusUpdate": {
+          "label": "Status Update",
+          "placeholder": "Enter visit status"
+        },
+        "dischargedDate": {
+          "label": "Discharged Date",
+          "placeholder": "Enter assigned nurse name"
+        },
+        "dischargedTime": {
+          "label": "Discharged Time",
+          "placeholder": "00:00:00"
+        }
+      }
     }
   }
 }

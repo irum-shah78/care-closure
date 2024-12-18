@@ -9,12 +9,17 @@ import acuteIcon from "../../assets/acute.svg";
 import waitingIcon from "../../assets/waiting.svg";
 import inProgressIcon from "../../assets/inprogress.svg";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const getRandomStatus = () => (Math.random() < 0.5 ? "In Progress" : "Waiting");
 const PatientsInHospital = () => {
+  const { t } = useTranslation();
   const [patientsData, setPatientsData] = useState([]);
   const [appointmentsData, setAppointmentsData] = useState([]);
   const navigate = useNavigate();
+  const getRandomStatus = () =>
+    Math.random() < 0.5
+      ? t("pages.checkin-checkout.table.status.inProgress")
+      : t("pages.checkin-checkout.table.status.waiting");
 
   useEffect(() => {
     const storedPatients = JSON.parse(localStorage.getItem("patients")) || [];
@@ -37,7 +42,10 @@ const PatientsInHospital = () => {
 
     const recentAppointment = sortedAppointments[0];
     const appointmentNumber = sortedAppointments.length;
-    const getRandomAction = () => (Math.random() > 0.5 ? "Chronic" : "Acute");
+    const getRandomAction = () =>
+      Math.random() > 0.5
+        ? t("pages.checkin-checkout.table.action.chronic")
+        : t("pages.checkin-checkout.table.action.acute");
 
     return {
       ...patient,
@@ -68,14 +76,16 @@ const PatientsInHospital = () => {
       <main className="flex-1 bg-gray-100">
         <Header />
         <div className="lg:px-8 px-4 py-6 bg-gray-100">
-          <h2 className="text-2xl font-semibold mb-4">Patients In Hospital</h2>
+          <h2 className="text-2xl font-semibold mb-4">
+            {t("pages.checkin-checkout.title")}
+          </h2>
           <div className="bg-white rounded-xl border shadow-sm p-4 overflow-auto">
             <div className="flex flex-col xl:flex-row items-start justify-between mb-6 gap-6 ms-1">
               <div className="relative w-full">
                 <input
                   type="text"
                   className="w-full px-4 py-2 border border-[#D1D1D1] bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E2559]"
-                  placeholder="Search Patient here.."
+                  placeholder={t("pages.checkin-checkout.search.placeholder")}
                   value={searchTerm}
                   onChange={handleSearch}
                 />
@@ -85,23 +95,16 @@ const PatientsInHospital = () => {
                   className="absolute top-2.5 right-3 text-gray-500 pointer-events-none"
                 />
               </div>
-              {/* <div className="flex md:flex-row sm:flex-row w-[300px] gap-3 space-y-2 md:space-y-0 md:space-x-2">
-                <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
-                  <img src={filterIcon} alt="filter" /> Filter
-                </button>
-                <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
-                  <img src={sortIcon} alt="filter" /> Sort by
-                </button>
-              </div> */}
               <div className="flex flex-row flex-wrap w-[300px] gap-3 gap-y-2">
-  <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
-    <img src={filterIcon} alt="filter" /> Filter
-  </button>
-  <button className="border border-[#B3B3B3] px-4 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
-    <img src={sortIcon} alt="filter" /> Sort by
-  </button>
-</div>
-
+                <button className="border border-[#B3B3B3] px-2 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
+                  <img src={filterIcon} alt="filter" />{" "}
+                  {t("pages.checkin-checkout.buttons.filter")}
+                </button>
+                <button className="border border-[#B3B3B3] px-2 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
+                  <img src={sortIcon} alt="filter" />{" "}
+                  {t("pages.checkin-checkout.buttons.sortBy")}
+                </button>
+              </div>
             </div>
             <div className="bg-white overflow-hidden w-full h-full">
               <div className="max-h-[500px] overflow-y-auto w-full">
@@ -109,16 +112,16 @@ const PatientsInHospital = () => {
                   <thead className="bg-gray-200">
                     <tr>
                       {[
-                        "ID",
-                        "Name",
-                        "Age",
-                        "Gender",
-                        "Contact No.",
-                        "Time",
-                        "Date",
-                        "Status",
-                        "Appoint to",
-                        "Action",
+                        t("pages.checkin-checkout.table.headers.id"),
+                        t("pages.checkin-checkout.table.headers.name"),
+                        t("pages.checkin-checkout.table.headers.age"),
+                        t("pages.checkin-checkout.table.headers.gender"),
+                        t("pages.checkin-checkout.table.headers.contactNo"),
+                        t("pages.checkin-checkout.table.headers.time"),
+                        t("pages.checkin-checkout.table.headers.date"),
+                        t("pages.checkin-checkout.table.headers.status"),
+                        t("pages.checkin-checkout.table.headers.appointTo"),
+                        t("pages.checkin-checkout.table.headers.action"),
                       ].map((header) => (
                         <th key={header} className="px-2 py-4 text-center">
                           {header}
@@ -156,14 +159,20 @@ const PatientsInHospital = () => {
                           <td className="p-4">
                             <div
                               className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
-                                status === "In Progress"
+                                status ===
+                                t(
+                                  "pages.checkin-checkout.table.status.inProgress"
+                                )
                                   ? "bg-[#E2E0E8] text-[#2E1A8C]"
                                   : "bg-[#DAEEF9] text-[#1A628C]"
                               }`}
                             >
                               <img
                                 src={
-                                  status === "In Progress"
+                                  status ===
+                                  t(
+                                    "pages.checkin-checkout.table.status.inProgress"
+                                  )
                                     ? inProgressIcon
                                     : waitingIcon
                                 }
@@ -177,14 +186,20 @@ const PatientsInHospital = () => {
                           <td className="p-4">
                             <div
                               className={`flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-lg ${
-                                action === "Chronic"
+                                action ===
+                                t("pages.checkin-checkout.table.action.chronic")
                                   ? "bg-[#FFCDC9] text-[#D2362B]"
                                   : "bg-[#E0F5FF] text-[#1A408C]"
                               }`}
                             >
                               <img
                                 src={
-                                  action === "Chronic" ? chronicIcon : acuteIcon
+                                  action ===
+                                  t(
+                                    "pages.checkin-checkout.table.action.chronic"
+                                  )
+                                    ? chronicIcon
+                                    : acuteIcon
                                 }
                                 alt={action}
                                 className="w-4 h-4"

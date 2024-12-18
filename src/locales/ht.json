@@ -14,14 +14,15 @@
     }
   },
   "components": {
-    "formselection": {
-      "title": "Seleksyon Fòm",
-      "selectForm": "Chwazi yon fòm"
-    },
     "header": {
       "welcome": "Byenveni",
       "logout": "Dekonekte",
-      "settings": "Paramèt"
+      "settings": "Paramèt",
+      "roles": {
+        "admissionsClerk": "Sekretè Admisyon",
+        "frontDeskStaff": "Pèsonèl Resepsyon",
+        "supervisor": "Sipèvizè"
+      }
     },
     "languageswitcher": {
       "selectLanguage": "Chwazi Lang"
@@ -38,60 +39,542 @@
     }
   },
   "pages": {
-    "addpatient": {
+    "addPatient": {
       "title": "Ajoute Nouvo Pasyan",
-      "personalInfo": "Enfòmasyon Pèsonèl",
-      "fields": {
-        "firstName": "Non",
+      "patientDetails": {
+        "title": "Detay Pasyan",
+        "firstName": "Premye Non",
         "lastName": "Siyati",
         "dob": "Dat Nesans",
         "gender": "Sèks",
-        "contact": "Nimewo Kontak",
+        "maritalStatus": "Eta Sivil",
+        "bloodGroup": "Gwoup San",
+        "age": "Laj",
+        "description": "Deskripsyon"
+      },
+      "contactInfo": {
+        "title": "Enfòmasyon Kontak",
+        "country": "Peyi",
+        "state": "Eta",
+        "city": "Vil",
+        "mobileNumber": "Nimewo Telefòn",
         "email": "Imèl",
+        "zipcode": "Kòd Postal",
         "address": "Adrès"
+      },
+      "emergencyContact": {
+        "title": "Kontak Ijans",
+        "contactName": "Non Kontak",
+        "relationship": "Relasyon",
+        "contactNumber": "Nimewo Kontak"
+      },
+      "medicalInfo": {
+        "title": "Enfòmasyon Medikal",
+        "allergies": "Alerji Konnen",
+        "medications": "Medikaman Kouran",
+        "medicalHistory": "Istwa Medikal"
+      },
+      "insuranceInfo": {
+        "title": "Enfòmasyon Asirans",
+        "insuranceProvider": "Founisè Asirans",
+        "policyNumber": "Nimewo Polisi"
+      },
+      "cardDetails": {
+        "title": "Detay Kat",
+        "cardNumber": "Nimewo Kat",
+        "expiryDate": "Dat Ekspirasyon",
+        "cvv": "CVV"
+      },
+      "paymentInfo": {
+        "title": "Peman",
+        "paymentStatus": "Estati Peman"
+      },
+      "placeholders": {
+        "enterFirstName": "Antre premye non",
+        "enterLastName": "Antre siyati",
+        "enterDate": "mm/jj/aa",
+        "selectGender": "Chwazi sèks ou",
+        "selectMaritalStatus": "Chwazi eta sivil ou",
+        "selectBloodGroup": "Chwazi gwoup san ou",
+        "enterAge": "Antre laj",
+        "enterDescription": "Antre deskripsyon",
+        "selectCountry": "Chwazi peyi ou",
+        "selectState": "Chwazi eta ou",
+        "selectCity": "Chwazi vil ou",
+        "enterMobileNumber": "Antre nimewo telefòn ou",
+        "enterEmail": "Antre imèl ou",
+        "enterZipcode": "Antre kòd postal ou",
+        "enterAddress": "Antre adrès ou",
+        "enterContactName": "Antre non kontak",
+        "selectRelationship": "Chwazi relasyon",
+        "enterContactNumber": "Antre nimewo kontak",
+        "enterAllergies": "Si genyen",
+        "enterMedications": "Si genyen",
+        "selectMedicalHistory": "Nenpòt kondisyon anvan",
+        "enterInsuranceProvider": "Antre founisè asirans",
+        "enterPolicyNumber": "Antre nimewo polisi",
+        "enterCardNumber": "Antre nimewo kat",
+        "enterExpiryDate": "MM/AA",
+        "enterCVV": "Antre CVV",
+        "selectPaymentStatus": "Chwazi estati peman"
+      },
+      "buttons": {
+        "generateID": "Jenere ID",
+        "submit": "Soumèt",
+        "cancel": "Anile"
+      },
+      "status": {
+        "chronic": "Kwonik",
+        "acute": "Akit"
+      },
+      "gender": {
+        "male": "Gason",
+        "female": "Fi"
+      },
+      "maritalStatus": {
+        "single": "Sèl",
+        "married": "Marye"
+      },
+      "paymentStatus": {
+        "pending": "An atant",
+        "completed": "Konplete",
+        "notPaid": "Pa Peye"
       }
     },
     "checkin-checkout": {
       "title": "Antre/Soti Pasyan",
       "checkIn": "Antre",
       "checkOut": "Soti",
-      "patientsInHosp": "Pasyan nan Lopital"
+      "patientsInHosp": "Pasyan nan Lopital",
+      "search": {
+        "placeholder": "Rechèch Pasyan isit la.."
+      },
+      "buttons": {
+        "filter": "Filtre",
+        "sortBy": "Triye pa"
+      },
+      "table": {
+        "headers": {
+          "id": "ID",
+          "name": "Non",
+          "age": "Laj",
+          "gender": "Sèks",
+          "contactNo": "Nimewo Kontak",
+          "time": "Lè",
+          "date": "Dat",
+          "status": "Estati",
+          "appointTo": "Randevou ak",
+          "action": "Aksyon"
+        },
+        "status": {
+          "inProgress": "An Pwogrè",
+          "waiting": "K ap Tann"
+        },
+        "action": {
+          "chronic": "Kwonik",
+          "acute": "Ak"
+        }
+      }
     },
     "dashboard": {
       "title": "Byenveni nan CareFlow",
       "stats": {
         "totalPatients": "Total Pasyan",
         "todayAppointments": "Randevou Jodi a",
-        "waitingPatients": "Pasyan kap Tann"
+        "waitingPatients": "Pasyan K ap Tann",
+        "complianceScore": "Nòt Konfòmite",
+        "fromLastMonth": "soti mwa pase a",
+        "fromLastWeek": "soti semèn pase a",
+        "remaining": "Rete"
+      },
+      "nextPatient": {
+        "title": "Pwochen Pasyan",
+        "headers": {
+          "name": "Non",
+          "gender": "Sèks",
+          "age": "Laj",
+          "appointment": "Randevou",
+          "status": "Estati",
+          "time": "Lè",
+          "date": "Dat"
+        }
+      },
+      "patientQueue": {
+        "title": "Liy Pasyan yo",
+        "headers": {
+          "id": "ID",
+          "name": "Non",
+          "age": "Laj",
+          "gender": "Sèks",
+          "appointment": "Randevou",
+          "time": "Lè",
+          "status": "Estati",
+          "date": "Dat",
+          "action": "Aksyon"
+        },
+        "status": {
+          "inProgress": "An Pwogrè",
+          "waiting": "K ap Tann"
+        },
+        "action": {
+          "checkIn": "Antre",
+          "checOut": "Soti"
+        }
+      }
+    },
+    "patients": {
+      "title": "Pasyan",
+      "searchPlaceholder": "Chèche Pasyan isit la..",
+      "filter": "Filtre",
+      "sort": "Triye pa",
+      "addNew": "Ajoute Nouvo Pasyan",
+      "tableHeaders": {
+        "patientID": "ID Pasyan",
+        "name": "Non",
+        "age": "Laj",
+        "gender": "Sèks",
+        "bloodGroup": "Gwoup San",
+        "contactNumber": "Nimewo Kontak",
+        "emergencyContact": "Nimewo Kontak Ijans",
+        "paymentStatus": "Estati Peman"
+      },
+      "paymentStatus": {
+        "pending": "An Atant",
+        "completed": "Konplete",
+        "notPaid": "Pa Peye"
+      }
+    },
+    "patientdetails": {
+      "title": "Detay Pasyan",
+      "back": "Retounen",
+      "patient": "Pasyan",
+      "personalInfo": {
+        "posts": "Post",
+        "upcoming": "K ap vini",
+        "gender": "Sèks",
+        "streetAddress": "Adrès Lari",
+        "status": "Estati",
+        "birthday": "Dat Nesans",
+        "city": "Vil",
+        "registeredDate": "Dat Enskripsyon",
+        "phoneNumber": "Nimewo Telefòn",
+        "zipCode": "Kòd ZIP"
+      },
+      "visitTypes": {
+        "preVisit": "Detay Anvan Vizit",
+        "duringVisit": "Detay Pandan Vizit",
+        "postVisit": "Detay Apre Vizit"
+      },
+      "appointmentDetails": {
+        "title": "Detay Randevou",
+        "table": {
+          "id": "ID",
+          "date": "Dat",
+          "time": "Lè",
+          "appointmentNo": "Nimewo Randevou",
+          "appointTo": "Randevou ak",
+          "status": "Estati",
+          "description": "Deskripsyon"
+        },
+        "statusTypes": {
+          "chronic": "Kwonik",
+          "acute": "Ak"
+        },
+        "noAppointments": "Pa gen detay randevou yo jwenn."
+      }
+    },
+    "previsitregistration": {
+      "title": "Enskripsyon Pasyan Anvan Vizit",
+      "visitInformation": {
+        "title": "Enfòmasyon sou Vizit",
+        "visitType": {
+          "label": "Kalite Vizit",
+          "placeholder": "Chwazi Kalite Vizit",
+          "options": {
+            "newConsultation": "Nouvo Konsiltasyon",
+            "checkup": "Tchekòp",
+            "regular": "Regilye"
+          }
+        },
+        "department": {
+          "label": "Depatman",
+          "placeholder": "Chwazi Depatman",
+          "options": {
+            "generalMedicine": "Medsin Jeneral",
+            "medicine": "Medsin",
+            "labs": "Laboratwa"
+          }
+        },
+        "preferredDoctor": {
+          "label": "Doktè Préfere",
+          "placeholder": "Chwazi sèks ou",
+          "options": {
+            "male": "Gason",
+            "female": "Fi"
+          }
+        },
+        "preferredDate": {
+          "label": "Dat Préfere",
+          "placeholder": "mm/jj/aa"
+        },
+        "preferredTimeSlot": {
+          "label": "Orè Préfere",
+          "placeholder": "Maten(9AM - 12PM)",
+          "options": {
+            "morning": "Maten(9AM - 12PM)",
+            "afternoon": "Apremidi(1PM - 4PM)"
+          }
+        }
+      },
+      "medicalInformation": {
+        "title": "Enfòmasyon Medikal",
+        "reasonForVisit": {
+          "label": "Rezon Pou Vizit",
+          "placeholder": "Bay yon ti Deskripsyon sou Pwoblèm Medikal ou"
+        },
+        "currentSymptoms": {
+          "label": "Sentòm Kounye a",
+          "placeholder": "Lis tout sentòm kounye a"
+        },
+        "symptomsDuration": {
+          "label": "Dire Sentòm yo",
+          "placeholder": "Orè",
+          "options": {
+            "hours": "Orè",
+            "days": "Jou",
+            "weeks": "Semèn"
+          }
+        }
+      },
+      "insuranceInformation": {
+        "title": "Enfòmasyon Asirans",
+        "provider": {
+          "label": "Founisè Asirans",
+          "placeholder": "Antre non an"
+        },
+        "policyNumber": {
+          "label": "Nimewo Pòlis",
+          "placeholder": "Antre nimewo a"
+        },
+        "subscriberName": {
+          "label": "Non Abòne",
+          "placeholder": "Antre non an"
+        },
+        "relationship": {
+          "label": "Relasyon ak Abòne",
+          "placeholder": "Tèt mwen",
+          "options": {
+            "self": "Tèt mwen",
+            "owner": "Pwopriyetè",
+            "subscriber": "Abòne"
+          }
+        }
+      },
+      "additionalRequirements": {
+        "label": "Kondisyon Siplemantè",
+        "placeholder": "Chwazi kondisyon yo",
+        "options": {
+          "wheelchair": "Aksè chèz woulant, entèprèt, elatriye",
+          "ac": "AC",
+          "interpreter": "Entèprèt"
+        }
+      },
+      "buttons": {
+        "cancel": "Anile",
+        "schedule": "Pwograme Vizit"
       }
     },
     "duringvisit": {
       "title": "Pandan Vizit",
-      "vitals": "Siy Vital",
-      "diagnosis": "Dyagnostik",
-      "prescription": "Preskripsyon"
-    },
-    "patientdetails": {
-      "title": "Detay Pasyan",
-      "history": "Istwa Medikal",
-      "appointments": "Randevou",
-      "documents": "Dokiman"
-    },
-    "patients": {
-      "title": "Lis Pasyan",
-      "search": "Chèche Pasyan",
-      "filters": "Filtre"
+      "patientDetails": {
+        "title": "Verifikasyon Pasyan ak Asirans",
+        "firstName": {
+          "label": "Premye Non Pasyan",
+          "placeholder": "Antre non la"
+        },
+        "middleName": {
+          "label": "Dezyèm Non Pasyan",
+          "placeholder": "Antre non la"
+        },
+        "lastName": {
+          "label": "Siyati Pasyan",
+          "placeholder": "Antre non la"
+        },
+        "insuranceProvider": {
+          "label": "Founisè Asirans",
+          "placeholder": "Non Founisè a",
+          "options": {
+            "providerOne": "Founisè 1",
+            "providerTwo": "Founisè 2"
+          }
+        },
+        "insuranceNumber": {
+          "label": "Nimewo Asirans",
+          "placeholder": "Antre nimewo asirans la"
+        },
+        "insuranceStatus": {
+          "label": "Estati Asirans",
+          "placeholder": "Estati Verifikasyon"
+        }
+      },
+      "roomAssignment": {
+        "title": "Asiyasyon Sal",
+        "wardType": {
+          "label": "Kalite Sal",
+          "placeholder": "Chwazi Kalite Sal",
+          "options": {
+            "emergency": "Ijans",
+            "regular": "Regilye"
+          }
+        },
+        "roomNumber": {
+          "label": "Nimewo Sal",
+          "placeholder": "Antre nimewo sal la"
+        },
+        "bedNumber": {
+          "label": "Nimewo Kabann",
+          "placeholder": "Antre nimewo kabann lan"
+        },
+        "admissionType": {
+          "label": "Kalite Admisyon",
+          "placeholder": "Antre kalite admisyon"
+        }
+      },
+      "teamNotification": {
+        "title": "Notifikasyon Ekip",
+        "assignedDoctor": {
+          "label": "Doktè Asiyen",
+          "placeholder": "Antre non doktè asiyen an"
+        },
+        "assignedNurse": {
+          "label": "Enfimyè Asiyen",
+          "placeholder": "Antre non enfimyè asiyen an"
+        },
+        "additionalNotes": {
+          "label": "Nòt Siplemantè",
+          "placeholder": "Nenpòt enstriksyon oswa kondisyon espesyal"
+        }
+      },
+      "admissionStatus": {
+        "title": "Estati Admisyon",
+        "status": {
+          "label": "Estati",
+          "placeholder": "Antre estati admisyon"
+        },
+        "assignedDate": {
+          "label": "Dat Asiyasyon",
+          "placeholder": "Antre dat la"
+        },
+        "assignedTime": {
+          "label": "Lè Asiyasyon",
+          "placeholder": "00:00:00"
+        }
+      },
+      "buttons": {
+        "cancel": "Anile",
+        "complete": "Konplete Admisyon"
+      }
     },
     "postvisit": {
-      "title": "Aprè Vizit",
-      "followUp": "Swivi",
-      "billing": "Faktirasyon",
-      "medications": "Medikaman"
-    },
-    "previsitregistration": {
-      "title": "Pre-Anrejistreman Vizit",
-      "appointment": "Detay Randevou",
-      "insurance": "Enfòmasyon Asirans"
+      "title": "Pòst-Vizit",
+      "followUp": "Suivi",
+      "billing": "Fakti",
+      "medications": "Medikaman",
+      "backButton": "Tounen",
+      "printSummary": "Enprime Rezime",
+      "completeCheckout": "Konplete Peman",
+      "paymentProcessing": {
+        "title": "Pwosesis Peman",
+        "consultationFee": {
+          "label": "Frè Konsiltasyon",
+          "placeholder": "100.00"
+        },
+        "medicatedCharges": {
+          "label": "Kout Frè Medikaman",
+          "placeholder": "Frè yo isit la"
+        },
+        "additionalServices": {
+          "label": "Sèvis Siplemantè",
+          "placeholder": "Si genyen"
+        },
+        "totalAmount": {
+          "label": "Montan Total",
+          "placeholder": "Montan isit la"
+        },
+        "paymentMethod": {
+          "label": "Metòd Peman",
+          "placeholder": "Chwazi Metòd Peman",
+          "options": {
+            "online": "Sou Entènèt",
+            "cash": "Lajan Kach"
+          }
+        },
+        "paymentStatus": {
+          "label": "Estati Peman",
+          "placeholder": "Chwazi Estati Peman",
+          "options": {
+            "pending": "An Atant",
+            "completed": "Konplete"
+          }
+        }
+      },
+      "followupSection": {
+        "title": "Detay Suivi",
+        "required": {
+          "label": "Suivi Nesesè",
+          "placeholder": "Chwazi Opsyon",
+          "options": {
+            "option1": "Opsyon 1",
+            "option2": "Opsyon 2"
+          }
+        },
+        "preferredDate": {
+          "label": "Dat Preferab",
+          "placeholder": ""
+        },
+        "assignedDoctor": {
+          "label": "Doktè Asiyen",
+          "placeholder": "Antre non doktè a"
+        },
+        "department": {
+          "label": "Depatman",
+          "placeholder": "Antre depatman"
+        }
+      },
+      "visitSummary": {
+        "title": "Rezime Vizit",
+        "diagnosis": {
+          "label": "Dyagnostik",
+          "placeholder": "Antre dyagnostik"
+        },
+        "treatmentSummary": {
+          "label": "Rezime Tretman",
+          "placeholder": "Antre rezime"
+        },
+        "medicationsPrescribed": {
+          "label": "Medikaman Preskri",
+          "placeholder": "Antre medikaman"
+        },
+        "specialInstructions": {
+          "label": "Enstriksyon Espesyal",
+          "placeholder": "Antre enstriksyon"
+        }
+      },
+      "visitStatus": {
+        "title": "Estati Vizit",
+        "statusUpdate": {
+          "label": "Mizajou Estati",
+          "placeholder": "Antre estati vizit la"
+        },
+        "dischargedDate": {
+          "label": "Dat Dechaj",
+          "placeholder": "Antre dat la"
+        },
+        "dischargedTime": {
+          "label": "Lè Dechaj",
+          "placeholder": "00:00:00"
+        }
+      }
     }
   }
 }

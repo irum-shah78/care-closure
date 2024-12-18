@@ -8,9 +8,11 @@ import nextPage from "../../assets/next-page.svg";
 import chronicIcon from "../../assets/chronic.svg";
 import acuteIcon from "../../assets/acute.svg";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
 const PatientDetails = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { state } = useLocation();
   const patient = state?.patient;
@@ -82,12 +84,12 @@ const PatientDetails = () => {
           <div className="flex items-center gap-3">
             <img
               src={backIcon}
-              alt="Back"
+              alt={t("pages.patientdetails.back")}
               className="cursor-pointer"
               onClick={handleBack}
             />
             <h1 className="text-2xl font-bold text-gray-800">
-              Patient Details
+              {t("pages.patientdetails.title")}
             </h1>
           </div>
 
@@ -96,7 +98,7 @@ const PatientDetails = () => {
               <div className="flex flex-col items-center justify-center space-x-4 pr-6 text-center">
                 <img
                   src={patientImage}
-                  alt="Patient"
+                  alt={t("pages.patientdetails.patient")}
                   className="w-20 h-20 rounded-full object-cover"
                 />
                 <div className="flex flex-col gap-2">
@@ -109,14 +111,18 @@ const PatientDetails = () => {
                       <span className="text-gray-700 text-sm font-medium">
                         {patient?.posts || 0}
                       </span>
-                      <span className="text-gray-500 text-sm">Post</span>
+                      <span className="text-gray-500 text-sm">
+                        {t("pages.patientdetails.personalInfo.posts")}
+                      </span>
                     </div>
                     <img src={line} alt="line" />
                     <div className="flex flex-col text-center items-center justify-center">
                       <span className="text-gray-700 text-sm font-medium">
                         {patient?.upcomingAppointments || 0}
                       </span>
-                      <span className="text-gray-500 text-sm">Upcoming</span>
+                      <span className="text-gray-500 text-sm">
+                        {t("pages.patientdetails.personalInfo.upcoming")}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -126,17 +132,21 @@ const PatientDetails = () => {
               <div className="grid grid-cols-3">
                 <div className="grid grid-rows-3 py-3">
                   <div className="flex flex-col gap-2">
-                    <p className="text-sm font-medium text-[#797979]">Gender</p>
+                    <p className="text-sm font-medium text-[#797979]">
+                      {t("pages.patientdetails.personalInfo.gender")}
+                    </p>
                     <p className="text-gray-800">{patient?.gender}</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">
-                      Street Address
+                      {t("pages.patientdetails.personalInfo.streetAddress")}
                     </p>
                     <p className="text-gray-800">{patient?.address}</p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="text-sm font-medium text-[#797979]">Status</p>
+                    <p className="text-sm font-medium text-[#797979]">
+                      {t("pages.patientdetails.personalInfo.status")}
+                    </p>
                     <p className="text-[#47DA60]">
                       {patient?.status || "Active"}
                     </p>
@@ -146,17 +156,19 @@ const PatientDetails = () => {
                 <div className="grid grid-rows-3 py-3 px-8">
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">
-                      Birthday
+                      {t("pages.patientdetails.personalInfo.birthday")}
                     </p>
                     <p className="text-gray-800">{patient?.dob}</p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="text-sm font-medium text-[#797979]">City</p>
+                    <p className="text-sm font-medium text-[#797979]">
+                      {t("pages.patientdetails.personalInfo.city")}
+                    </p>
                     <p className="text-gray-800">{patient?.city}</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">
-                      Registered Date
+                      {t("pages.patientdetails.personalInfo.registeredDate")}
                     </p>
                     <p className="text-gray-800">{patient?.registeredDate}</p>
                   </div>
@@ -165,13 +177,13 @@ const PatientDetails = () => {
                 <div className="grid grid-rows-3 py-3 px-8">
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">
-                      Phone Number
+                      {t("pages.patientdetails.personalInfo.phoneNumber")}
                     </p>
                     <p className="text-gray-800">{patient?.mobileNumber}</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="text-sm font-medium text-[#797979]">
-                      ZIP Code
+                      {t("pages.patientdetails.personalInfo.zipCode")}
                     </p>
                     <p className="text-gray-800">{patient?.pincode}</p>
                   </div>
@@ -184,26 +196,29 @@ const PatientDetails = () => {
                 className="px-4 text-[#363636] font-medium text-left bg-white p-6 rounded-xl shadow-md flex items-center justify-center gap-4"
                 onClick={handlePreVisit}
               >
-                Pre-Visit Details <img src={nextPage} alt="filter" />
+                {t("pages.patientdetails.visitTypes.preVisit")}{" "}
+                <img src={nextPage} alt="filter" />
               </button>
               <button
                 className="px-4 text-[#363636] font-medium text-left bg-white p-6 rounded-xl shadow-md flex items-center justify-center gap-4"
                 onClick={handleDuringVisit}
               >
-                During-Visit Details <img src={nextPage} alt="filter" />
+                {t("pages.patientdetails.visitTypes.duringVisit")}{" "}
+                <img src={nextPage} alt="filter" />
               </button>
               <button
                 className="px-4 text-[#363636] font-medium text-left bg-white p-6 rounded-xl shadow-md flex items-center justify-center gap-4"
                 onClick={handlePostVisit}
               >
-                Post-Visit Details <img src={nextPage} alt="filter" />
+                {t("pages.patientdetails.visitTypes.postVisit")}{" "}
+                <img src={nextPage} alt="filter" />
               </button>
             </div>
           </div>
 
           <div className="col-span-12 bg-white overflow-hidden rounded-xl shadow-md w-full h-full px-4 py-3">
             <h2 className="text-xl font-bold text-gray-800 mt-2">
-              Appointment Details
+              {t("pages.patientdetails.appointmentDetails.title")}
             </h2>
             <hr className="text-[#D1D1D1] border-1 mt-6 mb-6" />
             <div className="max-h-[500px] overflow-y-auto w-full">
@@ -212,13 +227,21 @@ const PatientDetails = () => {
                   <thead className="bg-gray-200">
                     <tr>
                       {[
-                        "ID",
-                        "Date",
-                        "Time",
-                        "Appointment No.",
-                        "Appoint to",
-                        "Status",
-                        "Description",
+                        t("pages.patientdetails.appointmentDetails.table.id"),
+                        t("pages.patientdetails.appointmentDetails.table.date"),
+                        t("pages.patientdetails.appointmentDetails.table.time"),
+                        t(
+                          "pages.patientdetails.appointmentDetails.table.appointmentNo"
+                        ),
+                        t(
+                          "pages.patientdetails.appointmentDetails.table.appointTo"
+                        ),
+                        t(
+                          "pages.patientdetails.appointmentDetails.table.status"
+                        ),
+                        t(
+                          "pages.patientdetails.appointmentDetails.table.description"
+                        ),
                       ].map((header) => (
                         <th key={header} className="p-4 text-center">
                           {header}

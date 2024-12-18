@@ -6,18 +6,9 @@
       "submit": "Enviar",
       "update": "Actualizar",
       "delete": "Eliminar"
-    },
-    "status": {
-      "active": "Activo",
-      "inactive": "Inactivo",
-      "pending": "Pendiente"
     }
   },
   "components": {
-    "formselection": {
-      "title": "Selección de Formulario",
-      "selectForm": "Seleccionar un formulario"
-    },
     "header": {
       "welcome": "Bienvenido",
       "logout": "Cerrar Sesión",
@@ -123,7 +114,7 @@
         "selectPaymentStatus": "Seleccione el estado del pago"
       },
       "buttons": {
-        "generateID":"Generar ID",
+        "generateID": "Generar ID",
         "submit": "Enviar",
         "cancel": "Cancelar"
       },
@@ -149,7 +140,36 @@
       "title": "Entrada/Salida de Pacientes",
       "checkIn": "Registrar Entrada",
       "checkOut": "Registrar Salida",
-      "patientsInHosp": "Pacientes en el Hospital"
+      "patientsInHosp": "Pacientes en el Hospital",
+      "search": {
+        "placeholder": "Buscar paciente aquí.."
+      },
+      "buttons": {
+        "filter": "Filtrar",
+        "sortBy": "Ordenar por"
+      },
+      "table": {
+        "headers": {
+          "id": "ID",
+          "name": "Nombre",
+          "age": "Edad",
+          "gender": "Género",
+          "contactNo": "Número de Contacto",
+          "time": "Hora",
+          "date": "Fecha",
+          "status": "Estado",
+          "appointTo": "Asignado a",
+          "action": "Acción"
+        },
+        "status": {
+          "inProgress": "En Progreso",
+          "waiting": "En Espera"
+        },
+        "action": {
+          "chronic": "Crónico",
+          "acute": "Agudo"
+        }
+      }
     },
     "dashboard": {
       "title": "Bienvenido a CareFlow",
@@ -222,6 +242,7 @@
     "patientdetails": {
       "title": "Detalles del Paciente",
       "back": "Atrás",
+      "patient": "Paciente",
       "personalInfo": {
         "posts": "Publicaciones",
         "upcoming": "Próximas",
@@ -257,22 +278,298 @@
         "noAppointments": "No se encontraron detalles de citas."
       }
     },
+    "previsitregistration": {
+      "title": "Pre-Registro de Visita del Paciente",
+      "visitInformation": {
+        "title": "Información de la Visita",
+        "visitType": {
+          "label": "Tipo de Visita",
+          "placeholder": "Seleccione el tipo de visita",
+          "options": {
+            "newConsultation": "Nueva Consulta",
+            "checkup": "Chequeo",
+            "regular": "Regular"
+          }
+        },
+        "department": {
+          "label": "Departamento",
+          "placeholder": "Seleccione Departamento",
+          "options": {
+            "generalMedicine": "Medicina General",
+            "medicine": "Medicina",
+            "labs": "Laboratorios"
+          }
+        },
+        "preferredDoctor": {
+          "label": "Doctor Preferido",
+          "placeholder": "Seleccione el género",
+          "options": {
+            "male": "Masculino",
+            "female": "Femenino"
+          }
+        },
+        "preferredDate": {
+          "label": "Fecha Preferida",
+          "placeholder": "mm/dd/aa"
+        },
+        "preferredTimeSlot": {
+          "label": "Horario Preferido",
+          "placeholder": "Mañana(9AM - 12PM)",
+          "options": {
+            "morning": "Mañana(9AM - 12PM)",
+            "afternoon": "Mañana(9AM - 12PM)"
+          }
+        }
+      },
+      "medicalInformation": {
+        "title": "Información Médica",
+        "reasonForVisit": {
+          "label": "Motivo de la Visita",
+          "placeholder": "Breve descripción de su problema médico"
+        },
+        "currentSymptoms": {
+          "label": "Síntomas Actuales",
+          "placeholder": "Liste cualquier síntoma actual"
+        },
+        "symptomsDuration": {
+          "label": "Duración de los Síntomas",
+          "placeholder": "Horas",
+          "options": {
+            "hours": "Horas",
+            "days": "Días",
+            "weeks": "Semanas"
+          }
+        }
+      },
+      "insuranceInformation": {
+        "title": "Información del Seguro",
+        "provider": {
+          "label": "Proveedor del Seguro",
+          "placeholder": "Ingrese nombre"
+        },
+        "policyNumber": {
+          "label": "Número de Póliza",
+          "placeholder": "Ingrese número"
+        },
+        "subscriberName": {
+          "label": "Nombre del Suscriptor",
+          "placeholder": "Ingrese nombre"
+        },
+        "relationship": {
+          "label": "Relación con el Suscriptor",
+          "placeholder": "Uno Mismo",
+          "options": {
+            "self": "Uno Mismo",
+            "owner": "Propietario",
+            "subscriber": "Suscriptor"
+          }
+        }
+      },
+      "additionalRequirements": {
+        "label": "Requisitos Adicionales",
+        "placeholder": "Seleccionar requisitos",
+        "options": {
+          "wheelchair": "Acceso para silla de ruedas, intérprete, etc",
+          "ac": "Aire Acondicionado",
+          "interpreter": "Intérprete"
+        }
+      },
+      "buttons": {
+        "cancel": "Cancelar",
+        "schedule": "Programar Visita"
+      }
+    },
+    "duringvisit": {
+      "title": "Durante la Visita",
+      "patientDetails": {
+        "title": "Verificación del Paciente y del Seguro",
+        "firstName": {
+          "label": "Nombre del Paciente",
+          "placeholder": "Ingrese nombre aquí"
+        },
+        "middleName": {
+          "label": "Segundo Nombre",
+          "placeholder": "Ingrese nombre aquí"
+        },
+        "lastName": {
+          "label": "Apellido",
+          "placeholder": "Ingrese apellido aquí"
+        },
+        "insuranceProvider": {
+          "label": "Proveedor de Seguro",
+          "placeholder": "Nombre del proveedor",
+          "options": {
+            "providerOne": "Proveedor 1",
+            "providerTwo": "Proveedor 2"
+          }
+        },
+        "insuranceNumber": {
+          "label": "Número de Seguro",
+          "placeholder": "Ingrese número de seguro"
+        },
+        "insuranceStatus": {
+          "label": "Estado del Seguro",
+          "placeholder": "Estado de verificación"
+        }
+      },
+      "roomAssignment": {
+        "title": "Asignación de Habitación",
+        "wardType": {
+          "label": "Tipo de Sala",
+          "placeholder": "Seleccione tipo de sala",
+          "options": {
+            "emergency": "Emergencia",
+            "regular": "Regular"
+          }
+        },
+        "roomNumber": {
+          "label": "Número de Habitación",
+          "placeholder": "Ingrese número de habitación"
+        },
+        "bedNumber": {
+          "label": "Número de Cama",
+          "placeholder": "Ingrese número de cama"
+        },
+        "admissionType": {
+          "label": "Tipo de Admisión",
+          "placeholder": "Introduzca el tipo de admisión"
+        }
+      },
+      "teamNotification": {
+        "title": "Notificación al Equipo",
+        "assignedDoctor": {
+          "label": "Doctor Asignado",
+          "placeholder": "Ingrese nombre del doctor"
+        },
+        "assignedNurse": {
+          "label": "Enfermera Asignada",
+          "placeholder": "Ingrese nombre de la enfermera"
+        },
+        "additionalNotes": {
+          "label": "Notas Adicionales",
+          "placeholder": "Cualquier instrucción o requisito especial"
+        }
+      },
+      "admissionStatus": {
+        "title": "Estado de Admisión",
+        "status": {
+          "label": "Estado",
+          "placeholder": "Ingrese el estado de admisión"
+        },
+        "assignedDate": {
+          "label": "Fecha Asignada",
+          "placeholder": "Ingrese fecha asignada"
+        },
+        "assignedTime": {
+          "label": "Hora Asignada",
+          "placeholder": "00:00:00"
+        }
+      },
+      "buttons": {
+        "cancel": "Cancelar",
+        "complete": "Completar Admisión"
+      }
+    },
     "postvisit": {
       "title": "Post Visita",
       "followUp": "Seguimiento",
       "billing": "Facturación",
-      "medications": "Medicamentos"
-    },
-    "previsitregistration": {
-      "title": "Pre-Registro de Visita",
-      "appointment": "Detalles de la Cita",
-      "insurance": "Información del Seguro"
-    },
-    "duringvisit": {
-      "title": "Durante la Visita",
-      "vitals": "Signos Vitales",
-      "diagnosis": "Diagnóstico",
-      "prescription": "Receta"
+      "medications": "Medicamentos",
+      "backButton": "Volver",
+      "printSummary": "Imprimir Resumen",
+      "completeCheckout": "Completar Salida",
+      "paymentProcessing": {
+        "title": "Procesamiento de Pago",
+        "consultationFee": {
+          "label": "Tarifa de Consulta",
+          "placeholder": "100.00"
+        },
+        "medicatedCharges": {
+          "label": "Cargos Medicados",
+          "placeholder": "Cargos aquí"
+        },
+        "additionalServices": {
+          "label": "Servicios Adicionales",
+          "placeholder": "Si hay alguno"
+        },
+        "totalAmount": {
+          "label": "Monto Total",
+          "placeholder": "Monto aquí"
+        },
+        "paymentMethod": {
+          "label": "Método de Pago",
+          "placeholder": "Seleccionar Método de Pago",
+          "options": {
+            "online": "En línea",
+            "cash": "Efectivo"
+          }
+        },
+        "paymentStatus": {
+          "label": "Estado del Pago",
+          "placeholder": "Seleccionar estado del pago",
+          "options": {
+            "pending": "Pendiente",
+            "completed": "Completado"
+          }
+        }
+      },
+      "followupSection": {
+        "title": "Detalles de Seguimiento",
+        "required": {
+          "label": "Seguimiento Requerido",
+          "placeholder": "Seleccionar Opción",
+          "options": {
+            "option1": "Opción 1",
+            "option2": "Opción 2"
+          }
+        },
+        "preferredDate": {
+          "label": "Fecha Preferida",
+          "placeholder": ""
+        },
+        "assignedDoctor": {
+          "label": "Doctor Asignado",
+          "placeholder": "Introduzca el nombre del médico"
+        },
+        "department": {
+          "label": "Departamento",
+          "placeholder": "Ingresar departamento"
+        }
+      },
+      "visitSummary": {
+        "title": "Resumen de la Visita",
+        "diagnosis": {
+          "label": "Diagnóstico",
+          "placeholder": "Ingresar diagnóstico"
+        },
+        "treatmentSummary": {
+          "label": "Resumen del Tratamiento",
+          "placeholder": "Ingresar resumen"
+        },
+        "medicationsPrescribed": {
+          "label": "Medicamentos Recetados",
+          "placeholder": "Ingresar medicamentos"
+        },
+        "specialInstructions": {
+          "label": "Instrucciones Especiales",
+          "placeholder": "Ingresar instrucciones"
+        }
+      },
+      "visitStatus": {
+        "title": "Estado de la Visita",
+        "statusUpdate": {
+          "label": "Actualización de Estado",
+          "placeholder": "Seleccionar estado de la visita"
+        },
+        "dischargedDate": {
+          "label": "Fecha de Alta",
+          "placeholder": ""
+        },
+        "dischargedTime": {
+          "label": "Hora de Alta",
+          "placeholder": "00:00:00"
+        }
+      }
     }
   }
 }

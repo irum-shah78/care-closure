@@ -14,84 +14,567 @@
     }
   },
   "components": {
-    "formselection": {
-      "title": "Sélection du formulaire",
-      "selectForm": "Sélectionner un formulaire"
-    },
     "header": {
       "welcome": "Bienvenue",
-      "logout": "Se déconnecter",
-      "settings": "Paramètres"
+      "logout": "Déconnexion",
+      "settings": "Paramètres",
+      "roles": {
+        "admissionsClerk": "Employé des admissions",
+        "frontDeskStaff": "Personnel de réception",
+        "supervisor": "Superviseur"
+      }
     },
     "languageswitcher": {
-      "selectLanguage": "Choisir la langue"
+      "selectLanguage": "Sélectionnez la langue"
     },
     "sidebar": {
       "dashboard": "Tableau de bord",
       "patients": "Patients",
       "addPatient": "Ajouter un patient",
-      "checkin": "Enregistrement/Départ",
+      "checkin": "Enregistrement/Sortie",
       "duringVisit": "Pendant la visite",
       "patientDetails": "Détails du patient",
-      "postVisit": "Après la visite",
+      "postVisit": "Post-visite",
       "preRegistration": "Pré-inscription"
     }
   },
   "pages": {
-    "addpatient": {
+    "addPatient": {
       "title": "Ajouter un nouveau patient",
-      "personalInfo": "Informations personnelles",
-      "fields": {
+      "patientDetails": {
+        "title": "Détails du patient",
         "firstName": "Prénom",
-        "lastName": "Nom",
+        "lastName": "Nom de famille",
         "dob": "Date de naissance",
-        "gender": "Genre",
-        "contact": "Numéro de contact",
-        "email": "Adresse e-mail",
+        "gender": "Sexe",
+        "maritalStatus": "État civil",
+        "bloodGroup": "Groupe sanguin",
+        "age": "Âge",
+        "description": "Description"
+      },
+      "contactInfo": {
+        "title": "Informations de contact",
+        "country": "Pays",
+        "state": "État",
+        "city": "Ville",
+        "mobileNumber": "Numéro de portable",
+        "email": "Email",
+        "zipcode": "Code postal",
         "address": "Adresse"
+      },
+      "emergencyContact": {
+        "title": "Contact d'urgence",
+        "contactName": "Nom du contact",
+        "relationship": "Relation",
+        "contactNumber": "Numéro de contact"
+      },
+      "medicalInfo": {
+        "title": "Informations médicales",
+        "allergies": "Allergies connues",
+        "medications": "Médicaments actuels",
+        "medicalHistory": "Antécédents médicaux"
+      },
+      "insuranceInfo": {
+        "title": "Informations sur l'assurance",
+        "insuranceProvider": "Fournisseur d'assurance",
+        "policyNumber": "Numéro de police"
+      },
+      "cardDetails": {
+        "title": "Détails de la carte",
+        "cardNumber": "Numéro de carte",
+        "expiryDate": "Date d'expiration",
+        "cvv": "CVV"
+      },
+      "paymentInfo": {
+        "title": "Paiement",
+        "paymentStatus": "Statut du paiement"
+      },
+      "placeholders": {
+        "enterFirstName": "Entrez le prénom",
+        "enterLastName": "Entrez le nom de famille",
+        "enterDate": "jj/mm/aa",
+        "selectGender": "Sélectionnez votre sexe",
+        "selectMaritalStatus": "Sélectionnez votre état civil",
+        "selectBloodGroup": "Sélectionnez votre groupe sanguin",
+        "enterAge": "Entrez l'âge",
+        "enterDescription": "Entrez une description",
+        "selectCountry": "Sélectionnez votre pays",
+        "selectState": "Sélectionnez votre état",
+        "selectCity": "Sélectionnez votre ville",
+        "enterMobileNumber": "Entrez votre numéro de portable",
+        "enterEmail": "Entrez votre email",
+        "enterZipcode": "Entrez votre code postal",
+        "enterAddress": "Entrez votre adresse",
+        "enterContactName": "Entrez le nom du contact",
+        "selectRelationship": "Sélectionnez la relation",
+        "enterContactNumber": "Entrez le numéro de contact",
+        "enterAllergies": "Si applicable",
+        "enterMedications": "Si applicable",
+        "selectMedicalHistory": "Conditions antérieures",
+        "enterInsuranceProvider": "Entrez le fournisseur d'assurance",
+        "enterPolicyNumber": "Entrez le numéro de police",
+        "enterCardNumber": "Entrez le numéro de carte",
+        "enterExpiryDate": "MM/AA",
+        "enterCVV": "Entrez le CVV",
+        "selectPaymentStatus": "Sélectionnez le statut du paiement"
+      },
+      "buttons": {
+        "generateID": "Générer un ID",
+        "submit": "Soumettre",
+        "cancel": "Annuler"
+      },
+      "status": {
+        "chronic": "Chronique",
+        "acute": "Aiguë"
+      },
+      "gender": {
+        "male": "Homme",
+        "female": "Femme"
+      },
+      "maritalStatus": {
+        "single": "Célibataire",
+        "married": "Marié"
+      },
+      "paymentStatus": {
+        "pending": "En attente",
+        "completed": "Terminé",
+        "notPaid": "Non payé"
       }
     },
     "checkin-checkout": {
-      "title": "Enregistrement/Départ du patient",
+      "title": "Enregistrement/Sortie des Patients",
       "checkIn": "Enregistrement",
-      "checkOut": "Départ",
-      "patientsInHosp": "Patients à l'hôpital"
+      "checkOut": "Sortie",
+      "patientsInHosp": "Patients à l'Hôpital",
+      "search": {
+        "placeholder": "Rechercher un patient ici..."
+      },
+      "buttons": {
+        "filter": "Filtrer",
+        "sortBy": "Trier par"
+      },
+      "table": {
+        "headers": {
+          "id": "ID",
+          "name": "Nom",
+          "age": "Âge",
+          "gender": "Sexe",
+          "contactNo": "N° de Contact",
+          "time": "Heure",
+          "date": "Date",
+          "status": "Statut",
+          "appointTo": "Attribué à",
+          "action": "Action"
+        },
+        "status": {
+          "inProgress": "En cours",
+          "waiting": "En attente"
+        },
+        "action": {
+          "chronic": "Chronique",
+          "acute": "Aiguë"
+        }
+      }
     },
     "dashboard": {
       "title": "Bienvenue sur CareFlow",
       "stats": {
-        "totalPatients": "Total des patients",
-        "todayAppointments": "Rendez-vous du jour",
-        "waitingPatients": "Patients en attente"
+        "totalPatients": "Nombre Total de Patients",
+        "todayAppointments": "Rendez-vous Aujourd'hui",
+        "waitingPatients": "Patients en Attente",
+        "complianceScore": "Score de Conformité",
+        "fromLastMonth": "par rapport au mois dernier",
+        "fromLastWeek": "par rapport à la semaine dernière",
+        "remaining": "Restant"
+      },
+      "nextPatient": {
+        "title": "Prochain Patient",
+        "headers": {
+          "name": "Nom",
+          "gender": "Sexe",
+          "age": "Âge",
+          "appointment": "Rendez-vous",
+          "status": "Statut",
+          "time": "Heure",
+          "date": "Date"
+        }
+      },
+      "patientQueue": {
+        "title": "File d'Attente des Patients",
+        "headers": {
+          "id": "ID",
+          "name": "Nom",
+          "age": "Âge",
+          "gender": "Sexe",
+          "appointment": "Rendez-vous",
+          "time": "Heure",
+          "status": "Statut",
+          "date": "Date",
+          "action": "Action"
+        },
+        "status": {
+          "inProgress": "En cours",
+          "waiting": "En attente"
+        },
+        "action": {
+          "checkIn": "Enregistrement",
+          "checkOut": "Sortie"
+        }
+      }
+    },
+    "patients": {
+      "title": "Patients",
+      "searchPlaceholder": "Rechercher un patient ici...",
+      "filter": "Filtrer",
+      "sort": "Trier par",
+      "addNew": "Ajouter un Nouveau Patient",
+      "tableHeaders": {
+        "patientID": "ID du Patient",
+        "name": "Nom",
+        "age": "Âge",
+        "gender": "Sexe",
+        "bloodGroup": "Groupe Sanguin",
+        "contactNumber": "N° de Contact",
+        "emergencyContact": "N° de Contact d'Urgence",
+        "paymentStatus": "Statut du Paiement"
+      },
+      "paymentStatus": {
+        "pending": "En attente",
+        "completed": "Terminé",
+        "notPaid": "Non payé"
+      }
+    },
+    "patientdetails": {
+      "title": "Détails du Patient",
+      "back": "Retour",
+      "patient": "Patient",
+      "personalInfo": {
+        "posts": "Publication",
+        "upcoming": "À Venir",
+        "gender": "Sexe",
+        "streetAddress": "Adresse",
+        "status": "Statut",
+        "birthday": "Date de Naissance",
+        "city": "Ville",
+        "registeredDate": "Date d'Enregistrement",
+        "phoneNumber": "Numéro de Téléphone",
+        "zipCode": "Code Postal"
+      },
+      "visitTypes": {
+        "preVisit": "Détails de la Pré-visite",
+        "duringVisit": "Détails de la Visite",
+        "postVisit": "Détails de la Post-visite"
+      },
+      "appointmentDetails": {
+        "title": "Détails du Rendez-vous",
+        "table": {
+          "id": "ID",
+          "date": "Date",
+          "time": "Heure",
+          "appointmentNo": "Numéro de Rendez-vous",
+          "appointTo": "Assigné à",
+          "status": "Statut",
+          "description": "Description"
+        },
+        "statusTypes": {
+          "chronic": "Chronique",
+          "acute": "Aigu"
+        },
+        "noAppointments": "Aucun détail de rendez-vous trouvé."
+      }
+    },
+    "previsitregistration": {
+      "title": "Enregistrement du Patient Avant la Visite",
+      "visitInformation": {
+        "title": "Informations sur la Visite",
+        "visitType": {
+          "label": "Type de Visite",
+          "placeholder": "Sélectionnez le Type de Visite",
+          "options": {
+            "newConsultation": "Nouvelle Consultation",
+            "checkup": "Examen",
+            "regular": "Régulier"
+          }
+        },
+        "department": {
+          "label": "Département",
+          "placeholder": "Sélectionnez le Département",
+          "options": {
+            "generalMedicine": "Médecine Générale",
+            "medicine": "Médecine",
+            "labs": "Laboratoires"
+          }
+        },
+        "preferredDoctor": {
+          "label": "Docteur Préféré",
+          "placeholder": "Sélectionnez votre sexe",
+          "options": {
+            "male": "Homme",
+            "female": "Femme"
+          }
+        },
+        "preferredDate": {
+          "label": "Date Préférée",
+          "placeholder": "jj/mm/aa"
+        },
+        "preferredTimeSlot": {
+          "label": "Créneau Horaire Préféré",
+          "placeholder": "Matin (9h00 - 12h00)",
+          "options": {
+            "morning": "Matin (9h00 - 12h00)",
+            "afternoon": "Après-midi (12h00 - 15h00)"
+          }
+        }
+      },
+      "medicalInformation": {
+        "title": "Informations Médicales",
+        "reasonForVisit": {
+          "label": "Raison de la Visite",
+          "placeholder": "Brève Description de votre Problème Médical"
+        },
+        "currentSymptoms": {
+          "label": "Symptômes Actuels",
+          "placeholder": "Listez tous les symptômes actuels"
+        },
+        "symptomsDuration": {
+          "label": "Durée des Symptômes",
+          "placeholder": "Heures",
+          "options": {
+            "hours": "Heures",
+            "days": "Jours",
+            "weeks": "Semaines"
+          }
+        }
+      },
+      "insuranceInformation": {
+        "title": "Informations sur l'Assurance",
+        "provider": {
+          "label": "Fournisseur d'Assurance",
+          "placeholder": "Entrez le nom"
+        },
+        "policyNumber": {
+          "label": "Numéro de Police",
+          "placeholder": "Entrez le numéro"
+        },
+        "subscriberName": {
+          "label": "Nom du Souscripteur",
+          "placeholder": "Entrez le nom"
+        },
+        "relationship": {
+          "label": "Relation avec le Souscripteur",
+          "placeholder": "Soi-même",
+          "options": {
+            "self": "Soi-même",
+            "owner": "Propriétaire",
+            "subscriber": "Souscripteur"
+          }
+        }
+      },
+      "additionalRequirements": {
+        "label": "Besoins Supplémentaires",
+        "placeholder": "Sélectionnez les besoins",
+        "options": {
+          "wheelchair": "Accès en fauteuil roulant, interprète, etc.",
+          "ac": "Climatisation",
+          "interpreter": "Interprète"
+        }
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "schedule": "Planifier la Visite"
       }
     },
     "duringvisit": {
-      "title": "Pendant la visite",
-      "vitals": "Signes vitaux",
-      "diagnosis": "Diagnostic",
-      "prescription": "Ordonnance"
-    },
-    "patientdetails": {
-      "title": "Détails du patient",
-      "history": "Historique médical",
-      "appointments": "Rendez-vous",
-      "documents": "Documents"
-    },
-    "patients": {
-      "title": "Liste des patients",
-      "search": "Rechercher des patients",
-      "filters": "Filtres"
+      "title": "Pendant la Visite",
+      "patientDetails": {
+        "title": "Vérification du Patient et de l'Assurance",
+        "firstName": {
+          "label": "Prénom du Patient",
+          "placeholder": "Nom ici"
+        },
+        "middleName": {
+          "label": "Deuxième Prénom du Patient",
+          "placeholder": "Nom ici"
+        },
+        "lastName": {
+          "label": "Nom de Famille du Patient",
+          "placeholder": "Nom ici"
+        },
+        "insuranceProvider": {
+          "label": "Fournisseur d'Assurance",
+          "placeholder": "Nom du Fournisseur",
+          "options": {
+            "providerOne": "Fournisseur 1",
+            "providerTwo": "Fournisseur 2"
+          }
+        },
+        "insuranceNumber": {
+          "label": "Numéro d'Assurance",
+          "placeholder": "Entrez le numéro d'assurance"
+        },
+        "insuranceStatus": {
+          "label": "Statut de l'Assurance",
+          "placeholder": "Statut de Vérification"
+        }
+      },
+      "roomAssignment": {
+        "title": "Affectation de Chambre",
+        "wardType": {
+          "label": "Type de Service",
+          "placeholder": "Sélectionnez le Type de Service",
+          "options": {
+            "emergency": "Urgences",
+            "regular": "Régulier"
+          }
+        },
+        "roomNumber": {
+          "label": "Numéro de Chambre",
+          "placeholder": "Entrez le numéro de chambre"
+        },
+        "bedNumber": {
+          "label": "Numéro de Lit",
+          "placeholder": "Entrez le numéro de lit"
+        },
+        "admissionType": {
+          "label": "Type d'Admission",
+          "placeholder": "Entrez le type d'admission"
+        }
+      },
+      "teamNotification": {
+        "title": "Notification à l'Équipe",
+        "assignedDoctor": {
+          "label": "Médecin Assigné",
+          "placeholder": "Entrez le nom du médecin assigné"
+        },
+        "assignedNurse": {
+          "label": "Infirmier/ère Assigné(e)",
+          "placeholder": "Entrez le nom de l'infirmier/ère assigné(e)"
+        },
+        "additionalNotes": {
+          "label": "Notes Supplémentaires",
+          "placeholder": "Instructions ou exigences particulières"
+        }
+      },
+      "admissionStatus": {
+        "title": "Statut de l'Admission",
+        "status": {
+          "label": "Statut",
+          "placeholder": "Entrez le statut de l'admission"
+        },
+        "assignedDate": {
+          "label": "Date Assignée",
+          "placeholder": "Entrez la date assignée"
+        },
+        "assignedTime": {
+          "label": "Heure Assignée",
+          "placeholder": "00:00:00"
+        }
+      },
+      "buttons": {
+        "cancel": "Annuler",
+        "complete": "Terminer l'Admission"
+      }
     },
     "postvisit": {
-      "title": "Après la visite",
+      "title": "Post-Visite",
       "followUp": "Suivi",
       "billing": "Facturation",
-      "medications": "Médicaments"
-    },
-    "previsitregistration": {
-      "title": "Pré-inscription à la visite",
-      "appointment": "Détails du rendez-vous",
-      "insurance": "Informations d'assurance"
+      "medications": "Médicaments",
+      "backButton": "Retour",
+      "printSummary": "Imprimer le Résumé",
+      "completeCheckout": "Terminer la Sortie",
+      "paymentProcessing": {
+        "title": "Traitement du Paiement",
+        "consultationFee": {
+          "label": "Frais de Consultation",
+          "placeholder": "100,00"
+        },
+        "medicatedCharges": {
+          "label": "Frais Médicaux",
+          "placeholder": "Frais ici"
+        },
+        "additionalServices": {
+          "label": "Services Supplémentaires",
+          "placeholder": "Si applicable"
+        },
+        "totalAmount": {
+          "label": "Montant Total",
+          "placeholder": "Montant ici"
+        },
+        "paymentMethod": {
+          "label": "Mode de Paiement",
+          "placeholder": "Sélectionnez le Mode de Paiement",
+          "options": {
+            "online": "En Ligne",
+            "cash": "Espèces"
+          }
+        },
+        "paymentStatus": {
+          "label": "Statut du Paiement",
+          "placeholder": "Sélectionnez le Statut du Paiement",
+          "options": {
+            "pending": "En Attente",
+            "completed": "Terminé"
+          }
+        }
+      },
+      "followupSection": {
+        "title": "Détails du Suivi",
+        "required": {
+          "label": "Suivi Nécessaire",
+          "placeholder": "Sélectionnez une Option",
+          "options": {
+            "option1": "Option 1",
+            "option2": "Option 2"
+          }
+        },
+        "preferredDate": {
+          "label": "Date Préférée",
+          "placeholder": ""
+        },
+        "assignedDoctor": {
+          "label": "Médecin Assigné",
+          "placeholder": "Entrez le nom du médecin"
+        },
+        "department": {
+          "label": "Service",
+          "placeholder": "Entrez le service"
+        }
+      },
+      "visitSummary": {
+        "title": "Résumé de la Visite",
+        "diagnosis": {
+          "label": "Diagnostic",
+          "placeholder": "Entrez le diagnostic"
+        },
+        "treatmentSummary": {
+          "label": "Résumé du Traitement",
+          "placeholder": "Entrez le résumé"
+        },
+        "medicationsPrescribed": {
+          "label": "Médicaments Prescrits",
+          "placeholder": "Entrez les médicaments"
+        },
+        "specialInstructions": {
+          "label": "Instructions Spéciales",
+          "placeholder": "Entrez les instructions"
+        }
+      },
+      "visitStatus": {
+        "title": "Statut de la Visite",
+        "statusUpdate": {
+          "label": "Mise à Jour du Statut",
+          "placeholder": "Entrez le statut de la visite"
+        },
+        "dischargedDate": {
+          "label": "Date de Sortie",
+          "placeholder": "Entrez le nom de l'infirmier assigné"
+        },
+        "dischargedTime": {
+          "label": "Heure de Sortie",
+          "placeholder": "00:00:00"
+        }
+      }
     }
   }
 }

@@ -372,7 +372,7 @@ const AddPatient = () => {
       type: "select",
       placeholder: t("pages.addPatient.placeholders.selectRelationship"),
       options: ["Father", "Mother", "Husband", "Wife", "Sister", "Daughter"],
-      value: state,
+      value: emergencyRelationship,
       onChange: (e) => setEmergencyRelationship(e.target.value),
     },
     {

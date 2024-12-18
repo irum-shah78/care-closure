@@ -319,10 +319,10 @@
         },
         "preferredTimeSlot": {
           "label": "首选时间段",
-          "placeholder": "上午(9AM - 12PM)",
+          "placeholder": "选择时间段",
           "options": {
-            "morning": "上午(9AM - 12PM)",
-            "afternoon": "下午(12PM - 3PM)"
+            "morning": "早晨（9AM - 12PM）",
+            "afternoon": "下午（9PM - 12AM)"
           }
         }
       },

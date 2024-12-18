@@ -314,10 +314,10 @@
         },
         "preferredTimeSlot": {
           "label": "Horario Preferido",
-          "placeholder": "Mañana(9AM - 12PM)",
+          "placeholder": "Seleccione el horario",
           "options": {
-            "morning": "Mañana(9AM - 12PM)",
-            "afternoon": "Mañana(9AM - 12PM)"
+            "morning": "Mañana (9AM - 12PM)",
+            "afternoon": "Tarde (9PM - 12AM)"
           }
         }
       },

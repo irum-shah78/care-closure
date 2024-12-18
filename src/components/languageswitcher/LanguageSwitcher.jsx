@@ -95,7 +95,6 @@ const LanguageSwitcher = () => {
     setIsDropdownOpen(false);
   };
 
-  // Update the selected language when i18n.language changes
   useEffect(() => {
     setSelectedLanguage(i18n.language);
   }, [i18n.language]);

@@ -319,10 +319,10 @@
         },
         "preferredTimeSlot": {
           "label": "Créneau Horaire Préféré",
-          "placeholder": "Matin (9h00 - 12h00)",
+          "placeholder": "Sélectionnez la plage horaire",
           "options": {
-            "morning": "Matin (9h00 - 12h00)",
-            "afternoon": "Après-midi (12h00 - 15h00)"
+            "morning": "Matin (9h - 12h)",
+            "afternoon": "Après-midi (21h - 00h)"
           }
         }
       },

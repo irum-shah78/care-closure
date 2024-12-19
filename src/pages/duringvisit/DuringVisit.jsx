@@ -252,6 +252,7 @@ const DuringVisit = () => {
               <button
                 type="submit"
                 className="px-6 py-2 rounded-xl bg-[#2E2559] text-white"
+                onClick={handlePatient}
               >
                 {t("pages.duringvisit.buttons.complete")}
               </button>

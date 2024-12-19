@@ -24,6 +24,16 @@ const PreRegistration = () => {
     e.preventDefault();
     const visitId = `#${Math.floor(1000 + Math.random() * 9000)}`;
 
+    const today = new Date();
+    const selectedDate = new Date(preferredDate);
+
+    if (selectedDate < today.setHours(0, 0, 0, 0)) {
+      alert(
+        "The appointment date cannot be in the past. Please select a valid date."
+      );
+      return;
+    }
+
     const visitDetails = {
       patientId: patient?.id,
       name: patient?.name,
@@ -189,7 +199,7 @@ const PreRegistration = () => {
       ),
     },
     {
-      type: "number",
+      type: "text",
       label: t(
         "pages.previsitregistration.insuranceInformation.policyNumber.label"
       ),

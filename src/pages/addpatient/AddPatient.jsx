@@ -419,7 +419,7 @@ const AddPatient = () => {
     },
     {
       label: t("pages.addPatient.insuranceInfo.policyNumber"),
-      type: "number",
+      type: "text",
       placeholder: t("pages.addPatient.placeholders.enterPolicyNumber"),
       value: policyNumber,
       onChange: (e) => setPolicyNumber(e.target.value),

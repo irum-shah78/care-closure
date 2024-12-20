@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
@@ -16,9 +16,27 @@ const PreRegistration = () => {
   const [preferredDoctor, setPreferredDoctor] = useState("");
   const [preferredDate, setPreferredDate] = useState("");
   const [preferredTimeSlot, setPreferredTimeSlot] = useState("");
+  const [reasonForVisit, setReasonForVisit] = useState("");
+  const [currentSymptoms, setCurrentSymptoms] = useState("");
+  const [symptomsDuration, setSymptomsDuration] = useState("");
+  const [insuranceProvider, setInsuranceProvider] = useState("");
+  const [policyNumber, setPolicyNumber] = useState("");
+  const [subscriberName, setSubscriberName] = useState("");
+  const [relationship, setRelationship] = useState("");
+  const [additionalRequirement, setAdditionalRequirement] = useState("");
+
   const handlePatient = () => {
     navigate("/patients/patient-details", { state: { patient } });
   };
+
+  useEffect(() => {
+    if (patient) {
+      setInsuranceProvider(patient.insuranceProvider || "");
+      setPolicyNumber(patient.policyNumber || "");
+      setSubscriberName(patient.subscriberName || "");
+      setRelationship(patient.relationship || "");
+    }
+  }, [patient]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,6 +61,14 @@ const PreRegistration = () => {
       preferredDoctor,
       preferredDate,
       preferredTimeSlot,
+      reasonForVisit: reasonForVisit,
+      currentSymptoms: currentSymptoms,
+      symptomsDuration: symptomsDuration,
+      insuranceProvider: insuranceProvider,
+      policyNumber: policyNumber,
+      subscriberName: subscriberName,
+      relationship: relationship,
+      additionalRequirement: additionalRequirement,
     };
 
     const storedData = localStorage.getItem("patientVisits");
@@ -156,6 +182,8 @@ const PreRegistration = () => {
       placeholder: t(
         "pages.previsitregistration.medicalInformation.reasonForVisit.placeholder"
       ),
+      value: reasonForVisit,
+      onChange: (e) => setReasonForVisit(e.target.value),
     },
     {
       type: "text",
@@ -165,6 +193,8 @@ const PreRegistration = () => {
       placeholder: t(
         "pages.previsitregistration.medicalInformation.currentSymptoms.placeholder"
       ),
+      value: currentSymptoms,
+      onChange: (e) => setCurrentSymptoms(e.target.value),
     },
     {
       type: "select",
@@ -185,6 +215,8 @@ const PreRegistration = () => {
           "pages.previsitregistration.medicalInformation.symptomsDuration.options.weeks"
         ),
       ],
+      value: symptomsDuration,
+      onChange: (e) => setSymptomsDuration(e.target.value),
     },
   ];
 
@@ -197,6 +229,8 @@ const PreRegistration = () => {
       placeholder: t(
         "pages.previsitregistration.insuranceInformation.provider.placeholder"
       ),
+      value: insuranceProvider,
+      onChange: (e) => setInsuranceProvider(e.target.value),
     },
     {
       type: "text",
@@ -206,6 +240,8 @@ const PreRegistration = () => {
       placeholder: t(
         "pages.previsitregistration.insuranceInformation.policyNumber.placeholder"
       ),
+      value: policyNumber,
+      onChange: (e) => setPolicyNumber(e.target.value),
     },
     {
       type: "text",
@@ -215,6 +251,8 @@ const PreRegistration = () => {
       placeholder: t(
         "pages.previsitregistration.insuranceInformation.subscriberName.placeholder"
       ),
+      value: subscriberName,
+      onChange: (e) => setSubscriberName(e.target.value),
     },
     {
       type: "select",
@@ -235,6 +273,8 @@ const PreRegistration = () => {
           "pages.previsitregistration.insuranceInformation.relationship.options.subscriber"
         ),
       ],
+      value: relationship,
+      onChange: (e) => setRelationship(e.target.value),
     },
   ];
 
@@ -254,6 +294,8 @@ const PreRegistration = () => {
           "pages.previsitregistration.additionalRequirements.options.interpreter"
         ),
       ],
+      value: additionalRequirement,
+      onChange: (e) => setAdditionalRequirement(e.target.value),
     },
   ];
 

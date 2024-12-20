@@ -387,7 +387,7 @@
     "duringvisit": {
       "title": "During-Visit",
       "patientDetails": {
-        "title": "Patient & Insurance Verfication",
+        "title": "Patient & Insurance Verification",
         "firstName": {
           "label": "Patient First Name",
           "placeholder": "Name here"

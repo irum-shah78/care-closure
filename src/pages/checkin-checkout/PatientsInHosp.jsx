@@ -95,7 +95,7 @@ const PatientsInHospital = () => {
                   className="absolute top-2.5 right-3 text-gray-500 pointer-events-none"
                 />
               </div>
-              <div className="flex flex-row flex-wrap w-[300px] gap-3 gap-y-2">
+              <div className="flex flex-row w-[300px] gap-3 gap-y-2">
                 <button className="truncate border border-[#B3B3B3] px-2 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
                   <img src={filterIcon} alt="filter" />{" "}
                   {t("pages.checkin-checkout.buttons.filter")}

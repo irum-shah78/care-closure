@@ -243,7 +243,7 @@ const Dashboard = () => {
                           className="flex items-center p-2 space-x-10"
                         >
                           <div className="flex items-center">
-                            <div className="flex items-center justify-center bg-[#2E2559] text-white w-10 h-10 rounded-full font-semibold text-sm">
+                            <div className="flex items-center justify-center bg-[#2E2559] text-white w-10 h-10 rounded-full font-semibold text-xs sm:text-sm">
                               {patient.initials}
                             </div>
                             <div className="ml-4">

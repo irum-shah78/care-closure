@@ -96,11 +96,11 @@ const PatientsInHospital = () => {
                 />
               </div>
               <div className="flex flex-row flex-wrap w-[300px] gap-3 gap-y-2">
-                <button className="border border-[#B3B3B3] px-2 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
+                <button className="truncate border border-[#B3B3B3] px-2 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
                   <img src={filterIcon} alt="filter" />{" "}
                   {t("pages.checkin-checkout.buttons.filter")}
                 </button>
-                <button className="border border-[#B3B3B3] px-2 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
+                <button className="truncate border border-[#B3B3B3] px-2 py-2 rounded-lg flex items-center justify-center gap-2 xl:text-base text-sm">
                   <img src={sortIcon} alt="filter" />{" "}
                   {t("pages.checkin-checkout.buttons.sortBy")}
                 </button>

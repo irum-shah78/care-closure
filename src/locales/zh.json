@@ -436,7 +436,12 @@
         },
         "admissionType": {
           "label": "入院类型",
-          "placeholder": "输入入院类型"
+          "placeholder": "输入入院类型",
+          "options": {
+            "outpatient": "门诊",
+            "inpatient": "住院",
+            "emergency": "急诊"
+          }
         }
       },
       "teamNotification": {
@@ -504,8 +509,9 @@
           "label": "付款方式",
           "placeholder": "选择付款方式",
           "options": {
-            "online": "在线",
-            "cash": "现金"
+            "insurance": "保险",
+            "cash": "现金",
+            "debit": "借记卡/信用"
           }
         },
         "paymentStatus": {

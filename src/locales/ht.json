@@ -436,7 +436,12 @@
         },
         "admissionType": {
           "label": "Kalite Admisyon",
-          "placeholder": "Antre kalite admisyon"
+          "placeholder": "Kalite admisyon",
+          "options": {
+            "outpatient": "Ambilatwa",
+            "inpatient": "Entène",
+            "emergency": "Ijans"
+          }
         }
       },
       "teamNotification": {
@@ -504,8 +509,9 @@
           "label": "Metòd Peman",
           "placeholder": "Chwazi Metòd Peman",
           "options": {
-            "online": "Sou Entènèt",
-            "cash": "Lajan Kach"
+            "insurance": "Asirans",
+            "cash": "Lajan Kach",
+            "debit": "Kat Debi/Kredi"
           }
         },
         "paymentStatus": {

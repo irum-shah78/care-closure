@@ -160,11 +160,22 @@ const DuringVisit = () => {
       onChange: (e) => setBedNumber(e.target.value),
     },
     {
-      type: "text",
+      type: "select",
       label: t("pages.duringvisit.roomAssignment.admissionType.label"),
       placeholder: t(
         "pages.duringvisit.roomAssignment.admissionType.placeholder"
       ),
+      options: [
+        t(
+          "pages.duringvisit.roomAssignment.admissionType.options.outpatient"
+        ),
+        t(
+       "pages.duringvisit.roomAssignment.admissionType.options.inpatient"
+        ),
+        t(
+          "pages.duringvisit.roomAssignment.admissionType.options.emergency"
+           ),
+      ],
       value: admissionType,
       onChange: (e) => setAdmissionType(e.target.value),
     },

@@ -436,7 +436,12 @@
         },
         "admissionType": {
           "label": "Admission Type",
-          "placeholder": "Enter admission type"
+          "placeholder": "Admission type",
+          "options": {
+            "outpatient": "Outpatient",
+            "inpatient": "Inpatient",
+            "emergency": "Emergency"
+          }
         }
       },
       "teamNotification": {
@@ -504,8 +509,9 @@
           "label": "Payment Method",
           "placeholder": "Select Payment Method",
           "options": {
-            "online": "Online",
-            "cash": "Cash"
+            "insurance": "Insurance",
+            "cash": "Cash",
+            "debit": "Debit/Credit"
           }
         },
         "paymentStatus": {

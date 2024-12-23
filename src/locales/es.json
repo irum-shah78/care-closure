@@ -431,7 +431,12 @@
         },
         "admissionType": {
           "label": "Tipo de Admisión",
-          "placeholder": "Introduzca el tipo de admisión"
+          "placeholder": "Tipo de admisión",
+          "options": {
+            "outpatient": "Ambulatorio",
+            "inpatient": "Hospitalización",
+            "emergency": "Emergencia"
+          }
         }
       },
       "teamNotification": {
@@ -499,8 +504,9 @@
           "label": "Método de Pago",
           "placeholder": "Seleccionar Método de Pago",
           "options": {
-            "online": "En línea",
-            "cash": "Efectivo"
+            "insurance": "Seguro",
+            "cash": "Efectivo",
+            "debit": "Tarjeta de Débito/Crédito"
           }
         },
         "paymentStatus": {

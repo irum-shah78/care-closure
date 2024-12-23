@@ -1,16 +1,81 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Sidebar from "../../components/sidebar/Sidebar";
 import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const PostVisit = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const patient = state?.patient;
+  const [consultationFee, setConsultationFee] = useState("");
+  const [medicatedCharges, setMedicatedCharges] = useState("");
+  const [additionalServices, setAdditionalServices] = useState("");
+  const [totalAmount, setTotalAmount] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [paymentStatus, setPaymentStatus] = useState("");
+  const [followupRequired, setFollowupRequired] = useState("");
+  const [preferredDate, setPreferredDate] = useState("");
+  const [assignedDoctor, setAssignedDoctor] = useState("");
+  const [department, setDepartment] = useState("");
+  const [diagnosis, setDiagnosis] = useState("");
+  const [treatmentSummary, setTreatmentSummary] = useState("");
+  const [medicationsPrescribed, setMedicationsPrescribed] = useState("");
+  const [specialInstructions, setSpecialInstructions] = useState("");
+  const [statusUpdate, setStatusUpdate] = useState("");
+  const [dischargedDate, setDischargedDate] = useState("");
+  const [dischargedTime, setDischargedTime] = useState("");
+
+  useEffect(() => {
+    const calculateTotal = () => {
+      const total =
+        parseFloat(consultationFee || 0) +
+        parseFloat(medicatedCharges || 0) +
+        parseFloat(additionalServices || 0);
+      setTotalAmount(total.toFixed(2));
+    };
+
+    calculateTotal();
+  }, [consultationFee, medicatedCharges, additionalServices]);
+
   const handlePatient = () => {
-    navigate("/patients/patient-details");
+    navigate("/patients/patient-details", { state: { patient } });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const postVisitDetails = {
+      consultationFee,
+      medicatedCharges,
+      additionalServices,
+      totalAmount,
+      paymentMethod,
+      paymentStatus,
+      followupRequired,
+      preferredDate,
+      assignedDoctor,
+      department,
+      diagnosis,
+      treatmentSummary,
+      medicationsPrescribed,
+      specialInstructions,
+      statusUpdate,
+      dischargedDate,
+      dischargedTime,
+    };
+
+    const storedData = localStorage.getItem("postVisitDetails");
+    const existingDetails = Array.isArray(JSON.parse(storedData))
+      ? JSON.parse(storedData)
+      : [];
+
+    existingDetails.push(postVisitDetails);
+    localStorage.setItem("postVisitDetails", JSON.stringify(existingDetails));
+    navigate("/patients/patient-details", { state: { patient } });
   };
 
   const paymentProcessingFields = [
@@ -18,6 +83,8 @@ const PostVisit = () => {
       type: "text",
       label: t("pages.postvisit.paymentProcessing.consultationFee.label"),
       placeholder: "100.00",
+      value: consultationFee,
+      onChange: (e) => setConsultationFee(e.target.value),
     },
     {
       type: "text",
@@ -25,6 +92,8 @@ const PostVisit = () => {
       placeholder: t(
         "pages.postvisit.paymentProcessing.medicatedCharges.placeholder"
       ),
+      value: medicatedCharges,
+      onChange: (e) => setMedicatedCharges(e.target.value),
     },
     {
       type: "text",
@@ -32,6 +101,8 @@ const PostVisit = () => {
       placeholder: t(
         "pages.postvisit.paymentProcessing.additionalServices.placeholder"
       ),
+      value: additionalServices,
+      onChange: (e) => setAdditionalServices(e.target.value),
     },
     {
       type: "text",
@@ -39,6 +110,9 @@ const PostVisit = () => {
       placeholder: t(
         "pages.postvisit.paymentProcessing.totalAmount.placeholder"
       ),
+      value: totalAmount,
+      onChange: (e) => setTotalAmount(e.target.value),
+      readOnly: true,
     },
     {
       type: "select",
@@ -47,9 +121,12 @@ const PostVisit = () => {
         "pages.postvisit.paymentProcessing.paymentMethod.placeholder"
       ),
       options: [
-        t("pages.postvisit.paymentProcessing.paymentMethod.options.online"),
+        t("pages.postvisit.paymentProcessing.paymentMethod.options.insurance"),
         t("pages.postvisit.paymentProcessing.paymentMethod.options.cash"),
+        t("pages.postvisit.paymentProcessing.paymentMethod.options.debit"),
       ],
+      value: paymentMethod,
+      onChange: (e) => setPaymentMethod(e.target.value),
     },
     {
       type: "select",
@@ -61,6 +138,8 @@ const PostVisit = () => {
         t("pages.postvisit.paymentProcessing.paymentStatus.options.pending"),
         t("pages.postvisit.paymentProcessing.paymentStatus.options.completed"),
       ],
+      value: paymentStatus,
+      onChange: (e) => setPaymentStatus(e.target.value),
     },
   ];
 
@@ -69,11 +148,15 @@ const PostVisit = () => {
       type: "text",
       label: t("pages.postvisit.followupSection.required.label"),
       placeholder: t("pages.postvisit.followupSection.required.placeholder"),
+      value: followupRequired,
+      onChange: (e) => setFollowupRequired(e.target.value),
     },
     {
       type: "date",
       label: t("pages.postvisit.followupSection.preferredDate.label"),
       placeholder: "mm/dd/yy",
+      value: preferredDate,
+      onChange: (e) => setPreferredDate(e.target.value),
     },
     {
       type: "text",
@@ -81,11 +164,15 @@ const PostVisit = () => {
       placeholder: t(
         "pages.postvisit.followupSection.assignedDoctor.placeholder"
       ),
+      value: assignedDoctor,
+      onChange: (e) => setAssignedDoctor(e.target.value),
     },
     {
       type: "text",
       label: t("pages.postvisit.followupSection.department.label"),
       placeholder: t("pages.postvisit.followupSection.department.placeholder"),
+      value: department,
+      onChange: (e) => setDepartment(e.target.value),
     },
   ];
 
@@ -94,6 +181,8 @@ const PostVisit = () => {
       type: "text",
       label: t("pages.postvisit.visitSummary.diagnosis.label"),
       placeholder: t("pages.postvisit.visitSummary.diagnosis.placeholder"),
+      value: diagnosis,
+      onChange: (e) => setDiagnosis(e.target.value),
     },
     {
       type: "text",
@@ -101,6 +190,8 @@ const PostVisit = () => {
       placeholder: t(
         "pages.postvisit.visitSummary.treatmentSummary.placeholder"
       ),
+      value: treatmentSummary,
+      onChange: (e) => setTreatmentSummary(e.target.value),
     },
     {
       type: "text",
@@ -108,6 +199,8 @@ const PostVisit = () => {
       placeholder: t(
         "pages.postvisit.visitSummary.medicationsPrescribed.placeholder"
       ),
+      value: medicationsPrescribed,
+      onChange: (e) => setMedicationsPrescribed(e.target.value),
     },
     {
       type: "text",
@@ -115,6 +208,8 @@ const PostVisit = () => {
       placeholder: t(
         "pages.postvisit.visitSummary.specialInstructions.placeholder"
       ),
+      value: specialInstructions,
+      onChange: (e) => setSpecialInstructions(e.target.value),
     },
   ];
 
@@ -123,16 +218,22 @@ const PostVisit = () => {
       type: "text",
       label: t("pages.postvisit.visitStatus.statusUpdate.label"),
       placeholder: t("pages.postvisit.visitStatus.statusUpdate.placeholder"),
+      value: statusUpdate,
+      onChange: (e) => setStatusUpdate(e.target.value),
     },
     {
       type: "date",
       label: t("pages.postvisit.visitStatus.dischargedDate.label"),
       placeholder: "mm/dd/yy",
+      value: dischargedDate,
+      onChange: (e) => setDischargedDate(e.target.value),
     },
     {
       type: "time",
       label: t("pages.postvisit.visitStatus.dischargedTime.label"),
       placeholder: "00:00:00",
+      value: dischargedTime,
+      onChange: (e) => setDischargedTime(e.target.value),
     },
   ];
 
@@ -143,6 +244,8 @@ const PostVisit = () => {
           <span className="text-sm font-medium">{field.label}</span>
           <select
             className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
+            value={field.value}
+            onChange={field.onChange}
             defaultValue=""
             required
           >
@@ -165,6 +268,8 @@ const PostVisit = () => {
           type={field.type}
           placeholder={field.placeholder}
           className="border border-gray-300 text-[#808080] p-2 rounded w-full mt-3"
+          value={field.value}
+          onChange={field.onChange}
           required
         />
       </label>
@@ -189,7 +294,7 @@ const PostVisit = () => {
               {t("pages.postvisit.title")}
             </h1>
           </div>
-          <form className="mt-6 space-y-6 shadow-sm">
+          <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
             <FormSection title={t("pages.postvisit.paymentProcessing.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">

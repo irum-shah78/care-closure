@@ -82,6 +82,17 @@ const PreRegistration = () => {
       additionalRequirement,
     };
 
+    const existingPatientsRaw = localStorage.getItem("patients");
+    const existingPatients = JSON.parse(existingPatientsRaw) || [];
+
+    const updatedPatients = existingPatients.map((existingPatient) =>
+      existingPatient.id === updatedPatient.id
+        ? updatedPatient
+        : existingPatient
+    );
+
+    localStorage.setItem("patients", JSON.stringify(updatedPatients));
+
     const storedData = localStorage.getItem("patientVisits");
     const existingVisits = Array.isArray(JSON.parse(storedData))
       ? JSON.parse(storedData)
@@ -89,7 +100,7 @@ const PreRegistration = () => {
 
     existingVisits.push(visitDetails);
     localStorage.setItem("patientVisits", JSON.stringify(existingVisits));
-    localStorage.setItem("patientData", JSON.stringify(updatedPatient));
+
     navigate("/patients/patient-details", {
       state: { patient: updatedPatient },
     });

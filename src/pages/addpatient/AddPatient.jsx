@@ -401,9 +401,8 @@ const AddPatient = () => {
     },
     {
       label: t("pages.addPatient.medicalInfo.medicalHistory"),
-      type: "select",
+      type: "text",
       placeholder: t("pages.addPatient.placeholders.selectMedicalHistory"),
-      options: ["None", "Condition 1", "Condition 2"],
       value: medicalHistory,
       onChange: (e) => setMedicalHistory(e.target.value),
     },
@@ -429,7 +428,7 @@ const AddPatient = () => {
   const cardDetailsFields = [
     {
       label: t("pages.addPatient.cardDetails.cardNumber"),
-      type: "number",
+      type: "text",
       placeholder:  t("pages.addPatient.placeholders.enterCardNumber"),
       value: cardNumber,
       onChange: (e) => setCardNumber(e.target.value),

@@ -16,6 +16,7 @@ const PreRegistration = () => {
   const [preferredDoctor, setPreferredDoctor] = useState("");
   const [preferredDate, setPreferredDate] = useState("");
   const [preferredTimeSlot, setPreferredTimeSlot] = useState("");
+  const [description, setDescription] = useState("");
   const [reasonForVisit, setReasonForVisit] = useState("");
   const [currentSymptoms, setCurrentSymptoms] = useState("");
   const [symptomsDuration, setSymptomsDuration] = useState("");
@@ -35,13 +36,13 @@ const PreRegistration = () => {
       setPolicyNumber(patient.policyNumber || "");
       setSubscriberName(patient.subscriberName || "");
       setRelationship(patient.relationship || "");
+      setDescription(patient.description || "");
     }
   }, [patient]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const visitId = `#${Math.floor(1000 + Math.random() * 9000)}`;
-
     const today = new Date();
     const selectedDate = new Date(preferredDate);
 
@@ -52,23 +53,33 @@ const PreRegistration = () => {
       return;
     }
 
+    const updatedPatient = {
+      ...patient,
+      description,
+      insuranceProvider,
+      policyNumber,
+      subscriberName,
+      relationship,
+    };
+
     const visitDetails = {
-      patientId: patient?.id,
-      name: patient?.name,
+      patientId: updatedPatient.id,
+      name: updatedPatient.name,
       visitId,
       visitType,
       department,
       preferredDoctor,
       preferredDate,
       preferredTimeSlot,
-      reasonForVisit: reasonForVisit,
-      currentSymptoms: currentSymptoms,
-      symptomsDuration: symptomsDuration,
-      insuranceProvider: insuranceProvider,
-      policyNumber: policyNumber,
-      subscriberName: subscriberName,
-      relationship: relationship,
-      additionalRequirement: additionalRequirement,
+      description: updatedPatient.description,
+      reasonForVisit,
+      currentSymptoms,
+      symptomsDuration,
+      insuranceProvider: updatedPatient.insuranceProvider,
+      policyNumber: updatedPatient.policyNumber,
+      subscriberName: updatedPatient.subscriberName,
+      relationship: updatedPatient.relationship,
+      additionalRequirement,
     };
 
     const storedData = localStorage.getItem("patientVisits");
@@ -78,7 +89,10 @@ const PreRegistration = () => {
 
     existingVisits.push(visitDetails);
     localStorage.setItem("patientVisits", JSON.stringify(existingVisits));
-    navigate("/patients/patient-details", { state: { patient } });
+    localStorage.setItem("patientData", JSON.stringify(updatedPatient));
+    navigate("/patients/patient-details", {
+      state: { patient: updatedPatient },
+    });
   };
 
   const visitInfoFields = [
@@ -177,6 +191,17 @@ const PreRegistration = () => {
     {
       type: "text",
       label: t(
+        "pages.previsitregistration.medicalInformation.description.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.medicalInformation.description.placeholder"
+      ),
+      value: description,
+      onChange: (e) => setDescription(e.target.value),
+    },
+    {
+      type: "text",
+      label: t(
         "pages.previsitregistration.medicalInformation.reasonForVisit.label"
       ),
       placeholder: t(
@@ -197,24 +222,13 @@ const PreRegistration = () => {
       onChange: (e) => setCurrentSymptoms(e.target.value),
     },
     {
-      type: "select",
+      type: "text",
       label: t(
         "pages.previsitregistration.medicalInformation.symptomsDuration.label"
       ),
       placeholder: t(
         "pages.previsitregistration.medicalInformation.symptomsDuration.placeholder"
       ),
-      options: [
-        t(
-          "pages.previsitregistration.medicalInformation.symptomsDuration.options.hours"
-        ),
-        t(
-          "pages.previsitregistration.medicalInformation.symptomsDuration.options.days"
-        ),
-        t(
-          "pages.previsitregistration.medicalInformation.symptomsDuration.options.weeks"
-        ),
-      ],
       value: symptomsDuration,
       onChange: (e) => setSymptomsDuration(e.target.value),
     },
@@ -378,7 +392,7 @@ const PreRegistration = () => {
                     )
                   ) {
                     return (
-                      <label key={index} className="block col-span-3">
+                      <label key={index} className="block col-span-2">
                         <span className="text-sm font-medium">
                           {field.label}
                         </span>

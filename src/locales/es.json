@@ -323,6 +323,10 @@
       },
       "medicalInformation": {
         "title": "Información Médica",
+        "description": {
+          "label": "Descripción",
+          "placeholder": "Descripción aquí"
+        },
         "reasonForVisit": {
           "label": "Motivo de la Visita",
           "placeholder": "Breve descripción de su problema médico"
@@ -333,12 +337,7 @@
         },
         "symptomsDuration": {
           "label": "Duración de los Síntomas",
-          "placeholder": "Horas",
-          "options": {
-            "hours": "Horas",
-            "days": "Días",
-            "weeks": "Semanas"
-          }
+          "placeholder": "Duración de los síntomas aquí."
         }
       },
       "insuranceInformation": {
@@ -517,11 +516,7 @@
         "title": "Detalles de Seguimiento",
         "required": {
           "label": "Seguimiento Requerido",
-          "placeholder": "Seleccionar Opción",
-          "options": {
-            "option1": "Opción 1",
-            "option2": "Opción 2"
-          }
+          "placeholder": "Seguimiento aquí"
         },
         "preferredDate": {
           "label": "Fecha Preferida",

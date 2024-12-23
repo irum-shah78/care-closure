@@ -328,6 +328,10 @@
       },
       "medicalInformation": {
         "title": "Enfòmasyon Medikal",
+        "description": {
+          "label": "Deskripsyon",
+          "placeholder": "Deskripsyon isit"
+        },
         "reasonForVisit": {
           "label": "Rezon Pou Vizit",
           "placeholder": "Bay yon ti Deskripsyon sou Pwoblèm Medikal ou"
@@ -338,12 +342,7 @@
         },
         "symptomsDuration": {
           "label": "Dire Sentòm yo",
-          "placeholder": "Orè",
-          "options": {
-            "hours": "Orè",
-            "days": "Jou",
-            "weeks": "Semèn"
-          }
+          "placeholder": "Sentòm yo dire isit la"
         }
       },
       "insuranceInformation": {
@@ -522,11 +521,7 @@
         "title": "Detay Suivi",
         "required": {
           "label": "Suivi Nesesè",
-          "placeholder": "Chwazi Opsyon",
-          "options": {
-            "option1": "Opsyon 1",
-            "option2": "Opsyon 2"
-          }
+          "placeholder": "Swiv-up isit la"
         },
         "preferredDate": {
           "label": "Dat Preferab",

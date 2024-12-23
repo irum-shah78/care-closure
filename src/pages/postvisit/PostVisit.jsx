@@ -66,13 +66,9 @@ const PostVisit = () => {
 
   const followupFields = [
     {
-      type: "select",
+      type: "text",
       label: t("pages.postvisit.followupSection.required.label"),
       placeholder: t("pages.postvisit.followupSection.required.placeholder"),
-      options: [
-        t("pages.postvisit.followupSection.required.options.option1"),
-        t("pages.postvisit.followupSection.required.options.option2"),
-      ],
     },
     {
       type: "date",

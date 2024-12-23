@@ -328,6 +328,10 @@
       },
       "medicalInformation": {
         "title": "Medical Information",
+        "description": {
+          "label": "Description",
+          "placeholder": "Description here"
+        },
         "reasonForVisit": {
           "label": "Reason For Visit",
           "placeholder": "Brief Description of your Medical Concern"
@@ -338,12 +342,7 @@
         },
         "symptomsDuration": {
           "label": "Symptoms Duration",
-          "placeholder": "Hours",
-          "options": {
-            "hours": "Hours",
-            "days": "Days",
-            "weeks": "Weeks"
-          }
+          "placeholder": "Symptoms duration here"
         }
       },
       "insuranceInformation": {
@@ -522,11 +521,7 @@
         "title": "Follow-up Details",
         "required": {
           "label": "Follow-up Required",
-          "placeholder": "Select Option",
-          "options": {
-            "option1": "Option 1",
-            "option2": "Option 2"
-          }
+          "placeholder": "Follow-up here"
         },
         "preferredDate": {
           "label": "Preferred Date",

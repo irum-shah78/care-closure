@@ -328,6 +328,10 @@
       },
       "medicalInformation": {
         "title": "医疗信息",
+        "description": {
+          "label": "描述",
+          "placeholder": "在这里描述"
+        },
         "reasonForVisit": {
           "label": "访问原因",
           "placeholder": "简述您的医疗问题"
@@ -338,12 +342,7 @@
         },
         "symptomsDuration": {
           "label": "症状持续时间",
-          "placeholder": "小时",
-          "options": {
-            "hours": "小时",
-            "days": "天",
-            "weeks": "周"
-          }
+          "placeholder": "症状持续时间在这里"
         }
       },
       "insuranceInformation": {
@@ -522,11 +521,7 @@
         "title": "后续详情",
         "required": {
           "label": "是否需要后续",
-          "placeholder": "选择选项",
-          "options": {
-            "option1": "选项 1",
-            "option2": "选项 2"
-          }
+          "placeholder": "后续跟进看这里"
         },
         "preferredDate": {
           "label": "首选日期",

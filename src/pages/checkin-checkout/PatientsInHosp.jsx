@@ -30,40 +30,6 @@ const PatientsInHospital = () => {
     setAppointmentsData(storedAppointments);
   }, []);
 
-  useEffect(() => {
-    const fetchPatients = async () => {
-      try {
-        const headers = {
-          "X-xPxApp-App-Account-Id": "<APP_ACCOUNT_ID>",
-          "X-xPxApp-App-Auth": "<MD5_AUTH_TOKEN>",
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer <YOUR_AUTH_TOKEN>",
-        };
-
-        const response = await axios.get(
-          "https://localhost:8000/patient-profiles",
-          {
-            headers,
-            params: {
-              q: searchTerm,
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          setPatientsData(response.data);
-        } else {
-          console.error("Failed to fetch patient profiles");
-        }
-      } catch (error) {
-        console.error("Error fetching patient profiles:", error);
-      }
-    };
-
-    fetchPatients();
-  }, [searchTerm]);
-
   const combinedData = patientsData.map((patient) => {
     const patientAppointments = appointmentsData.filter(
       (appointment) => appointment.patientId === patient.id

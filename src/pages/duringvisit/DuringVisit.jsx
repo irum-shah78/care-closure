@@ -5,6 +5,7 @@ import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 const DuringVisit = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -42,7 +43,15 @@ const DuringVisit = () => {
     navigate("/patients/patient-details", { state: { patient } });
   };
 
-  const handleSubmit = (e) => {
+  const API_AUTH_HEADERS = {
+    Authorization: "Bearer yourAuthToken",
+    "X-xPxApp-App-Account-Id": "yourAppAccountId",
+    "X-xPxApp-App-Auth": "yourAppAuth",
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const visitDetails = {
@@ -64,15 +73,62 @@ const DuringVisit = () => {
       assignedTime,
     };
 
-    const storedData = localStorage.getItem("duringVisitDetails");
-    const existingDetails = Array.isArray(JSON.parse(storedData))
-      ? JSON.parse(storedData)
-      : [];
+    try {
+      await axios.post("http://localost:8000/records", visitDetails, {
+        headers: API_AUTH_HEADERS,
+      });
 
-    existingDetails.push(visitDetails);
-    localStorage.setItem("duringVisitDetails", JSON.stringify(existingDetails));
-    navigate("/patients/patient-details", { state: { patient } });
+      const storedData = localStorage.getItem("duringVisitDetails");
+      const existingDetails = Array.isArray(JSON.parse(storedData))
+        ? JSON.parse(storedData)
+        : [];
+
+      existingDetails.push(visitDetails);
+      localStorage.setItem(
+        "duringVisitDetails",
+        JSON.stringify(existingDetails)
+      );
+
+      navigate("/patients/patient-details", { state: { patient } });
+    } catch (error) {
+      console.error("Error creating the visit record:", error);
+      alert(
+        "There was an error while submitting the visit record. Please try again."
+      );
+    }
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const visitDetails = {
+  //     firstName,
+  //     middleName,
+  //     lastName,
+  //     insuranceProvider,
+  //     insuranceNumber,
+  //     insuranceStatus,
+  //     wardType,
+  //     roomNumber,
+  //     bedNumber,
+  //     admissionType,
+  //     assignedDoctor,
+  //     assignedNurse,
+  //     additionalNotes,
+  //     admissionStatus,
+  //     assignedDate,
+  //     assignedTime,
+  //   };
+
+  //   const storedData = localStorage.getItem("duringVisitDetails");
+  //   const existingDetails = Array.isArray(JSON.parse(storedData))
+  //     ? JSON.parse(storedData)
+  //     : [];
+
+  //   existingDetails.push(visitDetails);
+  //   localStorage.setItem("duringVisitDetails", JSON.stringify(existingDetails));
+  //   navigate("/patients/patient-details", { state: { patient } });
+  // };
 
   const patientDetailsFields = [
     {
@@ -166,15 +222,9 @@ const DuringVisit = () => {
         "pages.duringvisit.roomAssignment.admissionType.placeholder"
       ),
       options: [
-        t(
-          "pages.duringvisit.roomAssignment.admissionType.options.outpatient"
-        ),
-        t(
-       "pages.duringvisit.roomAssignment.admissionType.options.inpatient"
-        ),
-        t(
-          "pages.duringvisit.roomAssignment.admissionType.options.emergency"
-           ),
+        t("pages.duringvisit.roomAssignment.admissionType.options.outpatient"),
+        t("pages.duringvisit.roomAssignment.admissionType.options.inpatient"),
+        t("pages.duringvisit.roomAssignment.admissionType.options.emergency"),
       ],
       value: admissionType,
       onChange: (e) => setAdmissionType(e.target.value),

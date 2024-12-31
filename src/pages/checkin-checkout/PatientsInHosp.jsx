@@ -10,6 +10,7 @@ import waitingIcon from "../../assets/waiting.svg";
 import inProgressIcon from "../../assets/inprogress.svg";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const PatientsInHospital = () => {
   const { t } = useTranslation();
@@ -28,6 +29,40 @@ const PatientsInHospital = () => {
       JSON.parse(localStorage.getItem("patientVisits")) || [];
     setAppointmentsData(storedAppointments);
   }, []);
+
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        const headers = {
+          "X-xPxApp-App-Account-Id": "<APP_ACCOUNT_ID>",
+          "X-xPxApp-App-Auth": "<MD5_AUTH_TOKEN>",
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer <YOUR_AUTH_TOKEN>",
+        };
+
+        const response = await axios.get(
+          "https://localhost:8000/patient-profiles",
+          {
+            headers,
+            params: {
+              q: searchTerm,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          setPatientsData(response.data);
+        } else {
+          console.error("Failed to fetch patient profiles");
+        }
+      } catch (error) {
+        console.error("Error fetching patient profiles:", error);
+      }
+    };
+
+    fetchPatients();
+  }, [searchTerm]);
 
   const combinedData = patientsData.map((patient) => {
     const patientAppointments = appointmentsData.filter(
@@ -67,9 +102,36 @@ const PatientsInHospital = () => {
     patient.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handlePatientDetails = (patient) => {
-    navigate("/patients/patient-details", { state: { patient } });
+  const handlePatientDetails = async (patient) => {
+    try {
+      const headers = {
+        "X-xPxApp-App-Account-Id": "<APP_ACCOUNT_ID>",
+        "X-xPxApp-App-Auth": "<MD5_AUTH_TOKEN>",
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer <YOUR_AUTH_TOKEN>",
+      };
+
+      const response = await axios.get(
+        `https://localhost:8000/patient-profiles/${patient.id}`,
+        { headers }
+      );
+
+      if (response.status === 200) {
+        navigate("/patients/patient-details", {
+          state: { patientDetails: response.data },
+        });
+      } else {
+        console.error("Failed to fetch patient details");
+      }
+    } catch (error) {
+      console.error("Error fetching patient details:", error);
+    }
   };
+
+  // const handlePatientDetails = (patient) => {
+  //   navigate("/patients/patient-details", { state: { patient } });
+  // };
   return (
     <div className="min-h-screen flex bg-gray-100">
       <Sidebar />

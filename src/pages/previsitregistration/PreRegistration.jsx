@@ -5,6 +5,7 @@ import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const PreRegistration = () => {
   const { t } = useTranslation();
@@ -40,7 +41,15 @@ const PreRegistration = () => {
     }
   }, [patient]);
 
-  const handleSubmit = (e) => {
+  const API_AUTH_HEADERS = {
+    Authorization: "Bearer yourAuthToken",
+    "X-xPxApp-App-Account-Id": "yourAppAccountId",
+    "X-xPxApp-App-Auth": "yourAppAuth",
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const visitId = `#${Math.floor(1000 + Math.random() * 9000)}`;
     const today = new Date();
@@ -82,29 +91,105 @@ const PreRegistration = () => {
       additionalRequirement,
     };
 
-    const existingPatientsRaw = localStorage.getItem("patients");
-    const existingPatients = JSON.parse(existingPatientsRaw) || [];
+    try {
+      await axios.post("http://localhost:8000/records", visitDetails, {
+        headers: API_AUTH_HEADERS,
+      });
 
-    const updatedPatients = existingPatients.map((existingPatient) =>
-      existingPatient.id === updatedPatient.id
-        ? updatedPatient
-        : existingPatient
-    );
+      const existingPatientsRaw = localStorage.getItem("patients");
+      const existingPatients = JSON.parse(existingPatientsRaw) || [];
 
-    localStorage.setItem("patients", JSON.stringify(updatedPatients));
+      const updatedPatients = existingPatients.map((existingPatient) =>
+        existingPatient.id === updatedPatient.id
+          ? updatedPatient
+          : existingPatient
+      );
 
-    const storedData = localStorage.getItem("patientVisits");
-    const existingVisits = Array.isArray(JSON.parse(storedData))
-      ? JSON.parse(storedData)
-      : [];
+      localStorage.setItem("patients", JSON.stringify(updatedPatients));
 
-    existingVisits.push(visitDetails);
-    localStorage.setItem("patientVisits", JSON.stringify(existingVisits));
+      const storedData = localStorage.getItem("patientVisits");
+      const existingVisits = Array.isArray(JSON.parse(storedData))
+        ? JSON.parse(storedData)
+        : [];
 
-    navigate("/patients/patient-details", {
-      state: { patient: updatedPatient },
-    });
+      existingVisits.push(visitDetails);
+      localStorage.setItem("patientVisits", JSON.stringify(existingVisits));
+      navigate("/patients/patient-details", {
+        state: { patient: updatedPatient },
+      });
+    } catch (error) {
+      console.error("Error creating the visit record:", error);
+      alert(
+        "There was an error while submitting the visit record. Please try again."
+      );
+    }
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const visitId = `#${Math.floor(1000 + Math.random() * 9000)}`;
+  //   const today = new Date();
+  //   const selectedDate = new Date(preferredDate);
+
+  //   if (selectedDate < today.setHours(0, 0, 0, 0)) {
+  //     alert(
+  //       "The appointment date cannot be in the past. Please select a valid date."
+  //     );
+  //     return;
+  //   }
+
+  //   const updatedPatient = {
+  //     ...patient,
+  //     description,
+  //     insuranceProvider,
+  //     policyNumber,
+  //     subscriberName,
+  //     relationship,
+  //   };
+
+  //   const visitDetails = {
+  //     patientId: updatedPatient.id,
+  //     name: updatedPatient.name,
+  //     visitId,
+  //     visitType,
+  //     department,
+  //     preferredDoctor,
+  //     preferredDate,
+  //     preferredTimeSlot,
+  //     description: updatedPatient.description,
+  //     reasonForVisit,
+  //     currentSymptoms,
+  //     symptomsDuration,
+  //     insuranceProvider: updatedPatient.insuranceProvider,
+  //     policyNumber: updatedPatient.policyNumber,
+  //     subscriberName: updatedPatient.subscriberName,
+  //     relationship: updatedPatient.relationship,
+  //     additionalRequirement,
+  //   };
+
+  //   const existingPatientsRaw = localStorage.getItem("patients");
+  //   const existingPatients = JSON.parse(existingPatientsRaw) || [];
+
+  //   const updatedPatients = existingPatients.map((existingPatient) =>
+  //     existingPatient.id === updatedPatient.id
+  //       ? updatedPatient
+  //       : existingPatient
+  //   );
+
+  //   localStorage.setItem("patients", JSON.stringify(updatedPatients));
+
+  //   const storedData = localStorage.getItem("patientVisits");
+  //   const existingVisits = Array.isArray(JSON.parse(storedData))
+  //     ? JSON.parse(storedData)
+  //     : [];
+
+  //   existingVisits.push(visitDetails);
+  //   localStorage.setItem("patientVisits", JSON.stringify(existingVisits));
+
+  //   navigate("/patients/patient-details", {
+  //     state: { patient: updatedPatient },
+  //   });
+  // };
 
   const visitInfoFields = [
     {

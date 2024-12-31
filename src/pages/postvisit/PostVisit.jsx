@@ -5,6 +5,7 @@ import FormSection from "../../components/formselection/FormSelection";
 import backIcon from "../../assets/back-icon.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const PostVisit = () => {
   const { t } = useTranslation();
@@ -45,7 +46,15 @@ const PostVisit = () => {
     navigate("/patients/patient-details", { state: { patient } });
   };
 
-  const handleSubmit = (e) => {
+  const API_AUTH_HEADERS = {
+    Authorization: "Bearer yourAuthToken",
+    "X-xPxApp-App-Account-Id": "yourAppAccountId",
+    "X-xPxApp-App-Auth": "yourAppAuth",
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const postVisitDetails = {
@@ -68,15 +77,59 @@ const PostVisit = () => {
       dischargedTime,
     };
 
-    const storedData = localStorage.getItem("postVisitDetails");
-    const existingDetails = Array.isArray(JSON.parse(storedData))
-      ? JSON.parse(storedData)
-      : [];
+    try {
+      await axios.post("http://localost:8000/records", postVisitDetails, {
+        headers: API_AUTH_HEADERS,
+      });
+      const storedData = localStorage.getItem("postVisitDetails");
+      const existingDetails = Array.isArray(JSON.parse(storedData))
+        ? JSON.parse(storedData)
+        : [];
 
-    existingDetails.push(postVisitDetails);
-    localStorage.setItem("postVisitDetails", JSON.stringify(existingDetails));
-    navigate("/patients/patient-details", { state: { patient } });
+      existingDetails.push(postVisitDetails);
+      localStorage.setItem("postVisitDetails", JSON.stringify(existingDetails));
+
+      navigate("/patients/patient-details", { state: { patient } });
+    } catch (error) {
+      console.error("Error creating the visit record:", error);
+      alert(
+        "There was an error while submitting the post-visit record. Please try again."
+      );
+    }
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const postVisitDetails = {
+  //     consultationFee,
+  //     medicatedCharges,
+  //     additionalServices,
+  //     totalAmount,
+  //     paymentMethod,
+  //     paymentStatus,
+  //     followupRequired,
+  //     preferredDate,
+  //     assignedDoctor,
+  //     department,
+  //     diagnosis,
+  //     treatmentSummary,
+  //     medicationsPrescribed,
+  //     specialInstructions,
+  //     statusUpdate,
+  //     dischargedDate,
+  //     dischargedTime,
+  //   };
+
+  //   const storedData = localStorage.getItem("postVisitDetails");
+  //   const existingDetails = Array.isArray(JSON.parse(storedData))
+  //     ? JSON.parse(storedData)
+  //     : [];
+
+  //   existingDetails.push(postVisitDetails);
+  //   localStorage.setItem("postVisitDetails", JSON.stringify(existingDetails));
+  //   navigate("/patients/patient-details", { state: { patient } });
+  // };
 
   const paymentProcessingFields = [
     {

@@ -9,6 +9,7 @@ import chronicIcon from "../../assets/chronic.svg";
 import acuteIcon from "../../assets/acute.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
 const PatientDetails = () => {
@@ -21,6 +22,7 @@ const PatientDetails = () => {
     total: 0,
     lastAppointment: "N/A",
   });
+  const [records, setRecords] = useState([]);
 
   useEffect(() => {
     if (patient) {
@@ -64,16 +66,102 @@ const PatientDetails = () => {
     }
   }, [patient]);
 
+  useEffect(() => {
+    if (patient) {
+      localStorage.setItem("patient", JSON.stringify(patient));
+    }
+    fetchPatientRecords();
+  }, [patient]);
+
+  const fetchPatientRecords = async () => {
+    const patientId = patient?.id;
+    const recordType = "inpatient";
+
+    const headers = {
+      "X-xPxApp-App-Account-Id": "<APP_ACCOUNT_ID>",
+      "X-xPxApp-App-Auth": "<APP_ACCOUNT_AUTH>",
+      Authorization: `Bearer <ACCESS_TOKEN>`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const response = await axios.get(
+        `/patient-profiles/${patientId}/records`,
+        {
+          headers,
+          params: { recordType },
+        }
+      );
+      setRecords(response.data);
+    } catch (error) {
+      console.error("Error fetching patient records:", error);
+    }
+  };
+
+  const API_AUTH_HEADERS = {
+    Authorization: "Bearer yourAuthToken",
+    "X-xPxApp-App-Account-Id": "yourAppAccountId",
+    "X-xPxApp-App-Auth": "yourAppAuth",
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  };
+
+  const fetchRecords = async (patientId, recordType) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8000/patient-profiles/${patientId}/records`,
+        {
+          headers: API_AUTH_HEADERS,
+          params: {
+            recordType,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching records:", error);
+      return null;
+    }
+  };
+
+  const handlePreVisit = async () => {
+    const records = await fetchRecords(patient.id, "inpatient");
+    if (records) {
+      navigate("/patients/patient-details/pre-visit", {
+        state: { patient, records },
+      });
+    }
+  };
+
+  const handleDuringVisit = async () => {
+    const records = await fetchRecords(patient.id, "outpatient");
+    if (records) {
+      navigate("/patients/patient-details/during-visit", {
+        state: { patient, records },
+      });
+    }
+  };
+
+  const handlePostVisit = async () => {
+    const records = await fetchRecords(patient.id, "emergency");
+    if (records) {
+      navigate("/patients/patient-details/post-visit", {
+        state: { patient, records },
+      });
+    }
+  };
+
   const handleBack = () => navigate("/patients");
-  const handlePreVisit = () => {
-    navigate("/patients/patient-details/pre-visit", { state: { patient } });
-  };
-  const handleDuringVisit = () => {
-    navigate("/patients/patient-details/during-visit", { state: { patient } });
-  };
-  const handlePostVisit = () => {
-    navigate("/patients/patient-details/post-visit", { state: { patient } });
-  };
+  // const handlePreVisit = () => {
+  //   navigate("/patients/patient-details/pre-visit", { state: { patient } });
+  // };
+  // const handleDuringVisit = () => {
+  //   navigate("/patients/patient-details/during-visit", { state: { patient } });
+  // };
+  // const handlePostVisit = () => {
+  //   navigate("/patients/patient-details/post-visit", { state: { patient } });
+  // };
 
   return (
     <div className="min-h-screen flex bg-gray-100">

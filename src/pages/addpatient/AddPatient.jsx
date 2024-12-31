@@ -93,7 +93,54 @@ const AddPatient = () => {
     navigate("/patients");
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
+
+  //   const newPatient = {
+  //     id: `#${Math.floor(1000 + Math.random() * 9000)}`,
+  //     status: getRandomStatus(),
+  //     name,
+  //     lastName,
+  //     dob,
+  //     gender,
+  //     maritalStatus,
+  //     bloodGroup,
+  //     age,
+  //     description,
+  //     mobileNumber,
+  //     email,
+  //     city,
+  //     address,
+  //     state,
+  //     pincode,
+  //     emergencyContactName,
+  //     emergencyRelationship,
+  //     emergencyContactNumber,
+  //     allergies,
+  //     medications,
+  //     medicalHistory,
+  //     insuranceProvider,
+  //     policyNumber,
+  //     cardNumber,
+  //     expiryDate,
+  //     cvv,
+  //     paymentStatus,
+  //   };
+
+  //   const existingPatientsRaw = localStorage.getItem("patients");
+  //   const existingPatients = Array.isArray(JSON.parse(existingPatientsRaw))
+  //     ? JSON.parse(existingPatientsRaw)
+  //     : [];
+
+  //   existingPatients.push(newPatient);
+  //   localStorage.setItem("patients", JSON.stringify(existingPatients));
+
+  //   navigate("/patients");
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const getRandomStatus = () => (Math.random() < 0.5 ? "Chronic" : "Acute");
@@ -129,15 +176,38 @@ const AddPatient = () => {
       paymentStatus,
     };
 
-    const existingPatientsRaw = localStorage.getItem("patients");
-    const existingPatients = Array.isArray(JSON.parse(existingPatientsRaw))
-      ? JSON.parse(existingPatientsRaw)
-      : [];
+    try {
+      const headers = {
+        "X-xPxApp-App-Account-Id": "<APP_ACCOUNT_ID>",
+        "X-xPxApp-App-Auth": "<MD5_AUTH_TOKEN>",
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer <YOUR_AUTH_TOKEN>",
+      };
 
-    existingPatients.push(newPatient);
-    localStorage.setItem("patients", JSON.stringify(existingPatients));
+      const response = await axios.post(
+        "https://localhost:8000/records",
+        newPatient,
+        { headers }
+      );
 
-    navigate("/patients");
+      if (response.status === 201) {
+        console.log("Patient record saved successfully:", response.data);
+        const existingPatientsRaw = localStorage.getItem("patients");
+        const existingPatients = Array.isArray(JSON.parse(existingPatientsRaw))
+          ? JSON.parse(existingPatientsRaw)
+          : [];
+        existingPatients.push(response.data);
+        localStorage.setItem("patients", JSON.stringify(existingPatients));
+
+        navigate("/patients");
+      } else {
+        console.error("Unexpected response status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error saving patient record:", error);
+      alert("Failed to save patient record. Please try again.");
+    }
   };
 
   const renderField = (field, index) => {
@@ -429,7 +499,7 @@ const AddPatient = () => {
     {
       label: t("pages.addPatient.cardDetails.cardNumber"),
       type: "text",
-      placeholder:  t("pages.addPatient.placeholders.enterCardNumber"),
+      placeholder: t("pages.addPatient.placeholders.enterCardNumber"),
       value: cardNumber,
       onChange: (e) => setCardNumber(e.target.value),
     },
@@ -454,7 +524,11 @@ const AddPatient = () => {
       type: "select",
       label: t("pages.addPatient.paymentInfo.paymentStatus"),
       placeholder: t("pages.addPatient.placeholders.selectPaymentStatus"),
-      options: [t("pages.addPatient.paymentStatus.pending"), t("pages.addPatient.paymentStatus.completed"), t("pages.addPatient.paymentStatus.notPaid")],
+      options: [
+        t("pages.addPatient.paymentStatus.pending"),
+        t("pages.addPatient.paymentStatus.completed"),
+        t("pages.addPatient.paymentStatus.notPaid"),
+      ],
       value: paymentStatus,
       onChange: (e) => setPaymentStatus(e.target.value),
     },
@@ -528,7 +602,7 @@ const AddPatient = () => {
                     return (
                       <label
                         key={index}
-                        className="block col-span-1 sm:col-span-2 lg:col-span-3"
+                        className="block col-span-1 sm:col-span-2 lg:col-span-2"
                       >
                         <span className="text-sm font-medium">
                           {field.label}
@@ -571,7 +645,10 @@ const AddPatient = () => {
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {insuranceInformationFields.map((field, index) => {
-                  if (field.label === t("pages.addPatient.insuranceInfo.insuranceProvider")) {
+                  if (
+                    field.label ===
+                    t("pages.addPatient.insuranceInfo.insuranceProvider")
+                  ) {
                     return (
                       <label
                         key={index}
@@ -591,7 +668,10 @@ const AddPatient = () => {
                       </label>
                     );
                   }
-                  if (field.label === t("pages.addPatient.insuranceInfo.policyNumber")) {
+                  if (
+                    field.label ===
+                    t("pages.addPatient.insuranceInfo.policyNumber")
+                  ) {
                     return (
                       <label key={index} className="block col-span-1 relative">
                         <span className="text-sm font-medium">
@@ -620,7 +700,7 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection  title={t("pages.addPatient.cardDetails.title")}>
+            <FormSection title={t("pages.addPatient.cardDetails.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {cardDetailsFields.map((field, index) =>

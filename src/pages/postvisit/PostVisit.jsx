@@ -30,6 +30,37 @@ const PostVisit = () => {
   const [dischargedDate, setDischargedDate] = useState("");
   const [dischargedTime, setDischargedTime] = useState("");
 
+  const [egressDate, setEgressDate] = useState("");
+  const [egressType, setEgressType] = useState("");
+  const [egressComment, setEgressComment] = useState("");
+  const [egressDepartmentId, setEgressDepartmentId] = useState("");
+  const [egressDepartment, setEgressDepartment] = useState("");
+  const [egressTransportWay, setEgressTransportWay] = useState("");
+  const [egressTransportInfo, setEgressTransportInfo] = useState([]);
+  const [signEgress, setSignEgress] = useState(false);
+
+  // Follow-up States
+  const [nextAppointmentDate, setNextAppointmentDate] = useState("");
+  const [referredTo, setReferredTo] = useState("");
+  const [isCoordinatedReferredTo, setIsCoordinatedReferredTo] = useState(false);
+  const [planEgress, setPlanEgress] = useState("");
+  const [medicalDischargePrintForm, setMedicalDischargePrintForm] =
+    useState(false);
+
+  // Final Documentation States
+  const [notes, setNotes] = useState("");
+  const [diseaseOrigin, setDiseaseOrigin] = useState("");
+  const [canceledDate, setCanceledDate] = useState("");
+  const [cancelReason, setCancelReason] = useState("");
+
+  // Treatments States
+  const [treatment, setTreatment] = useState([
+    { recordStage: 3, description: "" },
+  ]);
+  const [diagnostic, setDiagnostic] = useState([
+    { recordStage: 3, description: "" },
+  ]);
+
   useEffect(() => {
     const calculateTotal = () => {
       const total =
@@ -75,6 +106,25 @@ const PostVisit = () => {
       statusUpdate,
       dischargedDate,
       dischargedTime,
+      egressDate,
+      egressType,
+      egressComment,
+      egressDepartmentId,
+      egressDepartment,
+      egressTransportWay,
+      egressTransportInfo,
+      signEgress,
+      nextAppointmentDate,
+      referredTo,
+      isCoordinatedReferredTo,
+      planEgress,
+      medicalDischargePrintForm,
+      notes,
+      diseaseOrigin,
+      canceledDate,
+      cancelReason,
+      treatment,
+      diagnostic,
     };
 
     try {
@@ -290,7 +340,222 @@ const PostVisit = () => {
     },
   ];
 
+  const egressDateField = [
+    {
+      type: "date",
+      label: "Egress Date",
+      value: egressDate,
+      onChange: (e) => setEgressDate(e.target.value),
+    },
+  ];
+
+  const egressTypeField = [
+    {
+      type: "select",
+      label: "Egress Type",
+      placeholder: "Select type",
+      value: egressType,
+      onChange: (e) => setEgressType(e.target.value),
+      options: [
+        "Medical Discharge",
+        "Medical Discharge On Request",
+        "Escape",
+        "Referral",
+        "Decease",
+      ],
+    },
+  ];
+
+  const egressCommentField = [
+    {
+      type: "text",
+      label: "Egress Comment",
+      placeholder: "Enter egress comment",
+      value: egressComment,
+      onChange: (e) => setEgressComment(e.target.value),
+    },
+  ];
+
+  const egressDepartmentIdField = [
+    {
+      type: "text",
+      label: "Egress Department ID",
+      placeholder: "Enter egress department ID",
+      value: egressDepartmentId,
+      onChange: (e) => setEgressDepartmentId(e.target.value),
+    },
+  ];
+
+  const egressDepartmentField = [
+    {
+      type: "text",
+      label: "Egress Department",
+      placeholder: "Enter egress department",
+      value: egressDepartment,
+      onChange: (e) => setEgressDepartment(e.target.value),
+    },
+  ];
+
+  const egressTransportWayField = [
+    {
+      type: "text",
+      label: "Egress Transport Way",
+      placeholder: "Enter transport way",
+      value: egressTransportWay,
+      onChange: (e) => setEgressTransportWay(e.target.value),
+    },
+  ];
+
+  const egressTransportInfoField = [
+    {
+      type: "text",
+      label: "Egress Transport Info",
+      placeholder: "Enter transport info",
+      value: egressTransportInfo.name,
+      onChange: (e) =>
+        setEgressTransportInfo({
+          ...egressTransportInfo,
+          name: e.target.value,
+        }),
+    },
+  ];
+
+  const signEgressField = [
+    {
+      type: "checkbox",
+      label: "Sign Egress",
+      checked: signEgress,
+      onChange: (e) => setSignEgress(e.target.checked),
+    },
+  ];
+
+  // Follow-up Fields
+  const nextAppointmentDateField = [
+    {
+      type: "date",
+      label: "Next Appointment Date",
+      value: nextAppointmentDate,
+      onChange: (e) => setNextAppointmentDate(e.target.value),
+    },
+  ];
+
+  const referredToField = [
+    {
+      type: "text",
+      label: "Referred To",
+      placeholder: "Enter referral",
+      value: referredTo,
+      onChange: (e) => setReferredTo(e.target.value),
+    },
+  ];
+
+  const planEgressField = [
+    {
+      type: "text",
+      label: "Plan Egress",
+      placeholder: "Enter plan",
+      value: planEgress,
+      onChange: (e) => setPlanEgress(e.target.value),
+    },
+  ];
+  const isCoordinatedReferredToField = [
+    {
+      type: "checkbox",
+      label: "Is Coordinated Referred To",
+      checked: isCoordinatedReferredTo,
+      onChange: (e) => setIsCoordinatedReferredTo(e.target.checked),
+    },
+  ];
+
+  const medicalDischargePrintFormField = [
+    {
+      type: "checkbox",
+      label: "Medical Discharge Print Form",
+      checked: medicalDischargePrintForm,
+      onChange: (e) => setMedicalDischargePrintForm(e.target.checked),
+    },
+  ];
+
+  // Final Documentation Fields
+  const notesField = [
+    {
+      type: "text",
+      label: "Notes",
+      placeholder: "Enter notes",
+      value: notes,
+      onChange: (e) => setNotes(e.target.value),
+    },
+  ];
+
+  const diseaseOriginField = [
+    {
+      type: "text",
+      label: "Disease Origin",
+      placeholder: "Enter disease origin",
+      value: diseaseOrigin,
+      onChange: (e) => setDiseaseOrigin(e.target.value),
+    },
+  ];
+
+  const canceledDateField = [
+    {
+      type: "date",
+      label: "Canceled Date",
+      value: canceledDate,
+      onChange: (e) => setCanceledDate(e.target.value),
+    },
+  ];
+
+  const cancelReasonField = [
+    {
+      type: "text",
+      label: "Cancel Reason",
+      placeholder: "Enter cancel reason",
+      value: cancelReason,
+      onChange: (e) => setCancelReason(e.target.value),
+    },
+  ];
+
+  // Treatments Fields
+  const treatmentField = [
+    {
+      type: "text",
+      label: "Treatment Description",
+      placeholder: "Enter treatment description",
+      value: treatment[0].description,
+      onChange: (e) =>
+        setTreatment([{ ...treatment[0], description: e.target.value }]),
+    },
+  ];
+
+  const diagnosticField = [
+    {
+      type: "text",
+      label: "Diagnostic Description",
+      placeholder: "Enter diagnostic description",
+      value: diagnostic[0].description,
+      onChange: (e) =>
+        setDiagnostic([{ ...diagnostic[0], description: e.target.value }]),
+    },
+  ];
+
   const renderField = (field, index) => {
+    if (field.type === "checkbox") {
+      return (
+        <div key={index} className="flex items-center gap-4">
+          <input
+            type="checkbox"
+            className="w-8 h-8 accent-[#2E2559]"
+            checked={field.checked}
+            onChange={field.onChange}
+          />
+          <div className="flex flex-col w-full">
+            <label className="text-sm font-medium">{field.label}</label>
+          </div>
+        </div>
+      );
+    }
+
     if (field.type === "select") {
       return (
         <label key={index} className="block">
@@ -314,6 +579,29 @@ const PostVisit = () => {
         </label>
       );
     }
+
+    // if (field.type === "select") {
+    //   return (
+    //     <label key={index} className="block">
+    //       <span className="text-sm font-medium">{field.label}</span>
+    //       <select
+    //         className="border border-[#CDCDCD] p-2 rounded w-full mt-3 text-[#808080]"
+    //         value={field.value}
+    //         onChange={field.onChange}
+    //         required
+    //       >
+    //         <option value="" disabled>
+    //           {field.placeholder}
+    //         </option>
+    //         {field.options.map((option, idx) => (
+    //           <option key={idx} value={option.value}>
+    //             {option.label}
+    //           </option>
+    //         ))}
+    //       </select>
+    //     </label>
+    //   );
+    // }
     return (
       <label key={index} className="block">
         <span className="text-sm font-medium">{field.label}</span>
@@ -348,6 +636,86 @@ const PostVisit = () => {
             </h1>
           </div>
           <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
+            <FormSection title="Discharge Info">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {egressDateField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {egressTypeField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {egressCommentField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {egressDepartmentIdField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {egressDepartmentField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {egressTransportWayField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {egressTransportInfoField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {signEgressField.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Follow-up">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {nextAppointmentDateField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {referredToField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {planEgressField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {isCoordinatedReferredToField.map((field, index) =>
+                  renderField(field, index)
+                )}
+
+                {medicalDischargePrintFormField.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Final Documentation">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {notesField.map((field, index) => renderField(field, index))}
+                {diseaseOriginField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {canceledDateField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {cancelReasonField.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Treatments">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {treatmentField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {diagnosticField.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
             <FormSection title={t("pages.postvisit.paymentProcessing.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">

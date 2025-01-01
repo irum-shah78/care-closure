@@ -26,6 +26,36 @@ const PreRegistration = () => {
   const [subscriberName, setSubscriberName] = useState("");
   const [relationship, setRelationship] = useState("");
   const [additionalRequirement, setAdditionalRequirement] = useState("");
+  const [admissionDate, setAdmissionDate] = useState("");
+  const [arrivalDate, setArrivalDate] = useState("");
+  const [admissionOrigin, setAdmissionOrigin] = useState(null);
+  const [referredFrom, setReferredFrom] = useState(null);
+  const [isCoordinatedReferredFrom, setIsCoordinatedReferredFrom] =
+    useState(null);
+  const [admissionTransportWay, setAdmissionTransportWay] = useState("");
+  const [admissionTransportInfo, setAdmissionTransportInfo] = useState("");
+
+  const [chiefComplaintOrdinal, setChiefComplaintOrdinal] = useState("");
+  const [chiefComplaintIndexes, setChiefComplaintIndexes] = useState("");
+  const [chiefComplaintName, setChiefComplaintName] = useState("");
+  const [chiefComplaintEvolutionTime, setChiefComplaintEvolutionTime] =
+    useState("");
+  const [chiefComplaintTimeMeausre, setChiefComplaintTimeMeasure] =
+    useState("");
+  const [chiefComplaintDescription, setChiefComplaintDescription] =
+    useState("");
+  const [triage, setTriage] = useState([]);
+  const [triageSystem, setTriageSystem] = useState(null);
+  const [planAdmission, setPlanAdmission] = useState(null);
+  const [admissionPrintForm, setAdmissionPrintForm] = useState(null);
+
+  const [instituitionID, setInstituitionID] = useState("");
+  const [instituitionCode, setInstituitionCode] = useState("");
+  const [instituitionName, setInstituitionName] = useState("");
+  const [departmentID, setDepartmentID] = useState("");
+  const [departmentName, setDepartmentName] = useState("");
+  const [medicalOfficeID, setMedicalOfficeID] = useState("");
+  const [sign, setSign] = useState("");
 
   const handlePatient = () => {
     navigate("/patients/patient-details", { state: { patient } });
@@ -62,6 +92,17 @@ const PreRegistration = () => {
       return;
     }
 
+    const chiefComplaint = [
+      {
+        ordinal: parseInt(chiefComplaintOrdinal, 10),
+        capitalizeIndexes: chiefComplaintIndexes,
+        name: chiefComplaintName,
+        evolutionTime: chiefComplaintEvolutionTime,
+        timeMeasure: chiefComplaintTimeMeausre,
+        description: chiefComplaintDescription,
+      },
+    ];
+
     const updatedPatient = {
       ...patient,
       description,
@@ -89,6 +130,25 @@ const PreRegistration = () => {
       subscriberName: updatedPatient.subscriberName,
       relationship: updatedPatient.relationship,
       additionalRequirement,
+      admissionDate,
+      arrivalDate,
+      admissionOrigin,
+      referredFrom,
+      isCoordinatedReferredFrom,
+      admissionTransportWay,
+      admissionTransportInfo,
+      chiefComplaint,
+      triage,
+      triageSystem,
+      planAdmission,
+      admissionPrintForm,
+      instituitionID,
+      instituitionName,
+      instituitionCode,
+      departmentID,
+      departmentName,
+      medicalOfficeID,
+      sign,
     };
 
     try {
@@ -281,6 +341,43 @@ const PreRegistration = () => {
       value: preferredTimeSlot,
       onChange: (e) => setPreferredTimeSlot(e.target.value),
     },
+    {
+      type: "date",
+      label: "Admission Date",
+      placeholder: "",
+      value: admissionDate,
+      onChange: (e) => setAdmissionDate(e.target.value),
+    },
+    {
+      type: "date",
+      label: "Arrival Date",
+      placeholder: "",
+      value: arrivalDate,
+      onChange: (e) => setArrivalDate(e.target.value),
+    },
+    {
+      type: "select",
+      label: "Admission Origin",
+      options: ["Emergency", "Consultation"],
+      placeholder: "Select admission origin",
+      value: admissionOrigin,
+      onChange: (e) => setAdmissionOrigin(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Referred From",
+      placeholder: "Enter name",
+      value: referredFrom,
+      onChange: (e) => setReferredFrom(e.target.value),
+    },
+    {
+      type: "select",
+      label: "Coordinated Referred From",
+      placeholder: "Select any",
+      options: ["True", "False"],
+      value: isCoordinatedReferredFrom,
+      onChange: (e) => setIsCoordinatedReferredFrom(e.target.value),
+    },
   ];
 
   const medicalInformationFields = [
@@ -327,6 +424,104 @@ const PreRegistration = () => {
       ),
       value: symptomsDuration,
       onChange: (e) => setSymptomsDuration(e.target.value),
+    },
+  ];
+
+  const admissionTransportFields = [
+    {
+      type: "text",
+      label: "Admission Transport Way",
+      placeholder: "Enter Admission Transport Way",
+      value: admissionTransportWay,
+      onChange: (e) => setAdmissionTransportWay(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Admission Transport Info",
+      placeholder: "Enter Admission Transport Info",
+      value: admissionTransportInfo,
+      onChange: (e) => setAdmissionTransportInfo(e.target.value),
+    },
+  ];
+
+  const admissionPlanFields = [
+    {
+      type: "text",
+      label: "Plan Admission",
+      placeholder: "Enter Admission Plan",
+      value: planAdmission,
+      onChange: (e) => setPlanAdmission(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Admission Print Form",
+      placeholder: "Enter form",
+      value: admissionPrintForm,
+      onChange: (e) => setAdmissionPrintForm(e.target.value),
+    },
+  ];
+
+  const chiefComplaintFields = [
+    {
+      type: "number",
+      label: "Ordinal",
+      placeholder: "Enter ordinal",
+      value: chiefComplaintOrdinal,
+      onChange: (e) => setChiefComplaintOrdinal(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Capitilize Indexes",
+      placeholder: "Enter Indexes",
+      value: chiefComplaintIndexes,
+      onChange: (e) => setChiefComplaintIndexes(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Name",
+      placeholder: "Enter name",
+      value: chiefComplaintName,
+      onChange: (e) => setChiefComplaintName(e.target.value),
+    },
+    {
+      type: "number",
+      label: "Evolution Time",
+      placeholder: "Enter time",
+      value: chiefComplaintEvolutionTime,
+      onChange: (e) => setChiefComplaintEvolutionTime(e.target.value),
+    },
+    {
+      type: "select",
+      label: "Time Measure",
+      options: ["Days", "Week", "Months"],
+      placeholder: "Select time",
+      value: chiefComplaintTimeMeausre,
+      onChange: (e) => setChiefComplaintTimeMeasure(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Description",
+      placeholder: "Enter description",
+      value: chiefComplaintDescription,
+      onChange: (e) => setChiefComplaintDescription(e.target.value),
+    },
+  ];
+
+  const triageFields = [
+    {
+      type: "select",
+      label: "Triage System",
+      options: ["Manchester", "ESI", "Canadian"],
+      placeholder: "Select system",
+      value: triageSystem,
+      onChange: (e) => setTriageSystem(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Triage",
+      placeholder: "Enter triage",
+      value: triage,
+      onChange: (e) => setTriage(e.target.value),
     },
   ];
 
@@ -406,6 +601,58 @@ const PreRegistration = () => {
       ],
       value: additionalRequirement,
       onChange: (e) => setAdditionalRequirement(e.target.value),
+    },
+  ];
+
+  const institutionFields = [
+    {
+      type: "number",
+      label: "Institution ID",
+      placeholder: "Enter ID",
+      value: instituitionID,
+      onChange: (e) => setInstituitionID(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Institution Code",
+      placeholder: "Enter code",
+      value: instituitionCode,
+      onChange: (e) => setInstituitionCode(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Institution Name",
+      placeholder: "Enter name",
+      value: instituitionName,
+      onChange: (e) => setInstituitionName(e.target.value),
+    },
+    {
+      type: "number",
+      label: "Department ID",
+      placeholder: "Enter ID",
+      value: departmentID,
+      onChange: (e) => setDepartmentID(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Department Name",
+      placeholder: "Enter name",
+      value: departmentName,
+      onChange: (e) => setDepartmentName(e.target.value),
+    },
+    {
+      type: "number",
+      label: "Medical Office ID",
+      placeholder: "Enter ID",
+      value: medicalOfficeID,
+      onChange: (e) => setMedicalOfficeID(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Signature",
+      placeholder: "Enter name who signed record",
+      value: sign,
+      onChange: (e) => setSign(e.target.value),
     },
   ];
 
@@ -523,6 +770,49 @@ const PreRegistration = () => {
                   }
                   return renderField(field, index);
                 })}
+              </div>
+            </FormSection>
+
+            <FormSection title="Admission Transport">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {admissionTransportFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Admission Plan">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {admissionPlanFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Instituition">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {institutionFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Chief Complaint">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {chiefComplaintFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Triage">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {triageFields.map((field, index) => renderField(field, index))}
               </div>
             </FormSection>
 

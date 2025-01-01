@@ -28,6 +28,83 @@ const DuringVisit = () => {
   const [assignedDate, setAssignedDate] = useState("");
   const [assignedTime, setAssignedTime] = useState("");
 
+  const [historyOfPresentIllness, setHistoryOfPresentIllness] = useState("");
+  const [historyOfPresentIllnessAuto, setHistoryOfPresentIllnessAuto] =
+    useState("");
+  const [skipMedicalHistory, setSkipMedicalHistory] = useState(false); // Boolean
+  const [perinatalMedicalHistory, setPerinatalMedicalHistory] = useState("");
+  const [pastMedicalHistory, setPastMedicalHistory] = useState("");
+  const [surgicalHistory, setSurgicalHistory] = useState("");
+  const [familyHistory, setFamilyHistory] = useState("");
+  const [immunization, setImmunization] = useState("");
+  const [developmentalMilestones, setDevelopmentalMilestones] = useState("");
+  const [drugHistory, setDrugHistory] = useState("");
+  const [substancesUse, setSubstancesUse] = useState("");
+
+  const [vitalSigns, setVitalSigns] = useState([]);
+  const [physicalExamination, setPhysicalExamination] = useState([]);
+  const [vaginalExaminations, setVaginalExaminations] = useState([]);
+  const [LMP, setLMP] = useState("");
+  const [GAPC, setGAPC] = useState([]);
+  const [GAPCCurrent, setGAPCCurrent] = useState([]);
+  const [perinatalOutcomes, setPerinatalOutcomes] = useState([]);
+
+  // const [diagnostic, setDiagnostic] = useState([]);
+  // const [treatment, setTreatment] = useState([]);
+  const [diet, setDiet] = useState("");
+  const [physicalActivity, setPhysicalActivity] = useState("");
+  const [position, setPosition] = useState("");
+  const [cures, setCures] = useState("");
+  const [oxygenTherapy, setOxygenTherapy] = useState("");
+  const [chestPhysiotherapy, setChestPhysiotherapy] = useState("");
+  const [catheters, setCatheters] = useState("");
+  const [drains, setDrains] = useState("");
+  const [nebulizations, setNebulizations] = useState("");
+
+  const [fluids, setFluids] = useState([]);
+  const [totalFluidsCalc, setTotalFluidsCalc] = useState("");
+  const [fluidBalance, setFluidBalance] = useState("");
+  const [hourlyDiuresis, setHourlyDiuresis] = useState("");
+  const [hourlyMeanDiuresis, setHourlyMeanDiuresis] = useState("");
+  const [timeTemperatureCurve, setTimeTemperatureCurve] = useState("");
+  const [controls, setControls] = useState([]);
+  const [othersOrderSets, setOthersOrderSets] = useState("");
+
+  const [diagnostic, setDiagnostic] = useState({
+    ordinal: 0,
+    institutionId: 0,
+    departmentId: 0,
+    name: "",
+    code: null,
+    note: null,
+    recordStage: 1,
+    createdDate: "",
+    suspendedDate: null,
+    capitalizeIndexes: "",
+  });
+
+  const [treatment, setTreatment] = useState({
+    ordinal: 0,
+    institutionId: 0,
+    departmentId: 0,
+    name: "",
+    use: null,
+    isDrug: true,
+    presentation: null,
+    indications: "",
+    missingDays: 0,
+    note: null,
+    recordStage: 1,
+    createdDate: "",
+    suspendedDate: null,
+    capitalizeIndexes: "",
+    visibleInAdmissionForm: true,
+    visibleInEgressForm: true,
+    visibleTreatmentTime: true,
+    visibleInInpatientsReport: true,
+    supports: [],
+  });
+
   useEffect(() => {
     if (patient) {
       setFirstName(patient.firstName || patient.name || "");
@@ -71,6 +148,43 @@ const DuringVisit = () => {
       admissionStatus,
       assignedDate,
       assignedTime,
+      historyOfPresentIllness,
+      historyOfPresentIllnessAuto,
+      skipMedicalHistory,
+      perinatalMedicalHistory,
+      pastMedicalHistory,
+      surgicalHistory,
+      familyHistory,
+      immunization,
+      developmentalMilestones,
+      drugHistory,
+      substancesUse,
+      vitalSigns,
+      physicalExamination,
+      vaginalExaminations,
+      LMP,
+      GAPC,
+      GAPCCurrent,
+      perinatalOutcomes,
+      diagnostic,
+      treatment,
+      diet,
+      physicalActivity,
+      position,
+      cures,
+      oxygenTherapy,
+      chestPhysiotherapy,
+      catheters,
+      drains,
+      nebulizations,
+      fluids,
+      totalFluidsCalc,
+      fluidBalance,
+      hourlyDiuresis,
+      hourlyMeanDiuresis,
+      timeTemperatureCurve,
+      controls,
+      othersOrderSets,
     };
 
     try {
@@ -189,6 +303,85 @@ const DuringVisit = () => {
     },
   ];
 
+  const medicalHistoryFields = [
+    {
+      type: "text",
+      label: "History of Present Illness",
+      placeholder: "Enter history of present illness",
+      value: historyOfPresentIllness,
+      onChange: (e) => setHistoryOfPresentIllness(e.target.value),
+    },
+    {
+      type: "text",
+      label: "History of Present Illness (Auto)",
+      placeholder: "Enter auto-generated history of present illness",
+      value: historyOfPresentIllnessAuto,
+      onChange: (e) => setHistoryOfPresentIllnessAuto(e.target.value),
+    },
+    {
+      type: "checkbox",
+      label: "Skip Medical History",
+      value: skipMedicalHistory,
+      onChange: (e) => setSkipMedicalHistory(e.target.checked),
+    },
+    {
+      type: "text",
+      label: "Perinatal Medical History",
+      placeholder: "Enter perinatal medical history",
+      value: perinatalMedicalHistory,
+      onChange: (e) => setPerinatalMedicalHistory(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Past Medical History",
+      placeholder: "Enter past medical history",
+      value: pastMedicalHistory,
+      onChange: (e) => setPastMedicalHistory(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Surgical History",
+      placeholder: "Enter surgical history",
+      value: surgicalHistory,
+      onChange: (e) => setSurgicalHistory(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Family History",
+      placeholder: "Enter family history",
+      value: familyHistory,
+      onChange: (e) => setFamilyHistory(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Immunization",
+      placeholder: "Enter immunization details",
+      value: immunization,
+      onChange: (e) => setImmunization(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Developmental Milestones",
+      placeholder: "Enter developmental milestones",
+      value: developmentalMilestones,
+      onChange: (e) => setDevelopmentalMilestones(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Drug History",
+      placeholder: "Enter drug history",
+      value: drugHistory,
+      onChange: (e) => setDrugHistory(e.target.value),
+    },
+    {
+      type: "text",
+      label: "Substances Use",
+      placeholder: "Enter substances use details",
+      value: substancesUse,
+      onChange: (e) => setSubstancesUse(e.target.value),
+    },
+  ];
+
   const roomAssignmentFields = [
     {
       type: "select",
@@ -287,7 +480,442 @@ const DuringVisit = () => {
     },
   ];
 
+  const vitalSignsFields = [
+    {
+      type: "text",
+      label: "Vital Sign Name",
+      placeholder: "Enter vital sign name",
+      value: vitalSigns.name,
+      onChange: (e) => setVitalSigns({ ...vitalSigns, name: e.target.value }),
+    },
+    {
+      type: "text",
+      label: "Vital Sign Value",
+      placeholder: "Enter vital sign value",
+      value: vitalSigns.value,
+      onChange: (e) => setVitalSigns({ ...vitalSigns, value: e.target.value }),
+    },
+  ];
+
+  const physicalExaminationFields = [
+    {
+      type: "text",
+      label: "Examination Name",
+      placeholder: "Enter examination name",
+      value: physicalExamination.name,
+      onChange: (e) =>
+        setPhysicalExamination({
+          ...physicalExamination,
+          name: e.target.value,
+        }),
+    },
+    {
+      type: "text",
+      label: "Physical Examination Result",
+      placeholder: "Enter examination result",
+      value: physicalExamination.result,
+      onChange: (e) =>
+        setPhysicalExamination({
+          ...physicalExamination,
+          result: e.target.value,
+        }),
+    },
+  ];
+
+  const vaginalExaminationsFields = [
+    {
+      type: "text",
+      label: "Vaginal Examination Result",
+      placeholder: "Enter examination result",
+      value: vaginalExaminations.result,
+      onChange: (e) =>
+        setVaginalExaminations({
+          ...vaginalExaminations,
+          result: e.target.value,
+        }),
+    },
+  ];
+
+  const lmpField = [
+    {
+      type: "date",
+      label: "Last Menstrual Period (LMP)",
+      placeholder: "Enter LMP",
+      value: LMP,
+      onChange: (e) => setLMP(e.target.value),
+    },
+  ];
+
+  const GAPCFields = [
+    {
+      type: "text",
+      label: "GAPC Name",
+      placeholder: "Enter GAPC name",
+      value: GAPC.name,
+      onChange: (e) => setGAPC({ ...GAPC, name: e.target.value }),
+    },
+  ];
+
+  const GAPCCurrentFields = [
+    {
+      type: "text",
+      label: "Current GAPC",
+      placeholder: "Enter current GAPC",
+      value: GAPCCurrent.current,
+      onChange: (e) =>
+        setGAPCCurrent({ ...GAPCCurrent, current: e.target.value }),
+    },
+  ];
+
+  const perinatalOutcomesFields = [
+    {
+      type: "text",
+      label: "Perinatal Outcome",
+      placeholder: "Enter perinatal outcome",
+      value: perinatalOutcomes.outcome,
+      onChange: (e) =>
+        setPerinatalOutcomes({ ...perinatalOutcomes, outcome: e.target.value }),
+    },
+  ];
+
+  // const diagnosticFields = [
+  //   {
+  //     type: "text",
+  //     label: "Diagnostic Test",
+  //     placeholder: "Enter diagnostic test",
+  //     value: diagnostic.name,
+  //     onChange: (e) => setDiagnostic({ ...diagnostic, name: e.target.value }),
+  //   },
+  // ];
+
+  // const treatmentFields = [
+  //   {
+  //     type: "text",
+  //     label: "Treatment",
+  //     placeholder: "Enter treatment",
+  //     value: treatment.name,
+  //     onChange: (e) => setTreatment({ ...treatment, name: e.target.value }),
+  //   },
+  // ];
+
+  const diagnosticFields = [
+    {
+      type: "text",
+      label: "Diagnostic Test",
+      placeholder: "Enter diagnostic test",
+      value: diagnostic.name,
+      onChange: (e) => setDiagnostic({ ...diagnostic, name: e.target.value }),
+    },
+    {
+      type: "text",
+      label: "Code",
+      placeholder: "Enter code",
+      value: diagnostic.code,
+      onChange: (e) => setDiagnostic({ ...diagnostic, code: e.target.value }),
+    },
+    {
+      type: "text",
+      label: "Note",
+      placeholder: "Enter note",
+      value: diagnostic.note,
+      onChange: (e) => setDiagnostic({ ...diagnostic, note: e.target.value }),
+    },
+    {
+      type: "text",
+      label: "Capitalize Indexes",
+      placeholder: "Enter capitalize indexes",
+      value: diagnostic.capitalizeIndexes,
+      onChange: (e) =>
+        setDiagnostic({ ...diagnostic, capitalizeIndexes: e.target.value }),
+    },
+  ];
+
+  // Fields for treatment
+  const treatmentFields = [
+    {
+      type: "text",
+      label: "Treatment",
+      placeholder: "Enter treatment",
+      value: treatment.name,
+      onChange: (e) => setTreatment({ ...treatment, name: e.target.value }),
+    },
+    {
+      type: "text",
+      label: "Use",
+      placeholder: "Enter use",
+      value: treatment.use,
+      onChange: (e) => setTreatment({ ...treatment, use: e.target.value }),
+    },
+
+    {
+      type: "text",
+      label: "Presentation",
+      placeholder: "Enter presentation",
+      value: treatment.presentation,
+      onChange: (e) =>
+        setTreatment({ ...treatment, presentation: e.target.value }),
+    },
+    {
+      type: "text",
+      label: "Indications",
+      placeholder: "Enter indications",
+      value: treatment.indications,
+      onChange: (e) =>
+        setTreatment({ ...treatment, indications: e.target.value }),
+    },
+    {
+      type: "number",
+      label: "Missing Days",
+      placeholder: "Enter missing days",
+      value: treatment.missingDays,
+      onChange: (e) =>
+        setTreatment({ ...treatment, missingDays: e.target.value }),
+    },
+    {
+      type: "text",
+      label: "Note",
+      placeholder: "Enter note",
+      value: treatment.note,
+      onChange: (e) => setTreatment({ ...treatment, note: e.target.value }),
+    },
+    {
+      type: "text",
+      label: "Capitalize Indexes",
+      placeholder: "Enter capitalize indexes",
+      value: treatment.capitalizeIndexes,
+      onChange: (e) =>
+        setTreatment({ ...treatment, capitalizeIndexes: e.target.value }),
+    },
+    {
+      type: "checkbox",
+      label: "Is Drug",
+      value: treatment.isDrug,
+      onChange: (e) => setTreatment({ ...treatment, isDrug: e.target.checked }),
+    },
+    {
+      type: "checkbox",
+      label: "Visible in Admission Form",
+      value: treatment.visibleInAdmissionForm,
+      onChange: (e) =>
+        setTreatment({
+          ...treatment,
+          visibleInAdmissionForm: e.target.checked,
+        }),
+    },
+    {
+      type: "checkbox",
+      label: "Visible in Egress Form",
+      value: treatment.visibleInEgressForm,
+      onChange: (e) =>
+        setTreatment({ ...treatment, visibleInEgressForm: e.target.checked }),
+    },
+
+    {
+      type: "checkbox",
+      label: "Visible Treatment Time",
+      value: treatment.visibleTreatmentTime,
+      onChange: (e) =>
+        setTreatment({ ...treatment, visibleTreatmentTime: e.target.checked }),
+    },
+    {
+      type: "checkbox",
+      label: "Visible in Inpatients Report",
+      value: treatment.visibleInInpatientsReport,
+      onChange: (e) =>
+        setTreatment({
+          ...treatment,
+          visibleInInpatientsReport: e.target.checked,
+        }),
+    },
+  ];
+
+  const dietField = [
+    {
+      type: "text",
+      label: "Diet",
+      placeholder: "Enter diet",
+      value: diet,
+      onChange: (e) => setDiet(e.target.value),
+    },
+  ];
+
+  const physicalActivityField = [
+    {
+      type: "text",
+      label: "Physical Activity",
+      placeholder: "Enter physical activity",
+      value: physicalActivity,
+      onChange: (e) => setPhysicalActivity(e.target.value),
+    },
+  ];
+
+  const positionField = [
+    {
+      type: "text",
+      label: "Position",
+      placeholder: "Enter position",
+      value: position,
+      onChange: (e) => setPosition(e.target.value),
+    },
+  ];
+
+  const curesField = [
+    {
+      type: "text",
+      label: "Cures",
+      placeholder: "Enter cures",
+      value: cures,
+      onChange: (e) => setCures(e.target.value),
+    },
+  ];
+
+  const oxygenTherapyField = [
+    {
+      type: "text",
+      label: "Oxygen Therapy",
+      placeholder: "Enter oxygen therapy details",
+      value: oxygenTherapy,
+      onChange: (e) => setOxygenTherapy(e.target.value),
+    },
+  ];
+
+  const chestPhysiotherapyField = [
+    {
+      type: "text",
+      label: "Chest Physiotherapy",
+      placeholder: "Enter chest physiotherapy details",
+      value: chestPhysiotherapy,
+      onChange: (e) => setChestPhysiotherapy(e.target.value),
+    },
+  ];
+
+  const cathetersField = [
+    {
+      type: "text",
+      label: "Catheters",
+      placeholder: "Enter catheter details",
+      value: catheters,
+      onChange: (e) => setCatheters(e.target.value),
+    },
+  ];
+
+  const drainsField = [
+    {
+      type: "text",
+      label: "Drains",
+      placeholder: "Enter drain details",
+      value: drains,
+      onChange: (e) => setDrains(e.target.value),
+    },
+  ];
+
+  const nebulizationsField = [
+    {
+      type: "text",
+      label: "Nebulizations",
+      placeholder: "Enter nebulization details",
+      value: nebulizations,
+      onChange: (e) => setNebulizations(e.target.value),
+    },
+  ];
+
+  const fluidsField = [
+    {
+      type: "text",
+      label: "Fluids",
+      placeholder: "Enter fluid details",
+      value: fluids.name,
+      onChange: (e) => setFluids({ ...fluids, name: e.target.value }),
+    },
+  ];
+
+  const totalFluidsCalcField = [
+    {
+      type: "text",
+      label: "Total Fluids Calculation",
+      placeholder: "Enter total fluids calculation",
+      value: totalFluidsCalc,
+      onChange: (e) => setTotalFluidsCalc(e.target.value),
+    },
+  ];
+
+  const fluidBalanceField = [
+    {
+      type: "text",
+      label: "Fluid Balance",
+      placeholder: "Enter fluid balance",
+      value: fluidBalance,
+      onChange: (e) => setFluidBalance(e.target.value),
+    },
+  ];
+
+  const hourlyDiuresisField = [
+    {
+      type: "text",
+      label: "Hourly Diuresis",
+      placeholder: "Enter hourly diuresis",
+      value: hourlyDiuresis,
+      onChange: (e) => setHourlyDiuresis(e.target.value),
+    },
+  ];
+
+  const hourlyMeanDiuresisField = [
+    {
+      type: "text",
+      label: "Hourly Mean Diuresis",
+      placeholder: "Enter hourly mean diuresis",
+      value: hourlyMeanDiuresis,
+      onChange: (e) => setHourlyMeanDiuresis(e.target.value),
+    },
+  ];
+
+  const timeTemperatureCurveField = [
+    {
+      type: "text",
+      label: "Time-Temperature Curve",
+      placeholder: "Enter time-temperature curve details",
+      value: timeTemperatureCurve,
+      onChange: (e) => setTimeTemperatureCurve(e.target.value),
+    },
+  ];
+
+  const controlsField = [
+    {
+      type: "text",
+      label: "Controls",
+      placeholder: "Enter control details",
+      value: controls.name,
+      onChange: (e) => setControls({ ...controls, name: e.target.value }),
+    },
+  ];
+
+  const othersOrderSetsField = [
+    {
+      type: "text",
+      label: "Other Order Sets",
+      placeholder: "Enter other order sets",
+      value: othersOrderSets,
+      onChange: (e) => setOthersOrderSets(e.target.value),
+    },
+  ];
+
   const renderField = (field, index) => {
+    if (field.type === "checkbox") {
+      return (
+        <div key={index} className="flex items-center gap-4">
+          <input
+            type="checkbox"
+            className="w-8 h-8 accent-[#2E2559]"
+            checked={field.value}
+            onChange={field.onChange}
+          />
+          <div className="flex flex-col w-full">
+            <label className="text-sm font-medium">{field.label}</label>
+          </div>
+        </div>
+      );
+    }
+
     if (field.type === "select") {
       return (
         <label key={index} className="block">
@@ -353,10 +981,99 @@ const DuringVisit = () => {
               </div>
             </FormSection>
 
+            <FormSection title="Medical History">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {medicalHistoryFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Examinations">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {vitalSignsFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {physicalExaminationFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {vaginalExaminationsFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {lmpField.map((field, index) => renderField(field, index))}
+                {GAPCFields.map((field, index) => renderField(field, index))}
+                {GAPCCurrentFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {perinatalOutcomesFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Care & Treatment">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {dietField.map((field, index) => renderField(field, index))}
+                {physicalActivityField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {positionField.map((field, index) => renderField(field, index))}
+                {curesField.map((field, index) => renderField(field, index))}
+                {oxygenTherapyField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {chestPhysiotherapyField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {cathetersField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {drainsField.map((field, index) => renderField(field, index))}
+                {nebulizationsField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {diagnosticFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {treatmentFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
             <FormSection title={t("pages.duringvisit.roomAssignment.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {roomAssignmentFields.map((field, index) =>
+                  renderField(field, index)
+                )}
+              </div>
+            </FormSection>
+
+            <FormSection title="Monitoring">
+              <hr className="text-[#D1D1D1] border-1" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
+                {fluidsField.map((field, index) => renderField(field, index))}
+                {totalFluidsCalcField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {fluidBalanceField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {hourlyDiuresisField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {hourlyMeanDiuresisField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {timeTemperatureCurveField.map((field, index) =>
+                  renderField(field, index)
+                )}
+                {controlsField.map((field, index) => renderField(field, index))}
+                {othersOrderSetsField.map((field, index) =>
                   renderField(field, index)
                 )}
               </div>

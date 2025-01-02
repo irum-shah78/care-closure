@@ -514,38 +514,17 @@ const AddPatient = () => {
   const isValidDob = (dob) => {
     if (typeof dob === "string" && dob.includes("/")) {
       const [month, day, year] = dob.split("/").map(Number);
-      if (year < 1900 || year > new Date().getFullYear()) {
-        return false;
-      }
-
-      if (month < 1 || month > 12) {
-        return false;
-      }
-
-      if (day < 1 || day > 31) {
-        return false;
-      }
-
-      const daysInMonth = new Date(year, month, 0).getDate();
-      if (day > daysInMonth) {
-        return false;
-      }
-
+      if (month < 1 || month > 12 || day < 1 || day > 31) return false;
       const birthDate = new Date(year, month - 1, day);
-      if (birthDate > new Date()) {
-        return false;
-      }
+      if (year < 1900 || year > new Date().getFullYear()) return false;
+      if (birthDate.getMonth() !== month - 1) return false;
 
-      return true;
+      return birthDate <= new Date();
     }
-
     const birthDate = new Date(dob);
     const today = new Date();
     const year = birthDate.getFullYear();
-
-    if (year < 1900 || year > today.getFullYear()) {
-      return false;
-    }
+    if (year < 1900 || year > today.getFullYear()) return false;
 
     return birthDate <= today;
   };
@@ -596,23 +575,13 @@ const AddPatient = () => {
           setAge(calculateAge(formattedDate));
           return;
         }
+
         newValue = newValue.replace(/\D/g, "");
 
         if (newValue.length >= 2) {
-          const month = parseInt(newValue.slice(0, 2), 10);
-          if (month < 1 || month > 12) {
-            alert("Invalid month! Please enter a valid month (01-12).");
-            return;
-          }
           newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
         }
-
         if (newValue.length >= 5) {
-          const day = parseInt(newValue.slice(3, 5), 10);
-          if (day < 1 || day > 31) {
-            alert("Invalid day! Please enter a valid day (01-31).");
-            return;
-          }
           newValue = newValue.slice(0, 5) + "/" + newValue.slice(5, 9);
         }
 
@@ -629,7 +598,6 @@ const AddPatient = () => {
           }
         }
       },
-
       render: ({ field }) => (
         <div className="relative">
           <input
@@ -1154,20 +1122,9 @@ const AddPatient = () => {
         newValue = newValue.replace(/\D/g, "");
 
         if (newValue.length >= 2) {
-          const month = parseInt(newValue.slice(0, 2), 10);
-          if (month < 1 || month > 12) {
-            alert("Invalid month! Please enter a valid month (01-12).");
-            return;
-          }
           newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
         }
-
         if (newValue.length >= 5) {
-          const day = parseInt(newValue.slice(3, 5), 10);
-          if (day < 1 || day > 31) {
-            alert("Invalid day! Please enter a valid day (01-31).");
-            return;
-          }
           newValue = newValue.slice(0, 5) + "/" + newValue.slice(5, 9);
         }
 
@@ -1180,7 +1137,6 @@ const AddPatient = () => {
           }
         }
       },
-
       render: ({ field }) => (
         <div className="relative">
           <input

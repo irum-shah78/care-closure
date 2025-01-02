@@ -511,6 +511,24 @@ const AddPatient = () => {
     return age;
   };
 
+  // const isValidDob = (dob) => {
+  //   if (typeof dob === "string" && dob.includes("/")) {
+  //     const [month, day, year] = dob.split("/").map(Number);
+  //     if (month < 1 || month > 12 || day < 1 || day > 31) return false;
+  //     const birthDate = new Date(year, month - 1, day);
+  //     if (year < 1900 || year > new Date().getFullYear()) return false;
+  //     if (birthDate.getMonth() !== month - 1) return false;
+
+  //     return birthDate <= new Date();
+  //   }
+  //   const birthDate = new Date(dob);
+  //   const today = new Date();
+  //   const year = birthDate.getFullYear();
+  //   if (year < 1900 || year > today.getFullYear()) return false;
+
+  //   return birthDate <= today;
+  // };
+
   const isValidDob = (dob) => {
     if (typeof dob === "string" && dob.includes("/")) {
       const [month, day, year] = dob.split("/").map(Number);
@@ -1100,43 +1118,97 @@ const AddPatient = () => {
       type: "text",
       placeholder: "mm/dd/yyyy",
       value: expiryDate,
+      // onChange: (e) => {
+      //   let newValue = e.target.value;
+
+      //   if (e.target.type === "date") {
+      //     const date = new Date(newValue);
+      //     const formattedDate = `${String(date.getMonth() + 1).padStart(
+      //       2,
+      //       "0"
+      //     )}/${String(date.getDate()).padStart(2, "0")}/${date.getFullYear()}`;
+
+      //     if (isCardExpired(formattedDate)) {
+      //       alert("This card is expired! Please use a valid card.");
+      //       return;
+      //     }
+
+      //     setExpiryDate(formattedDate);
+      //     return;
+      //   }
+
+      //   newValue = newValue.replace(/\D/g, "");
+
+      //   if (newValue.length >= 2) {
+      //     newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
+      //   }
+      //   if (newValue.length >= 5) {
+      //     newValue = newValue.slice(0, 5) + "/" + newValue.slice(5, 9);
+      //   }
+
+      //   if (newValue.length <= 10) {
+      //     setExpiryDate(newValue);
+
+      //     if (newValue.length === 10 && isCardExpired(newValue)) {
+      //       alert("This card is expired! Please use a valid card.");
+      //       return;
+      //     }
+      //   }
+      // },
       onChange: (e) => {
         let newValue = e.target.value;
-
+      
         if (e.target.type === "date") {
           const date = new Date(newValue);
           const formattedDate = `${String(date.getMonth() + 1).padStart(
             2,
             "0"
           )}/${String(date.getDate()).padStart(2, "0")}/${date.getFullYear()}`;
-
+      
           if (isCardExpired(formattedDate)) {
             alert("This card is expired! Please use a valid card.");
             return;
           }
-
+      
           setExpiryDate(formattedDate);
           return;
         }
-
+      
+        // Remove non-digit characters
         newValue = newValue.replace(/\D/g, "");
-
+      
+        // Validate month
         if (newValue.length >= 2) {
+          const month = parseInt(newValue.slice(0, 2), 10);
+          if (month < 1 || month > 12) {
+            alert("Invalid month! Please enter a valid month (01-12).");
+            return;
+          }
           newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
         }
+      
+        // Validate day
         if (newValue.length >= 5) {
+          const day = parseInt(newValue.slice(3, 5), 10);
+          if (day < 1 || day > 31) {
+            alert("Invalid day! Please enter a valid day (01-31).");
+            return;
+          }
           newValue = newValue.slice(0, 5) + "/" + newValue.slice(5, 9);
         }
-
+      
+        // Set the value if it is valid
         if (newValue.length <= 10) {
           setExpiryDate(newValue);
-
+      
+          // Check if the card is expired
           if (newValue.length === 10 && isCardExpired(newValue)) {
             alert("This card is expired! Please use a valid card.");
             return;
           }
         }
       },
+      
       render: ({ field }) => (
         <div className="relative">
           <input

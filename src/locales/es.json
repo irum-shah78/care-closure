@@ -45,7 +45,14 @@
         "maritalStatus": "Estado civil",
         "bloodGroup": "Grupo sanguíneo",
         "age": "Edad",
-        "description": "Descripción"
+        "description": "Descripción",
+        "weight": "Peso",
+        "height": "Altura",
+        "headCircumference": "Circunferencia de la Cabeza",
+        "abdominalCircumference": "Circunferencia Abdominal",
+        "totalFluidsCalc": "Cálculo Total de Líquidos",
+        "fluids": "Líquidos",
+        "patientType": "Tipo de Paciente"
       },
       "contactInfo": {
         "title": "Información del Contacto",
@@ -55,7 +62,11 @@
         "mobileNumber": "Número de móvil",
         "email": "Correo electrónico",
         "zipcode": "Código postal",
-        "address": "Dirección"
+        "address": "Dirección",
+        "nationality": "Nacionalidad",
+        "nationalSecurityId": "ID de Seguridad Nacional",
+        "birthPlace": "Lugar de Nacimiento",
+        "domicile": "Domicilio"
       },
       "emergencyContact": {
         "title": "Contacto de Emergencia",
@@ -67,12 +78,17 @@
         "title": "Información Médica",
         "allergies": "Alergias conocidas",
         "medications": "Medicamentos actuales",
-        "medicalHistory": "Historial médico"
+        "medicalHistory": "Historial médico",
+        "emergencySignSymptoms": "Signos y Síntomas de Emergencia"
       },
       "insuranceInfo": {
         "title": "Información del Seguro",
         "insuranceProvider": "Proveedor de seguros",
-        "policyNumber": "Número de póliza"
+        "policyNumber": "Número de póliza",
+        "assuranceName": "Nombre de Aseguradora",
+        "assuranceID": "ID de Aseguradora",
+        "responsible": "Responsable",
+        "policyHolder": "Titular de la Póliza"
       },
       "cardDetails": {
         "title": "Detalles de la tarjeta",
@@ -83,6 +99,45 @@
       "paymentInfo": {
         "title": "Pago",
         "paymentStatus": "Estado del pago"
+      },
+      "identificationsFields": {
+        "title": "Identificaciones",
+        "ordinal": "Ordinal",
+        "type": "Tipo",
+        "value": "Valor"
+      },
+      "responsibleIdentificationsFields": {
+        "title": "Identificaciones Responsables",
+        "ordinal": "Ordinal",
+        "type": "Tipo",
+        "value": "Valor"
+      },
+      "communicationFields": {
+        "title": "Comunicaciones",
+        "ordinal": "Ordinal",
+        "type": "Tipo",
+        "label": "Etiqueta",
+        "value": "Valor"
+      },
+      "responsibleCommunicationFields": {
+        "title": "Comunicaciones Responsables",
+        "ordinal": "Ordinal",
+        "type": "Tipo",
+        "label": "Etiqueta",
+        "value": "Valor"
+      },
+      "policyHolderIdentificationsFields": {
+        "title": "Identificaciones del Titular de la Póliza",
+        "ordinal": "Ordinal",
+        "type": "Tipo",
+        "value": "Valor"
+      },
+      "policyHolderCommunicationFields": {
+        "title": "Comunicaciones del Titular de la Póliza",
+        "ordinal": "Ordinal",
+        "type": "Tipo",
+        "label": "Etiqueta",
+        "value": "Valor"
       },
       "placeholders": {
         "enterFirstName": "Introduzca el nombre",
@@ -111,7 +166,27 @@
         "enterCardNumber": "Introduzca el número de tarjeta",
         "enterExpiryDate": "MM/AA",
         "enterCVV": "Introduzca el CVV",
-        "selectPaymentStatus": "Seleccione el estado del pago"
+        "selectPaymentStatus": "Seleccione el estado del pago",
+        "enterWeight": "Ingrese Peso",
+        "enterHeight": "Ingrese Altura",
+        "enterHeadCircumference": "Ingrese Circunferencia de la Cabeza",
+        "enterAbdominalCircumference": "Ingrese Circunferencia Abdominal",
+        "enterTotalFluidsCalc": "Ingrese Cálculo Total de Líquidos",
+        "enterFluids": "Ingrese Líquidos",
+        "selectPatientType": "Seleccione Tipo de Paciente",
+        "enterNationality": "Ingrese nacionalidad",
+        "enterNationalSecurityId": "Ingrese ID de Seguridad Nacional",
+        "enterBirthPlace": "Ingrese lugar de nacimiento",
+        "enterDomicile": "Ingrese domicilio",
+        "enterAsuranceName": "Ingrese el nombre de la aseguradora",
+        "enterAssuranceID": "Ingrese el ID de la aseguradora",
+        "enterResponsible": "Ingrese el nombre",
+        "enterPolicyHolder": "Ingrese el titular de la póliza",
+        "enterSymptoms": "Ingrese los síntomas",
+        "enterOrdinal": "Ingrese ordinal",
+        "enterType": "Ingrese tipo",
+        "enterValue": "Ingrese valor",
+        "enterLabel": "Ingrese etiqueta"
       },
       "buttons": {
         "generateID": "Generar ID",
@@ -123,7 +198,7 @@
         "acute": "Agudo"
       },
       "gender": {
-        "male": "Masculina",
+        "male": "Masculino",
         "female": "Femenina"
       },
       "maritalStatus": {
@@ -134,6 +209,19 @@
         "pending": "Pendiente",
         "completed": "Completado",
         "notPaid": "No Pagado"
+      },
+      "patientType": {
+        "neonate": "Neonato",
+        "pediatric": "Pediátrico",
+        "adult": "Adulto"
+      },
+      "relationship": {
+        "father": "Padre",
+        "mother": "Madre",
+        "husband": "Esposo",
+        "wife": "Esposa",
+        "sister": "Hermana",
+        "daughter": "Hija"
       }
     },
     "checkin-checkout": {
@@ -319,6 +407,34 @@
             "morning": "Mañana (9AM - 12PM)",
             "afternoon": "Tarde (9PM - 12AM)"
           }
+        },
+        "admissionDate": {
+          "label": "Fecha de Admisión",
+          "placeholder": ""
+        },
+        "arrivalDate": {
+          "label": "Fecha de Llegada",
+          "placeholder": ""
+        },
+        "admissionOrigin": {
+          "label": "Origen de Admisión",
+          "options": {
+            "emergency": "Emergencia",
+            "consultation": "Consulta"
+          },
+          "placeholder": "Seleccionar origen de admisión"
+        },
+        "referredFrom": {
+          "label": "Referido Desde",
+          "placeholder": "Ingresar nombre"
+        },
+        "isCoordinatedReferredFrom": {
+          "label": "Referido Desde Coordinado",
+          "options": {
+            "true": "Verdadero",
+            "false": "Falso"
+          },
+          "placeholder": "Seleccionar cualquiera"
         }
       },
       "medicalInformation": {
@@ -371,6 +487,110 @@
           "wheelchair": "Acceso para silla de ruedas, intérprete, etc",
           "ac": "Aire Acondicionado",
           "interpreter": "Intérprete"
+        }
+      },
+      "admissionTransport": {
+        "title": "Transporte de Admisión",
+        "admissionTransportWay": {
+          "label": "Forma de Transporte de Admisión",
+          "placeholder": "Ingresar forma de transporte de admisión"
+        },
+        "admissionTransportInfo": {
+          "label": "Información de Transporte de Admisión",
+          "placeholder": "Ingresar información de transporte de admisión"
+        }
+      },
+      "admissionPlan": {
+        "title": "Plan de Admisión",
+        "planAdmission": {
+          "label": "Plan de Admisión",
+          "placeholder": "Ingresar plan de admisión"
+        },
+        "admissionPrintForm": {
+          "label": "Formulario de Impresión de Admisión",
+          "placeholder": "Ingresar formulario"
+        }
+      },
+      "chiefComplaint": {
+        "title": "Queja Principal",
+        "chiefComplaintOrdinal": {
+          "label": "Ordinal",
+          "placeholder": "Ingresar ordinal"
+        },
+        "chiefComplaintIndexes": {
+          "label": "Índices de Capitalización",
+          "placeholder": "Ingresar índices"
+        },
+        "chiefComplaintName": {
+          "label": "Nombre",
+          "placeholder": "Ingresar nombre"
+        },
+        "chiefComplaintEvolutionTime": {
+          "label": "Tiempo de Evolución",
+          "placeholder": "Ingresar tiempo"
+        },
+        "chiefComplaintTimeMeasure": {
+          "label": "Medida de Tiempo",
+          "options": {
+            "days": "Días",
+            "week": "Semana",
+            "months": "Meses"
+          },
+          "placeholder": "Seleccionar tiempo"
+        },
+        "chiefComplaintDescription": {
+          "label": "Descripción",
+          "placeholder": "Ingresar descripción"
+        }
+      },
+      "triage": {
+        "title": "Triaje",
+        "triageSystem": {
+          "label": "Sistema de Triaje",
+          "options": {
+            "manchester": "Manchester",
+            "esi": "ESI",
+            "canadian": "Canadiense"
+          },
+          "placeholder": "Seleccionar sistema"
+        },
+        "triage": {
+          "label": "Triaje",
+          "placeholder": "Ingresar triaje"
+        }
+      },
+      "instituition": {
+        "title": "Institución",
+        "institution": {
+          "title": "Institución",
+          "institutionID": {
+            "label": "ID de la Institución",
+            "placeholder": "Ingresar ID"
+          },
+          "institutionCode": {
+            "label": "Código de la Institución",
+            "placeholder": "Ingresar código"
+          },
+          "institutionName": {
+            "label": "Nombre de la Institución",
+            "placeholder": "Ingresar nombre"
+          },
+          "departmentID": {
+            "label": "ID del Departamento",
+            "placeholder": "Ingresar ID"
+          },
+          "departmentName": {
+            "label": "Nombre del Departamento",
+            "placeholder": "Ingresar nombre"
+          },
+          "medicalOfficeID": {
+            "label": "ID de la Oficina Médica",
+            "placeholder": "Ingresar ID"
+          },
+          "signature": {
+            "label": "Firma",
+            "placeholder": "Ingresar nombre quien firmó el registro"
+          }
         }
       },
       "buttons": {
@@ -469,6 +689,341 @@
           "placeholder": "00:00:00"
         }
       },
+      "medicalHistory": {
+        "title": "Historial Médico",
+        "historyOfPresentIllness": {
+          "label": "Historial de Enfermedad Actual",
+          "placeholder": "Ingresar historial de enfermedad actual"
+        },
+        "historyOfPresentIllnessAuto": {
+          "label": "Historial de Enfermedad Actual (Automático)",
+          "placeholder": "Historial automático generado"
+        },
+        "skipMedicalHistory": {
+          "label": "Omitir Historial Médico",
+          "placeholder": "Marcar para omitir historial médico"
+        },
+        "perinatalMedicalHistory": {
+          "label": "Historial Médico Perinatal",
+          "placeholder": "Ingresar historial médico perinatal"
+        },
+        "pastMedicalHistory": {
+          "label": "Historial Médico Pasado",
+          "placeholder": "Ingresar historial médico pasado"
+        },
+        "surgicalHistory": {
+          "label": "Historial Quirúrgico",
+          "placeholder": "Ingresar historial quirúrgico"
+        },
+        "familyHistory": {
+          "label": "Historial Familiar",
+          "placeholder": "Ingresar historial familiar"
+        },
+        "immunization": {
+          "label": "Inmunización",
+          "placeholder": "Ingresar detalles de inmunización"
+        },
+        "developmentalMilestones": {
+          "label": "Hitos del Desarrollo",
+          "placeholder": "Ingresar hitos del desarrollo"
+        },
+        "drugHistory": {
+          "label": "Historial de Medicamentos",
+          "placeholder": "Ingresar historial de medicamentos"
+        },
+        "substancesUse": {
+          "label": "Uso de Sustancias",
+          "placeholder": "Ingresar detalles del uso de sustancias"
+        }
+      },
+      "examinations": {
+        "title": "Exámenes",
+        "vitalSigns": {
+          "title": "Signos Vitales",
+          "name": {
+            "label": "Nombre del Signo Vital",
+            "placeholder": "Ingrese el nombre del signo vital"
+          },
+          "value": {
+            "label": "Valor del Signo Vital",
+            "placeholder": "Ingrese el valor del signo vital"
+          }
+        },
+        "physicalExamination": {
+          "title": "Examen Físico",
+          "name": {
+            "label": "Nombre del Examen",
+            "placeholder": "Ingrese el nombre del examen"
+          },
+          "result": {
+            "label": "Resultado del Examen Físico",
+            "placeholder": "Ingrese el resultado del examen"
+          }
+        },
+        "vaginalExaminations": {
+          "title": "Exámenes Vaginales",
+          "result": {
+            "label": "Resultado del Examen Vaginal",
+            "placeholder": "Ingrese el resultado del examen"
+          }
+        },
+        "LMP": {
+          "title": "Último Periodo Menstrual (LMP)",
+          "label": "LMP",
+          "placeholder": "Ingrese el LMP"
+        },
+        "GAPC": {
+          "title": "GAPC",
+          "name": {
+            "label": "Nombre de GAPC",
+            "placeholder": "Ingrese el nombre de GAPC"
+          }
+        },
+        "GAPCCurrent": {
+          "title": "GAPC Actual",
+          "current": {
+            "label": "GAPC Actual",
+            "placeholder": "Ingrese el GAPC actual"
+          }
+        },
+        "perinatalOutcomes": {
+          "title": "Resultados Perinatales",
+          "outcome": {
+            "label": "Resultado Perinatal",
+            "placeholder": "Ingrese el resultado perinatal"
+          }
+        }
+      },
+
+      "careandTreatment": {
+        "title": "Cuidado y Tratamiento",
+        "diagnosticFields": {
+          "title": "Campos de Diagnóstico",
+          "fields": {
+            "diagnosticTest": {
+              "label": "Prueba Diagnóstica",
+              "placeholder": "Ingrese la prueba diagnóstica"
+            },
+            "code": {
+              "label": "Código",
+              "placeholder": "Ingrese el código"
+            },
+            "note": {
+              "label": "Nota",
+              "placeholder": "Ingrese la nota"
+            },
+            "capitalizeIndexes": {
+              "label": "Capitalizar Índices",
+              "placeholder": "Ingrese los índices a capitalizar"
+            }
+          }
+        },
+        "treatmentFields": {
+          "title": "Campos de Tratamiento",
+          "fields": {
+            "treatment": {
+              "label": "Tratamiento",
+              "placeholder": "Ingrese el tratamiento"
+            },
+            "use": {
+              "label": "Uso",
+              "placeholder": "Ingrese el uso"
+            },
+            "presentation": {
+              "label": "Presentación",
+              "placeholder": "Ingrese la presentación"
+            },
+            "indications": {
+              "label": "Indicaciones",
+              "placeholder": "Ingrese las indicaciones"
+            },
+            "missingDays": {
+              "label": "Días Perdidos",
+              "placeholder": "Ingrese los días perdidos"
+            },
+            "note": {
+              "label": "Nota",
+              "placeholder": "Ingrese la nota"
+            },
+            "capitalizeIndexes": {
+              "label": "Capitalizar Índices",
+              "placeholder": "Ingrese los índices a capitalizar"
+            },
+            "isDrug": {
+              "label": "¿Es un medicamento?"
+            },
+            "visibleInAdmissionForm": {
+              "label": "Visible en el Formulario de Admisión"
+            },
+            "visibleInEgressForm": {
+              "label": "Visible en el Formulario de Egreso"
+            },
+            "visibleTreatmentTime": {
+              "label": "Visible en el Tiempo de Tratamiento"
+            },
+            "visibleInInpatientsReport": {
+              "label": "Visible en el Informe de Pacientes Internos"
+            }
+          }
+        },
+        "dietField": {
+          "title": "Campo de Dieta",
+          "fields": {
+            "diet": {
+              "label": "Dieta",
+              "placeholder": "Ingrese la dieta"
+            }
+          }
+        },
+        "physicalActivityField": {
+          "title": "Campo de Actividad Física",
+          "fields": {
+            "physicalActivity": {
+              "label": "Actividad Física",
+              "placeholder": "Ingrese la actividad física"
+            }
+          }
+        },
+        "positionField": {
+          "title": "Campo de Posición",
+          "fields": {
+            "position": {
+              "label": "Posición",
+              "placeholder": "Ingrese la posición"
+            }
+          }
+        },
+        "curesField": {
+          "title": "Campo de Curaciones",
+          "fields": {
+            "cures": {
+              "label": "Curaciones",
+              "placeholder": "Ingrese las curaciones"
+            }
+          }
+        },
+        "oxygenTherapyField": {
+          "title": "Campo de Terapia con Oxígeno",
+          "fields": {
+            "oxygenTherapy": {
+              "label": "Terapia con Oxígeno",
+              "placeholder": "Ingrese los detalles de la terapia con oxígeno"
+            }
+          }
+        },
+        "chestPhysiotherapyField": {
+          "title": "Campo de Fisioterapia Torácica",
+          "fields": {
+            "chestPhysiotherapy": {
+              "label": "Fisioterapia Torácica",
+              "placeholder": "Ingrese los detalles de la fisioterapia torácica"
+            }
+          }
+        },
+        "cathetersField": {
+          "title": "Campo de Catéteres",
+          "fields": {
+            "catheters": {
+              "label": "Catéteres",
+              "placeholder": "Ingrese los detalles del catéter"
+            }
+          }
+        },
+        "drainsField": {
+          "title": "Campo de Drenajes",
+          "fields": {
+            "drains": {
+              "label": "Drenajes",
+              "placeholder": "Ingrese los detalles del drenaje"
+            }
+          }
+        },
+        "nebulizationsField": {
+          "title": "Campo de Nebulizaciones",
+          "fields": {
+            "nebulizations": {
+              "label": "Nebulizaciones",
+              "placeholder": "Ingrese los detalles de la nebulización"
+            }
+          }
+        }
+      },
+      "monitoring": {
+        "title": "Monitoreo",
+        "fluidsField": {
+          "title": "Campo de Líquidos",
+          "fields": {
+            "fluids": {
+              "label": "Líquidos",
+              "placeholder": "Ingrese los detalles de los líquidos"
+            }
+          }
+        },
+        "totalFluidsCalcField": {
+          "title": "Campo de Cálculo de Líquidos Totales",
+          "fields": {
+            "totalFluidsCalc": {
+              "label": "Cálculo de Líquidos Totales",
+              "placeholder": "Ingrese el cálculo de líquidos totales"
+            }
+          }
+        },
+        "fluidBalanceField": {
+          "title": "Campo de Balance de Líquidos",
+          "fields": {
+            "fluidBalance": {
+              "label": "Balance de Líquidos",
+              "placeholder": "Ingrese el balance de líquidos"
+            }
+          }
+        },
+        "hourlyDiuresisField": {
+          "title": "Campo de Diuresis Horaria",
+          "fields": {
+            "hourlyDiuresis": {
+              "label": "Diuresis Horaria",
+              "placeholder": "Ingrese la diuresis horaria"
+            }
+          }
+        },
+        "hourlyMeanDiuresisField": {
+          "title": "Campo de Diuresis Promedio Horaria",
+          "fields": {
+            "hourlyMeanDiuresis": {
+              "label": "Diuresis Promedio Horaria",
+              "placeholder": "Ingrese la diuresis promedio horaria"
+            }
+          }
+        },
+        "timeTemperatureCurveField": {
+          "title": "Campo de Curva Tiempo-Temperatura",
+          "fields": {
+            "timeTemperatureCurve": {
+              "label": "Curva Tiempo-Temperatura",
+              "placeholder": "Ingrese los detalles de la curva tiempo-temperatura"
+            }
+          }
+        },
+        "controlsField": {
+          "title": "Campo de Controles",
+          "fields": {
+            "controls": {
+              "label": "Controles",
+              "placeholder": "Ingrese los detalles del control"
+            }
+          }
+        },
+        "othersOrderSetsField": {
+          "title": "Campo de Otros Conjuntos de Órdenes",
+          "fields": {
+            "othersOrderSets": {
+              "label": "Otros Conjuntos de Órdenes",
+              "placeholder": "Ingrese otros conjuntos de órdenes"
+            }
+          }
+        }
+      },
+
       "buttons": {
         "cancel": "Cancelar",
         "complete": "Completar Admisión"
@@ -570,7 +1125,116 @@
           "label": "Hora de Alta",
           "placeholder": "00:00:00"
         }
+      },
+
+
+      "dischargeInfo": {
+  "title": "Información de Alta",
+  "egress": {
+    "title": "Egreso",
+    "egressDate": {
+      "label": "Fecha de Egreso",
+      "placeholder": "Ingrese la fecha de egreso"
+    },
+    "egressType": {
+      "label": "Tipo de Egreso",
+      "placeholder": "Seleccione tipo",
+      "options": {
+        "medicalDischarge": "Alta Médica",
+        "medicalDischargeOnRequest": "Alta Médica a Solicitud",
+        "escape": "Escape",
+        "referral": "Remisión",
+        "decease": "Fallecimiento"
       }
+    },
+    "egressComment": {
+      "label": "Comentario de Egreso",
+      "placeholder": "Ingrese comentario de egreso"
+    },
+    "egressDepartmentId": {
+      "label": "ID del Departamento de Egreso",
+      "placeholder": "Ingrese ID del departamento de egreso"
+    },
+    "egressDepartment": {
+      "label": "Departamento de Egreso",
+      "placeholder": "Ingrese departamento de egreso"
+    },
+    "egressTransportWay": {
+      "label": "Medio de Transporte de Egreso",
+      "placeholder": "Ingrese medio de transporte"
+    },
+    "egressTransportInfo": {
+      "label": "Información de Transporte de Egreso",
+      "placeholder": "Ingrese información de transporte"
+    },
+    "signEgress": {
+      "label": "Firmar Egreso",
+      "placeholder": "Marque para firmar egreso"
+    }
+  }
+},
+
+"followUpp": {
+  "title": "Seguimiento",
+  "followUpFields": {
+    "nextAppointmentDate": {
+      "label": "Próxima Fecha de Cita",
+      "placeholder": "Ingrese la próxima fecha de cita"
+    },
+    "referredTo": {
+      "label": "Referido A",
+      "placeholder": "Ingrese referencia"
+    },
+    "planEgress": {
+      "label": "Plan de Egreso",
+      "placeholder": "Ingrese el plan"
+    },
+    "isCoordinatedReferredTo": {
+      "label": "¿Es Referencia Coordinada?",
+      "placeholder": "Marque si es referencia coordinada"
+    },
+    "medicalDischargePrintForm": {
+      "label": "Formulario de Alta Médica",
+      "placeholder": "Marque para imprimir el formulario de alta médica"
+    }
+  }
+},
+"finalDocumentation": {
+  "title": "Documentación Final",
+  "finalDocumentationFields": {
+    "notes": {
+      "label": "Notas",
+      "placeholder": "Ingrese notas"
+    },
+    "diseaseOrigin": {
+      "label": "Origen de la Enfermedad",
+      "placeholder": "Ingrese el origen de la enfermedad"
+    },
+    "canceledDate": {
+      "label": "Fecha de Cancelación",
+      "placeholder": "Ingrese la fecha de cancelación"
+    },
+    "cancelReason": {
+      "label": "Razón de Cancelación",
+      "placeholder": "Ingrese la razón de cancelación"
+    }
+  }
+},
+"treatment": {
+  "title": "Tratamiento",
+  "treatmentsFields": {
+    "treatment": {
+      "label": "Descripción del Tratamiento",
+      "placeholder": "Ingrese la descripción del tratamiento"
+    },
+    "diagnostic": {
+      "label": "Descripción del Diagnóstico",
+      "placeholder": "Ingrese la descripción del diagnóstico"
+    }
+  }
+}
+
+
     }
   }
 }

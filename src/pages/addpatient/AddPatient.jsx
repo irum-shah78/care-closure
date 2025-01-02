@@ -111,7 +111,7 @@ const AddPatient = () => {
     useState("");
 
   const handleHeightChange = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setHeight(value);
     if (value) {
       setHeightDate("");
@@ -119,7 +119,7 @@ const AddPatient = () => {
   };
 
   const handleWeightChange = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setWeight(value);
     if (value) {
       setWeightDate("");
@@ -512,15 +512,21 @@ const AddPatient = () => {
   };
 
   const isValidDob = (dob) => {
+    if (typeof dob === "string" && dob.includes("/")) {
+      const [month, day, year] = dob.split("/").map(Number);
+      if (month < 1 || month > 12 || day < 1 || day > 31) return false;
+      const birthDate = new Date(year, month - 1, day);
+      if (year < 1900 || year > new Date().getFullYear()) return false;
+      if (birthDate.getMonth() !== month - 1) return false;
+
+      return birthDate <= new Date();
+    }
     const birthDate = new Date(dob);
     const today = new Date();
-    const earliestValidDate = new Date(
-      today.getFullYear() - 150,
-      today.getMonth(),
-      today.getDate()
-    );
+    const year = birthDate.getFullYear();
+    if (year < 1900 || year > today.getFullYear()) return false;
 
-    return birthDate >= earliestValidDate && birthDate <= today;
+    return birthDate <= today;
   };
 
   const isCardExpired = (expiryDate) => {
@@ -547,20 +553,68 @@ const AddPatient = () => {
     },
     {
       label: t("pages.addPatient.patientDetails.dob"),
-      type: "date",
-      placeholder: t("pages.addPatient.placeholders.enterDate"),
+      type: "text",
+      placeholder: "mm/dd/yyyy",
       value: dob,
       onChange: (e) => {
-        const newDob = e.target.value;
+        let newValue = e.target.value;
 
-        if (!isValidDob(newDob)) {
-          alert("Invalid date of birth! Please enter a realistic date.");
+        if (e.target.type === "date") {
+          const date = new Date(newValue);
+          const formattedDate = `${String(date.getMonth() + 1).padStart(
+            2,
+            "0"
+          )}/${String(date.getDate()).padStart(2, "0")}/${date.getFullYear()}`;
+
+          if (!isValidDob(formattedDate)) {
+            alert("Please enter a date of birth between 1900 and present.");
+            return;
+          }
+
+          setDob(formattedDate);
+          setAge(calculateAge(formattedDate));
           return;
         }
 
-        setDob(newDob);
-        setAge(calculateAge(newDob));
+        newValue = newValue.replace(/\D/g, "");
+
+        if (newValue.length >= 2) {
+          newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
+        }
+        if (newValue.length >= 5) {
+          newValue = newValue.slice(0, 5) + "/" + newValue.slice(5, 9);
+        }
+
+        if (newValue.length <= 10) {
+          setDob(newValue);
+
+          if (newValue.length === 10 && !isValidDob(newValue)) {
+            alert("Please enter a date of birth between 1900 and present.");
+            return;
+          }
+
+          if (newValue.length === 10 && isValidDob(newValue)) {
+            setAge(calculateAge(newValue));
+          }
+        }
       },
+      render: ({ field }) => (
+        <div className="relative">
+          <input
+            {...field}
+            type="text"
+            placeholder="mm/dd/yyyy"
+            className="w-full px-3 py-2 border rounded"
+          />
+          <input
+            type="date"
+            onChange={(e) => field.onChange(e)}
+            className="absolute inset-0 opacity-0 cursor-pointer"
+            min="1900-01-01"
+            max={new Date().toISOString().split("T")[0]}
+          />
+        </div>
+      ),
     },
     {
       label: t("pages.addPatient.patientDetails.gender"),
@@ -607,52 +661,58 @@ const AddPatient = () => {
       onChange: (e) => setDescription(e.target.value),
     },
     {
-      label: "Weight",
+      label: t("pages.addPatient.patientDetails.weight"),
       type: "text",
-      placeholder: "Enter Weight",
-      value: weight ? `${weight} ${weightDate}` : "",
+      placeholder: t("pages.addPatient.placeholders.enterWeight"),
+      value: weight ? `${weight}${weightDate ? ` ${weightDate}` : ""}` : "",
       onChange: handleWeightChange,
     },
     {
-      label: "Height",
+      label: t("pages.addPatient.patientDetails.height"),
       type: "text",
-      placeholder: "Enter Height",
-      value: height ? `${height} ${heightDate}` : "",
+      placeholder: t("pages.addPatient.placeholders.enterHeight"),
+      value: height ? `${height}${heightDate ? ` ${heightDate}` : ""}` : "",
       onChange: handleHeightChange,
     },
     {
-      label: "Head Circumference",
+      label: t("pages.addPatient.patientDetails.headCircumference"),
       type: "text",
-      placeholder: "Enter Head Circumference",
+      placeholder: t("pages.addPatient.placeholders.enterHeadCircumference"),
       value: headCircumference,
       onChange: (e) => setHeadCircumference(e.target.value),
     },
     {
-      label: "Abdominal Circumference",
+      label: t("pages.addPatient.patientDetails.abdominalCircumference"),
       type: "text",
-      placeholder: "Enter Abdominal Circumference",
+      placeholder: t(
+        "pages.addPatient.placeholders.enterAbdominalCircumference"
+      ),
       value: abdominalCircumference,
       onChange: (e) => setAbdominalCircumference(e.target.value),
     },
     {
-      label: "Total Fluids Calc",
+      label: t("pages.addPatient.patientDetails.totalFluidsCalc"),
       type: "text",
-      placeholder: "Enter Total Fluids Calc",
+      placeholder: t("pages.addPatient.placeholders.enterTotalFluidsCalc"),
       value: totalFluidsCalc,
       onChange: (e) => setTotalFluidsCalc(e.target.value),
     },
     {
-      label: "Fluids",
+      label: t("pages.addPatient.patientDetails.fluids"),
       type: "text",
-      placeholder: "Enter Fluids",
+      placeholder: t("pages.addPatient.placeholders.enterFluids"),
       value: fluids.join(", "),
       onChange: (e) => setFluids(e.target.value.split(", ")),
     },
     {
-      label: "Patient Type",
+      label: t("pages.addPatient.patientDetails.patientType"),
       type: "select",
-      placeholder: "Select Patient Type",
-      options: ["Neonate", "Pediatric", "Adult"],
+      placeholder: t("pages.addPatient.placeholders.selectPatientType"),
+      options: [
+        t("pages.addPatient.patientType.neonate"),
+        t("pages.addPatient.patientType.pediatric"),
+        t("pages.addPatient.patientType.adult"),
+      ],
       value: patientType,
       onChange: (e) => setPatientType(e.target.value),
     },
@@ -697,30 +757,30 @@ const AddPatient = () => {
       onChange: (e) => setCity(e.target.value),
     },
     {
-      label: "Nationality",
+      label: t("pages.addPatient.contactInfo.nationality"),
       type: "text",
-      placeholder: "Enter nationality",
+      placeholder: t("pages.addPatient.placeholders.enterNationality"),
       value: nationality,
       onChange: (e) => setNationality(e.target.value),
     },
     {
-      label: "National Security Id",
+      label: t("pages.addPatient.contactInfo.nationalSecurityId"),
       type: "text",
-      placeholder: "Enter National Security Id",
-      value: nationality,
+      placeholder: t("pages.addPatient.placeholders.enterNationalSecurityId"),
+      value: nationalSecurityId,
       onChange: (e) => setNationalSecurityId(e.target.value),
     },
     {
-      label: "Birth Place",
+      label: t("pages.addPatient.contactInfo.birthPlace"),
       type: "text",
-      placeholder: "Enter Birth Place",
+      placeholder: t("pages.addPatient.placeholders.enterBirthPlace"),
       value: birthPlace,
       onChange: (e) => setBirthPlace(e.target.value),
     },
     {
-      label: "Domicile",
+      label: t("pages.addPatient.contactInfo.domicile"),
       type: "text",
-      placeholder: "Enter Domicile",
+      placeholder: t("pages.addPatient.placeholders.enterDomicile"),
       value: domicile,
       onChange: (e) => setDomicile(e.target.value),
     },
@@ -766,7 +826,14 @@ const AddPatient = () => {
       label: t("pages.addPatient.emergencyContact.relationship"),
       type: "select",
       placeholder: t("pages.addPatient.placeholders.selectRelationship"),
-      options: ["Father", "Mother", "Husband", "Wife", "Sister", "Daughter"],
+      options: [
+        t("pages.addPatient.relationship.father"),
+        t("pages.addPatient.relationship.mother"),
+        t("pages.addPatient.relationship.husband"),
+        t("pages.addPatient.relationship.wife"),
+        t("pages.addPatient.relationship.sister"),
+        t("pages.addPatient.relationship.daughter"),
+      ],
       value: emergencyRelationship,
       onChange: (e) => setEmergencyRelationship(e.target.value),
     },
@@ -802,9 +869,9 @@ const AddPatient = () => {
       onChange: (e) => setMedicalHistory(e.target.value),
     },
     {
-      label: "Energency Sign and Symptoms",
+      label: t("pages.addPatient.medicalInfo.emergencySignSymptoms"),
       type: "text",
-      placeholder: "Enter symptoms",
+      placeholder: t("pages.addPatient.placeholders.enterSymptoms"),
       value: signinAndSymptoms,
       onChange: (e) => setSignAndSymptoms(e.target.value),
     },
@@ -826,30 +893,30 @@ const AddPatient = () => {
       onChange: (e) => setPolicyNumber(e.target.value),
     },
     {
-      label: "Assurance Name",
+      label: t("pages.addPatient.insuranceInfo.assuranceName"),
       type: "text",
-      placeholder: "Enter Assurance Name",
+      placeholder: t("pages.addPatient.placeholders.enterAsuranceName"),
       value: assuranceName,
       onChange: (e) => setAssuranceName(e.target.value),
     },
     {
-      label: "Assurance ID",
+      label: t("pages.addPatient.insuranceInfo.assuranceID"),
       type: "text",
-      placeholder: "Enter Assurance ID",
+      placeholder: t("pages.addPatient.placeholders.enterAssuranceID"),
       value: assuranceId,
       onChange: (e) => setAssuranceId(e.target.value),
     },
     {
-      label: "Responsible",
+      label: t("pages.addPatient.insuranceInfo.responsible"),
       type: "text",
-      placeholder: "Enter name",
+      placeholder: t("pages.addPatient.placeholders.enterResponsible"),
       value: responsible,
       onChange: (e) => setResponsible(e.target.value),
     },
     {
-      label: "Policy Holder",
+      label: t("pages.addPatient.insuranceInfo.policyHolder"),
       type: "text",
-      placeholder: "Enter name",
+      placeholder: t("pages.addPatient.placeholders.enterPolicyHolder"),
       value: policyHolder,
       onChange: (e) => setPolicyHolder(e.target.value),
     },
@@ -857,23 +924,23 @@ const AddPatient = () => {
 
   const identificationsFields = [
     {
-      label: "Ordinal",
+      label: t("pages.addPatient.identificationsFields.ordinal"),
       type: "number",
-      placeholder: "Enter ordinal",
+      placeholder: t("pages.addPatient.placeholders.enterOrdinal"),
       value: identificationOrdinal,
       onChange: (e) => setIdentificationOrdinal(e.target.value),
     },
     {
-      label: "Type",
+      label: t("pages.addPatient.identificationsFields.type"),
       type: "text",
-      placeholder: "Enter type",
+      placeholder: t("pages.addPatient.placeholders.enterType"),
       value: identificationType,
       onChange: (e) => setIdentificationType(e.target.value),
     },
     {
-      label: "Value",
+      label: t("pages.addPatient.identificationsFields.value"),
       type: "text",
-      placeholder: "Enter value",
+      placeholder: t("pages.addPatient.placeholders.enterValue"),
       value: identificationValue,
       onChange: (e) => setIdentificationValue(e.target.value),
     },
@@ -881,23 +948,23 @@ const AddPatient = () => {
 
   const responsibleIdentificationsFields = [
     {
-      label: "Ordinal",
+      label: t("pages.addPatient.responsibleIdentificationsFields.ordinal"),
       type: "number",
-      placeholder: "Enter ordinal",
+      placeholder: t("pages.addPatient.placeholders.enterOrdinal"),
       value: responsibleIdentificationOrdinal,
       onChange: (e) => setResponsibleIdentificationsOrdinal(e.target.value),
     },
     {
-      label: "Type",
+      label: t("pages.addPatient.responsibleIdentificationsFields.type"),
       type: "text",
-      placeholder: "Enter type",
+      placeholder: t("pages.addPatient.placeholders.enterType"),
       value: responsibleIdentificationType,
       onChange: (e) => setResponsibleIdentificationsType(e.target.value),
     },
     {
-      label: "Value",
+      label: t("pages.addPatient.responsibleIdentificationsFields.value"),
       type: "text",
-      placeholder: "Enter value",
+      placeholder: t("pages.addPatient.placeholders.enterValue"),
       value: responsibleIdentificationValue,
       onChange: (e) => setResponsibleIdentificationsValue(e.target.value),
     },
@@ -905,30 +972,30 @@ const AddPatient = () => {
 
   const communicationFields = [
     {
-      label: "Ordinal",
+      label: t("pages.addPatient.communicationFields.ordinal"),
       type: "number",
-      placeholder: "Enter ordinal",
+      placeholder: t("pages.addPatient.placeholders.enterOrdinal"),
       value: communicationOrdinal,
       onChange: (e) => setCommunicationOrdinal(e.target.value),
     },
     {
-      label: "Type",
+      label: t("pages.addPatient.communicationFields.type"),
       type: "text",
-      placeholder: "Enter type",
+      placeholder: t("pages.addPatient.placeholders.enterType"),
       value: communicationType,
       onChange: (e) => setCommunicationType(e.target.value),
     },
     {
-      label: "Label",
+      label: t("pages.addPatient.communicationFields.label"),
       type: "text",
-      placeholder: "Enter label",
+      placeholder: t("pages.addPatient.placeholders.enterLabel"),
       value: communicationLabel,
       onChange: (e) => setCommunicationLabel(e.target.value),
     },
     {
-      label: "Value",
+      label: t("pages.addPatient.communicationFields.value"),
       type: "text",
-      placeholder: "Enter value",
+      placeholder: t("pages.addPatient.placeholders.enterValue"),
       value: communicationValue,
       onChange: (e) => setCommunicationValue(e.target.value),
     },
@@ -936,30 +1003,30 @@ const AddPatient = () => {
 
   const responsibleCommunicationFields = [
     {
-      label: "Ordinal",
+      label: t("pages.addPatient.responsibleCommunicationFields.ordinal"),
       type: "number",
-      placeholder: "Enter ordinal",
+      placeholder: t("pages.addPatient.placeholders.enterOrdinal"),
       value: responsibleCommunicationsOrdinal,
       onChange: (e) => setResponsibleCommunicationsOrdinal(e.target.value),
     },
     {
-      label: "Type",
+      label: t("pages.addPatient.responsibleCommunicationFields.type"),
       type: "text",
-      placeholder: "Enter type",
+      placeholder: t("pages.addPatient.placeholders.enterType"),
       value: responsibleCommunicationType,
       onChange: (e) => setResponsibleCommunicationsType(e.target.value),
     },
     {
-      label: "Label",
+      label: t("pages.addPatient.responsibleCommunicationFields.label"),
       type: "text",
-      placeholder: "Enter label",
+      placeholder: t("pages.addPatient.placeholders.enterLabel"),
       value: responsibleCommunicationLabel,
       onChange: (e) => setResponsibleCommunicationsLabel(e.target.value),
     },
     {
-      label: "Value",
+      label: t("pages.addPatient.responsibleCommunicationFields.value"),
       type: "text",
-      placeholder: "Enter value",
+      placeholder: t("pages.addPatient.placeholders.enterValue"),
       value: responsibleCommunicationValue,
       onChange: (e) => setResponsibleCommunicationsValue(e.target.value),
     },
@@ -967,23 +1034,23 @@ const AddPatient = () => {
 
   const policyHolderIdentificationsFields = [
     {
-      label: "Ordinal",
+      label: t("pages.addPatient.policyHolderIdentificationsFields.ordinal"),
       type: "number",
-      placeholder: "Enter ordinal",
+      placeholder: t("pages.addPatient.placeholders.enterOrdinal"),
       value: policyHolderIdentificationOrdinal,
       onChange: (e) => setPolicyHolderIdentificationsOrdinal(e.target.value),
     },
     {
-      label: "Type",
+      label: t("pages.addPatient.policyHolderIdentificationsFields.type"),
       type: "text",
-      placeholder: "Enter type",
+      placeholder: t("pages.addPatient.placeholders.enterType"),
       value: policyHolderIdentificationType,
       onChange: (e) => setPolicyHolderIdentificationsType(e.target.value),
     },
     {
-      label: "Value",
+      label: t("pages.addPatient.policyHolderIdentificationsFields.value"),
       type: "text",
-      placeholder: "Enter value",
+      placeholder: t("pages.addPatient.placeholders.enterValue"),
       value: policyHolderIdentificationValue,
       onChange: (e) => setPolicyHolderIdentificationsValue(e.target.value),
     },
@@ -991,30 +1058,30 @@ const AddPatient = () => {
 
   const policyHolderCommunicationFields = [
     {
-      label: "Ordinal",
+      label: t("pages.addPatient.policyHolderCommunicationFields.ordinal"),
       type: "number",
-      placeholder: "Enter ordinal",
+      placeholder: t("pages.addPatient.placeholders.enterOrdinal"),
       value: policyHolderCommunicationOrdinal,
       onChange: (e) => setPolicyHolderCommunicationOrdinal(e.target.value),
     },
     {
-      label: "Type",
+      label: t("pages.addPatient.policyHolderCommunicationFields.type"),
       type: "text",
-      placeholder: "Enter type",
+      placeholder: t("pages.addPatient.placeholders.enterType"),
       value: policyHolderCommunicationType,
       onChange: (e) => setPolicyHolderCommunicationType(e.target.value),
     },
     {
-      label: "Label",
+      label: t("pages.addPatient.policyHolderCommunicationFields.label"),
       type: "text",
-      placeholder: "Enter label",
+      placeholder: t("pages.addPatient.placeholders.enterLabel"),
       value: policyHolderCommunicationLabel,
       onChange: (e) => setPolicyHolderCommunicationLabel(e.target.value),
     },
     {
-      label: "Value",
+      label: t("pages.addPatient.policyHolderCommunicationFields.value"),
       type: "text",
-      placeholder: "Enter value",
+      placeholder: t("pages.addPatient.placeholders.enterValue"),
       value: policyHolderCommunicationValue,
       onChange: (e) => setPolicyHolderCommunicationValue(e.target.value),
     },
@@ -1030,19 +1097,62 @@ const AddPatient = () => {
     },
     {
       label: t("pages.addPatient.cardDetails.expiryDate"),
-      type: "date",
-      placeholder: t("pages.addPatient.placeholders.enterExpiryDate"),
+      type: "text",
+      placeholder: "mm/dd/yyyy",
       value: expiryDate,
       onChange: (e) => {
-        const newExpiryDate = e.target.value;
+        let newValue = e.target.value;
 
-        if (isCardExpired(newExpiryDate)) {
-          alert("This card is expired! Please use a valid card.");
+        if (e.target.type === "date") {
+          const date = new Date(newValue);
+          const formattedDate = `${String(date.getMonth() + 1).padStart(
+            2,
+            "0"
+          )}/${String(date.getDate()).padStart(2, "0")}/${date.getFullYear()}`;
+
+          if (isCardExpired(formattedDate)) {
+            alert("This card is expired! Please use a valid card.");
+            return;
+          }
+
+          setExpiryDate(formattedDate);
           return;
         }
 
-        setExpiryDate(newExpiryDate);
+        newValue = newValue.replace(/\D/g, "");
+
+        if (newValue.length >= 2) {
+          newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
+        }
+        if (newValue.length >= 5) {
+          newValue = newValue.slice(0, 5) + "/" + newValue.slice(5, 9);
+        }
+
+        if (newValue.length <= 10) {
+          setExpiryDate(newValue);
+
+          if (newValue.length === 10 && isCardExpired(newValue)) {
+            alert("This card is expired! Please use a valid card.");
+            return;
+          }
+        }
       },
+      render: ({ field }) => (
+        <div className="relative">
+          <input
+            {...field}
+            type="text"
+            placeholder="mm/dd/yyyy"
+            className="w-full px-3 py-2 border rounded"
+          />
+          <input
+            type="date"
+            onChange={(e) => field.onChange(e)}
+            className="absolute inset-0 opacity-0 cursor-pointer"
+            min={new Date().toISOString().split("T")[0]}
+          />
+        </div>
+      ),
     },
     {
       label: t("pages.addPatient.cardDetails.cvv"),
@@ -1234,7 +1344,9 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Identifications">
+            <FormSection
+              title={t("pages.addPatient.identificationsFields.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {identificationsFields.map((field, index) =>
@@ -1243,7 +1355,9 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Comunications">
+            <FormSection
+              title={t("pages.addPatient.communicationFields.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {communicationFields.map((field, index) =>
@@ -1252,7 +1366,11 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Responsible Identifications">
+            <FormSection
+              title={t(
+                "pages.addPatient.responsibleIdentificationsFields.title"
+              )}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {responsibleIdentificationsFields.map((field, index) =>
@@ -1261,7 +1379,9 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Responsible Communications">
+            <FormSection
+              title={t("pages.addPatient.responsibleCommunicationFields.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {responsibleCommunicationFields.map((field, index) =>
@@ -1270,7 +1390,11 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Policyholder Identifications">
+            <FormSection
+              title={t(
+                "pages.addPatient.policyHolderIdentificationsFields.title"
+              )}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {policyHolderIdentificationsFields.map((field, index) =>
@@ -1279,7 +1403,11 @@ const AddPatient = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Policyholder Communications">
+            <FormSection
+              title={t(
+                "pages.addPatient.policyHolderCommunicationFields.title"
+              )}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {policyHolderCommunicationFields.map((field, index) =>

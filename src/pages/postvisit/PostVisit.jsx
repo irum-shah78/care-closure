@@ -343,7 +343,10 @@ const PostVisit = () => {
   const egressDateField = [
     {
       type: "date",
-      label: "Egress Date",
+      label: t("pages.postvisit.dischargeInfo.egress.egressDate.label"),
+      placeholder: t(
+        "pages.postvisit.dischargeInfo.egress.egressDate.placeholder"
+      ),
       value: egressDate,
       onChange: (e) => setEgressDate(e.target.value),
     },
@@ -352,16 +355,22 @@ const PostVisit = () => {
   const egressTypeField = [
     {
       type: "select",
-      label: "Egress Type",
-      placeholder: "Select type",
+      label: t("pages.postvisit.dischargeInfo.egress.egressType.label"),
+      placeholder: t(
+        "pages.postvisit.dischargeInfo.egress.egressType.placeholder"
+      ),
       value: egressType,
       onChange: (e) => setEgressType(e.target.value),
       options: [
-        "Medical Discharge",
-        "Medical Discharge On Request",
-        "Escape",
-        "Referral",
-        "Decease",
+        t(
+          "pages.postvisit.dischargeInfo.egress.egressType.options.medicalDischarge"
+        ),
+        t(
+          "pages.postvisit.dischargeInfo.egress.egressType.options.medicalDischargeOnRequest"
+        ),
+        t("pages.postvisit.dischargeInfo.egress.egressType.options.escape"),
+        t("pages.postvisit.dischargeInfo.egress.egressType.options.referral"),
+        t("pages.postvisit.dischargeInfo.egress.egressType.options.decease"),
       ],
     },
   ];
@@ -369,8 +378,10 @@ const PostVisit = () => {
   const egressCommentField = [
     {
       type: "text",
-      label: "Egress Comment",
-      placeholder: "Enter egress comment",
+      label: t("pages.postvisit.dischargeInfo.egress.egressComment.label"),
+      placeholder: t(
+        "pages.postvisit.dischargeInfo.egress.egressComment.placeholder"
+      ),
       value: egressComment,
       onChange: (e) => setEgressComment(e.target.value),
     },
@@ -379,8 +390,10 @@ const PostVisit = () => {
   const egressDepartmentIdField = [
     {
       type: "text",
-      label: "Egress Department ID",
-      placeholder: "Enter egress department ID",
+      label: t("pages.postvisit.dischargeInfo.egress.egressDepartmentId.label"),
+      placeholder: t(
+        "pages.postvisit.dischargeInfo.egress.egressDepartmentId.placeholder"
+      ),
       value: egressDepartmentId,
       onChange: (e) => setEgressDepartmentId(e.target.value),
     },
@@ -389,8 +402,10 @@ const PostVisit = () => {
   const egressDepartmentField = [
     {
       type: "text",
-      label: "Egress Department",
-      placeholder: "Enter egress department",
+      label: t("pages.postvisit.dischargeInfo.egress.egressDepartment.label"),
+      placeholder: t(
+        "pages.postvisit.dischargeInfo.egress.egressDepartment.placeholder"
+      ),
       value: egressDepartment,
       onChange: (e) => setEgressDepartment(e.target.value),
     },
@@ -399,8 +414,10 @@ const PostVisit = () => {
   const egressTransportWayField = [
     {
       type: "text",
-      label: "Egress Transport Way",
-      placeholder: "Enter transport way",
+      label: t("pages.postvisit.dischargeInfo.egress.egressTransportWay.label"),
+      placeholder: t(
+        "pages.postvisit.dischargeInfo.egress.egressTransportWay.placeholder"
+      ),
       value: egressTransportWay,
       onChange: (e) => setEgressTransportWay(e.target.value),
     },
@@ -409,8 +426,12 @@ const PostVisit = () => {
   const egressTransportInfoField = [
     {
       type: "text",
-      label: "Egress Transport Info",
-      placeholder: "Enter transport info",
+      label: t(
+        "pages.postvisit.dischargeInfo.egress.egressTransportInfo.label"
+      ),
+      placeholder: t(
+        "pages.postvisit.dischargeInfo.egress.egressTransportInfo.placeholder"
+      ),
       value: egressTransportInfo.name,
       onChange: (e) =>
         setEgressTransportInfo({
@@ -423,121 +444,238 @@ const PostVisit = () => {
   const signEgressField = [
     {
       type: "checkbox",
-      label: "Sign Egress",
+      label: t("pages.postvisit.dischargeInfo.egress.signEgress.label"),
       checked: signEgress,
       onChange: (e) => setSignEgress(e.target.checked),
     },
   ];
 
+  // // Follow-up Fields
+  // const nextAppointmentDateField = [
+  //   {
+  //     type: "date",
+  //     label: "Next Appointment Date",
+  //     value: nextAppointmentDate,
+  //     onChange: (e) => setNextAppointmentDate(e.target.value),
+  //   },
+  // ];
+
+  // const referredToField = [
+  //   {
+  //     type: "text",
+  //     label: "Referred To",
+  //     placeholder: "Enter referral",
+  //     value: referredTo,
+  //     onChange: (e) => setReferredTo(e.target.value),
+  //   },
+  // ];
+
+  // const planEgressField = [
+  //   {
+  //     type: "text",
+  //     label: "Plan Egress",
+  //     placeholder: "Enter plan",
+  //     value: planEgress,
+  //     onChange: (e) => setPlanEgress(e.target.value),
+  //   },
+  // ];
+  // const isCoordinatedReferredToField = [
+  //   {
+  //     type: "checkbox",
+  //     label: "Is Coordinated Referred To",
+  //     checked: isCoordinatedReferredTo,
+  //     onChange: (e) => setIsCoordinatedReferredTo(e.target.checked),
+  //   },
+  // ];
+
+  // const medicalDischargePrintFormField = [
+  //   {
+  //     type: "checkbox",
+  //     label: "Medical Discharge Print Form",
+  //     checked: medicalDischargePrintForm,
+  //     onChange: (e) => setMedicalDischargePrintForm(e.target.checked),
+  //   },
+  // ];
+
+  // // Final Documentation Fields
+  // const notesField = [
+  //   {
+  //     type: "text",
+  //     label: "Notes",
+  //     placeholder: "Enter notes",
+  //     value: notes,
+  //     onChange: (e) => setNotes(e.target.value),
+  //   },
+  // ];
+
+  // const diseaseOriginField = [
+  //   {
+  //     type: "text",
+  //     label: "Disease Origin",
+  //     placeholder: "Enter disease origin",
+  //     value: diseaseOrigin,
+  //     onChange: (e) => setDiseaseOrigin(e.target.value),
+  //   },
+  // ];
+
+  // const canceledDateField = [
+  //   {
+  //     type: "date",
+  //     label: "Canceled Date",
+  //     value: canceledDate,
+  //     onChange: (e) => setCanceledDate(e.target.value),
+  //   },
+  // ];
+
+  // const cancelReasonField = [
+  //   {
+  //     type: "text",
+  //     label: "Cancel Reason",
+  //     placeholder: "Enter cancel reason",
+  //     value: cancelReason,
+  //     onChange: (e) => setCancelReason(e.target.value),
+  //   },
+  // ];
+
+  // // Treatments Fields
+  // const treatmentField = [
+  //   {
+  //     type: "text",
+  //     label: "Treatment Description",
+  //     placeholder: "Enter treatment description",
+  //     value: treatment[0].description,
+  //     onChange: (e) =>
+  //       setTreatment([{ ...treatment[0], description: e.target.value }]),
+  //   },
+  // ];
+
+  // const diagnosticField = [
+  //   {
+  //     type: "text",
+  //     label: "Diagnostic Description",
+  //     placeholder: "Enter diagnostic description",
+  //     value: diagnostic[0].description,
+  //     onChange: (e) =>
+  //       setDiagnostic([{ ...diagnostic[0], description: e.target.value }]),
+  //   },
+  // ];
+
+
   // Follow-up Fields
-  const nextAppointmentDateField = [
-    {
-      type: "date",
-      label: "Next Appointment Date",
-      value: nextAppointmentDate,
-      onChange: (e) => setNextAppointmentDate(e.target.value),
-    },
-  ];
+const nextAppointmentDateField = [
+  {
+    type: "date",
+    label: t("pages.postvisit.followUpp.followUpFields.nextAppointmentDate.label"),
+    placeholder: t("followUpp.followUpFields.nextAppointmentDate.placeholder"),
+    value: nextAppointmentDate,
+    onChange: (e) => setNextAppointmentDate(e.target.value),
+  },
+];
 
-  const referredToField = [
-    {
-      type: "text",
-      label: "Referred To",
-      placeholder: "Enter referral",
-      value: referredTo,
-      onChange: (e) => setReferredTo(e.target.value),
-    },
-  ];
+const referredToField = [
+  {
+    type: "text",
+    label: t("pages.postvisit.followUpp.followUpFields.referredTo.label"),
+    placeholder: t("pages.postvisit.followUpp.followUpFields.referredTo.placeholder"),
+    value: referredTo,
+    onChange: (e) => setReferredTo(e.target.value),
+  },
+];
 
-  const planEgressField = [
-    {
-      type: "text",
-      label: "Plan Egress",
-      placeholder: "Enter plan",
-      value: planEgress,
-      onChange: (e) => setPlanEgress(e.target.value),
-    },
-  ];
-  const isCoordinatedReferredToField = [
-    {
-      type: "checkbox",
-      label: "Is Coordinated Referred To",
-      checked: isCoordinatedReferredTo,
-      onChange: (e) => setIsCoordinatedReferredTo(e.target.checked),
-    },
-  ];
+const planEgressField = [
+  {
+    type: "text",
+    label: t("pages.postvisit.followUpp.followUpFields.planEgress.label"),
+    placeholder: t("pages.postvisit.followUpp.followUpFields.planEgress.placeholder"),
+    value: planEgress,
+    onChange: (e) => setPlanEgress(e.target.value),
+  },
+];
 
-  const medicalDischargePrintFormField = [
-    {
-      type: "checkbox",
-      label: "Medical Discharge Print Form",
-      checked: medicalDischargePrintForm,
-      onChange: (e) => setMedicalDischargePrintForm(e.target.checked),
-    },
-  ];
+const isCoordinatedReferredToField = [
+  {
+    type: "checkbox",
+    label: t("pages.postvisit.followUpp.followUpFields.isCoordinatedReferredTo.label"),
+    placeholder: t("pages.postvisit.followUpp.followUpFields.isCoordinatedReferredTo.placeholder"),
+    checked: isCoordinatedReferredTo,
+    onChange: (e) => setIsCoordinatedReferredTo(e.target.checked),
+  },
+];
 
-  // Final Documentation Fields
-  const notesField = [
-    {
-      type: "text",
-      label: "Notes",
-      placeholder: "Enter notes",
-      value: notes,
-      onChange: (e) => setNotes(e.target.value),
-    },
-  ];
+const medicalDischargePrintFormField = [
+  {
+    type: "checkbox",
+    label: t("pages.postvisit.followUpp.followUpFields.medicalDischargePrintForm.label"),
+    placeholder: t("pages.postvisit.followUpp.followUpFields.medicalDischargePrintForm.placeholder"),
+    checked: medicalDischargePrintForm,
+    onChange: (e) => setMedicalDischargePrintForm(e.target.checked),
+  },
+];
 
-  const diseaseOriginField = [
-    {
-      type: "text",
-      label: "Disease Origin",
-      placeholder: "Enter disease origin",
-      value: diseaseOrigin,
-      onChange: (e) => setDiseaseOrigin(e.target.value),
-    },
-  ];
+// Final Documentation Fields
+const notesField = [
+  {
+    type: "text",
+    label: t("pages.postvisit.finalDocumentation.finalDocumentationFields.notes.label"),
+    placeholder: t("pages.postvisit.finalDocumentation.finalDocumentationFields.notes.placeholder"),
+    value: notes,
+    onChange: (e) => setNotes(e.target.value),
+  },
+];
 
-  const canceledDateField = [
-    {
-      type: "date",
-      label: "Canceled Date",
-      value: canceledDate,
-      onChange: (e) => setCanceledDate(e.target.value),
-    },
-  ];
+const diseaseOriginField = [
+  {
+    type: "text",
+    label: t("pages.postvisit.finalDocumentation.finalDocumentationFields.diseaseOrigin.label"),
+    placeholder: t("pages.postvisit.finalDocumentation.finalDocumentationFields.diseaseOrigin.placeholder"),
+    value: diseaseOrigin,
+    onChange: (e) => setDiseaseOrigin(e.target.value),
+  },
+];
 
-  const cancelReasonField = [
-    {
-      type: "text",
-      label: "Cancel Reason",
-      placeholder: "Enter cancel reason",
-      value: cancelReason,
-      onChange: (e) => setCancelReason(e.target.value),
-    },
-  ];
+const canceledDateField = [
+  {
+    type: "date",
+    label: t("pages.postvisit.finalDocumentation.finalDocumentationFields.canceledDate.label"),
+    placeholder: t("pages.postvisit.finalDocumentation.finalDocumentationFields.canceledDate.placeholder"),
+    value: canceledDate,
+    onChange: (e) => setCanceledDate(e.target.value),
+  },
+];
 
-  // Treatments Fields
-  const treatmentField = [
-    {
-      type: "text",
-      label: "Treatment Description",
-      placeholder: "Enter treatment description",
-      value: treatment[0].description,
-      onChange: (e) =>
-        setTreatment([{ ...treatment[0], description: e.target.value }]),
-    },
-  ];
+const cancelReasonField = [
+  {
+    type: "text",
+    label: t("pages.postvisit.finalDocumentation.finalDocumentationFields.cancelReason.label"),
+    placeholder: t("pages.postvisit.finalDocumentation.finalDocumentationFields.cancelReason.placeholder"),
+    value: cancelReason,
+    onChange: (e) => setCancelReason(e.target.value),
+  },
+];
 
-  const diagnosticField = [
-    {
-      type: "text",
-      label: "Diagnostic Description",
-      placeholder: "Enter diagnostic description",
-      value: diagnostic[0].description,
-      onChange: (e) =>
-        setDiagnostic([{ ...diagnostic[0], description: e.target.value }]),
-    },
-  ];
+// Treatments Fields
+const treatmentField = [
+  {
+    type: "text",
+    label: t("pages.postvisit.treatment.treatmentsFields.treatment.label"),
+    placeholder: t("pages.postvisit.treatment.treatmentsFields.treatment.placeholder"),
+    value: treatment[0].description,
+    onChange: (e) =>
+      setTreatment([{ ...treatment[0], description: e.target.value }]),
+  },
+];
+
+const diagnosticField = [
+  {
+    type: "text",
+    label: t("pages.postvisit.treatment.treatmentsFields.diagnostic.label"),
+    placeholder: t("pages.postvisit.treatment.treatmentsFields.diagnostic.placeholder"),
+    value: diagnostic[0].description,
+    onChange: (e) =>
+      setDiagnostic([{ ...diagnostic[0], description: e.target.value }]),
+  },
+];
+
 
   const renderField = (field, index) => {
     if (field.type === "checkbox") {
@@ -636,7 +774,7 @@ const PostVisit = () => {
             </h1>
           </div>
           <form className="mt-6 space-y-6 shadow-sm" onSubmit={handleSubmit}>
-            <FormSection title="Discharge Info">
+            <FormSection title={t("pages.postvisit.dischargeInfo.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {egressDateField.map((field, index) =>
@@ -666,7 +804,7 @@ const PostVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Follow-up">
+            <FormSection title={t("pages.postvisit.followUpp.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {nextAppointmentDateField.map((field, index) =>
@@ -688,7 +826,7 @@ const PostVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Final Documentation">
+            <FormSection title={t("pages.postvisit.finalDocumentation.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {notesField.map((field, index) => renderField(field, index))}
@@ -704,7 +842,7 @@ const PostVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Treatments">
+            <FormSection title={t("pages.postvisit.treatment.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {treatmentField.map((field, index) =>

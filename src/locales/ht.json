@@ -50,7 +50,14 @@
         "maritalStatus": "Eta Sivil",
         "bloodGroup": "Gwoup San",
         "age": "Laj",
-        "description": "Deskripsyon"
+        "description": "Deskripsyon",
+        "weight": "Pwa",
+        "height": "Wotè",
+        "headCircumference": "Sikonferans Tèt",
+        "abdominalCircumference": "Sikonferans Vant",
+        "totalFluidsCalc": "Kalkil Total Likid",
+        "fluids": "Likid",
+        "patientType": "Kalite Pasyan"
       },
       "contactInfo": {
         "title": "Enfòmasyon Kontak",
@@ -60,7 +67,11 @@
         "mobileNumber": "Nimewo Telefòn",
         "email": "Imèl",
         "zipcode": "Kòd Postal",
-        "address": "Adrès"
+        "address": "Adrès",
+        "nationality": "Nasyonalite",
+        "nationalSecurityId": "ID Sekirite Nasyonal",
+        "birthPlace": "Kote Nesans",
+        "domicile": "Domi"
       },
       "emergencyContact": {
         "title": "Kontak Ijans",
@@ -72,12 +83,17 @@
         "title": "Enfòmasyon Medikal",
         "allergies": "Alerji Konnen",
         "medications": "Medikaman Kouran",
-        "medicalHistory": "Istwa Medikal"
+        "medicalHistory": "Istwa Medikal",
+        "emergencySignSymptoms": "Siy ak Sentòm Ijans"
       },
       "insuranceInfo": {
         "title": "Enfòmasyon Asirans",
         "insuranceProvider": "Founisè Asirans",
-        "policyNumber": "Nimewo Polisi"
+        "policyNumber": "Nimewo Polisi",
+        "assuranceName": "Non Asirans",
+        "assuranceID": "ID Asirans",
+        "responsible": "Responsab",
+        "policyHolder": "Mèt Polisi"
       },
       "cardDetails": {
         "title": "Detay Kat",
@@ -88,6 +104,45 @@
       "paymentInfo": {
         "title": "Peman",
         "paymentStatus": "Estati Peman"
+      },
+      "identificationsFields": {
+        "title": "Idantifikasyon",
+        "ordinal": "Òdinal",
+        "type": "Tip",
+        "value": "Valè"
+      },
+      "responsibleIdentificationsFields": {
+        "title": "Idantifikasyon Responsab",
+        "ordinal": "Òdinal",
+        "type": "Tip",
+        "value": "Valè"
+      },
+      "communicationFields": {
+        "title": "Kominikasyon",
+        "ordinal": "Òdinal",
+        "type": "Tip",
+        "label": "Etikèt",
+        "value": "Valè"
+      },
+      "responsibleCommunicationFields": {
+        "title": "Kominikasyon Responsab",
+        "ordinal": "Òdinal",
+        "type": "Tip",
+        "label": "Etikèt",
+        "value": "Valè"
+      },
+      "policyHolderIdentificationsFields": {
+        "title": "Idantifikasyon Titè Polis la",
+        "ordinal": "Òdinal",
+        "type": "Tip",
+        "value": "Valè"
+      },
+      "policyHolderCommunicationFields": {
+        "title": "Kominikasyon Titè Polis la",
+        "ordinal": "Òdinal",
+        "type": "Tip",
+        "label": "Etikèt",
+        "value": "Valè"
       },
       "placeholders": {
         "enterFirstName": "Antre premye non",
@@ -116,7 +171,27 @@
         "enterCardNumber": "Antre nimewo kat",
         "enterExpiryDate": "MM/AA",
         "enterCVV": "Antre CVV",
-        "selectPaymentStatus": "Chwazi estati peman"
+        "selectPaymentStatus": "Chwazi estati peman",
+        "enterWeight": "Antre Pwa",
+        "enterHeight": "Antre Wotè",
+        "enterHeadCircumference": "Antre Sikonferans Tèt",
+        "enterAbdominalCircumference": "Antre Sikonferans Vant",
+        "enterTotalFluidsCalc": "Antre Kalkil Total Likid",
+        "enterFluids": "Antre Likid",
+        "selectPatientType": "Chwazi Kalite Pasyan",
+        "enterNationality": "Antre nasyonalite",
+        "enterNationalSecurityId": "Antre ID Sekirite Nasyonal",
+        "enterBirthPlace": "Antre kote nesans",
+        "enterDomicile": "Antre domi",
+        "enterAsuranceName": "Antre non asirans",
+        "enterAssuranceID": "Antre ID asirans",
+        "enterResponsible": "Antre non",
+        "enterPolicyHolder": "Antre mèt polisi",
+        "enterSymptoms": "Antre sentòm yo",
+        "enterOrdinal": "Antre òdinal",
+        "enterType": "Antre tip",
+        "enterValue": "Antre valè",
+        "enterLabel": "Antre etikèt"
       },
       "buttons": {
         "generateID": "Jenere ID",
@@ -139,6 +214,19 @@
         "pending": "An atant",
         "completed": "Konplete",
         "notPaid": "Pa Peye"
+      },
+      "patientType": {
+        "neonate": "Neyonatal",
+        "pediatric": "Pedyat",
+        "adult": "Adilt"
+      },
+      "relationship": {
+        "father": "Papa",
+        "mother": "Manman",
+        "husband": "Mari",
+        "wife": "Madanm",
+        "sister": "Sè",
+        "daughter": "Pitit Fi"
       }
     },
     "checkin-checkout": {
@@ -324,6 +412,34 @@
             "morning": "Maten (9AM - 12PM)",
             "afternoon": "Apre midi (9PM - 12AM)"
           }
+        },
+        "admissionDate": {
+          "label": "Dat Admisyon",
+          "placeholder": ""
+        },
+        "arrivalDate": {
+          "label": "Dat Arive",
+          "placeholder": ""
+        },
+        "admissionOrigin": {
+          "label": "Orijin Admisyon",
+          "options": {
+            "emergency": "Ijans",
+            "consultation": "Konsiltasyon"
+          },
+          "placeholder": "Chwazi orijin admisyon"
+        },
+        "referredFrom": {
+          "label": "Referans Soti",
+          "placeholder": "Antre non"
+        },
+        "isCoordinatedReferredFrom": {
+          "label": "Referans Soti Koòdone",
+          "options": {
+            "true": "Vre",
+            "false": "Fo"
+          },
+          "placeholder": "Chwazi nenpòt"
         }
       },
       "medicalInformation": {
@@ -376,6 +492,110 @@
           "wheelchair": "Aksè chèz woulant, entèprèt, elatriye",
           "ac": "AC",
           "interpreter": "Entèprèt"
+        }
+      },
+      "admissionTransport": {
+        "title": "Transpò Admisyon",
+        "admissionTransportWay": {
+          "label": "Metòd Transpò Admisyon",
+          "placeholder": "Antre Metòd Transpò Admisyon"
+        },
+        "admissionTransportInfo": {
+          "label": "Enfòmasyon sou Transpò Admisyon",
+          "placeholder": "Antre Enfòmasyon sou Transpò Admisyon"
+        }
+      },
+      "admissionPlan": {
+        "title": "Plan Admisyon",
+        "planAdmission": {
+          "label": "Plan Admisyon",
+          "placeholder": "Antre Plan Admisyon"
+        },
+        "admissionPrintForm": {
+          "label": "Fòm Enpresyon Admisyon",
+          "placeholder": "Antre Fòm"
+        }
+      },
+      "chiefComplaint": {
+        "title": "Pwen Pwensipal",
+        "chiefComplaintOrdinal": {
+          "label": "Ordinal",
+          "placeholder": "Antre Ordinal"
+        },
+        "chiefComplaintIndexes": {
+          "label": "Endis Kapitalizasyon",
+          "placeholder": "Antre Endis"
+        },
+        "chiefComplaintName": {
+          "label": "Non",
+          "placeholder": "Antre Non"
+        },
+        "chiefComplaintEvolutionTime": {
+          "label": "Tan Evolisyon",
+          "placeholder": "Antre Tan"
+        },
+        "chiefComplaintTimeMeasure": {
+          "label": "Mezi Tan",
+          "options": {
+            "days": "Jou",
+            "week": "Semèn",
+            "months": "Mwa"
+          },
+          "placeholder": "Chwazi Tan"
+        },
+        "chiefComplaintDescription": {
+          "label": "Deskripsyon",
+          "placeholder": "Antre Deskripsyon"
+        }
+      },
+      "triage": {
+        "title": "Triyaj",
+        "triageSystem": {
+          "label": "Sistèm Triyaj",
+          "options": {
+            "manchester": "Manchester",
+            "esi": "ESI",
+            "canadian": "Kanadyen"
+          },
+          "placeholder": "Chwazi Sistèm"
+        },
+        "triage": {
+          "label": "Triyaj",
+          "placeholder": "Antre Triyaj"
+        }
+      },
+      "instituition": {
+        "title": "Enstitisyon",
+        "institution": {
+          "title": "Enstitisyon",
+          "institutionID": {
+            "label": "ID Enstitisyon",
+            "placeholder": "Antre ID"
+          },
+          "institutionCode": {
+            "label": "Kòd Enstitisyon",
+            "placeholder": "Antre kòd"
+          },
+          "institutionName": {
+            "label": "Non Enstitisyon",
+            "placeholder": "Antre non"
+          },
+          "departmentID": {
+            "label": "ID Depatman",
+            "placeholder": "Antre ID"
+          },
+          "departmentName": {
+            "label": "Non Depatman",
+            "placeholder": "Antre non"
+          },
+          "medicalOfficeID": {
+            "label": "ID Biwo Medikal",
+            "placeholder": "Antre ID"
+          },
+          "signature": {
+            "label": "Siynati",
+            "placeholder": "Antre non moun ki siyen dosye a"
+          }
         }
       },
       "buttons": {
@@ -474,6 +694,342 @@
           "placeholder": "00:00:00"
         }
       },
+      "medicalHistory": {
+        "title": "Istwa Medikal",
+        "historyOfPresentIllness": {
+          "label": "Istwa Maladi Kounye a",
+          "placeholder": "Antre istwa maladi kounye a"
+        },
+        "historyOfPresentIllnessAuto": {
+          "label": "Istwa Maladi Kounye a (Otomatik)",
+          "placeholder": "Istwa ki jenere otomatikman"
+        },
+        "skipMedicalHistory": {
+          "label": "Sote Istwa Medikal",
+          "placeholder": "Tcheke pou sote istwa medikal"
+        },
+        "perinatalMedicalHistory": {
+          "label": "Istwa Medikal Perinatal",
+          "placeholder": "Antre istwa medikal perinatal"
+        },
+        "pastMedicalHistory": {
+          "label": "Istwa Medikal Pase",
+          "placeholder": "Antre istwa medikal pase"
+        },
+        "surgicalHistory": {
+          "label": "Istwa Chirijikal",
+          "placeholder": "Antre istwa chirijikal"
+        },
+        "familyHistory": {
+          "label": "Istwa Fanmi",
+          "placeholder": "Antre istwa fanmi"
+        },
+        "immunization": {
+          "label": "Iminitè",
+          "placeholder": "Antre detay iminitè"
+        },
+        "developmentalMilestones": {
+          "label": "Pwen Milestone Devlopman",
+          "placeholder": "Antre pwen milestone devlopman"
+        },
+        "drugHistory": {
+          "label": "Istwa Dwòg",
+          "placeholder": "Antre istwa dwòg"
+        },
+        "substancesUse": {
+          "label": "Itilizasyon Sibstans",
+          "placeholder": "Antre detay itilizasyon sibstans"
+        }
+      },
+      "examinations": {
+        "title": "Egzamen",
+        "vitalSigns": {
+          "title": "Siy Vital",
+          "name": {
+            "label": "Non Siy Vital",
+            "placeholder": "Antre non siy vital"
+          },
+          "value": {
+            "label": "Valè Siy Vital",
+            "placeholder": "Antre valè siy vital"
+          }
+        },
+        "physicalExamination": {
+          "title": "Egzamen Fizik",
+          "name": {
+            "label": "Non Egzamen",
+            "placeholder": "Antre non egzamen an"
+          },
+          "result": {
+            "label": "Rezilta Egzamen Fizik",
+            "placeholder": "Antre rezilta egzamen an"
+          }
+        },
+        "vaginalExaminations": {
+          "title": "Egzamen Vajinal",
+          "result": {
+            "label": "Rezilta Egzamen Vajinal",
+            "placeholder": "Antre rezilta egzamen an"
+          }
+        },
+        "LMP": {
+          "title": "Dènye Peryòd Menstriyèl (LMP)",
+          "label": "LMP",
+          "placeholder": "Antre LMP"
+        },
+        "GAPC": {
+          "title": "GAPC",
+          "name": {
+            "label": "Non GAPC",
+            "placeholder": "Antre non GAPC"
+          }
+        },
+        "GAPCCurrent": {
+          "title": "GAPC Kouran",
+          "current": {
+            "label": "GAPC Kouran",
+            "placeholder": "Antre GAPC kouran"
+          }
+        },
+        "perinatalOutcomes": {
+          "title": "Rezilta Perenatal",
+          "outcome": {
+            "label": "Rezilta Perenatal",
+            "placeholder": "Antre rezilta perenatal"
+          }
+        }
+      },
+
+      "careandTreatment": {
+        "title": "Swen ak Trete",
+        "diagnosticFields": {
+          "title": "Champs Dyagnostik",
+          "fields": {
+            "diagnosticTest": {
+              "label": "Tès Dyagnostik",
+              "placeholder": "Antre tès dyagnostik"
+            },
+            "code": {
+              "label": "Kòd",
+              "placeholder": "Antre kòd"
+            },
+            "note": {
+              "label": "Nòt",
+              "placeholder": "Antre nòt"
+            },
+            "capitalizeIndexes": {
+              "label": "Kapitlize Endèks",
+              "placeholder": "Antre endèks pou kapitlize"
+            }
+          }
+        },
+        "treatmentFields": {
+          "title": "Champs Trete",
+          "fields": {
+            "treatment": {
+              "label": "Tretman",
+              "placeholder": "Antre tretman"
+            },
+            "use": {
+              "label": "Itilize",
+              "placeholder": "Antre itilizasyon"
+            },
+            "presentation": {
+              "label": "Prezantasyon",
+              "placeholder": "Antre prezantasyon"
+            },
+            "indications": {
+              "label": "Endikasyon",
+              "placeholder": "Antre endikasyon"
+            },
+            "missingDays": {
+              "label": "Jou Pèdi",
+              "placeholder": "Antre jou pèdi"
+            },
+            "note": {
+              "label": "Nòt",
+              "placeholder": "Antre nòt"
+            },
+            "capitalizeIndexes": {
+              "label": "Kapitlize Endèks",
+              "placeholder": "Antre endèks pou kapitlize"
+            },
+            "isDrug": {
+              "label": "Eske se yon medikaman?"
+            },
+            "visibleInAdmissionForm": {
+              "label": "Vizib nan Fòm Admisyon"
+            },
+            "visibleInEgressForm": {
+              "label": "Vizib nan Fòm Egzeyat"
+            },
+            "visibleTreatmentTime": {
+              "label": "Vizib nan Tan Tretman"
+            },
+            "visibleInInpatientsReport": {
+              "label": "Vizib nan Rapò Pasyan Entèn"
+            }
+          }
+        },
+        "dietField": {
+          "title": "Champs Rejim",
+          "fields": {
+            "diet": {
+              "label": "Rejim",
+              "placeholder": "Antre rejim"
+            }
+          }
+        },
+        "physicalActivityField": {
+          "title": "Champs Aktivite Fizik",
+          "fields": {
+            "physicalActivity": {
+              "label": "Aktivite Fizik",
+              "placeholder": "Antre aktivite fizik"
+            }
+          }
+        },
+        "positionField": {
+          "title": "Champs Pozisyon",
+          "fields": {
+            "position": {
+              "label": "Pozisyon",
+              "placeholder": "Antre pozisyon"
+            }
+          }
+        },
+        "curesField": {
+          "title": "Champs Swen",
+          "fields": {
+            "cures": {
+              "label": "Swen",
+              "placeholder": "Antre swen"
+            }
+          }
+        },
+        "oxygenTherapyField": {
+          "title": "Champs Terapè Oksijèn",
+          "fields": {
+            "oxygenTherapy": {
+              "label": "Terapè Oksijèn",
+              "placeholder": "Antre detay terapi oksijèn"
+            }
+          }
+        },
+        "chestPhysiotherapyField": {
+          "title": "Champs Fizyo Terapi Tòrax",
+          "fields": {
+            "chestPhysiotherapy": {
+              "label": "Fizyo Terapi Tòrax",
+              "placeholder": "Antre detay terapi tòrax"
+            }
+          }
+        },
+        "cathetersField": {
+          "title": "Champs Katetè",
+          "fields": {
+            "catheters": {
+              "label": "Katetè",
+              "placeholder": "Antre detay katetè"
+            }
+          }
+        },
+        "drainsField": {
+          "title": "Champs Drenaj",
+          "fields": {
+            "drains": {
+              "label": "Drenaj",
+              "placeholder": "Antre detay drenaj"
+            }
+          }
+        },
+        "nebulizationsField": {
+          "title": "Champs Nebulizasyon",
+          "fields": {
+            "nebulizations": {
+              "label": "Nebulizasyon",
+              "placeholder": "Antre detay nebulizasyon"
+            }
+          }
+        }
+      },
+
+      "monitoring": {
+        "title": "Suivi",
+        "fluidsField": {
+          "title": "Champs de Liquides",
+          "fields": {
+            "fluids": {
+              "label": "Liquides",
+              "placeholder": "Antre detay sou likid yo"
+            }
+          }
+        },
+        "totalFluidsCalcField": {
+          "title": "Champs de Kalkil Total Liquides",
+          "fields": {
+            "totalFluidsCalc": {
+              "label": "Kalkil Total Liquides",
+              "placeholder": "Antre kalkil total likid yo"
+            }
+          }
+        },
+        "fluidBalanceField": {
+          "title": "Champs de Balans Liquides",
+          "fields": {
+            "fluidBalance": {
+              "label": "Balans Liquides",
+              "placeholder": "Antre balans likid yo"
+            }
+          }
+        },
+        "hourlyDiuresisField": {
+          "title": "Champs Diürezis Pa Èdtan",
+          "fields": {
+            "hourlyDiuresis": {
+              "label": "Diürezis Pa Èdtan",
+              "placeholder": "Antre diürezis pa èdtan"
+            }
+          }
+        },
+        "hourlyMeanDiuresisField": {
+          "title": "Champs Diürezis Mwayèn Pa Èdtan",
+          "fields": {
+            "hourlyMeanDiuresis": {
+              "label": "Diürezis Mwayèn Pa Èdtan",
+              "placeholder": "Antre diürezis mwayèn pa èdtan"
+            }
+          }
+        },
+        "timeTemperatureCurveField": {
+          "title": "Champs Courbe Tan-Tanperati",
+          "fields": {
+            "timeTemperatureCurve": {
+              "label": "Courbe Tan-Tanperati",
+              "placeholder": "Antre detay sou courbe tan-tanperati"
+            }
+          }
+        },
+        "controlsField": {
+          "title": "Champs Kontwòl",
+          "fields": {
+            "controls": {
+              "label": "Kontwòl",
+              "placeholder": "Antre detay sou kontwòl yo"
+            }
+          }
+        },
+        "othersOrderSetsField": {
+          "title": "Champs Lòt Lòd",
+          "fields": {
+            "othersOrderSets": {
+              "label": "Lòt Lòd",
+              "placeholder": "Antre lòt lòd yo"
+            }
+          }
+        }
+      },
+
       "buttons": {
         "cancel": "Anile",
         "complete": "Konplete Admisyon"
@@ -574,6 +1130,111 @@
         "dischargedTime": {
           "label": "Lè Dechaj",
           "placeholder": "00:00:00"
+        }
+      },
+      "dischargeInfo": {
+        "title": "Enfòmasyon Sou Depa",
+        "egress": {
+          "title": "Depa",
+          "egressDate": {
+            "label": "Dat Depa",
+            "placeholder": "Antre dat depa"
+          },
+          "egressType": {
+            "label": "Tip Depa",
+            "placeholder": "Chwazi tip",
+            "options": {
+              "medicalDischarge": "Depa Medikal",
+              "medicalDischargeOnRequest": "Depa Medikal Sou Demann",
+              "escape": "Echape",
+              "referral": "Referans",
+              "decease": "Mouri"
+            }
+          },
+          "egressComment": {
+            "label": "Kòmantè Depa",
+            "placeholder": "Antre kòmantè depa"
+          },
+          "egressDepartmentId": {
+            "label": "ID Depatman Depa",
+            "placeholder": "Antre ID depatman depa"
+          },
+          "egressDepartment": {
+            "label": "Depatman Depa",
+            "placeholder": "Antre depatman depa"
+          },
+          "egressTransportWay": {
+            "label": "Mwayen Transpò Depa",
+            "placeholder": "Antre mwayen transpò"
+          },
+          "egressTransportInfo": {
+            "label": "Enfòmasyon Transpò Depa",
+            "placeholder": "Antre enfòmasyon transpò"
+          },
+          "signEgress": {
+            "label": "Siyen Depa",
+            "placeholder": "Tcheke pou siyen depa"
+          }
+        }
+      },
+
+      "followUpp": {
+        "title": "Swivi",
+        "followUpFields": {
+          "nextAppointmentDate": {
+            "label": "Dat Pwochen Randevou",
+            "placeholder": "Antre dat pwochen randevou"
+          },
+          "referredTo": {
+            "label": "Refere A",
+            "placeholder": "Antre referans"
+          },
+          "planEgress": {
+            "label": "Plan Soti",
+            "placeholder": "Antre plan an"
+          },
+          "isCoordinatedReferredTo": {
+            "label": "Èske Refere Koòdone?",
+            "placeholder": "Tcheke si refere koòdone"
+          },
+          "medicalDischargePrintForm": {
+            "label": "Fòm Ekriti Egzeyat Medikal",
+            "placeholder": "Tcheke pou enprime fòm egzeyat medikal"
+          }
+        }
+      },
+      "finalDocumentation": {
+        "title": "Dokimantasyon Final",
+        "finalDocumentationFields": {
+          "notes": {
+            "label": "Nòt",
+            "placeholder": "Antre nòt yo"
+          },
+          "diseaseOrigin": {
+            "label": "Orijin Maladi",
+            "placeholder": "Antre orijin maladi"
+          },
+          "canceledDate": {
+            "label": "Dat Anile",
+            "placeholder": "Antre dat anile"
+          },
+          "cancelReason": {
+            "label": "Rezon Anilasyon",
+            "placeholder": "Antre rezon anilasyon"
+          }
+        }
+      },
+      "treatment": {
+        "title": "Tretman",
+        "treatmentsFields": {
+          "treatment": {
+            "label": "Deskripsyon Tretman",
+            "placeholder": "Antre deskripsyon tretman"
+          },
+          "diagnostic": {
+            "label": "Deskripsyon Dyagnostik",
+            "placeholder": "Antre deskripsyon dyagnostik"
+          }
         }
       }
     }

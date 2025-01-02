@@ -50,7 +50,14 @@
         "maritalStatus": "婚姻状况",
         "bloodGroup": "血型",
         "age": "年龄",
-        "description": "描述"
+        "description": "描述",
+        "weight": "体重",
+        "height": "身高",
+        "headCircumference": "头围",
+        "abdominalCircumference": "腹围",
+        "totalFluidsCalc": "总液体计算",
+        "fluids": "液体",
+        "patientType": "患者类型"
       },
       "contactInfo": {
         "title": "联系信息",
@@ -60,7 +67,11 @@
         "mobileNumber": "手机号",
         "email": "电子邮件",
         "zipcode": "邮政编码",
-        "address": "地址"
+        "address": "地址",
+        "nationality": "国籍",
+        "nationalSecurityId": "国家安全证件号码",
+        "birthPlace": "出生地",
+        "domicile": "住所"
       },
       "emergencyContact": {
         "title": "紧急联系人",
@@ -72,12 +83,17 @@
         "title": "医疗信息",
         "allergies": "已知过敏",
         "medications": "当前用药",
-        "medicalHistory": "病史"
+        "medicalHistory": "病史",
+        "emergencySignSymptoms": "紧急情况的症状和体征"
       },
       "insuranceInfo": {
         "title": "保险信息",
         "insuranceProvider": "保险提供者",
-        "policyNumber": "保单号码"
+        "policyNumber": "保单号码",
+        "assuranceName": "保险公司名称",
+        "assuranceID": "保险公司编号",
+        "responsible": "负责人",
+        "policyHolder": "保单持有人"
       },
       "cardDetails": {
         "title": "卡片详情",
@@ -88,6 +104,45 @@
       "paymentInfo": {
         "title": "付款",
         "paymentStatus": "付款状态"
+      },
+      "identificationsFields": {
+        "title": "身份证明",
+        "ordinal": "序号",
+        "type": "类型",
+        "value": "值"
+      },
+      "responsibleIdentificationsFields": {
+        "title": "责任身份证明",
+        "ordinal": "序号",
+        "type": "类型",
+        "value": "值"
+      },
+      "communicationFields": {
+        "title": "通信",
+        "ordinal": "序号",
+        "type": "类型",
+        "label": "标签",
+        "value": "值"
+      },
+      "responsibleCommunicationFields": {
+        "title": "责任通信",
+        "ordinal": "序号",
+        "type": "类型",
+        "label": "标签",
+        "value": "值"
+      },
+      "policyHolderIdentificationsFields": {
+        "title": "保单持有人身份证明",
+        "ordinal": "序号",
+        "type": "类型",
+        "value": "值"
+      },
+      "policyHolderCommunicationFields": {
+        "title": "保单持有人通信",
+        "ordinal": "序号",
+        "type": "类型",
+        "label": "标签",
+        "value": "值"
       },
       "placeholders": {
         "enterFirstName": "输入名字",
@@ -116,7 +171,27 @@
         "enterCardNumber": "输入卡号",
         "enterExpiryDate": "月/年",
         "enterCVV": "输入CVV",
-        "selectPaymentStatus": "选择付款状态"
+        "selectPaymentStatus": "选择付款状态",
+        "enterWeight": "输入体重",
+        "enterHeight": "输入身高",
+        "enterHeadCircumference": "输入头围",
+        "enterAbdominalCircumference": "输入腹围",
+        "enterTotalFluidsCalc": "输入总液体计算",
+        "enterFluids": "输入液体",
+        "selectPatientType": "选择患者类型",
+        "enterNationality": "输入国籍",
+        "enterNationalSecurityId": "输入国家安全证件号码",
+        "enterBirthPlace": "输入出生地",
+        "enterDomicile": "输入住所",
+        "enterAsuranceName": "输入保险公司名称",
+        "enterAssuranceID": "输入保险公司编号",
+        "enterResponsible": "输入姓名",
+        "enterPolicyHolder": "输入保单持有人",
+        "enterSymptoms": "输入症状",
+        "enterOrdinal": "输入序号",
+        "enterType": "输入类型",
+        "enterValue": "输入值",
+        "enterLabel": "输入标签"
       },
       "buttons": {
         "generateID": "生成ID",
@@ -139,6 +214,19 @@
         "pending": "待处理",
         "completed": "已完成",
         "notPaid": "未支付"
+      },
+      "patientType": {
+        "neonate": "新生儿",
+        "pediatric": "儿科",
+        "adult": "成人"
+      },
+      "relationship": {
+        "father": "父亲",
+        "mother": "母亲",
+        "husband": "丈夫",
+        "wife": "妻子",
+        "sister": "姐妹",
+        "daughter": "女儿"
       }
     },
     "checkin-checkout": {
@@ -324,6 +412,35 @@
             "morning": "早晨（9AM - 12PM）",
             "afternoon": "下午（9PM - 12AM)"
           }
+        },
+
+        "admissionDate": {
+          "label": "入院日期",
+          "placeholder": ""
+        },
+        "arrivalDate": {
+          "label": "到达日期",
+          "placeholder": ""
+        },
+        "admissionOrigin": {
+          "label": "入院来源",
+          "options": {
+            "emergency": "紧急",
+            "consultation": "咨询"
+          },
+          "placeholder": "选择入院来源"
+        },
+        "referredFrom": {
+          "label": "推荐来源",
+          "placeholder": "输入姓名"
+        },
+        "isCoordinatedReferredFrom": {
+          "label": "协调推荐来源",
+          "options": {
+            "true": "是",
+            "false": "否"
+          },
+          "placeholder": "选择任意"
         }
       },
       "medicalInformation": {
@@ -376,6 +493,110 @@
           "wheelchair": "轮椅通道、翻译等",
           "ac": "空调",
           "interpreter": "翻译"
+        }
+      },
+      "admissionTransport": {
+        "title": "入院运输",
+        "admissionTransportWay": {
+          "label": "入院运输方式",
+          "placeholder": "输入入院运输方式"
+        },
+        "admissionTransportInfo": {
+          "label": "入院运输信息",
+          "placeholder": "输入入院运输信息"
+        }
+      },
+      "admissionPlan": {
+        "title": "入院计划",
+        "planAdmission": {
+          "label": "计划入院",
+          "placeholder": "输入入院计划"
+        },
+        "admissionPrintForm": {
+          "label": "入院打印表单",
+          "placeholder": "输入表单"
+        }
+      },
+      "chiefComplaint": {
+        "title": "主诉",
+        "chiefComplaintOrdinal": {
+          "label": "序号",
+          "placeholder": "输入序号"
+        },
+        "chiefComplaintIndexes": {
+          "label": "首字母索引",
+          "placeholder": "输入索引"
+        },
+        "chiefComplaintName": {
+          "label": "名称",
+          "placeholder": "输入名称"
+        },
+        "chiefComplaintEvolutionTime": {
+          "label": "发展时间",
+          "placeholder": "输入时间"
+        },
+        "chiefComplaintTimeMeasure": {
+          "label": "时间度量",
+          "options": {
+            "days": "天",
+            "week": "周",
+            "months": "月"
+          },
+          "placeholder": "选择时间"
+        },
+        "chiefComplaintDescription": {
+          "label": "描述",
+          "placeholder": "输入描述"
+        }
+      },
+      "triage": {
+        "title": "分诊",
+        "triageSystem": {
+          "label": "分诊系统",
+          "options": {
+            "manchester": "曼彻斯特",
+            "esi": "ESI",
+            "canadian": "加拿大"
+          },
+          "placeholder": "选择系统"
+        },
+        "triage": {
+          "label": "分诊",
+          "placeholder": "输入分诊"
+        }
+      },
+      "instituition": {
+        "title": "机构",
+        "institution": {
+          "title": "机构",
+          "institutionID": {
+            "label": "机构ID",
+            "placeholder": "输入ID"
+          },
+          "institutionCode": {
+            "label": "机构代码",
+            "placeholder": "输入代码"
+          },
+          "institutionName": {
+            "label": "机构名称",
+            "placeholder": "输入名称"
+          },
+          "departmentID": {
+            "label": "部门ID",
+            "placeholder": "输入ID"
+          },
+          "departmentName": {
+            "label": "部门名称",
+            "placeholder": "输入名称"
+          },
+          "medicalOfficeID": {
+            "label": "医疗办公室ID",
+            "placeholder": "输入ID"
+          },
+          "signature": {
+            "label": "签名",
+            "placeholder": "输入签署记录的名字"
+          }
         }
       },
       "buttons": {
@@ -474,6 +695,342 @@
           "placeholder": "00:00:00"
         }
       },
+      "medicalHistory": {
+        "title": "病史",
+        "historyOfPresentIllness": {
+          "label": "现病史",
+          "placeholder": "输入现病史"
+        },
+        "historyOfPresentIllnessAuto": {
+          "label": "现病史（自动）",
+          "placeholder": "自动生成的病史"
+        },
+        "skipMedicalHistory": {
+          "label": "跳过病史",
+          "placeholder": "勾选以跳过病史"
+        },
+        "perinatalMedicalHistory": {
+          "label": "围产期病史",
+          "placeholder": "输入围产期病史"
+        },
+        "pastMedicalHistory": {
+          "label": "既往病史",
+          "placeholder": "输入既往病史"
+        },
+        "surgicalHistory": {
+          "label": "手术史",
+          "placeholder": "输入手术史"
+        },
+        "familyHistory": {
+          "label": "家族史",
+          "placeholder": "输入家族史"
+        },
+        "immunization": {
+          "label": "免疫接种",
+          "placeholder": "输入免疫接种详情"
+        },
+        "developmentalMilestones": {
+          "label": "发展里程碑",
+          "placeholder": "输入发展里程碑"
+        },
+        "drugHistory": {
+          "label": "药物史",
+          "placeholder": "输入药物史"
+        },
+        "substancesUse": {
+          "label": "物质使用",
+          "placeholder": "输入物质使用详情"
+        }
+      },
+      "examinations": {
+        "title": "检查",
+        "vitalSigns": {
+          "title": "生命体征",
+          "name": {
+            "label": "生命体征名称",
+            "placeholder": "输入生命体征名称"
+          },
+          "value": {
+            "label": "生命体征值",
+            "placeholder": "输入生命体征值"
+          }
+        },
+        "physicalExamination": {
+          "title": "体格检查",
+          "name": {
+            "label": "检查名称",
+            "placeholder": "输入检查名称"
+          },
+          "result": {
+            "label": "体格检查结果",
+            "placeholder": "输入检查结果"
+          }
+        },
+        "vaginalExaminations": {
+          "title": "阴道检查",
+          "result": {
+            "label": "阴道检查结果",
+            "placeholder": "输入检查结果"
+          }
+        },
+        "LMP": {
+          "title": "末次月经期 (LMP)",
+          "label": "LMP",
+          "placeholder": "输入末次月经期"
+        },
+        "GAPC": {
+          "title": "GAPC",
+          "name": {
+            "label": "GAPC 名称",
+            "placeholder": "输入 GAPC 名称"
+          }
+        },
+        "GAPCCurrent": {
+          "title": "当前 GAPC",
+          "current": {
+            "label": "当前 GAPC",
+            "placeholder": "输入当前 GAPC"
+          }
+        },
+        "perinatalOutcomes": {
+          "title": "围产期结果",
+          "outcome": {
+            "label": "围产期结果",
+            "placeholder": "输入围产期结果"
+          }
+        }
+      },
+
+      "careandTreatment": {
+        "title": "护理与治疗",
+        "diagnosticFields": {
+          "title": "诊断字段",
+          "fields": {
+            "diagnosticTest": {
+              "label": "诊断测试",
+              "placeholder": "请输入诊断测试"
+            },
+            "code": {
+              "label": "代码",
+              "placeholder": "请输入代码"
+            },
+            "note": {
+              "label": "备注",
+              "placeholder": "请输入备注"
+            },
+            "capitalizeIndexes": {
+              "label": "大写索引",
+              "placeholder": "请输入大写索引"
+            }
+          }
+        },
+        "treatmentFields": {
+          "title": "治疗字段",
+          "fields": {
+            "treatment": {
+              "label": "治疗",
+              "placeholder": "请输入治疗"
+            },
+            "use": {
+              "label": "用途",
+              "placeholder": "请输入用途"
+            },
+            "presentation": {
+              "label": "表现",
+              "placeholder": "请输入表现"
+            },
+            "indications": {
+              "label": "适应症",
+              "placeholder": "请输入适应症"
+            },
+            "missingDays": {
+              "label": "缺失天数",
+              "placeholder": "请输入缺失天数"
+            },
+            "note": {
+              "label": "备注",
+              "placeholder": "请输入备注"
+            },
+            "capitalizeIndexes": {
+              "label": "大写索引",
+              "placeholder": "请输入大写索引"
+            },
+            "isDrug": {
+              "label": "是否为药物"
+            },
+            "visibleInAdmissionForm": {
+              "label": "在入院表单中可见"
+            },
+            "visibleInEgressForm": {
+              "label": "在出院表单中可见"
+            },
+            "visibleTreatmentTime": {
+              "label": "治疗时间可见"
+            },
+            "visibleInInpatientsReport": {
+              "label": "在住院病人报告中可见"
+            }
+          }
+        },
+        "dietField": {
+          "title": "饮食字段",
+          "fields": {
+            "diet": {
+              "label": "饮食",
+              "placeholder": "请输入饮食"
+            }
+          }
+        },
+        "physicalActivityField": {
+          "title": "身体活动字段",
+          "fields": {
+            "physicalActivity": {
+              "label": "身体活动",
+              "placeholder": "请输入身体活动"
+            }
+          }
+        },
+        "positionField": {
+          "title": "位置字段",
+          "fields": {
+            "position": {
+              "label": "位置",
+              "placeholder": "请输入位置"
+            }
+          }
+        },
+        "curesField": {
+          "title": "治疗字段",
+          "fields": {
+            "cures": {
+              "label": "治疗",
+              "placeholder": "请输入治疗"
+            }
+          }
+        },
+        "oxygenTherapyField": {
+          "title": "氧气治疗字段",
+          "fields": {
+            "oxygenTherapy": {
+              "label": "氧气治疗",
+              "placeholder": "请输入氧气治疗详情"
+            }
+          }
+        },
+        "chestPhysiotherapyField": {
+          "title": "胸部物理治疗字段",
+          "fields": {
+            "chestPhysiotherapy": {
+              "label": "胸部物理治疗",
+              "placeholder": "请输入胸部物理治疗详情"
+            }
+          }
+        },
+        "cathetersField": {
+          "title": "导管字段",
+          "fields": {
+            "catheters": {
+              "label": "导管",
+              "placeholder": "请输入导管详情"
+            }
+          }
+        },
+        "drainsField": {
+          "title": "引流字段",
+          "fields": {
+            "drains": {
+              "label": "引流",
+              "placeholder": "请输入引流详情"
+            }
+          }
+        },
+        "nebulizationsField": {
+          "title": "雾化治疗字段",
+          "fields": {
+            "nebulizations": {
+              "label": "雾化治疗",
+              "placeholder": "请输入雾化治疗详情"
+            }
+          }
+        }
+      },
+
+      "monitoring": {
+        "title": "监测",
+        "fluidsField": {
+          "title": "液体字段",
+          "fields": {
+            "fluids": {
+              "label": "液体",
+              "placeholder": "请输入液体详情"
+            }
+          }
+        },
+        "totalFluidsCalcField": {
+          "title": "总液体计算字段",
+          "fields": {
+            "totalFluidsCalc": {
+              "label": "总液体计算",
+              "placeholder": "请输入总液体计算"
+            }
+          }
+        },
+        "fluidBalanceField": {
+          "title": "液体平衡字段",
+          "fields": {
+            "fluidBalance": {
+              "label": "液体平衡",
+              "placeholder": "请输入液体平衡"
+            }
+          }
+        },
+        "hourlyDiuresisField": {
+          "title": "每小时排尿字段",
+          "fields": {
+            "hourlyDiuresis": {
+              "label": "每小时排尿",
+              "placeholder": "请输入每小时排尿"
+            }
+          }
+        },
+        "hourlyMeanDiuresisField": {
+          "title": "每小时平均排尿字段",
+          "fields": {
+            "hourlyMeanDiuresis": {
+              "label": "每小时平均排尿",
+              "placeholder": "请输入每小时平均排尿"
+            }
+          }
+        },
+        "timeTemperatureCurveField": {
+          "title": "时间-温度曲线字段",
+          "fields": {
+            "timeTemperatureCurve": {
+              "label": "时间-温度曲线",
+              "placeholder": "请输入时间-温度曲线详情"
+            }
+          }
+        },
+        "controlsField": {
+          "title": "控制字段",
+          "fields": {
+            "controls": {
+              "label": "控制",
+              "placeholder": "请输入控制详情"
+            }
+          }
+        },
+        "othersOrderSetsField": {
+          "title": "其他医嘱字段",
+          "fields": {
+            "othersOrderSets": {
+              "label": "其他医嘱",
+              "placeholder": "请输入其他医嘱"
+            }
+          }
+        }
+      },
+
       "buttons": {
         "cancel": "取消",
         "complete": "完成入院"
@@ -575,7 +1132,114 @@
           "label": "出院时间",
           "placeholder": "00:00:00"
         }
+      },
+      "dischargeInfo": {
+  "title": "出院信息",
+  "egress": {
+    "title": "出院",
+    "egressDate": {
+      "label": "出院日期",
+      "placeholder": "请输入出院日期"
+    },
+    "egressType": {
+      "label": "出院类型",
+      "placeholder": "选择类型",
+      "options": {
+        "medicalDischarge": "医疗出院",
+        "medicalDischargeOnRequest": "申请出院",
+        "escape": "逃逸",
+        "referral": "转诊",
+        "decease": "死亡"
       }
+    },
+    "egressComment": {
+      "label": "出院备注",
+      "placeholder": "请输入出院备注"
+    },
+    "egressDepartmentId": {
+      "label": "出院科室 ID",
+      "placeholder": "请输入出院科室 ID"
+    },
+    "egressDepartment": {
+      "label": "出院科室",
+      "placeholder": "请输入出院科室"
+    },
+    "egressTransportWay": {
+      "label": "出院交通方式",
+      "placeholder": "请输入交通方式"
+    },
+    "egressTransportInfo": {
+      "label": "出院交通信息",
+      "placeholder": "请输入交通信息"
+    },
+    "signEgress": {
+      "label": "签署出院",
+      "placeholder": "勾选以签署出院"
+    }
+  }
+},
+
+"followUpp": {
+  "title": "随访",
+  "followUpFields": {
+    "nextAppointmentDate": {
+      "label": "下次预约日期",
+      "placeholder": "请输入下次预约日期"
+    },
+    "referredTo": {
+      "label": "转诊至",
+      "placeholder": "请输入转诊信息"
+    },
+    "planEgress": {
+      "label": "出院计划",
+      "placeholder": "请输入计划"
+    },
+    "isCoordinatedReferredTo": {
+      "label": "是否协调转诊",
+      "placeholder": "勾选以确认协调转诊"
+    },
+    "medicalDischargePrintForm": {
+      "label": "医疗出院打印表",
+      "placeholder": "勾选以打印医疗出院表"
+    }
+  }
+},
+"finalDocumentation": {
+  "title": "最终文件",
+  "finalDocumentationFields": {
+    "notes": {
+      "label": "备注",
+      "placeholder": "请输入备注"
+    },
+    "diseaseOrigin": {
+      "label": "疾病来源",
+      "placeholder": "请输入疾病来源"
+    },
+    "canceledDate": {
+      "label": "取消日期",
+      "placeholder": "请输入取消日期"
+    },
+    "cancelReason": {
+      "label": "取消原因",
+      "placeholder": "请输入取消原因"
+    }
+  }
+},
+"treatment": {
+  "title": "治疗",
+  "treatmentsFields": {
+    "treatment": {
+      "label": "治疗描述",
+      "placeholder": "请输入治疗描述"
+    },
+    "diagnostic": {
+      "label": "诊断描述",
+      "placeholder": "请输入诊断描述"
+    }
+  }
+}
+
+
     }
   }
 }

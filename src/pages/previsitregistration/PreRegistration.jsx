@@ -343,38 +343,70 @@ const PreRegistration = () => {
     },
     {
       type: "date",
-      label: "Admission Date",
-      placeholder: "",
+      label: t(
+        "pages.previsitregistration.visitInformation.admissionDate.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.admissionDate.placeholder"
+      ),
       value: admissionDate,
       onChange: (e) => setAdmissionDate(e.target.value),
     },
     {
       type: "date",
-      label: "Arrival Date",
-      placeholder: "",
+      label: t("pages.previsitregistration.visitInformation.arrivalDate.label"),
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.arrivalDate.placeholder"
+      ),
       value: arrivalDate,
       onChange: (e) => setArrivalDate(e.target.value),
     },
     {
       type: "select",
-      label: "Admission Origin",
-      options: ["Emergency", "Consultation"],
-      placeholder: "Select admission origin",
+      label: t(
+        "pages.previsitregistration.visitInformation.admissionOrigin.label"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.visitInformation.admissionOrigin.options.emergency"
+        ),
+        t(
+          "pages.previsitregistration.visitInformation.admissionOrigin.options.consultation"
+        ),
+      ],
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.admissionOrigin.placeholder"
+      ),
       value: admissionOrigin,
       onChange: (e) => setAdmissionOrigin(e.target.value),
     },
     {
       type: "text",
-      label: "Referred From",
-      placeholder: "Enter name",
+      label: t(
+        "pages.previsitregistration.visitInformation.referredFrom.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.referredFrom.placeholder"
+      ),
       value: referredFrom,
       onChange: (e) => setReferredFrom(e.target.value),
     },
     {
       type: "select",
-      label: "Coordinated Referred From",
-      placeholder: "Select any",
-      options: ["True", "False"],
+      label: t(
+        "pages.previsitregistration.visitInformation.isCoordinatedReferredFrom.label"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.visitInformation.isCoordinatedReferredFrom.options.true"
+        ),
+        t(
+          "pages.previsitregistration.visitInformation.isCoordinatedReferredFrom.options.false"
+        ),
+      ],
+      placeholder: t(
+        "pages.previsitregistration.visitInformation.isCoordinatedReferredFrom.placeholder"
+      ),
       value: isCoordinatedReferredFrom,
       onChange: (e) => setIsCoordinatedReferredFrom(e.target.value),
     },
@@ -427,18 +459,124 @@ const PreRegistration = () => {
     },
   ];
 
+  // const admissionTransportFields = [
+  //   {
+  //     type: "text",
+  //     label: "Admission Transport Way",
+  //     placeholder: "Enter Admission Transport Way",
+  //     value: admissionTransportWay,
+  //     onChange: (e) => setAdmissionTransportWay(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Admission Transport Info",
+  //     placeholder: "Enter Admission Transport Info",
+  //     value: admissionTransportInfo,
+  //     onChange: (e) => setAdmissionTransportInfo(e.target.value),
+  //   },
+  // ];
+
+  // const admissionPlanFields = [
+  //   {
+  //     type: "text",
+  //     label: "Plan Admission",
+  //     placeholder: "Enter Admission Plan",
+  //     value: planAdmission,
+  //     onChange: (e) => setPlanAdmission(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Admission Print Form",
+  //     placeholder: "Enter form",
+  //     value: admissionPrintForm,
+  //     onChange: (e) => setAdmissionPrintForm(e.target.value),
+  //   },
+  // ];
+
+  // const chiefComplaintFields = [
+  //   {
+  //     type: "number",
+  //     label: "Ordinal",
+  //     placeholder: "Enter ordinal",
+  //     value: chiefComplaintOrdinal,
+  //     onChange: (e) => setChiefComplaintOrdinal(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Capitilize Indexes",
+  //     placeholder: "Enter Indexes",
+  //     value: chiefComplaintIndexes,
+  //     onChange: (e) => setChiefComplaintIndexes(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Name",
+  //     placeholder: "Enter name",
+  //     value: chiefComplaintName,
+  //     onChange: (e) => setChiefComplaintName(e.target.value),
+  //   },
+  //   {
+  //     type: "number",
+  //     label: "Evolution Time",
+  //     placeholder: "Enter time",
+  //     value: chiefComplaintEvolutionTime,
+  //     onChange: (e) => setChiefComplaintEvolutionTime(e.target.value),
+  //   },
+  //   {
+  //     type: "select",
+  //     label: "Time Measure",
+  //     options: ["Days", "Week", "Months"],
+  //     placeholder: "Select time",
+  //     value: chiefComplaintTimeMeausre,
+  //     onChange: (e) => setChiefComplaintTimeMeasure(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Description",
+  //     placeholder: "Enter description",
+  //     value: chiefComplaintDescription,
+  //     onChange: (e) => setChiefComplaintDescription(e.target.value),
+  //   },
+  // ];
+
+  // const triageFields = [
+  //   {
+  //     type: "select",
+  //     label: "Triage System",
+  //     options: ["Manchester", "ESI", "Canadian"],
+  //     placeholder: "Select system",
+  //     value: triageSystem,
+  //     onChange: (e) => setTriageSystem(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Triage",
+  //     placeholder: "Enter triage",
+  //     value: triage,
+  //     onChange: (e) => setTriage(e.target.value),
+  //   },
+  // ];
+
   const admissionTransportFields = [
     {
       type: "text",
-      label: "Admission Transport Way",
-      placeholder: "Enter Admission Transport Way",
+      label: t(
+        "pages.previsitregistration.admissionTransport.admissionTransportWay.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.admissionTransport.admissionTransportWay.placeholder"
+      ),
       value: admissionTransportWay,
       onChange: (e) => setAdmissionTransportWay(e.target.value),
     },
     {
       type: "text",
-      label: "Admission Transport Info",
-      placeholder: "Enter Admission Transport Info",
+      label: t(
+        "pages.previsitregistration.admissionTransport.admissionTransportInfo.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.admissionTransport.admissionTransportInfo.placeholder"
+      ),
       value: admissionTransportInfo,
       onChange: (e) => setAdmissionTransportInfo(e.target.value),
     },
@@ -447,15 +585,21 @@ const PreRegistration = () => {
   const admissionPlanFields = [
     {
       type: "text",
-      label: "Plan Admission",
-      placeholder: "Enter Admission Plan",
+      label: t("pages.previsitregistration.admissionPlan.planAdmission.label"),
+      placeholder: t(
+        "pages.previsitregistration.admissionPlan.planAdmission.placeholder"
+      ),
       value: planAdmission,
       onChange: (e) => setPlanAdmission(e.target.value),
     },
     {
       type: "text",
-      label: "Admission Print Form",
-      placeholder: "Enter form",
+      label: t(
+        "pages.previsitregistration.admissionPlan.admissionPrintForm.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.admissionPlan.admissionPrintForm.placeholder"
+      ),
       value: admissionPrintForm,
       onChange: (e) => setAdmissionPrintForm(e.target.value),
     },
@@ -464,44 +608,78 @@ const PreRegistration = () => {
   const chiefComplaintFields = [
     {
       type: "number",
-      label: "Ordinal",
-      placeholder: "Enter ordinal",
+      label: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintOrdinal.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintOrdinal.placeholder"
+      ),
       value: chiefComplaintOrdinal,
       onChange: (e) => setChiefComplaintOrdinal(e.target.value),
     },
     {
       type: "text",
-      label: "Capitilize Indexes",
-      placeholder: "Enter Indexes",
+      label: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintIndexes.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintIndexes.placeholder"
+      ),
       value: chiefComplaintIndexes,
       onChange: (e) => setChiefComplaintIndexes(e.target.value),
     },
     {
       type: "text",
-      label: "Name",
-      placeholder: "Enter name",
+      label: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintName.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintName.placeholder"
+      ),
       value: chiefComplaintName,
       onChange: (e) => setChiefComplaintName(e.target.value),
     },
     {
       type: "number",
-      label: "Evolution Time",
-      placeholder: "Enter time",
+      label: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintEvolutionTime.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintEvolutionTime.placeholder"
+      ),
       value: chiefComplaintEvolutionTime,
       onChange: (e) => setChiefComplaintEvolutionTime(e.target.value),
     },
     {
       type: "select",
-      label: "Time Measure",
-      options: ["Days", "Week", "Months"],
-      placeholder: "Select time",
+      label: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintTimeMeasure.label"
+      ),
+      options: [
+        t(
+          "pages.previsitregistration.chiefComplaint.chiefComplaintTimeMeasure.options.days"
+        ),
+        t(
+          "pages.previsitregistration.chiefComplaint.chiefComplaintTimeMeasure.options.week"
+        ),
+        t(
+          "pages.previsitregistration.chiefComplaint.chiefComplaintTimeMeasure.options.months"
+        ),
+      ],
+      placeholder: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintTimeMeasure.placeholder"
+      ),
       value: chiefComplaintTimeMeausre,
       onChange: (e) => setChiefComplaintTimeMeasure(e.target.value),
     },
     {
       type: "text",
-      label: "Description",
-      placeholder: "Enter description",
+      label: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintDescription.label"
+      ),
+      placeholder: t(
+        "pages.previsitregistration.chiefComplaint.chiefComplaintDescription.placeholder"
+      ),
       value: chiefComplaintDescription,
       onChange: (e) => setChiefComplaintDescription(e.target.value),
     },
@@ -510,16 +688,22 @@ const PreRegistration = () => {
   const triageFields = [
     {
       type: "select",
-      label: "Triage System",
-      options: ["Manchester", "ESI", "Canadian"],
-      placeholder: "Select system",
+      label: t("pages.previsitregistration.triage.triageSystem.label"),
+      options: [
+        t("pages.previsitregistration.triage.triageSystem.options.manchester"),
+        t("pages.previsitregistration.triage.triageSystem.options.esi"),
+        t("pages.previsitregistration.triage.triageSystem.options.canadian"),
+      ],
+      placeholder: t(
+        "pages.previsitregistration.triage.triageSystem.placeholder"
+      ),
       value: triageSystem,
       onChange: (e) => setTriageSystem(e.target.value),
     },
     {
       type: "text",
-      label: "Triage",
-      placeholder: "Enter triage",
+      label: t("pages.previsitregistration.triage.triage.label"),
+      placeholder: t("pages.previsitregistration.triage.triage.placeholder"),
       value: triage,
       onChange: (e) => setTriage(e.target.value),
     },
@@ -604,58 +788,111 @@ const PreRegistration = () => {
     },
   ];
 
+  // const institutionFields = [
+  //   {
+  //     type: "number",
+  //     label: "Institution ID",
+  //     placeholder: "Enter ID",
+  //     value: instituitionID,
+  //     onChange: (e) => setInstituitionID(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Institution Code",
+  //     placeholder: "Enter code",
+  //     value: instituitionCode,
+  //     onChange: (e) => setInstituitionCode(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Institution Name",
+  //     placeholder: "Enter name",
+  //     value: instituitionName,
+  //     onChange: (e) => setInstituitionName(e.target.value),
+  //   },
+  //   {
+  //     type: "number",
+  //     label: "Department ID",
+  //     placeholder: "Enter ID",
+  //     value: departmentID,
+  //     onChange: (e) => setDepartmentID(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Department Name",
+  //     placeholder: "Enter name",
+  //     value: departmentName,
+  //     onChange: (e) => setDepartmentName(e.target.value),
+  //   },
+  //   {
+  //     type: "number",
+  //     label: "Medical Office ID",
+  //     placeholder: "Enter ID",
+  //     value: medicalOfficeID,
+  //     onChange: (e) => setMedicalOfficeID(e.target.value),
+  //   },
+  //   {
+  //     type: "text",
+  //     label: "Signature",
+  //     placeholder: "Enter name who signed record",
+  //     value: sign,
+  //     onChange: (e) => setSign(e.target.value),
+  //   },
+  // ];
+
   const institutionFields = [
     {
       type: "number",
-      label: "Institution ID",
-      placeholder: "Enter ID",
+      label: t("pages.previsitregistration.instituition.institution.institutionID.label"),
+      placeholder: t("pages.previsitregistration.instituition.institution.institutionID.placeholder"),
       value: instituitionID,
       onChange: (e) => setInstituitionID(e.target.value),
     },
     {
       type: "text",
-      label: "Institution Code",
-      placeholder: "Enter code",
+      label: t("pages.previsitregistration.instituition.institution.institutionCode.label"),
+      placeholder: t("pages.previsitregistration.instituition.institution.institutionCode.placeholder"),
       value: instituitionCode,
       onChange: (e) => setInstituitionCode(e.target.value),
     },
     {
       type: "text",
-      label: "Institution Name",
-      placeholder: "Enter name",
+      label: t("pages.previsitregistration.instituition.institution.institutionName.label"),
+      placeholder: t("pages.previsitregistration.instituition.institution.institutionName.placeholder"),
       value: instituitionName,
       onChange: (e) => setInstituitionName(e.target.value),
     },
     {
       type: "number",
-      label: "Department ID",
-      placeholder: "Enter ID",
+      label: t("pages.previsitregistration.instituition.institution.departmentID.label"),
+      placeholder: t("pages.previsitregistration.instituition.institution.departmentID.placeholder"),
       value: departmentID,
       onChange: (e) => setDepartmentID(e.target.value),
     },
     {
       type: "text",
-      label: "Department Name",
-      placeholder: "Enter name",
+      label: t("pages.previsitregistration.instituition.institution.departmentName.label"),
+      placeholder: t("pages.previsitregistration.instituition.institution.departmentName.placeholder"),
       value: departmentName,
       onChange: (e) => setDepartmentName(e.target.value),
     },
     {
       type: "number",
-      label: "Medical Office ID",
-      placeholder: "Enter ID",
+      label: t("pages.previsitregistration.instituition.institution.medicalOfficeID.label"),
+      placeholder: t("pages.previsitregistration.instituition.institution.medicalOfficeID.placeholder"),
       value: medicalOfficeID,
       onChange: (e) => setMedicalOfficeID(e.target.value),
     },
     {
       type: "text",
-      label: "Signature",
-      placeholder: "Enter name who signed record",
+      label: t("pages.previsitregistration.instituition.institution.signature.label"),
+      placeholder: t("pages.previsitregistration.instituition.institution.signature.placeholder"),
       value: sign,
       onChange: (e) => setSign(e.target.value),
     },
   ];
 
+  
   const renderField = (field, index) => {
     if (field.type === "select") {
       return (
@@ -773,7 +1010,9 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Admission Transport">
+            <FormSection
+              title={t("pages.previsitregistration.admissionTransport.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {admissionTransportFields.map((field, index) =>
@@ -782,7 +1021,9 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Admission Plan">
+            <FormSection
+              title={t("pages.previsitregistration.admissionPlan.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {admissionPlanFields.map((field, index) =>
@@ -791,7 +1032,7 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Instituition">
+            <FormSection title={t("pages.previsitregistration.instituition.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {institutionFields.map((field, index) =>
@@ -800,7 +1041,9 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Chief Complaint">
+            <FormSection
+              title={t("pages.previsitregistration.chiefComplaint.title")}
+            >
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {chiefComplaintFields.map((field, index) =>
@@ -809,7 +1052,7 @@ const PreRegistration = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Triage">
+            <FormSection title={t("pages.previsitregistration.triage.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {triageFields.map((field, index) => renderField(field, index))}

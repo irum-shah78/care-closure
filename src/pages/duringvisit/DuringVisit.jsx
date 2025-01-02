@@ -306,77 +306,105 @@ const DuringVisit = () => {
   const medicalHistoryFields = [
     {
       type: "text",
-      label: "History of Present Illness",
-      placeholder: "Enter history of present illness",
+      label: t(
+        "pages.duringvisit.medicalHistory.historyOfPresentIllness.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.historyOfPresentIllness.placeholder"
+      ),
       value: historyOfPresentIllness,
       onChange: (e) => setHistoryOfPresentIllness(e.target.value),
     },
     {
       type: "text",
-      label: "History of Present Illness (Auto)",
-      placeholder: "Enter auto-generated history of present illness",
+      label: t(
+        "pages.duringvisit.medicalHistory.historyOfPresentIllnessAuto.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.historyOfPresentIllnessAuto.placeholder"
+      ),
       value: historyOfPresentIllnessAuto,
       onChange: (e) => setHistoryOfPresentIllnessAuto(e.target.value),
     },
     {
       type: "checkbox",
-      label: "Skip Medical History",
+      label: t("pages.duringvisit.medicalHistory.skipMedicalHistory.label"),
       value: skipMedicalHistory,
       onChange: (e) => setSkipMedicalHistory(e.target.checked),
     },
     {
       type: "text",
-      label: "Perinatal Medical History",
-      placeholder: "Enter perinatal medical history",
+      label: t(
+        "pages.duringvisit.medicalHistory.perinatalMedicalHistory.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.perinatalMedicalHistory.placeholder"
+      ),
       value: perinatalMedicalHistory,
       onChange: (e) => setPerinatalMedicalHistory(e.target.value),
     },
     {
       type: "text",
-      label: "Past Medical History",
-      placeholder: "Enter past medical history",
+      label: t("pages.duringvisit.medicalHistory.pastMedicalHistory.label"),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.pastMedicalHistory.placeholder"
+      ),
       value: pastMedicalHistory,
       onChange: (e) => setPastMedicalHistory(e.target.value),
     },
     {
       type: "text",
-      label: "Surgical History",
-      placeholder: "Enter surgical history",
+      label: t("pages.duringvisit.medicalHistory.surgicalHistory.label"),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.surgicalHistory.placeholder"
+      ),
       value: surgicalHistory,
       onChange: (e) => setSurgicalHistory(e.target.value),
     },
     {
       type: "text",
-      label: "Family History",
-      placeholder: "Enter family history",
+      label: t("pages.duringvisit.medicalHistory.familyHistory.label"),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.familyHistory.placeholder"
+      ),
       value: familyHistory,
       onChange: (e) => setFamilyHistory(e.target.value),
     },
     {
       type: "text",
-      label: "Immunization",
-      placeholder: "Enter immunization details",
+      label: t("pages.duringvisit.medicalHistory.immunization.label"),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.immunization.placeholder"
+      ),
       value: immunization,
       onChange: (e) => setImmunization(e.target.value),
     },
     {
       type: "text",
-      label: "Developmental Milestones",
-      placeholder: "Enter developmental milestones",
+      label: t(
+        "pages.duringvisit.medicalHistory.developmentalMilestones.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.developmentalMilestones.placeholder"
+      ),
       value: developmentalMilestones,
       onChange: (e) => setDevelopmentalMilestones(e.target.value),
     },
     {
       type: "text",
-      label: "Drug History",
-      placeholder: "Enter drug history",
+      label: t("pages.duringvisit.medicalHistory.drugHistory.label"),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.drugHistory.placeholder"
+      ),
       value: drugHistory,
       onChange: (e) => setDrugHistory(e.target.value),
     },
     {
       type: "text",
-      label: "Substances Use",
-      placeholder: "Enter substances use details",
+      label: t("pages.duringvisit.medicalHistory.substancesUse.label"),
+      placeholder: t(
+        "pages.duringvisit.medicalHistory.substancesUse.placeholder"
+      ),
       value: substancesUse,
       onChange: (e) => setSubstancesUse(e.target.value),
     },
@@ -483,15 +511,19 @@ const DuringVisit = () => {
   const vitalSignsFields = [
     {
       type: "text",
-      label: "Vital Sign Name",
-      placeholder: "Enter vital sign name",
+      label: t("pages.duringvisit.examinations.vitalSigns.name.label"),
+      placeholder: t(
+        "pages.duringvisit.examinations.vitalSigns.name.placeholder"
+      ),
       value: vitalSigns.name,
       onChange: (e) => setVitalSigns({ ...vitalSigns, name: e.target.value }),
     },
     {
       type: "text",
-      label: "Vital Sign Value",
-      placeholder: "Enter vital sign value",
+      label: t("pages.duringvisit.examinations.vitalSigns.value.label"),
+      placeholder: t(
+        "pages.duringvisit.examinations.vitalSigns.value.placeholder"
+      ),
       value: vitalSigns.value,
       onChange: (e) => setVitalSigns({ ...vitalSigns, value: e.target.value }),
     },
@@ -500,8 +532,10 @@ const DuringVisit = () => {
   const physicalExaminationFields = [
     {
       type: "text",
-      label: "Examination Name",
-      placeholder: "Enter examination name",
+      label: t("pages.duringvisit.examinations.physicalExamination.name.label"),
+      placeholder: t(
+        "pages.duringvisit.examinations.physicalExamination.name.placeholder"
+      ),
       value: physicalExamination.name,
       onChange: (e) =>
         setPhysicalExamination({
@@ -511,8 +545,12 @@ const DuringVisit = () => {
     },
     {
       type: "text",
-      label: "Physical Examination Result",
-      placeholder: "Enter examination result",
+      label: t(
+        "pages.duringvisit.examinations.physicalExamination.result.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.examinations.physicalExamination.result.placeholder"
+      ),
       value: physicalExamination.result,
       onChange: (e) =>
         setPhysicalExamination({
@@ -525,8 +563,12 @@ const DuringVisit = () => {
   const vaginalExaminationsFields = [
     {
       type: "text",
-      label: "Vaginal Examination Result",
-      placeholder: "Enter examination result",
+      label: t(
+        "pages.duringvisit.examinations.vaginalExaminations.result.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.examinations.vaginalExaminations.result.placeholder"
+      ),
       value: vaginalExaminations.result,
       onChange: (e) =>
         setVaginalExaminations({
@@ -539,8 +581,8 @@ const DuringVisit = () => {
   const lmpField = [
     {
       type: "date",
-      label: "Last Menstrual Period (LMP)",
-      placeholder: "Enter LMP",
+      label: t("pages.duringvisit.examinations.LMP.label"),
+      placeholder: t("pages.duringvisit.examinations.LMP.placeholder"),
       value: LMP,
       onChange: (e) => setLMP(e.target.value),
     },
@@ -549,8 +591,8 @@ const DuringVisit = () => {
   const GAPCFields = [
     {
       type: "text",
-      label: "GAPC Name",
-      placeholder: "Enter GAPC name",
+      label: t("pages.duringvisit.examinations.GAPC.name.label"),
+      placeholder: t("pages.duringvisit.examinations.GAPC.name.placeholder"),
       value: GAPC.name,
       onChange: (e) => setGAPC({ ...GAPC, name: e.target.value }),
     },
@@ -559,8 +601,10 @@ const DuringVisit = () => {
   const GAPCCurrentFields = [
     {
       type: "text",
-      label: "Current GAPC",
-      placeholder: "Enter current GAPC",
+      label: t("pages.duringvisit.examinations.GAPCCurrent.current.label"),
+      placeholder: t(
+        "pages.duringvisit.examinations.GAPCCurrent.current.placeholder"
+      ),
       value: GAPCCurrent.current,
       onChange: (e) =>
         setGAPCCurrent({ ...GAPCCurrent, current: e.target.value }),
@@ -570,131 +614,149 @@ const DuringVisit = () => {
   const perinatalOutcomesFields = [
     {
       type: "text",
-      label: "Perinatal Outcome",
-      placeholder: "Enter perinatal outcome",
+      label: t(
+        "pages.duringvisit.examinations.perinatalOutcomes.outcome.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.examinations.perinatalOutcomes.outcome.placeholder"
+      ),
       value: perinatalOutcomes.outcome,
       onChange: (e) =>
         setPerinatalOutcomes({ ...perinatalOutcomes, outcome: e.target.value }),
     },
   ];
 
-  // const diagnosticFields = [
-  //   {
-  //     type: "text",
-  //     label: "Diagnostic Test",
-  //     placeholder: "Enter diagnostic test",
-  //     value: diagnostic.name,
-  //     onChange: (e) => setDiagnostic({ ...diagnostic, name: e.target.value }),
-  //   },
-  // ];
-
-  // const treatmentFields = [
-  //   {
-  //     type: "text",
-  //     label: "Treatment",
-  //     placeholder: "Enter treatment",
-  //     value: treatment.name,
-  //     onChange: (e) => setTreatment({ ...treatment, name: e.target.value }),
-  //   },
-  // ];
-
   const diagnosticFields = [
     {
       type: "text",
-      label: "Diagnostic Test",
-      placeholder: "Enter diagnostic test",
+      label: t(
+        "pages.duringvisit.careandTreatment.diagnosticFields.fields.diagnosticTest.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.diagnosticFields.fields.diagnosticTest.placeholder"
+      ),
       value: diagnostic.name,
       onChange: (e) => setDiagnostic({ ...diagnostic, name: e.target.value }),
     },
     {
       type: "text",
-      label: "Code",
-      placeholder: "Enter code",
+      label: t(
+        "pages.duringvisit.careandTreatment.diagnosticFields.fields.code.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.diagnosticFields.fields.code.placeholder"
+      ),
       value: diagnostic.code,
       onChange: (e) => setDiagnostic({ ...diagnostic, code: e.target.value }),
     },
     {
       type: "text",
-      label: "Note",
-      placeholder: "Enter note",
+      label: t(
+        "pages.duringvisit.careandTreatment.diagnosticFields.fields.note.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.diagnosticFields.fields.note.placeholder"
+      ),
       value: diagnostic.note,
       onChange: (e) => setDiagnostic({ ...diagnostic, note: e.target.value }),
     },
     {
       type: "text",
-      label: "Capitalize Indexes",
-      placeholder: "Enter capitalize indexes",
+      label: t(
+        "pages.duringvisit.careandTreatment.diagnosticFields.fields.capitalizeIndexes.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.diagnosticFields.fields.capitalizeIndexes.placeholder"
+      ),
       value: diagnostic.capitalizeIndexes,
       onChange: (e) =>
         setDiagnostic({ ...diagnostic, capitalizeIndexes: e.target.value }),
     },
   ];
 
-  // Fields for treatment
   const treatmentFields = [
     {
       type: "text",
-      label: "Treatment",
-      placeholder: "Enter treatment",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.treatment.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.treatment.placeholder"
+      ),
       value: treatment.name,
       onChange: (e) => setTreatment({ ...treatment, name: e.target.value }),
     },
     {
       type: "text",
-      label: "Use",
-      placeholder: "Enter use",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.use.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.use.placeholder"
+      ),
       value: treatment.use,
       onChange: (e) => setTreatment({ ...treatment, use: e.target.value }),
     },
-
     {
       type: "text",
-      label: "Presentation",
-      placeholder: "Enter presentation",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.presentation.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.presentation.placeholder"
+      ),
       value: treatment.presentation,
       onChange: (e) =>
         setTreatment({ ...treatment, presentation: e.target.value }),
     },
     {
       type: "text",
-      label: "Indications",
-      placeholder: "Enter indications",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.indications.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.indications.placeholder"
+      ),
       value: treatment.indications,
       onChange: (e) =>
         setTreatment({ ...treatment, indications: e.target.value }),
     },
     {
       type: "number",
-      label: "Missing Days",
-      placeholder: "Enter missing days",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.missingDays.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.missingDays.placeholder"
+      ),
       value: treatment.missingDays,
       onChange: (e) =>
         setTreatment({ ...treatment, missingDays: e.target.value }),
     },
     {
       type: "text",
-      label: "Note",
-      placeholder: "Enter note",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.note.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.note.placeholder"
+      ),
       value: treatment.note,
       onChange: (e) => setTreatment({ ...treatment, note: e.target.value }),
     },
     {
-      type: "text",
-      label: "Capitalize Indexes",
-      placeholder: "Enter capitalize indexes",
-      value: treatment.capitalizeIndexes,
-      onChange: (e) =>
-        setTreatment({ ...treatment, capitalizeIndexes: e.target.value }),
-    },
-    {
       type: "checkbox",
-      label: "Is Drug",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.isDrug.label"
+      ),
       value: treatment.isDrug,
       onChange: (e) => setTreatment({ ...treatment, isDrug: e.target.checked }),
     },
     {
       type: "checkbox",
-      label: "Visible in Admission Form",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.visibleInAdmissionForm.label"
+      ),
       value: treatment.visibleInAdmissionForm,
       onChange: (e) =>
         setTreatment({
@@ -704,7 +766,9 @@ const DuringVisit = () => {
     },
     {
       type: "checkbox",
-      label: "Visible in Egress Form",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.visibleInEgressForm.label"
+      ),
       value: treatment.visibleInEgressForm,
       onChange: (e) =>
         setTreatment({ ...treatment, visibleInEgressForm: e.target.checked }),
@@ -712,14 +776,18 @@ const DuringVisit = () => {
 
     {
       type: "checkbox",
-      label: "Visible Treatment Time",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.visibleTreatmentTime.label"
+      ),
       value: treatment.visibleTreatmentTime,
       onChange: (e) =>
         setTreatment({ ...treatment, visibleTreatmentTime: e.target.checked }),
     },
     {
       type: "checkbox",
-      label: "Visible in Inpatients Report",
+      label: t(
+        "pages.duringvisit.careandTreatment.treatmentFields.fields.visibleInInpatientsReport.label"
+      ),
       value: treatment.visibleInInpatientsReport,
       onChange: (e) =>
         setTreatment({
@@ -732,8 +800,12 @@ const DuringVisit = () => {
   const dietField = [
     {
       type: "text",
-      label: "Diet",
-      placeholder: "Enter diet",
+      label: t(
+        "pages.duringvisit.careandTreatment.dietField.fields.diet.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.dietField.fields.diet.placeholder"
+      ),
       value: diet,
       onChange: (e) => setDiet(e.target.value),
     },
@@ -742,8 +814,12 @@ const DuringVisit = () => {
   const physicalActivityField = [
     {
       type: "text",
-      label: "Physical Activity",
-      placeholder: "Enter physical activity",
+      label: t(
+        "pages.duringvisit.careandTreatment.physicalActivityField.fields.physicalActivity.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.physicalActivityField.fields.physicalActivity.placeholder"
+      ),
       value: physicalActivity,
       onChange: (e) => setPhysicalActivity(e.target.value),
     },
@@ -752,8 +828,12 @@ const DuringVisit = () => {
   const positionField = [
     {
       type: "text",
-      label: "Position",
-      placeholder: "Enter position",
+      label: t(
+        "pages.duringvisit.careandTreatment.positionField.fields.position.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.positionField.fields.position.placeholder"
+      ),
       value: position,
       onChange: (e) => setPosition(e.target.value),
     },
@@ -762,8 +842,12 @@ const DuringVisit = () => {
   const curesField = [
     {
       type: "text",
-      label: "Cures",
-      placeholder: "Enter cures",
+      label: t(
+        "pages.duringvisit.careandTreatment.curesField.fields.cures.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.curesField.fields.cures.placeholder"
+      ),
       value: cures,
       onChange: (e) => setCures(e.target.value),
     },
@@ -772,8 +856,12 @@ const DuringVisit = () => {
   const oxygenTherapyField = [
     {
       type: "text",
-      label: "Oxygen Therapy",
-      placeholder: "Enter oxygen therapy details",
+      label: t(
+        "pages.duringvisit.careandTreatment.oxygenTherapyField.fields.oxygenTherapy.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.oxygenTherapyField.fields.oxygenTherapy.placeholder"
+      ),
       value: oxygenTherapy,
       onChange: (e) => setOxygenTherapy(e.target.value),
     },
@@ -782,8 +870,12 @@ const DuringVisit = () => {
   const chestPhysiotherapyField = [
     {
       type: "text",
-      label: "Chest Physiotherapy",
-      placeholder: "Enter chest physiotherapy details",
+      label: t(
+        "pages.duringvisit.careandTreatment.chestPhysiotherapyField.fields.chestPhysiotherapy.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.chestPhysiotherapyField.fields.chestPhysiotherapy.placeholder"
+      ),
       value: chestPhysiotherapy,
       onChange: (e) => setChestPhysiotherapy(e.target.value),
     },
@@ -792,8 +884,12 @@ const DuringVisit = () => {
   const cathetersField = [
     {
       type: "text",
-      label: "Catheters",
-      placeholder: "Enter catheter details",
+      label: t(
+        "pages.duringvisit.careandTreatment.cathetersField.fields.catheters.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.cathetersField.fields.catheters.placeholder"
+      ),
       value: catheters,
       onChange: (e) => setCatheters(e.target.value),
     },
@@ -802,8 +898,12 @@ const DuringVisit = () => {
   const drainsField = [
     {
       type: "text",
-      label: "Drains",
-      placeholder: "Enter drain details",
+      label: t(
+        "pages.duringvisit.careandTreatment.drainsField.fields.drains.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.drainsField.fields.drains.placeholder"
+      ),
       value: drains,
       onChange: (e) => setDrains(e.target.value),
     },
@@ -812,8 +912,12 @@ const DuringVisit = () => {
   const nebulizationsField = [
     {
       type: "text",
-      label: "Nebulizations",
-      placeholder: "Enter nebulization details",
+      label: t(
+        "pages.duringvisit.careandTreatment.nebulizationsField.fields.nebulizations.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.careandTreatment.nebulizationsField.fields.nebulizations.placeholder"
+      ),
       value: nebulizations,
       onChange: (e) => setNebulizations(e.target.value),
     },
@@ -822,8 +926,10 @@ const DuringVisit = () => {
   const fluidsField = [
     {
       type: "text",
-      label: "Fluids",
-      placeholder: "Enter fluid details",
+      label: t("pages.duringvisit.monitoring.fluidsField.fields.fluids.label"),
+      placeholder: t(
+        "pages.duringvisit.monitoring.fluidsField.fields.fluids.placeholder"
+      ),
       value: fluids.name,
       onChange: (e) => setFluids({ ...fluids, name: e.target.value }),
     },
@@ -832,8 +938,12 @@ const DuringVisit = () => {
   const totalFluidsCalcField = [
     {
       type: "text",
-      label: "Total Fluids Calculation",
-      placeholder: "Enter total fluids calculation",
+      label: t(
+        "pages.duringvisit.monitoring.totalFluidsCalcField.fields.totalFluidsCalc.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.monitoring.totalFluidsCalcField.fields.totalFluidsCalc.placeholder"
+      ),
       value: totalFluidsCalc,
       onChange: (e) => setTotalFluidsCalc(e.target.value),
     },
@@ -842,8 +952,12 @@ const DuringVisit = () => {
   const fluidBalanceField = [
     {
       type: "text",
-      label: "Fluid Balance",
-      placeholder: "Enter fluid balance",
+      label: t(
+        "pages.duringvisit.monitoring.fluidBalanceField.fields.fluidBalance.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.monitoring.fluidBalanceField.fields.fluidBalance.placeholder"
+      ),
       value: fluidBalance,
       onChange: (e) => setFluidBalance(e.target.value),
     },
@@ -852,8 +966,12 @@ const DuringVisit = () => {
   const hourlyDiuresisField = [
     {
       type: "text",
-      label: "Hourly Diuresis",
-      placeholder: "Enter hourly diuresis",
+      label: t(
+        "pages.duringvisit.monitoring.hourlyDiuresisField.fields.hourlyDiuresis.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.monitoring.hourlyDiuresisField.fields.hourlyDiuresis.placeholder"
+      ),
       value: hourlyDiuresis,
       onChange: (e) => setHourlyDiuresis(e.target.value),
     },
@@ -862,8 +980,12 @@ const DuringVisit = () => {
   const hourlyMeanDiuresisField = [
     {
       type: "text",
-      label: "Hourly Mean Diuresis",
-      placeholder: "Enter hourly mean diuresis",
+      label: t(
+        "pages.duringvisit.monitoring.hourlyMeanDiuresisField.fields.hourlyMeanDiuresis.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.monitoring.hourlyMeanDiuresisField.fields.hourlyMeanDiuresis.placeholder"
+      ),
       value: hourlyMeanDiuresis,
       onChange: (e) => setHourlyMeanDiuresis(e.target.value),
     },
@@ -872,8 +994,12 @@ const DuringVisit = () => {
   const timeTemperatureCurveField = [
     {
       type: "text",
-      label: "Time-Temperature Curve",
-      placeholder: "Enter time-temperature curve details",
+      label: t(
+        "pages.duringvisit.monitoring.timeTemperatureCurveField.fields.timeTemperatureCurve.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.monitoring.timeTemperatureCurveField.fields.timeTemperatureCurve.placeholder"
+      ),
       value: timeTemperatureCurve,
       onChange: (e) => setTimeTemperatureCurve(e.target.value),
     },
@@ -882,8 +1008,12 @@ const DuringVisit = () => {
   const controlsField = [
     {
       type: "text",
-      label: "Controls",
-      placeholder: "Enter control details",
+      label: t(
+        "pages.duringvisit.monitoring.controlsField.fields.controls.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.monitoring.controlsField.fields.controls.placeholder"
+      ),
       value: controls.name,
       onChange: (e) => setControls({ ...controls, name: e.target.value }),
     },
@@ -892,8 +1022,12 @@ const DuringVisit = () => {
   const othersOrderSetsField = [
     {
       type: "text",
-      label: "Other Order Sets",
-      placeholder: "Enter other order sets",
+      label: t(
+        "pages.duringvisit.monitoring.othersOrderSetsField.fields.othersOrderSets.label"
+      ),
+      placeholder: t(
+        "pages.duringvisit.monitoring.othersOrderSetsField.fields.othersOrderSets.placeholder"
+      ),
       value: othersOrderSets,
       onChange: (e) => setOthersOrderSets(e.target.value),
     },
@@ -981,7 +1115,7 @@ const DuringVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Medical History">
+            <FormSection title={t("pages.duringvisit.medicalHistory.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {medicalHistoryFields.map((field, index) =>
@@ -990,7 +1124,7 @@ const DuringVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Examinations">
+            <FormSection title={t("pages.duringvisit.examinations.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {vitalSignsFields.map((field, index) =>
@@ -1013,7 +1147,7 @@ const DuringVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Care & Treatment">
+            <FormSection title={t("pages.duringvisit.careandTreatment.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {dietField.map((field, index) => renderField(field, index))}
@@ -1053,7 +1187,7 @@ const DuringVisit = () => {
               </div>
             </FormSection>
 
-            <FormSection title="Monitoring">
+            <FormSection title={t("pages.duringvisit.monitoring.title")}>
               <hr className="text-[#D1D1D1] border-1" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-14 gap-y-4 mt-4">
                 {fluidsField.map((field, index) => renderField(field, index))}

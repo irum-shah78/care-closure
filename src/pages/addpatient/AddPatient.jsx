@@ -14,7 +14,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 const AddPatient = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [name, setname] = useState("");
   const [lastName, setLastName] = useState("");
@@ -109,22 +109,6 @@ const AddPatient = () => {
     useState("");
   const [policyHolderCommunicationLabel, setPolicyHolderCommunicationLabel] =
     useState("");
-
-  const handleHeightChange = (e) => {
-    const value = e.target.value.trim();
-    setHeight(value);
-    if (value) {
-      setHeightDate("");
-    }
-  };
-
-  const handleWeightChange = (e) => {
-    const value = e.target.value.trim();
-    setWeight(value);
-    if (value) {
-      setWeightDate("");
-    }
-  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -511,24 +495,6 @@ const AddPatient = () => {
     return age;
   };
 
-  // const isValidDob = (dob) => {
-  //   if (typeof dob === "string" && dob.includes("/")) {
-  //     const [month, day, year] = dob.split("/").map(Number);
-  //     if (month < 1 || month > 12 || day < 1 || day > 31) return false;
-  //     const birthDate = new Date(year, month - 1, day);
-  //     if (year < 1900 || year > new Date().getFullYear()) return false;
-  //     if (birthDate.getMonth() !== month - 1) return false;
-
-  //     return birthDate <= new Date();
-  //   }
-  //   const birthDate = new Date(dob);
-  //   const today = new Date();
-  //   const year = birthDate.getFullYear();
-  //   if (year < 1900 || year > today.getFullYear()) return false;
-
-  //   return birthDate <= today;
-  // };
-
   const isValidDob = (dob) => {
     if (typeof dob === "string" && dob.includes("/")) {
       const [month, day, year] = dob.split("/").map(Number);
@@ -586,6 +552,8 @@ const AddPatient = () => {
 
           if (!isValidDob(formattedDate)) {
             alert("Please enter a date of birth between 1900 and present.");
+            setDob("");
+            setAge("");
             return;
           }
 
@@ -608,6 +576,8 @@ const AddPatient = () => {
 
           if (newValue.length === 10 && !isValidDob(newValue)) {
             alert("Please enter a date of birth between 1900 and present.");
+            setDob("");
+            setAge("");
             return;
           }
 
@@ -649,10 +619,25 @@ const AddPatient = () => {
       label: t("pages.addPatient.patientDetails.maritalStatus"),
       type: "select",
       placeholder: t("pages.addPatient.placeholders.selectMaritalStatus"),
-      options: [
-        t("pages.addPatient.maritalStatus.single"),
-        t("pages.addPatient.maritalStatus.married"),
-      ],
+      // options: [
+      //   t("pages.addPatient.maritalStatus.single"),
+      //   t("pages.addPatient.maritalStatus.married"),
+      // ],
+      options:
+        i18n.language === "es"
+          ? gender === t("pages.addPatient.gender.male")
+            ? [
+                t("pages.addPatient.maritalStatus.maleSingle"),
+                t("pages.addPatient.maritalStatus.maleMarried"),
+              ]
+            : [
+                t("pages.addPatient.maritalStatus.femaleSingle"),
+                t("pages.addPatient.maritalStatus.femaleMarried"),
+              ]
+          : [
+              t("pages.addPatient.maritalStatus.single"),
+              t("pages.addPatient.maritalStatus.married"),
+            ],
       value: maritalStatus,
       onChange: (e) => setMaritalStatus(e.target.value),
     },
@@ -669,7 +654,11 @@ const AddPatient = () => {
       type: "number",
       placeholder: t("pages.addPatient.placeholders.enterAge"),
       value: age,
-      onChange: (e) => setAge(e.target.value),
+      readOnly: dob !== "",
+      className: `w-full px-3 py-2 border rounded ${
+        dob !== "" ? "bg-gray-100" : ""
+      }`,
+      onChange: (e) => dob === "" && setAge(e.target.value),
     },
     {
       label: t("pages.addPatient.patientDetails.description"),
@@ -682,15 +671,15 @@ const AddPatient = () => {
       label: t("pages.addPatient.patientDetails.weight"),
       type: "text",
       placeholder: t("pages.addPatient.placeholders.enterWeight"),
-      value: weight ? `${weight}${weightDate ? ` ${weightDate}` : ""}` : "",
-      onChange: handleWeightChange,
+      value: weight,
+      onChange: (e) => setWeight(e.target.value),
     },
     {
       label: t("pages.addPatient.patientDetails.height"),
       type: "text",
       placeholder: t("pages.addPatient.placeholders.enterHeight"),
-      value: height ? `${height}${heightDate ? ` ${heightDate}` : ""}` : "",
-      onChange: handleHeightChange,
+      value: height,
+      onChange: (e) => setHeight(e.target.value),
     },
     {
       label: t("pages.addPatient.patientDetails.headCircumference"),
@@ -1118,97 +1107,63 @@ const AddPatient = () => {
       type: "text",
       placeholder: "mm/dd/yyyy",
       value: expiryDate,
-      // onChange: (e) => {
-      //   let newValue = e.target.value;
-
-      //   if (e.target.type === "date") {
-      //     const date = new Date(newValue);
-      //     const formattedDate = `${String(date.getMonth() + 1).padStart(
-      //       2,
-      //       "0"
-      //     )}/${String(date.getDate()).padStart(2, "0")}/${date.getFullYear()}`;
-
-      //     if (isCardExpired(formattedDate)) {
-      //       alert("This card is expired! Please use a valid card.");
-      //       return;
-      //     }
-
-      //     setExpiryDate(formattedDate);
-      //     return;
-      //   }
-
-      //   newValue = newValue.replace(/\D/g, "");
-
-      //   if (newValue.length >= 2) {
-      //     newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
-      //   }
-      //   if (newValue.length >= 5) {
-      //     newValue = newValue.slice(0, 5) + "/" + newValue.slice(5, 9);
-      //   }
-
-      //   if (newValue.length <= 10) {
-      //     setExpiryDate(newValue);
-
-      //     if (newValue.length === 10 && isCardExpired(newValue)) {
-      //       alert("This card is expired! Please use a valid card.");
-      //       return;
-      //     }
-      //   }
-      // },
       onChange: (e) => {
         let newValue = e.target.value;
-      
+
         if (e.target.type === "date") {
           const date = new Date(newValue);
           const formattedDate = `${String(date.getMonth() + 1).padStart(
             2,
             "0"
           )}/${String(date.getDate()).padStart(2, "0")}/${date.getFullYear()}`;
-      
+
           if (isCardExpired(formattedDate)) {
             alert("This card is expired! Please use a valid card.");
+            setExpiryDate(" ");
             return;
           }
-      
+
           setExpiryDate(formattedDate);
           return;
         }
-      
+
         // Remove non-digit characters
         newValue = newValue.replace(/\D/g, "");
-      
+
         // Validate month
         if (newValue.length >= 2) {
           const month = parseInt(newValue.slice(0, 2), 10);
           if (month < 1 || month > 12) {
             alert("Invalid month! Please enter a valid month (01-12).");
+            setExpiryDate("");
             return;
           }
           newValue = newValue.slice(0, 2) + "/" + newValue.slice(2);
         }
-      
+
         // Validate day
         if (newValue.length >= 5) {
           const day = parseInt(newValue.slice(3, 5), 10);
           if (day < 1 || day > 31) {
             alert("Invalid day! Please enter a valid day (01-31).");
+            setExpiryDate("");
             return;
           }
           newValue = newValue.slice(0, 5) + "/" + newValue.slice(5, 9);
         }
-      
+
         // Set the value if it is valid
         if (newValue.length <= 10) {
           setExpiryDate(newValue);
-      
+
           // Check if the card is expired
           if (newValue.length === 10 && isCardExpired(newValue)) {
             alert("This card is expired! Please use a valid card.");
+            setExpiryDate("");
             return;
           }
         }
       },
-      
       render: ({ field }) => (
         <div className="relative">
           <input

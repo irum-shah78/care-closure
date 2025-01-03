@@ -202,6 +202,10 @@
         "female": "Femenina"
       },
       "maritalStatus": {
+        "maleSingle": "Soltero",
+        "maleMarried": "Casado",
+        "femaleSingle": "Soltera",
+        "femaleMarried": "Casada",
         "single": "Soltero",
         "married": "Casado"
       },
@@ -1127,114 +1131,111 @@
         }
       },
 
-
       "dischargeInfo": {
-  "title": "Información de Alta",
-  "egress": {
-    "title": "Egreso",
-    "egressDate": {
-      "label": "Fecha de Egreso",
-      "placeholder": "Ingrese la fecha de egreso"
-    },
-    "egressType": {
-      "label": "Tipo de Egreso",
-      "placeholder": "Seleccione tipo",
-      "options": {
-        "medicalDischarge": "Alta Médica",
-        "medicalDischargeOnRequest": "Alta Médica a Solicitud",
-        "escape": "Escape",
-        "referral": "Remisión",
-        "decease": "Fallecimiento"
+        "title": "Información de Alta",
+        "egress": {
+          "title": "Egreso",
+          "egressDate": {
+            "label": "Fecha de Egreso",
+            "placeholder": "Ingrese la fecha de egreso"
+          },
+          "egressType": {
+            "label": "Tipo de Egreso",
+            "placeholder": "Seleccione tipo",
+            "options": {
+              "medicalDischarge": "Alta Médica",
+              "medicalDischargeOnRequest": "Alta Médica a Solicitud",
+              "escape": "Escape",
+              "referral": "Remisión",
+              "decease": "Fallecimiento"
+            }
+          },
+          "egressComment": {
+            "label": "Comentario de Egreso",
+            "placeholder": "Ingrese comentario de egreso"
+          },
+          "egressDepartmentId": {
+            "label": "ID del Departamento de Egreso",
+            "placeholder": "Ingrese ID del departamento de egreso"
+          },
+          "egressDepartment": {
+            "label": "Departamento de Egreso",
+            "placeholder": "Ingrese departamento de egreso"
+          },
+          "egressTransportWay": {
+            "label": "Medio de Transporte de Egreso",
+            "placeholder": "Ingrese medio de transporte"
+          },
+          "egressTransportInfo": {
+            "label": "Información de Transporte de Egreso",
+            "placeholder": "Ingrese información de transporte"
+          },
+          "signEgress": {
+            "label": "Firmar Egreso",
+            "placeholder": "Marque para firmar egreso"
+          }
+        }
+      },
+
+      "followUpp": {
+        "title": "Seguimiento",
+        "followUpFields": {
+          "nextAppointmentDate": {
+            "label": "Próxima Fecha de Cita",
+            "placeholder": "Ingrese la próxima fecha de cita"
+          },
+          "referredTo": {
+            "label": "Referido A",
+            "placeholder": "Ingrese referencia"
+          },
+          "planEgress": {
+            "label": "Plan de Egreso",
+            "placeholder": "Ingrese el plan"
+          },
+          "isCoordinatedReferredTo": {
+            "label": "¿Es Referencia Coordinada?",
+            "placeholder": "Marque si es referencia coordinada"
+          },
+          "medicalDischargePrintForm": {
+            "label": "Formulario de Alta Médica",
+            "placeholder": "Marque para imprimir el formulario de alta médica"
+          }
+        }
+      },
+      "finalDocumentation": {
+        "title": "Documentación Final",
+        "finalDocumentationFields": {
+          "notes": {
+            "label": "Notas",
+            "placeholder": "Ingrese notas"
+          },
+          "diseaseOrigin": {
+            "label": "Origen de la Enfermedad",
+            "placeholder": "Ingrese el origen de la enfermedad"
+          },
+          "canceledDate": {
+            "label": "Fecha de Cancelación",
+            "placeholder": "Ingrese la fecha de cancelación"
+          },
+          "cancelReason": {
+            "label": "Razón de Cancelación",
+            "placeholder": "Ingrese la razón de cancelación"
+          }
+        }
+      },
+      "treatment": {
+        "title": "Tratamiento",
+        "treatmentsFields": {
+          "treatment": {
+            "label": "Descripción del Tratamiento",
+            "placeholder": "Ingrese la descripción del tratamiento"
+          },
+          "diagnostic": {
+            "label": "Descripción del Diagnóstico",
+            "placeholder": "Ingrese la descripción del diagnóstico"
+          }
+        }
       }
-    },
-    "egressComment": {
-      "label": "Comentario de Egreso",
-      "placeholder": "Ingrese comentario de egreso"
-    },
-    "egressDepartmentId": {
-      "label": "ID del Departamento de Egreso",
-      "placeholder": "Ingrese ID del departamento de egreso"
-    },
-    "egressDepartment": {
-      "label": "Departamento de Egreso",
-      "placeholder": "Ingrese departamento de egreso"
-    },
-    "egressTransportWay": {
-      "label": "Medio de Transporte de Egreso",
-      "placeholder": "Ingrese medio de transporte"
-    },
-    "egressTransportInfo": {
-      "label": "Información de Transporte de Egreso",
-      "placeholder": "Ingrese información de transporte"
-    },
-    "signEgress": {
-      "label": "Firmar Egreso",
-      "placeholder": "Marque para firmar egreso"
-    }
-  }
-},
-
-"followUpp": {
-  "title": "Seguimiento",
-  "followUpFields": {
-    "nextAppointmentDate": {
-      "label": "Próxima Fecha de Cita",
-      "placeholder": "Ingrese la próxima fecha de cita"
-    },
-    "referredTo": {
-      "label": "Referido A",
-      "placeholder": "Ingrese referencia"
-    },
-    "planEgress": {
-      "label": "Plan de Egreso",
-      "placeholder": "Ingrese el plan"
-    },
-    "isCoordinatedReferredTo": {
-      "label": "¿Es Referencia Coordinada?",
-      "placeholder": "Marque si es referencia coordinada"
-    },
-    "medicalDischargePrintForm": {
-      "label": "Formulario de Alta Médica",
-      "placeholder": "Marque para imprimir el formulario de alta médica"
-    }
-  }
-},
-"finalDocumentation": {
-  "title": "Documentación Final",
-  "finalDocumentationFields": {
-    "notes": {
-      "label": "Notas",
-      "placeholder": "Ingrese notas"
-    },
-    "diseaseOrigin": {
-      "label": "Origen de la Enfermedad",
-      "placeholder": "Ingrese el origen de la enfermedad"
-    },
-    "canceledDate": {
-      "label": "Fecha de Cancelación",
-      "placeholder": "Ingrese la fecha de cancelación"
-    },
-    "cancelReason": {
-      "label": "Razón de Cancelación",
-      "placeholder": "Ingrese la razón de cancelación"
-    }
-  }
-},
-"treatment": {
-  "title": "Tratamiento",
-  "treatmentsFields": {
-    "treatment": {
-      "label": "Descripción del Tratamiento",
-      "placeholder": "Ingrese la descripción del tratamiento"
-    },
-    "diagnostic": {
-      "label": "Descripción del Diagnóstico",
-      "placeholder": "Ingrese la descripción del diagnóstico"
-    }
-  }
-}
-
-
     }
   }
 }
